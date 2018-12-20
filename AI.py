@@ -79,7 +79,7 @@ class MyAI(AI_player):
     def NoWallOnTheWay(self,Pos):
         me = self.humans[self.number]
 
-        density = 30
+        density = 10
         deltax = Pos.x-me.position.x
         deltay = Pos.y-me.position.y
         deltax /= density 
@@ -189,7 +189,7 @@ class MyAI(AI_player):
         #print(self.number,Nodes)
 
         def Intersect(pos1,pos2):
-            density = 100
+            density = 10
             deltax = 1.0*(pos2.x-pos1.x)/density
             deltay = 1.0*(pos2.y-pos1.y)/density
             
@@ -198,8 +198,8 @@ class MyAI(AI_player):
                 for wall in self.wall:
                     if self.InWall(pos,wall):
                         return True
-            if(self.number==0):
-                line(self.screen, red, (pos1.x,pos1.y), (pos2.x,pos2.y), 1)
+            #if(self.number==0):
+            #    line(self.screen, red, (pos1.x,pos1.y), (pos2.x,pos2.y), 1)
             return False
 
         

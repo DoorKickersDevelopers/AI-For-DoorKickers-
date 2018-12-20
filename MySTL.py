@@ -22,80 +22,11 @@
 import math
 from math import sqrt,fabs,atan2
 import Arguments
-
+from BaseClass import *
 
 
 # When I wrote this,only God and I understood what I was doing
 
-
-class Point(object):
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
-
-    def __str__(self):
-        return "Point({},{})".format(self.x,self.y)
-
-    def __add__(self,other):
-        return Point(self.x+other.x, self.y+other.y)
-
-    def __sub__(self,other):
-        return Point(self.x-other.x, self.y-other.y)
-
-    def __mul__(self,other):
-        return self.x*other.y-self.y*other.x
-
-    def __eq__(self,other):
-        return self.x==other.x and self.y==other.y
-
-
-
-class Line(object):
-    def __init__(self,p1,p2):
-        self.p1 = p1
-        self.p2 = p2
-        if p1==p2:
-            raise Exception("create an instance of line with illegal argument")
-    def Points(self):
-        return self.p1,self.p2
-    def __str__(self):
-        return "Line( {} , {} )".format(self.p1.__str__(),self.p2.__str__())
-    def __eq__(self,other):
-        return self.p1==other.p1 and self.p2==other.p2
-
-class Rectangle(object):
-    def __init__(self,left,right,bottom,top):
-        self.left = left
-        self.right = right
-        self.bottom = bottom
-        self.top = top
-        if self.right<=self.left or self.top<=self.bottom:
-            raise Exception("create an instance of Rectangle with illegal argument")
-    def __str__(self):
-        return "Rect(x:[{},{}],y:[{},{}])".format(self.left,self.right,self.bottom,self.top)
-    def Points(self):
-        return Point(self.left, self.bottom),Point(self.left, self.top),Point(self.right, self.bottom),Point(self.right, self.top)
-    def __eq__(self,other):
-        return self.left==other.left and self.right==other.right and self.bottom==other.bottom and self.top==other.top
-
-    def Lines(self):
-        p1,p2,p3,p4 = Points()
-        return Line(p1, p2),Line(p1, p3),Line(p2, p4),Line(p3, p4)
-
-    def expand(self,d):
-        return Rectangle(self.left-d, self.right+d, self.bottom-d, self.top+d)
-
-
-class Circle(object):
-    def __init__(self,centre,radius):
-        self.centre = centre
-        self.radius = radius
-        if self.radius<=0:
-            raise Exception("create an instance of Circle with illegal radius")
-    def __str__(self):
-        return "Circle(o:{},r:{})".format(self.centre,self.radius)
-    def __eq__(self,other):
-        return self.centre==other.centre and self.radius==other.radius
 
 
 
@@ -278,6 +209,53 @@ def MoveAlongAngle(nowPos,angle,dis):
     return pos
 
 
+def LineIntersectionPoint(l1,l2):
+    '''
+    line l1
+    line l2
+    return where l1 intersect with l2
+    '''
+    if not LineIntersection(l1, l2):
+        return None
+    eps = 1e-5
+    if PointOnLine(l1.p1,l2):
+        delta = l1.p2-l1.p1
+        delta.x*=eps
+        delta.y*=eps
+        if PointOnLine(l1.p1+delta, l2):
+            return None,None
+        else:
+            return l1.p1
+    
+    if PointOnLine(l1.p2,l2):
+        delta = l1.p1-l1.p2
+        delta.x*=eps
+        delta.y*=eps
+        if PointOnLine(l1.p2+delta, l2):
+            return None,None
+        else:
+            return l1.p2
+
+
+    tmpLeft = (l2.p2.x-l2.p1.x)*(l1.p1.y-l1.p2.y)-(l1.p2.x-l1.p1.x)*(l2.p1.y-l2.p2.y)
+    tmpRight = (l1.p1.y-l2.p1.y)*(l1.p2.x-l1.p1.x)*(l2.p2.x-l2.p1.x)+l2.p1.x*(l2.p2.y-l2.p1.y)*(l1.p2.x-l1.p1.x)-l1.p1.x*(l1.p2.y-l1.p1.y)*(l2.p2.x-l2.p1.x)
+    x = tmpRight/tmpLeft
+    tmpLeft = (l1.p1.x-l1.p2.x)*(l2.p2.y-l2.p1.y)-(l1.p2.y-l1.p1.y)*(l2.p1.x-l2.p2.x)
+    tmpRight = l1.p2.y*(l1.p1.x-l1.p2.x)*(l2.p2.y-l2.p1.y)+(l2.p2.x-l1.p2.x)*(l2.p2.y-l2.p1.y)*(l1.p1.y-l1.p2.y)-l2.p2.y*(l2.p1.x-l2.p2.x)*(l1.p2.y-l1.p1.y) 
+    y = tmpRight/tmpLeft;
+    return Point(x, y)
+
+
+def LineIntersectCirclePoints(l,c):
+    '''
+    Line l
+    Circle c
+    assert l,c has two Intersection Points
+    '''
+
+
+
+
 
 def FutureGrenadePos(grenade,walls,future):
     if grenade.time<future:
@@ -288,8 +266,38 @@ def FutureGrenadePos(grenade,walls,future):
     dx = 1.0*bullet.velocity*future*math.cos(angle)
     dy = 1.0*bullet.velocity*future*math.sin(angle)
     pos2 = pos1+Point(dx, dy)
-    #TODO:
+    line = Line(pos1, pos2)
 
+    Nodes = []
+    for wall in walls:
+        l,r,t,b = wall.left,wall.right,wall.top,wall.bottom
+        l1 = Line(Point(l,b-grenade.radius), Point(r,b-grenade.radius))
+        l2 = Line(Point(l,t+grenade.radius), Point(r,t+grenade.radius))
+        l3 = Line(Point(l-grenade.radius,b), Point(l-grenade.radius,t))
+        l4 = Line(Point(r+grenade.radius,b), Point(r+grenade.radius,t))
+        for li in (l1,l2,l3,l4):
+            re = LineIntersectionPoint(line, li)
+            if re!=None and re!=(None,None):
+                Nodes.append(re)
+        p1,p2,p3,p4 = wall.Points()
+        for pi in (p1,p2,p3,p4):
+            if DisLinePoint(line, p)<grenade.radius:
+                pi1,pi2 = LineIntersectCirclePoints(line,Circle(pi, grenade.radius))
+                Nodes.append(pi1)
+                Nodes.append(pi2)
+    def DisToPos1(pos):
+        return L2Distance(pos, pos1)
+    Nodes.sort(key=DisToPos1)       
+    if Nodes==[]:
+        return pos2,grenade.time-future
+    else:
+        grenade2 = Grenade(Nodes[0],grenade.rotation)
+        delta_time = L2Distance(Nodes[0], pos1)/grenade.velocity
+        grenade2.time = grenade.time-delta_time
+        
+
+
+        return FutureGrenadePos(grenade2, walls, future-delta_time)
 
 
     
