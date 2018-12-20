@@ -17,10 +17,13 @@
 #          ======`-.____`-.___\_____/___.-`____.-'======
 #                             `=---='
 #          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#                       God Bless Me, No Bugs.
+#                      God Bless Me, No Bugs.
 
 import math
 from math import sqrt,fabs,atan2
+import Arguments
+
+
 
 # When I wrote this,only God and I understood what I was doing
 
@@ -74,6 +77,14 @@ class Rectangle(object):
         return Point(self.left, self.bottom),Point(self.left, self.top),Point(self.right, self.bottom),Point(self.right, self.top)
     def __eq__(self,other):
         return self.left==other.left and self.right==other.right and self.bottom==other.bottom and self.top==other.top
+
+    def Lines(self):
+        p1,p2,p3,p4 = Points()
+        return Line(p1, p2),Line(p1, p3),Line(p2, p4),Line(p3, p4)
+
+    def expand(self,d):
+        return Rectangle(self.left-d, self.right+d, self.bottom-d, self.top+d)
+
 
 class Circle(object):
     def __init__(self,centre,radius):
@@ -173,8 +184,8 @@ def LineIntersection(l1,l2):
 
 def RotateTo(angle1, angle2):
     '''
-    int angle1
-    int angle2
+    float angle1
+    float angle2
     return rot degree if you want to rotate from rot1 to rot2
     Warning: No cliping with Human_Rot_Max
     '''
@@ -251,6 +262,98 @@ def CircleIntersectLine(c,l):
         return True
     else:
         return False
+
+def MoveAlongAngle(nowPos,angle,dis):
+    '''
+    Point nowPos
+    float angle
+    float dis
+    return pos where nowPos move by dis along angle
+    '''
+    angle = 1.0*angle/180*math.pi
+    dx = 1.0*dis*math.cos(angle)
+    dy = 1.0*dis*math.sin(angle)
+
+    pos = nowPos+Point(dx, dy)
+    return pos
+
+
+
+def FutureGrenadePos(grenade,walls,future):
+    if grenade.time<future:
+        return None,None
+    pos1 = bullet.position
+    angle = bullet.rotation
+    angle = 1.0*angle/180*math.pi
+    dx = 1.0*bullet.velocity*future*math.cos(angle)
+    dy = 1.0*bullet.velocity*future*math.sin(angle)
+    pos2 = pos1+Point(dx, dy)
+    #TODO:
+
+
+
+    
+
+def FutureBulletPos(bullet,walls,future):
+    pos1 = bullet.position
+    angle = bullet.rotation
+    angle = 1.0*angle/180*math.pi
+    dx = 1.0*bullet.velocity*future*math.cos(angle)
+    dy = 1.0*bullet.velocity*future*math.sin(angle)
+    pos2 = pos1+Point(dx, dy)
+    if pos2.x<map_lbx or pos2.x>map_rbx or pos2.y<map_lby or pos2.y>map_rby:
+        return None
+
+    line = Line(pos1, pos2)
+    r = bullet.radius
+    eps = 1e-5
+    for wall in walls:
+        ps = wall.Points()
+        for p in ps:
+            dis = DisLinePoint(line, p)
+            if dis < bullet.radius-eps:
+                return None
+        rect = wall.expand(-eps)
+        l1,l2,l3,l4 = wall.Lines()
+        if  LineIntersection(l1, line) or LineIntersection(l2, line) or LineIntersection(l3, line) or LineIntersection(l4, line):
+            return None
+        if DisLinePoint(l1, pos2)<bullet.radius or DisLinePoint(l2, pos2)<bullet.radius or DisLinePoint(l3, pos2)<bullet.radius or DisLinePoint(l4, pos2)<bullet.radius:
+            return None
+    return pos2
+
+
+
+def FutureWeaponMap(walls,bullets,grenades,future):
+    '''
+    list of Wall: walls
+    list of Bullet : bullets
+    list of Grenade : grenades
+    int : future
+
+    return ball,walls,bullets,humans,grenades whose pos in future turns  
+    
+    e.g. future = 1 : next turn
+
+    Warning: assume human has no influence , so does ball 
+    '''
+    nowBullets = []
+    nowGrenades = []
+
+    for bullet in bullets:
+        pos = FutureBulletPos(bullet, walls, future)
+        if pos != None:
+            nowBullet = Bullet(pos,bullet.rotation)
+            nowBullets.append(nowBullet) 
+
+    for grenade in grenades:
+        pos,rot = FutureGrenadePos(grenade, walls, future)
+        if pos != None:
+            nowGrenade = Grenade(pos,rot,grenade.time-future)
+            nowGrenades.append(nowGrenade)
+
+    return nowBullets,nowGrenades
+
+
 
 # Now, God only knows
 
