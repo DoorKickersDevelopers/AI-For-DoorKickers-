@@ -23,7 +23,11 @@ import math
 from math import sqrt,fabs,atan2
 from Arguments import map_lbx,map_lby,map_ubx,map_uby
 from BaseClass import *
+import pygame
 
+
+
+eps = 1e-7
 
 # When I wrote this,only God and I understood what I was doing
 
@@ -54,22 +58,21 @@ def RectangleIntersection(rect1,rect2):
     Rectangle rect2
     return True if rect1 intersect with rect2(containing no edges)
     """
-    
-    eps = 1e-6
+    if rect1.left<rect2.left:
+        b,c = rect1.right,rect2.left
+    else:
+        b,c = rect2.right,rect1.left
+    if b<=c:
+        return False
 
+    if rect1.bottom<rect2.bottom:
+        b,c = rect1.top,rect2.bottom
+    else:
+        b,c = rect2.top,rect1.bottom
+    if b<=c:
+        return False
 
-    smallrect1 = Rectangle(rect1.left+eps, rect1.right-eps, rect1.bottom+eps, rect1.top-eps)
-    smallrect2 = Rectangle(rect2.left+eps, rect2.right-eps, rect2.bottom+eps, rect2.top-eps)
-
-    ret = False
-
-    p1,p2,p3,p4 = smallrect1.Points()
-    ret = ret or PointInRectangle(p1, rect2) or PointInRectangle(p2, rect2) or PointInRectangle(p3, rect2) or PointInRectangle(p4, rect2)
-    
-    p1,p2,p3,p4 = smallrect2.Points()
-    ret = ret or PointInRectangle(p1, rect1) or PointInRectangle(p2, rect1) or PointInRectangle(p3, rect1) or PointInRectangle(p4, rect1)
-
-    return ret
+    return True
 
 def PointOnLine(p,l):
     """
@@ -77,8 +80,22 @@ def PointOnLine(p,l):
     Line l 
     return True if p on l
     """
-    eps = 1e-9
-    return fabs(L2Distance(l.p1,p)+L2Distance(l.p2, p)-L2Distance(l.p1, l.p2))<eps
+    if l.p1.x==l.p2.x:
+        if p.x!=l.p1.x:
+            return False
+        else:
+            if min(l.p1.y,l.p2.y)<=p.y and p.y<=max(l.p1.y, l.p2.y):
+                return True
+            else:
+                return False
+
+    if fabs((l.p1.x-p.x)*(l.p2.y-p.y)-(l.p2.x-p.x)*(l.p1.y-p.y))<eps:
+        if min(l.p1.x, l.p2.x)<=p.x and p.x<=max(l.p1.x,l.p2.x):
+            return True
+        else: 
+            return False
+    else:
+        return False
 
 
 
@@ -86,7 +103,7 @@ def LineIntersection(l1,l2):
     '''
     Line l1
     Line l2
-    return True if l1 intersect with l2 (have an intersection)
+    return True if l1 intersect with l2 (have at least one intersection)
     '''
 
     def Rect(line):
@@ -111,7 +128,7 @@ def LineIntersection(l1,l2):
     return True
 
     #This Implementation is slow, maybe bugs exist
-    #Fix later 
+
 
 def RotateTo(angle1, angle2):
     '''
@@ -154,11 +171,8 @@ def LineIntersectRect(l,rect):
     if PointInRectangle(l.p1, rect) or PointInRectangle(l.p2,rect):
         return True
 
-    eps = 1e-5
-
-    smallrect = Rectangle(rect.left+eps, rect.right-eps, rect.bottom+eps, rect.top-eps)
-    p1,p2,p3,p4 = smallrect.Points()
-    l1,l2,l3,l4 = Line(p1, p2),Line(p1, p3),Line(p2, p4),Line(p3, p4)
+    smallrect = rect.expand(-eps)
+    l1,l2,l3,l4 = smallrect.Lines()
 
     return LineIntersection(l, l1) or LineIntersection(l, l2) or LineIntersection(l, l3) or LineIntersection(l, l4)
 
@@ -179,7 +193,7 @@ def DisLinePoint(l,p):
     r = dot/d2
     px = l.p1.x + ( l.p2.x - l.p1.x ) *r
     py = l.p1.y + ( l.p2.y - l.p1.y ) *r
-    return sqrt( (p.x - px)*(p.x - px) + (p.y - py)*(p.y - py))
+    return L2Distance(p, Point(px, py))
 
 
 def CircleIntersectLine(c,l):
@@ -188,9 +202,11 @@ def CircleIntersectLine(c,l):
     Line l
     return True if c intersect with l (more than one intersection)
     '''
-    eps = 1e-5
     if DisLinePoint(l,c.centre)<c.radius-eps:
-        return True
+        if L2Distance(c.centre, l.p1)<c.radius-eps and L2Distance(c.centre, l.p2)<c.radius-eps:
+            return False
+        else:
+            return True
     else:
         return False
 
@@ -217,7 +233,7 @@ def LineIntersectionPoint(l1,l2):
     '''
     if not LineIntersection(l1, l2):
         return None
-    eps = 1e-5
+
     if PointOnLine(l1.p1,l2):
         delta = l1.p2-l1.p1
         delta.x*=eps
@@ -352,7 +368,6 @@ def FutureBulletPos(bullet,walls,future):
 
     line = Line(pos1, pos2)
     r = bullet.radius
-    eps = 1e-5
     for wall in walls:
         ps = wall.Points()
         for p in ps:
@@ -432,9 +447,36 @@ def FutureWeaponMap(walls,bullets,grenades,future):
 
 # Now, God only knows
 
+import time
+
 if __name__ == '__main__':
-    p1 = Point(0, 0)
-    p2 = Point(0, 1)
-    p3 = Point(1, 0)
-    p4 = Point(1, 1)
-     
+    pygame.init()
+    screen = pygame.display.set_mode((width_of_screen,height_of_screen))
+    pygame.display.set_caption('Debug Mode')
+    screen.fill(white)
+    def drawPoint(pos):
+        pygame.draw.circle(screen, green, (pos.x,pos.y), 4)
+
+    def drawLine(line):
+        pygame.draw.line(screen, black, (line.p1.x,line.p1.y), (line.p2.x,line.p2.y), 2)
+
+    def drawCircle(circ):
+        pygame.draw.circle(screen, yellow, (circ.centre.x,circ.centre.y), circ.radius)
+    
+    def drawRect(rect):
+        pygame.draw.rect(screen, red, pygame.Rect(rect.left, rect.bottom, rect.right-rect.left, rect.top-rect.bottom))
+
+    rect1 = Rectangle(100, 200, 500, 800)
+    #p1 = Point(150, 600)
+    #print(PointInRectangle(p1, rect1))
+    #drawRect(rect1)
+    #drawPoint(p1)
+
+    #rect2 = Rectangle(105, 110, 550, 600)
+    #print(RectangleIntersection(rect1, rect2))
+    
+
+    pygame.display.flip()
+    time.sleep(5)
+
+    
