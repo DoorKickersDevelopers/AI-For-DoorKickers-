@@ -1,5 +1,7 @@
 import math
 from math import sqrt,fabs,atan2
+from Arguments import *
+
 
 class Point(object):
     def __init__(self,x,y):
@@ -70,3 +72,41 @@ class Circle(object):
     def __eq__(self,other):
         return self.centre==other.centre and self.radius==other.radius
 
+class Ball:
+    def __init__(self, position):
+        self.circle = Circle(position, ball_radius) 
+        self.belong = None
+
+class Bullet:
+    velocity = velocity_of_bullet
+    hurt = bullet_hurt
+    def __init__(self, position, rotation):
+        self.circle = Circle(position, bullet_radius)
+        self.rotation = rotation
+
+
+class Grenade:
+    velocity = velocity_of_grenade
+    hurt = explode_hurt
+    hurt_radius = explode_radius
+    def __init__(self, position, rotation):
+        self.circle = Circle(position, grenade_radius)
+        self.rotation = rotation
+        self.time = grenade_initial_time
+
+
+class Human:
+    velocity_max = human_speed_max
+    rotation_max = human_rotate_max
+    fire_interval = human_fire_interval
+    def __init__(self, position, rotation, number):
+        self.circle = Circle(position, human_radius)
+        self.rotation = rotation
+        self.hp = human_hp
+        self.grenade_number = human_grenade_number
+        self.fire_time = 0
+        self.number = number
+
+class Wall:
+    def __init__(self,left,right,bottom,top):
+        self.rectangle = Rectangle(left, right, bottom, top)
