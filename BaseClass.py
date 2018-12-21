@@ -20,8 +20,7 @@ class Point(object):
     def __mul__(self,other):
         return self.x*other.y-self.y*other.x
 
-    def __eq__(self,other):
-        return self.x==other.x and self.y==other.y
+    
 
 
 
@@ -29,15 +28,13 @@ class Line(object):
     def __init__(self,p1,p2):
         self.p1 = p1
         self.p2 = p2
-        if p1==p2:
+        if p1.x==p2.x and p1.y==p2.y:
             raise Exception("create an instance of line with illegal argument")
     def Points(self):
         return self.p1,self.p2
     def __str__(self):
         return "Line( {} , {} )".format(self.p1.__str__(),self.p2.__str__())
-    def __eq__(self,other):
-        return self.p1==other.p1 and self.p2==other.p2
-
+    
 class Rectangle(object):
     def __init__(self,left,right,bottom,top):
         self.left = left
@@ -50,9 +47,7 @@ class Rectangle(object):
         return "Rect(x:[{},{}],y:[{},{}])".format(self.left,self.right,self.bottom,self.top)
     def Points(self):
         return Point(self.left, self.bottom),Point(self.left, self.top),Point(self.right, self.bottom),Point(self.right, self.top)
-    def __eq__(self,other):
-        return self.left==other.left and self.right==other.right and self.bottom==other.bottom and self.top==other.top
-
+    
     def Lines(self):
         p1,p2,p3,p4 = self.Points()
         return Line(p1, p2),Line(p1, p3),Line(p2, p4),Line(p3, p4)
@@ -69,9 +64,7 @@ class Circle(object):
             raise Exception("create an instance of Circle with illegal radius")
     def __str__(self):
         return "Circle(o:{},r:{})".format(self.centre,self.radius)
-    def __eq__(self,other):
-        return self.centre==other.centre and self.radius==other.radius
-
+    
 class Ball:
     def __init__(self, position):
         self.circle = Circle(position, ball_radius) 

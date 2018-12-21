@@ -264,6 +264,16 @@ def LineIntersectionPoint(l1,l2):
     y = tmpRight/tmpLeft;
     return Point(x, y)
 
+def CircleIntersection(c1,c2):
+    '''
+    Circle c1
+    Circle c2
+    return True if c1 intersect with c2
+    '''
+    dis = L2Distance(c1.centre, c2.centre)
+    return dis<c1.radius+c2.radius-eps
+
+
 
 def LineIntersectCirclePoints(l,c):
     '''
@@ -323,33 +333,44 @@ def LegalPos(c,walls):
 
 
 def FutureGrenadePos(grenade,walls,future):
+    '''
+    Grenade grenade
+    list of Wall walls
+    float future
+    return where grenade will be if there are walls after future frames
+    return pos,rot
+    '''
     if grenade.time<future:
         return None,None
-    pos1 = bullet.position
-    angle = bullet.rotation
+    if future == 0:
+        return grenade.circle.centre,grenade.rotation
+    pos1 = grenade.circle.centre
+    angle = grenade.rotation
     angle = 1.0*angle/180*math.pi
-    dx = 1.0*bullet.velocity*future*math.cos(angle)
-    dy = 1.0*bullet.velocity*future*math.sin(angle)
+    dx = 1.0*grenade.velocity*future*math.cos(angle)
+    dy = 1.0*grenade.velocity*future*math.sin(angle)
     pos2 = pos1+Point(dx, dy)
+    pos1 = pos1+Point(eps*dx, eps*dy)
     line = Line(pos1, pos2)
-
+    rd = grenade.circle.radius
     Nodes = []
     for wall in walls:
-        l,r,t,b = wall.left,wall.right,wall.top,wall.bottom
-        l1 = Line(Point(l,b-grenade.radius), Point(r,b-grenade.radius))
-        l2 = Line(Point(l,t+grenade.radius), Point(r,t+grenade.radius))
-        l3 = Line(Point(l-grenade.radius,b), Point(l-grenade.radius,t))
-        l4 = Line(Point(r+grenade.radius,b), Point(r+grenade.radius,t))
+        rect = wall.rectangle
+        l,r,t,b = rect.left,rect.right,rect.top,rect.bottom
+        l1 = Line(Point(l,b-rd), Point(r,b-rd))
+        l2 = Line(Point(l,t+rd), Point(r,t+rd))
+        l3 = Line(Point(l-rd,b), Point(l-rd,t))
+        l4 = Line(Point(r+rd,b), Point(r+rd,t))
         for li in (l1,l2,l3,l4):
             re = LineIntersectionPoint(line, li)
             if re!=None and re!=(None,None):
                 Nodes.append((re,wall))
-        p1,p2,p3,p4 = wall.Points()
+        p1,p2,p3,p4 = rect.Points()
         for pi in (p1,p2,p3,p4):
-            if DisLinePoint(line, p)<grenade.radius:
-                pi1,pi2 = LineIntersectCirclePoints(line,Circle(pi, grenade.radius))
-                Nodes.append((pi1,wall))
-                Nodes.append((pi2,wall))
+            if DisLinePoint(line, pi)<rd:
+                pp = LineIntersectCirclePoints(line,Circle(pi, rd))
+                for ppp in pp:
+                    Nodes.append((ppp,wall))
     def DisToPos1(obj):
         pos,wall = obj
         return L2Distance(pos, pos1)
@@ -357,42 +378,49 @@ def FutureGrenadePos(grenade,walls,future):
     if Nodes==[]:
         if pos2.x<map_lbx or pos2.x>map_ubx or pos2.y<map_lby or pos2.y>map_uby:
             return None,None
-        return pos2,grenade.time-future
+        return pos2,grenade.rotation
     else:
         grenade2 = Grenade(Nodes[0][0],grenade.rotation)
         delta_time = L2Distance(Nodes[0][0], pos1)/grenade.velocity
+        #print(delta_time)
         grenade2.time = grenade.time-delta_time
         collision_pos,wall = Nodes[0]
-        d = grenade.radius/sqrt(2)
-        if collision_pos.x <= wall.left-d:
+        rect = wall.rectangle
+        d = rd/sqrt(2)
+        if collision_pos.x <= rect.left-d:
             # collision left edge
             if grenade.rotation < 90:
                 grenade2.rotation = 180-grenade.rotation
             else:
                 grenade2.rotation = 540-grenade.rotation
-        if collision_pos.x >= wall.right+d:
+        if collision_pos.x >= rect.right+d:
             #collision right edge
             if grenade.rotation < 180:
                 grenade2.rotation = 180-grenade.rotation
             else:
                 grenade2.rotation = 540-grenade.rotation
-        if collision_pos.y <= wall.bottom-d:
+        if collision_pos.y <= rect.bottom-d:
             #collision bottom edge
             if grenade.rotation > 90:
                 grenade2.rotation = 360-grenade.rotation
             else:
                 grenade2.rotation = 360-grenade.rotation
-        if collision_pos.y >=wall.top+d:
+        if collision_pos.y >=rect.top+d:
             if grenade.rotation > 90:
                 grenade2.rotation = 360-grenade.rotation
             else: 
                 grenade2.rotation = 360-grenade.rotation
         return FutureGrenadePos(grenade2, walls, future-delta_time)
-
-
-    
+ 
 
 def FutureBulletPos(bullet,walls,future):
+    '''
+    Bullet bullet
+    list of Wall walls
+    float future
+    return where the bullet is after future frames,if collision happens return None
+
+    '''
     if future == 0:
         return bullet.circle.centre
     pos1 = bullet.circle.centre
@@ -407,16 +435,16 @@ def FutureBulletPos(bullet,walls,future):
     line = Line(pos1, pos2)
     r = bullet.circle.radius
     for wall in walls:
-        ps = wall.Points()
+        ps = wall.rectangle.Points()
         for p in ps:
             dis = DisLinePoint(line, p)
-            if dis < bullet.radius-eps:
+            if dis < r-eps:
                 return None
-        rect = wall.expand(-eps)
-        l1,l2,l3,l4 = wall.Lines()
+        rect = wall.rectangle.expand(-eps)
+        l1,l2,l3,l4 = wall.rectangle.Lines()
         if  LineIntersection(l1, line) or LineIntersection(l2, line) or LineIntersection(l3, line) or LineIntersection(l4, line):
             return None
-        if DisLinePoint(l1, pos2)<bullet.radius or DisLinePoint(l2, pos2)<bullet.radius or DisLinePoint(l3, pos2)<bullet.radius or DisLinePoint(l4, pos2)<bullet.radius:
+        if DisLinePoint(l1, pos2)<r or DisLinePoint(l2, pos2)<r or DisLinePoint(l3, pos2)<r or DisLinePoint(l4, pos2)<r:
             return None
     return pos2
 
@@ -426,7 +454,7 @@ def HumanCanGotoPos(human,walls,pos):
     Human human
     Point pos
     list of wall walls
-    return if human can go straight to pos from human.position
+    return True if human can go straight to pos from human.position
     without collision(with wall)
     '''
     pos1 = human.position
@@ -434,16 +462,15 @@ def HumanCanGotoPos(human,walls,pos):
         return False
 
     line = Line(pos1, pos)
-    r = human.radius
-    eps = 1e-5
+    r = human.circle.radius
     for wall in walls:
-        ps = wall.Points()
+        ps = wall.rectangle.Points()
         for p in ps:
             dis = DisLinePoint(line, p)
             if dis < r-eps:
                 return False
-        rect = wall.expand(-eps)
-        l1,l2,l3,l4 = wall.Lines()
+        rect = wall.rectangle.expand(-eps)
+        l1,l2,l3,l4 = wall.rectangle.Lines()
         if  LineIntersection(l1, line) or LineIntersection(l2, line) or LineIntersection(l3, line) or LineIntersection(l4, line):
             return False
         if DisLinePoint(l1, pos)<r or DisLinePoint(l2, pos)<r or DisLinePoint(l3, pos)<r or DisLinePoint(l4, pos)<r:
@@ -464,6 +491,8 @@ def FutureWeaponMap(walls,bullets,grenades,future):
 
     Warning: assume human has no influence , so does ball 
     '''
+    if future==0:
+        return bullets,grenades
     nowBullets = []
     nowGrenades = []
 
@@ -558,24 +587,47 @@ if __name__ == '__main__':
         #drawLine(l2)
         #drawPoint(p)
         #p = RandomPoint()
-        c = RandomCirc()
+        #c = RandomCirc()
+        #rects = [Rectangle(217, 483, 232, 247),
+        #         Rectangle(42, 590, 371, 508),
+        #         Rectangle(303, 307, 12, 74),
+        #         Rectangle(429, 570, 336, 416),
+        #         Rectangle(327, 380, 432, 456)]
         walls = []
-        for i in range(3):
+        
+        for i in range(5):
             rect = RandomRect()
+        #for rect in rects:
             wall = Wall(rect.left, rect.right, rect.bottom, rect.top)
             walls.append(wall)
             drawRect(wall.rectangle)
         pos = RandomPoint()
-        while not LegalPos(Circle(pos,bullet_radius), walls):
+        #pos = Point(109, 283)
+        while not LegalPos(Circle(pos,grenade_radius), walls):
             pos = RandomPoint()
 
-        rot = random.randint(0, 360)
-        bullet = Bullet(pos, rot)
 
-        for i in range(10):
-            pos2 = FutureBulletPos(bullet, walls, i)
+        rot = Angle(pos, Point(width_of_screen/2,height_of_screen/2))+random.randint(-10,10)
+        if rot>360:
+            rot-=360
+        if rot<0:
+            rot+=360
+        #rot = random.randint(0, 360)
+        #rot = 48
+        grenade = Grenade(pos, rot)
+
+        for i in range(1000):
+        #for i in range(112,113):
+            #try:
+            pos2,rot = FutureGrenadePos(grenade, walls, i)
+            #except Exception as e:
+            #    print(grenade.circle.centre,grenade.rotation)
+            #    print(i)
+            #    for wall in walls:
+            #        print(wall.rectangle)
+            #    break    
             if pos2!=None:
-                drawCircle(Circle(pos2, bullet_radius))    
+                drawCircle(Circle(pos2, grenade_radius))    
 
         #u = LineIntersectCirclePoints(l, c)
         #while u==[]:
@@ -594,6 +646,7 @@ if __name__ == '__main__':
     #    print(LineIntersectCircle(c,l))
         pygame.display.flip()
         time.sleep(2)
+    #    break
 
 
     
