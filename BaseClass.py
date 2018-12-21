@@ -54,7 +54,7 @@ class Rectangle(object):
         return self.left==other.left and self.right==other.right and self.bottom==other.bottom and self.top==other.top
 
     def Lines(self):
-        p1,p2,p3,p4 = Points()
+        p1,p2,p3,p4 = self.Points()
         return Line(p1, p2),Line(p1, p3),Line(p2, p4),Line(p3, p4)
 
     def expand(self,d):

@@ -8,8 +8,8 @@ yellow = (255, 255, 0)
 number_of_walls = 10
 width_of_wall = 30
 
-height_of_screen = 800
-width_of_screen = 800
+height_of_screen = 600
+width_of_screen = 600
 
 map_lbx = 0
 map_ubx = width_of_screen

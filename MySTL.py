@@ -105,15 +105,17 @@ def LineIntersection(l1,l2):
     Line l2
     return True if l1 intersect with l2 (have at least one intersection)
     '''
-
+    if PointOnLine(l1.p1, l2) or PointOnLine(l1.p2, l2) or PointOnLine(l2.p1, l1) or PointOnLine(l2.p2, l1):
+        return True
+    
     def Rect(line):
         return Rectangle(min(line.p1.x,line.p2.x), max(line.p1.x,line.p2.x), min(line.p1.y,line.p2.y), max(line.p1.y,line.p2.y))
 
-    if not RectangleIntersection(Rect(l1), Rect(l2)):
-        return False
+    if (l1.p1.x!=l1.p2.x and l1.p1.y!=l1.p2.y) and (l2.p1.x!=l2.p2.x and l2.p1.y!=l2.p2.y):
+        if not RectangleIntersection(Rect(l1), Rect(l2)):
+            return False
 
-    if PointOnLine(l1.p1, l2) or PointOnLine(l1.p2, l2) or PointOnLine(l2.p1, l1) or PointOnLine(l2.p2, l1):
-        return True
+    
 
     p1 = l1.p2-l1.p1
 
@@ -196,11 +198,12 @@ def DisLinePoint(l,p):
     return L2Distance(p, Point(px, py))
 
 
-def CircleIntersectLine(c,l):
+def LineIntersectCircle(l,c):
     '''
     Circle c
     Line l
     return True if c intersect with l (more than one intersection)
+    Caution: if l in c return False
     '''
     if DisLinePoint(l,c.centre)<c.radius-eps:
         if L2Distance(c.centre, l.p1)<c.radius-eps and L2Distance(c.centre, l.p2)<c.radius-eps:
@@ -266,11 +269,13 @@ def LineIntersectCirclePoints(l,c):
     '''
     Line l
     Circle c
-    if there are less than 2 intersection points,return None
+    return list of Points
     '''
-    dis = DisLinePoint(l, O)
-    if(dis>=c.radius):
-        return None
+    if not LineIntersectCircle(l, c):
+        return []
+
+    def disLine(A,B,P):
+        return fabs((B-A)*(P-A))/L2Distance(A,B)
     O = c.centre
     A = l.p1
     B = l.p2
@@ -280,10 +285,41 @@ def LineIntersectCirclePoints(l,c):
     dis_AB = L2Distance(A, B)
     mu = (AO.x*AB.x+AO.y*AB.y)/dis_AB
     PR = Point(A.x+mu*AB.x/dis_AB, A.y+mu*AB.y/dis_AB)
-    base = sqrt(r*r-dis*dis) 
+    base = sqrt(r*r-disLine(A,B,O)*disLine(A, B, O)) 
     Base = Point(base*AB.x/dis_AB, base*AB.y/dis_AB)
-    return Base+PR,PR-Base
+    ans1,ans2 = Base+PR,PR-Base
+    ans = []
+    for p in ans1,ans2:
+        if l.p1.x==l.p2.x:
+            if min(l.p1.y,l.p2.y)<=p.y and p.y<=max(l.p1.y,l.p2.y):
+                ans.append(p)
+        else:
+            if min(l.p1.x,l.p2.x)<=p.x and p.x<=max(l.p1.x,l.p2.x):
+                ans.append(p)
+    return ans
 
+
+def LegalPos(c,walls):
+    """
+    Circle c
+    list of wall walls
+    return True if set a circle with r = radius at pos without any collision
+    """
+    pos = c.centre
+    radius = c.radius
+    if pos.x<map_lbx or pos.x>map_ubx or pos.y<map_lby or pos.y>map_uby:
+        return False
+    for wall in walls:
+        rect = wall.rectangle
+        ps = rect.Points()
+        for p in ps:
+            if L2Distance(p, pos) < radius-eps:
+                return False
+        rect1 = Rectangle(rect.left-radius, rect.right+radius, rect.bottom, rect.top)
+        rect2 = Rectangle(rect.left, rect.right, rect.bottom-radius, rect.top+radius)
+        if PointInRectangle(pos, rect1) or PointInRectangle(pos, rect2):
+            return False
+    return True
 
 
 def FutureGrenadePos(grenade,walls,future):
@@ -357,7 +393,9 @@ def FutureGrenadePos(grenade,walls,future):
     
 
 def FutureBulletPos(bullet,walls,future):
-    pos1 = bullet.position
+    if future == 0:
+        return bullet.circle.centre
+    pos1 = bullet.circle.centre
     angle = bullet.rotation
     angle = 1.0*angle/180*math.pi
     dx = 1.0*bullet.velocity*future*math.cos(angle)
@@ -367,7 +405,7 @@ def FutureBulletPos(bullet,walls,future):
         return None
 
     line = Line(pos1, pos2)
-    r = bullet.radius
+    r = bullet.circle.radius
     for wall in walls:
         ps = wall.Points()
         for p in ps:
@@ -448,6 +486,7 @@ def FutureWeaponMap(walls,bullets,grenades,future):
 # Now, God only knows
 
 import time
+import random
 
 if __name__ == '__main__':
     pygame.init()
@@ -455,18 +494,42 @@ if __name__ == '__main__':
     pygame.display.set_caption('Debug Mode')
     screen.fill(white)
     def drawPoint(pos):
-        pygame.draw.circle(screen, green, (pos.x,pos.y), 4)
+        pygame.draw.circle(screen, green, (int(pos.x),int(pos.y)), 4)
 
     def drawLine(line):
-        pygame.draw.line(screen, black, (line.p1.x,line.p1.y), (line.p2.x,line.p2.y), 2)
+        pygame.draw.line(screen, black, (int(line.p1.x),int(line.p1.y)), (int(line.p2.x),int(line.p2.y)), 2)
 
     def drawCircle(circ):
-        pygame.draw.circle(screen, yellow, (circ.centre.x,circ.centre.y), circ.radius)
+        pygame.draw.circle(screen, yellow, (int(circ.centre.x),int(circ.centre.y)), int(circ.radius))
     
     def drawRect(rect):
-        pygame.draw.rect(screen, red, pygame.Rect(rect.left, rect.bottom, rect.right-rect.left, rect.top-rect.bottom))
+        pygame.draw.rect(screen, red, pygame.Rect(int(rect.left), int(rect.bottom), int(rect.right-rect.left), int(rect.top-rect.bottom)))
 
-    rect1 = Rectangle(100, 200, 500, 800)
+    def RandomPoint():
+        return Point(random.randint(map_lbx,map_ubx), random.randint(map_lby, map_uby))
+
+    def RandomLine():
+        A = RandomPoint()
+        B = RandomPoint()
+        while A==B:
+            A = RandomPoint()
+            B = RandomPoint()
+        return Line(A, B)
+
+    def RandomRect():
+        A = RandomPoint()
+        B = RandomPoint()
+        while A.x==B.x or A.y==B.y:
+            A = RandomPoint()
+            B = RandomPoint()
+        return Rectangle(min(A.x,B.x), max(A.x,B.x), min(A.y,B.y), max(A.y,B.y))
+    def RandomCirc():
+        return Circle(RandomPoint(), random.randint(1, 100))
+
+
+
+
+    #rect1 = Rectangle(100, 200, 500, 800)
     #p1 = Point(150, 600)
     #print(PointInRectangle(p1, rect1))
     #drawRect(rect1)
@@ -475,8 +538,62 @@ if __name__ == '__main__':
     #rect2 = Rectangle(105, 110, 550, 600)
     #print(RectangleIntersection(rect1, rect2))
     
+    #p = Point(10, 10)
+    #line = Line(Point(5,9), Point(15, 11))
+    #print(PointOnLine(p,line))
 
-    pygame.display.flip()
-    time.sleep(5)
+    while True:
+
+        screen.fill(white)
+        #l = Line(Point(200,200),Point(200, 400))
+        #l2 = RandomLine()
+        #while(not LineIntersection(l1, l2)):
+        #    l1 = RandomLine()
+        #    l2 = RandomLine()
+        #l1 = Line(Point(99,99), Point(100, 100))
+        #l2 = Line(Point(99,99), Point(200, 200))
+        #print(LineIntersection(l1,l2))
+        #p = LineIntersectionPoint(l1, l2)
+        #drawLine(l1)
+        #drawLine(l2)
+        #drawPoint(p)
+        #p = RandomPoint()
+        c = RandomCirc()
+        walls = []
+        for i in range(3):
+            rect = RandomRect()
+            wall = Wall(rect.left, rect.right, rect.bottom, rect.top)
+            walls.append(wall)
+            drawRect(wall.rectangle)
+        pos = RandomPoint()
+        while not LegalPos(Circle(pos,bullet_radius), walls):
+            pos = RandomPoint()
+
+        rot = random.randint(0, 360)
+        bullet = Bullet(pos, rot)
+
+        for i in range(10):
+            pos2 = FutureBulletPos(bullet, walls, i)
+            if pos2!=None:
+                drawCircle(Circle(pos2, bullet_radius))    
+
+        #u = LineIntersectCirclePoints(l, c)
+        #while u==[]:
+        #    l = Line(Point(200,200),Point(200, 400))
+        #    c = RandomCirc()
+        #    u = LineIntersectCirclePoints(l, c)
+
+        #dis = DisLinePoint(l, p)
+        #drawCircle(c)
+        #drawRect(rect)
+        #print(LegalPos(c, walls))
+        #for p in u:
+        #    drawPoint(p)
+        
+    #    drawLine(l2)
+    #    print(LineIntersectCircle(c,l))
+        pygame.display.flip()
+        time.sleep(2)
+
 
     
