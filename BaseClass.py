@@ -1,6 +1,8 @@
 import math
 from math import sqrt,fabs,atan2
 from Arguments import *
+import pygame
+
 
 
 class Point(object):
@@ -23,6 +25,9 @@ class Point(object):
     def __eq__(self,other):
         return self.x==other.x and self.y==other.y
 
+    def tolist(self):
+        return [int(self.x), int(self.y)]
+
 
 
 class Line(object):
@@ -37,6 +42,7 @@ class Line(object):
         return "Line( {} , {} )".format(self.p1.__str__(),self.p2.__str__())
     def __eq__(self,other):
         return self.p1==other.p1 and self.p2==other.p2
+
 
 class Rectangle(object):
     def __init__(self,left,right,bottom,top):
@@ -59,7 +65,8 @@ class Rectangle(object):
 
     def expand(self,d):
         return Rectangle(self.left-d, self.right+d, self.bottom-d, self.top+d)
-
+    def torect(self):
+        return pygame.Rect(self.left, self.top, self.right-self.left, self.bottom-self.top)
 
 class Circle(object):
     def __init__(self,centre,radius):
@@ -72,10 +79,12 @@ class Circle(object):
     def __eq__(self,other):
         return self.centre==other.centre and self.radius==other.radius
 
+
 class Ball:
     def __init__(self, position):
         self.circle = Circle(position, ball_radius) 
         self.belong = None
+
 
 class Bullet:
     velocity = velocity_of_bullet
@@ -89,10 +98,17 @@ class Grenade:
     velocity = velocity_of_grenade
     hurt = explode_hurt
     hurt_radius = explode_radius
-    def __init__(self, position, rotation):
+    def __init__(self, position, rotation, time=grenade_initial_time):
         self.circle = Circle(position, grenade_radius)
         self.rotation = rotation
-        self.time = grenade_initial_time
+        self.time = time
+    def explode(self):
+        if self.time == 0:
+            return True
+        else:
+            return False
+    def update(self):
+        self.time -= 1
 
 
 class Human:
@@ -106,6 +122,24 @@ class Human:
         self.grenade_number = human_grenade_number
         self.fire_time = 0
         self.number = number
+    def rotate(self, angle):
+        if angle > human_rotate_max:
+            angle = human_rotate_max
+        if angle < 0-human_rotate_max:
+            angle = 0-human_rotate_max
+        self.rotation += angle
+        if self.rotation >= 360:
+            self.rotation -= 360
+        if self.rotation < 0:
+            self.rotation += 360
+    def update(self):
+        if self.fire_time > 0:
+            self.fire_time -= 1
+        if self.hp <= 0:
+            return False
+        else:
+            return True
+
 
 class Wall:
     def __init__(self,left,right,bottom,top):

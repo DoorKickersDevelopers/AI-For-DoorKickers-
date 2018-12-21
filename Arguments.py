@@ -25,13 +25,13 @@ human_radius = 10
 human_speed_max = 4
 human_rotate_max = 10
 
-velocity_of_bullet = 1  # v*5
+velocity_of_bullet = 0.25
 bullet_radius = 5
 bullet_hurt = 10
 
 grenade_radius = 5
-grenade_initial_time = 200
-velocity_of_grenade = 1  # v*5
+grenade_initial_time = 1600
+velocity_of_grenade = 0.25
 explode_radius = 50
 explode_hurt = 50
 

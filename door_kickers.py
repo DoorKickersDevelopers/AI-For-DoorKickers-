@@ -2,303 +2,140 @@ import pygame
 from pygame import Rect
 import sys
 import random
-import math
 import AI
 from AI_Player import AI_player
+from Arguments import *
+from BaseClass import *
+from MySTL import *
 
 
-black = (0, 0, 0)
-white = (255, 255, 255)
-red = (255, 0, 0)
-green = (0, 255, 0)
-blue = (0, 0, 255)
-yellow = (255, 255, 0)
-
-number_of_walls = 10
-width_of_walls = 30
-
-height_of_screen = 600
-width_of_screen = 800
-
-human_numbers = 3
-human_hp = 100
-human_grenade_number = 3
-human_fire_interval = 250
-human_r = 10
-human_speed_max = 4
-human_rotate_max = 10
-
-velocity_of_bullets = 1  # v*5
-bullets_r = 5
-bullets_hurt = 10
-
-grenades_r = 5
-grenades_time = 200
-velocity_of_grenades = 1  # v*5
-explode_r = [10, 20, 30, 40, 50]
-explode_hurt = [50, 40, 30, 20, 10]
-
-ball_r = 8
-
-walls = []
-humans = []
-bullets = []
-grenades = []
-ais = []
-
-class dot:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def add(self, offset):
-        self.x += offset.x
-        self.y += offset.y
-
-    def copy(self):
-        return dot(self.x, self.y)
-
-    def tolist(self):
-        return [int(self.x), int(self.y)]
-
-    def distance_square(self, o):
-        return (self.x - o.x) * (self.x - o.x) + (self.y - o.y) * (self.y - o.y)
+#new
+#new
+def draw_rectangle(screen, rect, color):
+    pygame.draw.rect(screen, color, pygame.Rect(int(rect.left), int(rect.bottom), int(rect.right - rect.left),
+                                              int(rect.top - rect.bottom)))
 
 
-def offset_of_rotation(l, r):
-    return dot(l * math.cos(r*2*math.pi/360), l * math.sin(r*2*math.pi/360))
-
-
-def position_valid(position, radius):
-    if not (0 <= position.x <= width_of_screen and 0 <= position.y <= height_of_screen):
-        print("crashintothescreen")
-        return False
-    for wall in walls:
-        x = int(position.x)
-        y = int(position.y)
-        l = wall.left
-        r = wall.right
-        t = wall.top
-        d = wall.bottom
-        if (l-radius <= x <= r+radius) and (t-radius <= y <= d+radius):
-            print("crashintothewall")
-            return False
-    return True
-
-
-
-
-
-class Ball:
-    def __init__(self, p):
-        self.position = p
-        self.belong = -1
-
-    def human_crash(self):
-        for human in humans:
-            if self.position.distance_square(human.position) <= (human_r + ball_r) * (human_r + ball_r):
-                self.belong = human.node
-                self.position = human.position
-                return True
-        return False
-
-    def update(self):
-        if self.belong >= 0:
-            self.position = humans[self.belong].position
-        else:
-            self.human_crash()
-
-
-class Bullets:
-    def __init__(self, p, v):
-        self.position = p
-        self.velocity = v
-
-    def crash_into_human(self, newp):
-        for human in humans:
-            dis = newp.distance_square(human.position)
-            mindis = (human_r + bullets_r)*(human_r + bullets_r)
-            if dis < mindis:
-                human.hp -= bullets_hurt
-                print("crashintopeople")
-                return True
-        return False
-
-    def move(self):
-        newp = self.position.copy()
-        newp.add(self.velocity)
-        if position_valid(newp, bullets_r):
-            if self.crash_into_human(newp) is False:
-                self.position = newp
-                return True
-        return False
-
-
-class Grenades:
-    def __init__(self, p, v):
-        self.position = p
-        self.velocity = v
-        self.time = grenades_time
-
-    def adjust(self):
-        x = self.position.x
-        y = self.position.y
-        vx = self.velocity.x
-        vy = self.velocity.y
-        ra = grenades_r
-        if x < ra or x > width_of_screen - ra:
-            self.velocity.x = -vx
-            print("fantan")
-        if y < ra or y > height_of_screen - ra:
-            self.velocity.y = -vy
-            print('fantan')
-        for wall in walls:
-            l = wall.left
-            r = wall.right
-            t = wall.top
-            d = wall.bottom
-            if l <= x <= r and t - ra <= y <= d + ra:
-                self.velocity.y = -vy
-            if t <= y <= d and l - ra <= x <= r + ra:
-                self.velocity.x = -vx
-
-    def explode(self):
-        self.time -= 1
-        if self.time == 0:
-            for human in humans:
-                distance = math.sqrt(self.position.distance_square(human.position))
-                for i in range(5):
-                    if distance < explode_r[i]:
-                        human.hp -= explode_hurt[i]
-                        break
-            return True
-        return False
-
-    def move(self):
-        newp = self.position.copy()
-        newp.add(self.velocity)
-        self.position = newp
-        self.adjust()
-
-
-class Humans:
-    def __init__(self, p, r, n):
-        self.position = p
-        self.rotation = r
-        self.hp = human_hp
-        self.grenade_number = human_grenade_number
-        self.fire_time = 0
-        self.node = n
-
-    def move(self, length):
-        offset = offset_of_rotation(length, self.rotation)
-        offset.add(self.position)
-        if position_valid(offset, human_r):
-            self.position = offset
-
-    def rotate(self, r):
-        self.rotation += r
-        if self.rotation > 360:
-            self.rotation -= 360
-        if self.rotation < 0:
-            self.rotation += 360
-
-    def shoot(self):
-        if self.fire_time == 0:
-            self.fire_time = human_fire_interval
-            offset = offset_of_rotation(2*human_r, self.rotation)
-            offset.add(self.position)
-            bullets.append(Bullets(offset, offset_of_rotation(velocity_of_bullets, self.rotation)))
-            return True
-        return False
-
-    def grenade(self):
-        if self.grenade_number > 0:
-            self.grenade_number -= 1
-            grenades.append(Grenades(self.position, offset_of_rotation(velocity_of_grenades, self.rotation)))
-            return True
-        return False
-
-    def update(self):
-        if self.fire_time > 0:
-            self.fire_time -= 1
-        if self.hp <= 0:
-            return False
-        return True
+def draw_circle(screen, circ, color):
+    pygame.draw.circle(screen, color, (int(circ.centre.x), int(circ.centre.y)), int(circ.radius))
 
 
 def draw_human(screen, human):
-    r = human_r
-    pygame.draw.circle(screen, red, human.position.tolist(), r)
-    p = human.position
-    offset = offset_of_rotation(2 * r, human.rotation)
-    offset.add(p)
-    pygame.draw.line(screen, red, p.tolist(), offset.tolist(), 4)
+    r = human_radius
+    p = human.circle.centre
+    draw_circle(screen, human.circle, red)
+    newp = MoveAlongAngle(p, human.rotation, 2*human_radius)
+    pygame.draw.line(screen, red, p.tolist(), newp.tolist(), 4)
     myfont = pygame.font.Font(None, 20)
     textImage = myfont.render(str(human.hp), True, black)
-    screen.blit(textImage, human.position.tolist())
+    screen.blit(textImage, human.circle.centre.tolist())
 
 
-def build_human(i):
-    p = dot(0, 0)
+def InitWalls(num):
+    walls = []
+    width = width_of_wall
+    for i in range(num):
+        left = random.randint(0, height_of_screen - 2 * width)
+        length = random.randint(2 * width, height_of_screen - left)
+        top = random.randint(0, height_of_screen)
+        if i % 2 == 0:
+            walls.append(Wall(left, left+width, top, top+length))
+        else:
+            walls.append(Wall(top, top+length, left, left+width))
+    return walls
+
+
+def InitHumans(num, walls):
+    humans = []
+    for i in range(num):
+        while True:
+            x = random.randint(0, width_of_screen)
+            y = random.randint(0, height_of_screen)
+            posi = Point(x, y)
+            if LegalPos(Circle(posi, human_radius), walls):
+                humans.append(Human(posi, random.randint(0, 359), i))
+                break
+    return humans
+
+
+def InitBall(walls):
     while True:
-        p.x = random.randint(0, width_of_screen)
-        p.y = random.randint(0, height_of_screen)
-        if position_valid(p, human_r):
-            break
-    rotation = random.randint(0, 359)
-    return Humans(p, rotation, i)
+        x = random.randint(0, width_of_screen)
+        y = random.randint(0, height_of_screen)
+        p = Point(x, y)
+        if LegalPos(Circle(p, ball_radius), walls):
+            return Ball(p)
 
 
-def build_wall(i):
-    width = width_of_walls
-    left = random.randint(0, height_of_screen - 2 * width)
-    length = random.randint(2 * width, height_of_screen - left)
-    top = random.randint(0, height_of_screen)
-    if i % 2 == 0:
-        return Rect(left, top, length, width)
+def update_ball(ball, humans):
+    if ball.belong is not None:
+        ball.circle.centre = ball.belong.circle.centre
     else:
-        return Rect(top, left, width, length)
+        for human in humans:
+            if CircleIntersection(ball.circle, human.circle):
+                ball.belong = human
+                ball.circle.centre = human.circle.centre
 
 
-def build_ball():
-    p = dot(0, 0)
-    while True:
-        p.x = random.randint(0, width_of_screen)
-        p.y = random.randint(0, height_of_screen)
-        if position_valid(p, ball_r):
-            break
-    return Ball(p)
+def human_move(self, dis, walls):
+    if dis < 0:
+        dis = 0
+    if dis > human_speed_max:
+        dis = human_speed_max
+    oldcentre = self.circle.centre
+    self.circle.centre = MoveAlongAngle(oldcentre, self.rotation, dis)
+    if not LegalPos(self.circle, walls):
+        self.circle.centre = oldcentre
 
 
-def Run_game():
+def human_shoot(self):
+    if self.fire_time == 0:
+        self.fire_time = human_fire_interval
+        p = MoveAlongAngle(self.circle.centre, self.rotation, human_radius+bullet_radius)
+        return Bullet(p, self.rotation)
+    return None
+
+
+def human_throwGrenade(self):
+    if self.grenade_number > 0:
+        self.grenade_number -= 1
+        p = MoveAlongAngle(self.circle.centre, self.rotation, human_radius+grenade_radius)
+        return Grenade(p, self.rotation)
+    return None
+
+
+def RunGame():
     pygame.init()
-    screen = pygame.display.set_mode((800, 600))
+    screen = pygame.display.set_mode((width_of_screen, height_of_screen))
     pygame.display.set_caption("Door Kickers")
-    for i in range(number_of_walls):
-        walls.append(build_wall(i))
-    for i in range(human_numbers):
-        humans.append(build_human(i))
-    ball = build_ball()
+    walls = InitWalls(number_of_walls)
+    humans = InitHumans(human_number, walls)
+    ball = InitBall(walls)
     time = 0
-    explode_to_paint = []
-    for i in range(human_numbers):
+    bullets = []
+    grenades = []
+    ais = []
+    for i in range(human_number):
         ais.append(AI.MyAI(i, ball, walls, bullets, humans, grenades,screen))
-
+    #this is frh's test code
+    '''
+    test = False
+    humans[0].circle.centre = Point(100, 100)
+    humans[0].rotation = 0
+    humans[1].circle.centre = Point(200, 100)
+    humans[1].rotation = 180
+    ball.circle.centre = Point(230, 130)
+    '''
     while True:
         screen.fill(white)
         time += 1
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-
-
-
-
-
         if time == 20:
             time = 0
             # ai决策
+
             analysis = []
             for i in range(len(ais)):
                 ais[i].getdata(i, ball, walls, bullets, humans, grenades)
@@ -308,80 +145,78 @@ def Run_game():
                 ana = analysis[i]
                 type = ana[0]
                 if type == 1:
-                    if ana[1] > human_rotate_max:
-                        ana[1] = human_rotate_max
-                    elif ana[1] < -human_rotate_max:
-                        ana[1] = -human_rotate_max
                     humans[i].rotate(ana[1])
                 elif type == 2:
-                    if ana[2] > human_speed_max:
-                        ana[2] = human_speed_max
-                    elif ana[2] < -human_speed_max:
-                        ana[2] = -human_speed_max
-                    humans[i].move(ana[2])
+                    human_move(humans[i],ana[2], walls)
                 elif type == 3:
-                    humans[i].shoot()
+                    b = human_shoot(humans[i])
+                    if b is not None:
+                        bullets.append(b)
                 else:
-                    humans[i].grenade()
+                    g = human_throwGrenade(humans[i])
+                    if g is not None:
+                        grenades.append(g)
+
+            #this is frh's test code
+            '''
+            if True:
+                # test
+                if test is True:
+                    human_move(humans[0], human_speed_max, walls)
+                b = human_shoot(humans[0])
+                if b is not None:
+                    bullets.append(b)
+                g = human_throwGrenade(humans[1])
+                if g is not None:
+                    grenades.append(g)
+                human_move(humans[1], human_speed_max, walls)
+                humans[1].rotate(0-human_rotate_max)
+            '''
+
 
         # 子弹、炸弹的移动
-        if time % 4 == 0:
-            explode_to_paint = []
-            bullets_to_delete = []
-            grenade_to_delete = []
-            for bullet in bullets:
-                if bullet.move() is False:
+        explode_to_paint = []
+        bullets_to_delete = []
+        bullets, newgrenades = FutureWeaponMap(walls, bullets, grenades, 1)
+        #如果子弹撞墙或撞人则消失
+        for bullet in bullets:
+            for human in humans:
+                if CircleIntersection(human.circle, bullet.circle):
+                    human.hp -= bullet_hurt
                     bullets_to_delete.append(bullet)
-            for i in bullets_to_delete:
-                bullets.remove(i)
-            for grenade in grenades:
-                grenade.move()
-                if grenade.explode():
-                    grenade_to_delete.append(grenade)
-            for grenade in grenade_to_delete:
-                explode_to_paint.append(grenade)
-                grenades.remove(grenade)
+        for i in bullets_to_delete:
+            bullets.remove(i)
+        for grenade in grenades:
+            if grenade.explode():
+                explode_to_paint.append(Circle(grenade.circle.centre, explode_radius))
+        for explode in explode_to_paint:
+            for human in humans:
+                if CircleIntersection(explode, human.circle):
+                    human.hp -= explode_hurt
+        grenades = newgrenades
 
         # 人的更新
-            for human in humans:
-                if human.update() is False:
-                    test = True
-                    index = humans.index(human)
-                    humans[index] = build_human(index)
-                    if index == ball.belong:
-                        ball.belong = -1
-
-        ball.update()
+        for human in humans:
+            if human.update() is False:
+                if ball.belong is human:
+                    ball.belong = None
+                index = humans.index(human)
+                humans[index] = InitHumans(1, walls)[0]
+        update_ball(ball, humans)
 
         
         for wall in walls:
-            pygame.draw.rect(screen, black, wall)
+            draw_rectangle(screen, wall.rectangle, black)
         for human in humans:
             draw_human(screen, human)
         for bullet in bullets:
-            pygame.draw.circle(screen, green, bullet.position.tolist(), bullets_r)
+            draw_circle(screen, bullet.circle, green)
         for grenade in grenades:
-            pygame.draw.circle(screen, yellow, grenade.position.tolist(), grenades_r)
+            draw_circle(screen, grenade.circle, yellow)
         for explode in explode_to_paint:
-            pygame.draw.circle(screen, yellow, explode.position.tolist(), explode_r[-1])
-        pygame.draw.circle(screen, blue, ball.position.tolist(), ball_r)
+            pygame.draw.circle(screen, yellow, explode.centre.tolist(), explode_radius)
+        draw_circle(screen, ball.circle, blue)
         pygame.display.flip()
         
 
-Run_game()
-
-
-
-
-def test():
-    # init
-    humans[0].position = dot(300, 300)
-    humans[1].position = dot(300, 400)
-    humans[0].rotation = 90
-    humans[1].rotation = 0
-    ball.position = dot(320, 420)
-    #while
-    humans[0].shoot()
-    humans[1].move(4)
-    humans[1].rotate(10)
-    humans[1].grenade()
+RunGame()
