@@ -1,22 +1,21 @@
 class AI_player:
-    def __init__(self, num, ball, wall, bul, human, gre):
+    def __init__(self, num, ball, walls, bullets, humans, grenades):
         self.number = num
         self.ball = ball
-        self.wall = wall
-        self.bullets = bul
-        self.humans = human
-        self.grenades = gre
+        self.walls = walls
+        self.bullets = bullets
+        self.humans = humans
+        self.grenades = grenades
 
-    def getdata(self, num, ball, wall, bul, human, gre):
+    def refresh(self, num, ball, walls, bullets, humans, grenades):
         self.number = num
         self.ball = ball
-        self.wall = wall
-        self.bullets = bul
-        self.humans = human
-        self.grenades = gre
+        self.walls = walls
+        self.bullets = bullets
+        self.humans = humans
+        self.grenades = grenades
 
     def analysis(self):
-        a = self.num
         ans = (0, 0, 0, False, False)
         return ans
         # do something
