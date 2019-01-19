@@ -4,10 +4,13 @@ import sys
 import random
 import copy
 import time
-from AI_Player import AI_player
+from AI_Player import *
+import threading
 from Arguments import *
 from BaseClass import *
 from MySTL import *
+from multiprocessing import Pool
+
 
 # Created by frh
 # Modified by xtx
@@ -199,6 +202,28 @@ def throw(human, grenades, walls):
             grenades.append(Grenade(p, human.rotation))
 
 
+class Dispatcher(threading.Thread):
+    def __init__(self, func):
+        threading.Thread.__init__(self)
+        self.setDaemon(True)
+        self.return_value = None
+        self.func = func
+        self.start()
+
+    def run(self):
+        self.return_value = self.func()
+
+
+def func(ai):
+    patcher = Dispatcher(ai.analysis)
+    patcher.join(timeout=time_of_round)
+    # time.sleep(time_of_round)
+    if patcher.return_value:
+        return patcher.return_value
+    else:
+        return (0, 0, 0)
+
+
 def RunGame():
     pygame.init()
     screen = pygame.display.set_mode((width_of_screen, height_of_screen))
@@ -209,9 +234,13 @@ def RunGame():
     ais = []
     for i in range(human_number):
         ais.append(AI_player(i, ball, walls, bullets, humans, grenades))
+    #ais.append(Time_Out_AI_player(0, ball, walls, bullets, humans, grenades))
+    # for i in range(human_number - 1):
+    #    ais.append(AI_player(i, ball, walls, bullets, humans, grenades))
     score = [0.0] * human_number
     start_time = time.time()
     while time.time() - start_time < time_of_game:
+        # print("Debug")
         screen.fill(white)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -221,10 +250,17 @@ def RunGame():
             score[ball.belong.number] += 1
 
         analysis = []
-        for i in range(len(ais)):
+        return_values = []
+        n = len(ais)
+        pool = Pool(processes=n)
+
+        for i in range(n):
             ais[i].refresh(i, ball, walls, bullets, humans, grenades)
-            # analysis.append(ais[i].analysis())
-            analysis.append((4, 0, human_speed_max))
+            return_values.append(pool.apply_async(func, args=(ais[i],)))
+        pool.close()
+        pool.join()
+        for i in return_values:
+            analysis.append(i.get())
 
         for a, human in zip(analysis, humans):
             if a[0] == 1:
@@ -311,4 +347,5 @@ def RunGame():
         print(i, ":", sc)
 
 
-RunGame()
+if __name__ == "__main__":
+    RunGame()

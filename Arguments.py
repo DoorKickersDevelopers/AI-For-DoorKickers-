@@ -43,4 +43,6 @@ ball_radius = 8
 
 time_of_game = 20
 
+time_of_round = 1.0 / 24
+
 # 一局游戏300s
