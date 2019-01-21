@@ -77,7 +77,7 @@ def RectangleIntersection(rect1,rect2):
 def PointOnLine(p,l):
     """
     Point p
-    Line l 
+    Line l
     return True if p on l
     """
     if l.p1.x==l.p2.x:
@@ -92,7 +92,7 @@ def PointOnLine(p,l):
     if fabs((l.p1.x-p.x)*(l.p2.y-p.y)-(l.p2.x-p.x)*(l.p1.y-p.y))<eps:
         if min(l.p1.x, l.p2.x)<=p.x and p.x<=max(l.p1.x,l.p2.x):
             return True
-        else: 
+        else:
             return False
     else:
         return False
@@ -107,7 +107,7 @@ def LineIntersection(l1,l2):
     '''
     if PointOnLine(l1.p1, l2) or PointOnLine(l1.p2, l2) or PointOnLine(l2.p1, l1) or PointOnLine(l2.p2, l1):
         return True
-    
+
     def Rect(line):
         return Rectangle(min(line.p1.x,line.p2.x), max(line.p1.x,line.p2.x), min(line.p1.y,line.p2.y), max(line.p1.y,line.p2.y))
 
@@ -115,7 +115,7 @@ def LineIntersection(l1,l2):
         if not RectangleIntersection(Rect(l1), Rect(l2)):
             return False
 
-    
+
 
     p1 = l1.p2-l1.p1
 
@@ -245,7 +245,7 @@ def LineIntersectionPoint(l1,l2):
             return None,None
         else:
             return l1.p1
-    
+
     if PointOnLine(l1.p2,l2):
         delta = l1.p1-l1.p2
         delta.x*=eps
@@ -260,7 +260,7 @@ def LineIntersectionPoint(l1,l2):
     tmpRight = (l1.p1.y-l2.p1.y)*(l1.p2.x-l1.p1.x)*(l2.p2.x-l2.p1.x)+l2.p1.x*(l2.p2.y-l2.p1.y)*(l1.p2.x-l1.p1.x)-l1.p1.x*(l1.p2.y-l1.p1.y)*(l2.p2.x-l2.p1.x)
     x = tmpRight/tmpLeft
     tmpLeft = (l1.p1.x-l1.p2.x)*(l2.p2.y-l2.p1.y)-(l1.p2.y-l1.p1.y)*(l2.p1.x-l2.p2.x)
-    tmpRight = l1.p2.y*(l1.p1.x-l1.p2.x)*(l2.p2.y-l2.p1.y)+(l2.p2.x-l1.p2.x)*(l2.p2.y-l2.p1.y)*(l1.p1.y-l1.p2.y)-l2.p2.y*(l2.p1.x-l2.p2.x)*(l1.p2.y-l1.p1.y) 
+    tmpRight = l1.p2.y*(l1.p1.x-l1.p2.x)*(l2.p2.y-l2.p1.y)+(l2.p2.x-l1.p2.x)*(l2.p2.y-l2.p1.y)*(l1.p1.y-l1.p2.y)-l2.p2.y*(l2.p1.x-l2.p2.x)*(l1.p2.y-l1.p1.y)
     y = tmpRight/tmpLeft;
     return Point(x, y)
 
@@ -295,7 +295,7 @@ def LineIntersectCirclePoints(l,c):
     dis_AB = L2Distance(A, B)
     mu = (AO.x*AB.x+AO.y*AB.y)/dis_AB
     PR = Point(A.x+mu*AB.x/dis_AB, A.y+mu*AB.y/dis_AB)
-    base = sqrt(r*r-disLine(A,B,O)*disLine(A, B, O)) 
+    base = sqrt(r*r-disLine(A,B,O)*disLine(A, B, O))
     Base = Point(base*AB.x/dis_AB, base*AB.y/dis_AB)
     ans1,ans2 = Base+PR,PR-Base
     ans = []
@@ -317,7 +317,7 @@ def LegalPos(c,walls):
     """
     pos = c.centre
     radius = c.radius
-    if pos.x<map_lbx or pos.x>map_ubx or pos.y<map_lby or pos.y>map_uby:
+    if pos.x-radius<map_lbx or pos.x+radius>map_ubx or pos.y-radius<map_lby or pos.y+radius>map_uby:
         return False
     for wall in walls:
         rect = wall.rectangle
@@ -332,108 +332,27 @@ def LegalPos(c,walls):
     return True
 
 
-def FutureGrenadePos(grenade,walls,future):
+def FutureFireballPos(fireball,walls,future):
     '''
-    Grenade grenade
+    Fireball fireball
     list of Wall walls
-    float future
-    return where grenade will be if there are walls after future frames
-    return pos,rot
-    '''
-    if grenade.time<future:
-        return None,None
-    if future == 0:
-        return grenade.circle.centre,grenade.rotation
-    pos1 = grenade.circle.centre
-    angle = grenade.rotation
-    angle = 1.0*angle/180*math.pi
-    dx = 1.0*grenade.velocity*future*math.cos(angle)
-    dy = 1.0*grenade.velocity*future*math.sin(angle)
-    pos2 = pos1+Point(dx, dy)
-    pos1 = pos1+Point(eps*dx, eps*dy)
-    line = Line(pos1, pos2)
-    rd = grenade.circle.radius
-    Nodes = []
-    for wall in walls:
-        rect = wall.rectangle
-        l,r,t,b = rect.left,rect.right,rect.top,rect.bottom
-        l1 = Line(Point(l,b-rd), Point(r,b-rd))
-        l2 = Line(Point(l,t+rd), Point(r,t+rd))
-        l3 = Line(Point(l-rd,b), Point(l-rd,t))
-        l4 = Line(Point(r+rd,b), Point(r+rd,t))
-        for li in (l1,l2,l3,l4):
-            re = LineIntersectionPoint(line, li)
-            if re!=None and re!=(None,None):
-                Nodes.append((re,wall))
-        p1,p2,p3,p4 = rect.Points()
-        for pi in (p1,p2,p3,p4):
-            if DisLinePoint(line, pi)<rd:
-                pp = LineIntersectCirclePoints(line,Circle(pi, rd))
-                for ppp in pp:
-                    Nodes.append((ppp,wall))
-    def DisToPos1(obj):
-        pos,wall = obj
-        return L2Distance(pos, pos1)
-    Nodes.sort(key=DisToPos1)       
-    if Nodes==[]:
-        if pos2.x<map_lbx or pos2.x>map_ubx or pos2.y<map_lby or pos2.y>map_uby:
-            return None,None
-        return pos2,grenade.rotation
-    else:
-        grenade2 = Grenade(Nodes[0][0],grenade.rotation)
-        delta_time = L2Distance(Nodes[0][0], pos1)/grenade.velocity
-        #print(delta_time)
-        grenade2.time = grenade.time-delta_time
-        collision_pos,wall = Nodes[0]
-        rect = wall.rectangle
-        d = rd/sqrt(2)
-        if collision_pos.x <= rect.left-d:
-            # collision left edge
-            if grenade.rotation < 90:
-                grenade2.rotation = 180-grenade.rotation
-            else:
-                grenade2.rotation = 540-grenade.rotation
-        if collision_pos.x >= rect.right+d:
-            #collision right edge
-            if grenade.rotation < 180:
-                grenade2.rotation = 180-grenade.rotation
-            else:
-                grenade2.rotation = 540-grenade.rotation
-        if collision_pos.y <= rect.bottom-d:
-            #collision bottom edge
-            if grenade.rotation > 90:
-                grenade2.rotation = 360-grenade.rotation
-            else:
-                grenade2.rotation = 360-grenade.rotation
-        if collision_pos.y >=rect.top+d:
-            if grenade.rotation > 90:
-                grenade2.rotation = 360-grenade.rotation
-            else: 
-                grenade2.rotation = 360-grenade.rotation
-        return FutureGrenadePos(grenade2, walls, future-delta_time)
- 
-
-def FutureBulletPos(bullet,walls,future):
-    '''
-    Bullet bullet
-    list of Wall walls
-    float future
-    return where the bullet is after future frames,if collision happens return None
+    int future
+    return where the fireball is after future frames,if collision happens return None
 
     '''
     if future == 0:
-        return bullet.circle.centre
-    pos1 = bullet.circle.centre
-    angle = bullet.rotation
+        return fireball.circle.centre
+    pos1 = fireball.circle.centre
+    angle = fireball.rotation
     angle = 1.0*angle/180*math.pi
-    dx = 1.0*bullet.velocity*future*math.cos(angle)
-    dy = 1.0*bullet.velocity*future*math.sin(angle)
+    dx = 1.0*Fireball.velocity*future*math.cos(angle)
+    dy = 1.0*Fireball.velocity*future*math.sin(angle)
     pos2 = pos1+Point(dx, dy)
-    if pos2.x<map_lbx or pos2.x>map_ubx or pos2.y<map_lby or pos2.y>map_uby:
+    r = fireball.circle.radius
+    if pos2.x-r<map_lbx or pos2.x+r>map_ubx or pos2.y-r<map_lby or pos2.y+r>map_uby:
         return None
 
     line = Line(pos1, pos2)
-    r = bullet.circle.radius
     for wall in walls:
         ps = wall.rectangle.Points()
         for p in ps:
@@ -457,12 +376,12 @@ def HumanCanGotoPos(human,walls,pos):
     return True if human can go straight to pos from human.position
     without collision(with wall)
     '''
-    pos1 = human.position
-    if pos.x<map_lbx or pos.x>map_ubx or pos.y<map_lby or pos.y>map_uby:
+    pos1 = human.circle.centre
+    r = human.circle.radius
+    if pos.x-r<map_lbx or pos.x+r>map_ubx or pos.y-r<map_lby or pos.y+r>map_uby:
         return False
 
     line = Line(pos1, pos)
-    r = human.circle.radius
     for wall in walls:
         ps = wall.rectangle.Points()
         for p in ps:
@@ -478,37 +397,44 @@ def HumanCanGotoPos(human,walls,pos):
     return True
 
 
-def FutureWeaponMap(walls,bullets,grenades,future):
+def UpdateWeaponMap(walls,fireballs,meteors,future):
     '''
     list of Wall: walls
-    list of Bullet : bullets
-    list of Grenade : grenades
+    list of Fireball : fireballs
+    list of Meteor : meteors
     int : future
 
-    return ball,walls,bullets,humans,grenades whose pos in future turns  
-    
+    return update fireballs and meteors after future frames
+
     e.g. future = 1 : next turn
 
-    Warning: assume human has no influence , so does ball 
+
+    Warning: meteor.time>=0
+    Warning: assume human has no influence , so does ball
     '''
     if future==0:
-        return bullets,grenades
-    nowBullets = []
-    nowGrenades = []
+        return
+    delFireballs = []
+    delMeteors = []
 
-    for bullet in bullets:
-        pos = FutureBulletPos(bullet, walls, future)
+    for fireball in fireballs:
+        pos = FutureFireballPos(fireball, walls, future)
         if pos != None:
-            nowBullet = Bullet(pos,bullet.rotation)
-            nowBullets.append(nowBullet) 
+            fireball.circle.centre = pos
+            fireball.attack_range.centre = pos
+        else:
+            delFireballs.append(fireball)
+    for fireball in delFireballs:
+        fireballs.remove(fireball)
 
-    for grenade in grenades:
-        pos,rot = FutureGrenadePos(grenade, walls, future)
-        if pos != None:
-            nowGrenade = Grenade(pos,rot,grenade.time-future)
-            nowGrenades.append(nowGrenade)
+    for meteor in meteors:
+        if meteor.time>=future:
+            meteor.time-=future
+        else:
+            delMeteors.append(meteor)
 
-    return nowBullets,nowGrenades
+    for meteor in delMeteors:
+        meteors.remove(meteor)
 
 
 
@@ -530,7 +456,7 @@ if __name__ == '__main__':
 
     def drawCircle(circ):
         pygame.draw.circle(screen, yellow, (int(circ.centre.x),int(circ.centre.y)), int(circ.radius))
-    
+
     def drawRect(rect):
         pygame.draw.rect(screen, red, pygame.Rect(int(rect.left), int(rect.bottom), int(rect.right-rect.left), int(rect.top-rect.bottom)))
 
@@ -566,7 +492,7 @@ if __name__ == '__main__':
 
     #rect2 = Rectangle(105, 110, 550, 600)
     #print(RectangleIntersection(rect1, rect2))
-    
+
     #p = Point(10, 10)
     #line = Line(Point(5,9), Point(15, 11))
     #print(PointOnLine(p,line))
@@ -594,7 +520,7 @@ if __name__ == '__main__':
         #         Rectangle(429, 570, 336, 416),
         #         Rectangle(327, 380, 432, 456)]
         walls = []
-        
+
         for i in range(5):
             rect = RandomRect()
         #for rect in rects:
@@ -603,7 +529,7 @@ if __name__ == '__main__':
             drawRect(wall.rectangle)
         pos = RandomPoint()
         #pos = Point(109, 283)
-        while not LegalPos(Circle(pos,grenade_radius), walls):
+        while not LegalPos(Circle(pos,Meteor_radius), walls):
             pos = RandomPoint()
 
 
@@ -614,21 +540,6 @@ if __name__ == '__main__':
             rot+=360
         #rot = random.randint(0, 360)
         #rot = 48
-        grenade = Grenade(pos, rot)
-
-        for i in range(1000):
-        #for i in range(112,113):
-            #try:
-            pos2,rot = FutureGrenadePos(grenade, walls, i)
-            #except Exception as e:
-            #    print(grenade.circle.centre,grenade.rotation)
-            #    print(i)
-            #    for wall in walls:
-            #        print(wall.rectangle)
-            #    break    
-            if pos2!=None:
-                drawCircle(Circle(pos2, grenade_radius))    
-
         #u = LineIntersectCirclePoints(l, c)
         #while u==[]:
         #    l = Line(Point(200,200),Point(200, 400))
@@ -641,7 +552,7 @@ if __name__ == '__main__':
         #print(LegalPos(c, walls))
         #for p in u:
         #    drawPoint(p)
-        
+
     #    drawLine(l2)
     #    print(LineIntersectCircle(c,l))
         pygame.display.flip()
@@ -649,4 +560,4 @@ if __name__ == '__main__':
     #    break
 
 
-    
+

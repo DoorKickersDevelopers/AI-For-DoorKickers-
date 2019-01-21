@@ -76,37 +76,38 @@ class Ball:
         self.belong = None
 
 
-class Bullet:
-    velocity = velocity_of_bullet
-    hurt = bullet_hurt
+class Fireball:
+    velocity = velocity_of_fireball
+    hurt = fireball_hurt
 
     def __init__(self, position, rotation):
-        self.circle = Circle(position, bullet_radius)
+        self.circle = Circle(position, fireball_radius)
         self.rotation = rotation
+        self.attack_range = Circle(position, splash_radius)
 
 
-class Grenade:
-    velocity = velocity_of_grenade
+class Meteor:
     hurt = explode_hurt
-    hurt_radius = explode_radius
 
-    def __init__(self, position, rotation, last_time=grenade_initial_time):
-        self.circle = Circle(position, grenade_radius)
-        self.rotation = rotation
-        self.time = last_time
+    def __init__(self, position, last_time=meteor_delay):
+        self.time = meteor_delay
+        self.pos = position
+        self.attack_range = Circle(position, explode_radius)
 
 
 class Human:
     velocity_max = human_speed_max
     rotation_max = human_rotate_max
-    fire_interval = human_fire_interval
+    fireball_interval = human_fireball_interval
+    meteor_interval = human_meteor_interval
+    meteor_cast_distance = cast_distance
 
     def __init__(self, position, rotation, number):
         self.circle = Circle(position, human_radius)
         self.rotation = rotation
         self.hp = human_hp
-        self.grenade_number = human_grenade_number
-        self.fire_time = 0
+        self.meteor_number = human_meteor_number
+        self.attack_time = 0
         self.number = number
 
 

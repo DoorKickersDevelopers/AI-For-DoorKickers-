@@ -65,42 +65,35 @@
 
 | 成员     | 解释                                         |
 | -------- | -------------------------------------------- |
-| `centre` | 圆心，`Point`类型                            |
-| `radius` | 半径，实数类型                               |
 | `belong` | 持有者                                       |
-| `circle` | 该类的形状对应的圆，与`centre`和`radius`一致 |
+| `circle` | 该类的形状对应的圆 |
 
-### class Bullet(object)
+### class Fireball(object)
 
 | 接口                               | 解释                                          |
 | ---------------------------------- | --------------------------------------------- |
-| `__init__(self,position,rotation)` | 使用Point类型和实数类型初始化子弹位置移动方向 |
+| `__init__(self,position,rotation)` | 使用Point类型和实数类型初始化火球位置移动方向 |
 
 | 成员       | 解释                                         |
 | ---------- | -------------------------------------------- |
-| `centre`   | 圆心，`Point`类型                            |
-| `radius`   | 半径，实数类型                               |
 | `rotation` | 角度，0~360                                  |
-| `circle`   | 该类的形状对应的圆，与`centre`和`radius`一致 |
+| `circle`   | 该类的形状对应的圆  |
 | `velocity` | 移动速率                                     |
 | `hurt`     | 伤害                                         |
+|`attack_range`|攻击范围对应的圆，中心与circle重合|
 
-### class Grenade(object)
+### class Meteor(object)
 
-| 接口                               | 解释                                          |
-| ---------------------------------- | --------------------------------------------- |
-| `__init__(self,position,rotation)` | 使用Point类型和实数类型初始化手雷位置移动方向 |
+| 接口                      | 解释                              |
+| ------------------------- | --------------------------------- |
+| `__init__(self,position)` | 使用Point类型初始化天降正义的位置 |
 
 | 成员          | 解释                                         |
 | ------------- | -------------------------------------------- |
-| `centre`      | 圆心，`Point`类型                            |
-| `radius`      | 半径，实数类型                               |
-| `rotation`    | 角度，0~360                                  |
-| `circle`      | 该类的形状对应的圆，与`centre`和`radius`一致 |
-| `velocity`    | 移动速率                                     |
+| `pos`         | 位置，`Point`类型                            |
+| `time`        | 剩余存在时间，整数类型                       |
+| `attack_range` |爆炸范围对应的圆，中心在Pos处                                     |
 | `hurt`        | 伤害                                         |
-| `hurt_radius` | 爆炸半径                                     |
-| `time`        | 剩余存在时间                                 |
 
 ### class Human(object)
 
@@ -110,16 +103,16 @@
 
 | 成员             | 解释                                         |
 | ---------------- | -------------------------------------------- |
-| `centre`         | 圆心，`Point`类型                            |
-| `radius`         | 半径，实数类型                               |
 | `rotation`       | 角度，0~360                                  |
-| `circle`         | 该类的形状对应的圆，与`centre`和`radius`一致 |
+| `circle`         | 该类的形状对应的圆 |
 | `velocity_max`   | 最大单帧移动速率                             |
 | `rotation_max`   | 最大单帧旋转速率                             |
-| `fire_interval`  | 每经过`fire_interval`帧发射一颗子弹          |
+| `fireball_interval`  | 发射火球术的后摇时间         |
+|`meteor_interval`|天降正义的后摇时间|
+|`meteor_cast_distance`|天降正义的施法距离|
 | `hp`             | 剩余血量                                     |
-| `grenade_number` | 剩余手雷数                                   |
-| `fire_time`      | 距离下一次的开火时间                         |
+| `meteor_number` | 剩余天降正义数                                   |
+| `attack_time`      | 距离下一次攻击的缓冲时间                         |
 | `number`         | 编号                                         |
 
 ### class Wall(object)
@@ -146,8 +139,8 @@
 
 | 接口                                                    | 解释                                                         |
 | ------------------------------------------------------- | ------------------------------------------------------------ |
-| `__init__(self,num,ball,walls,bullets,humans,grenades)` | 初始时，将自己控制的人的编号，球，所有的墙，所有的子弹，所有的人，所有的炸弹的信息传给 |
-| `refresh(self,num,ball,walls,bullets,humans,grenades)`  | 每一帧开始时，会调用refresh将上一帧的运行结果传给AI，进行地图信息的更新 |
+| `__init__(self, num, ball, walls, fireballs, humans, meteors)` | 初始时，将自己控制的人的编号，球，所有的墙，所有的火球，所有的人，所有的天降正义的信息传进去 |
+| `refresh(self, ball, walls, fireballs, humans, meteors)`  | 每一帧开始时，会调用refresh将上一帧的运行结果传给AI，进行地图信息的更新 |
 | `analysis(self)`                                        | 你需要覆盖这个接口，给出自己的每一轮的决策结果，每一轮refresh之后调用这个函数 |
 
 | 成员     | 解释               |
@@ -155,6 +148,6 @@
 | number   | 自己控制的角色编号 |
 | ball     | Ball类             |
 | walls    | Wall类的list       |
-| bullets  | Bullet类的list     |
+| fireballs  | Fireball类的list     |
 | humans   | Human类的list      |
-| grenades | Grenade类的list    |
+| meteors |Meteor类的list    |
