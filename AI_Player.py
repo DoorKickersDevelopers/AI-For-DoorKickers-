@@ -19,7 +19,8 @@ class AI_player:
         self.meteors = meteors
 
     def analysis(self):
-        ans = (0, 0, 0)
+        ans = (4, self.humans[self.number].circle.centre.x,
+               self.humans[self.number].circle.centre.y)
         return ans
         # do something
         # 返回的三个数(flag,x,y)表示如下含义

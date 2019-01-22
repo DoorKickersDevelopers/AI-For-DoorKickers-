@@ -8,7 +8,7 @@ class Point(object):
         self.x = x
         self.y = y
 
-    def __str__(self):
+    def __repr__(self):
         return "Point({},{})".format(self.x, self.y)
 
     def __add__(self, other):
@@ -31,8 +31,8 @@ class Line(object):
     def Points(self):
         return self.p1, self.p2
 
-    def __str__(self):
-        return "Line( {} , {} )".format(self.p1.__str__(), self.p2.__str__())
+    def __repr__(self):
+        return "Line( {} , {} )".format(self.p1.__repr__(), self.p2.__repr__())
 
 
 class Rectangle(object):
@@ -45,7 +45,7 @@ class Rectangle(object):
             raise Exception(
                 "create an instance of Rectangle with illegal argument")
 
-    def __str__(self):
+    def __repr__(self):
         return "Rect(x:[{},{}],y:[{},{}])".format(self.left, self.right, self.bottom, self.top)
 
     def Points(self):
@@ -66,7 +66,7 @@ class Circle(object):
         if self.radius <= 0:
             raise Exception("create an instance of Circle with illegal radius")
 
-    def __str__(self):
+    def __repr__(self):
         return "Circle(o:{},r:{})".format(self.centre, self.radius)
 
 
@@ -74,6 +74,13 @@ class Ball:
     def __init__(self, position):
         self.circle = Circle(position, ball_radius)
         self.belong = None
+
+    def __repr__(self):
+        if self.belong is None:
+            num = -1
+        else:
+            num = self.belong.number
+        return "[[{},{}],{}]".format(self.circle.centre.x, self.circle.centre.y, num)
 
 
 class Fireball:
@@ -85,6 +92,9 @@ class Fireball:
         self.rotation = rotation
         self.attack_range = Circle(position, splash_radius)
 
+    def __repr__(self):
+        return "[[{},{}],{}]".format(self.circle.centre.x, self.circle.centre.y, self.rotation)
+
 
 class Meteor:
     hurt = explode_hurt
@@ -93,6 +103,9 @@ class Meteor:
         self.time = meteor_delay
         self.pos = position
         self.attack_range = Circle(position, explode_radius)
+
+    def __repr__(self):
+        return "[[{},{}],{}]".format(self.pos.x, self.pos.y, self.time)
 
 
 class Human:
@@ -110,7 +123,13 @@ class Human:
         self.attack_time = 0
         self.number = number
 
+    def __repr__(self):
+        return "[{},[{},{}],{},{},{},{}]".format(self.number, self.circle.centre.x, self.circle.centre.y, self.rotation, self.hp, self.meteor_number, self.attack_time)
+
 
 class Wall:
     def __init__(self, left, right, bottom, top):
         self.rectangle = Rectangle(left, right, bottom, top)
+
+    def __repr__(self):
+        return "[{},{},{},{}]".format(self.rectangle.left, self.rectangle.right, self.rectangle.bottom, self.rectangle.top)

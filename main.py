@@ -10,6 +10,7 @@ from Arguments import *
 from BaseClass import *
 from MySTL import *
 from multiprocessing import Pool
+import json
 
 
 # Created by frh
@@ -268,6 +269,7 @@ def Init():
         ansy2 = h_offset + (ansy2+1) * room_size
 
         walls.append(Wall(ansx1,ansx2,ansy1,ansy2))
+        #print(ansx1,ansx2,ansy1,ansy2)
     '''
     for i in range(width):
         for j in range(height):
@@ -314,13 +316,14 @@ def Init():
 
 
 
-def update_ball(ball, humans):
+def update_ball(ball, humans,eventlist):
     if ball.belong is not None:
         ball.circle.centre = ball.belong.circle.centre
     else:
         for human in humans:
             if (human is not None) and CircleIntersection(ball.circle, human.circle):
                 ball.belong = human
+                eventlist.append([5,human.number])
                 ball.circle.centre = human.circle.centre
 
 
@@ -342,6 +345,8 @@ def shoot(human, fireballs, walls):
                            human_radius + fireball_radius)
         if LegalPos(Circle(p, fireball_radius), walls):
             fireballs.append(Fireball(p, human.rotation))
+            return True
+    return False
 
 
 def rotate(human, angle):
@@ -364,6 +369,8 @@ def throw(human, meteors, pos, walls):
             human.meteor_number -= 1
             human.attack_time = human.meteor_interval
             meteors.append(Meteor(pos))
+            return True
+    return False
 
 
 class Dispatcher(threading.Thread):
@@ -392,12 +399,18 @@ def func(ai):
 
 
 def RunGame():
+    loglist = []
     pygame.init()
     screen = pygame.display.set_mode((width_of_screen, height_of_screen))
     pygame.display.set_caption("Door Kickers")
     #Init()
 
     walls, humans, ball = Init()
+
+    dc = {}
+    dc["walls"]=str(walls)
+    loglist.append(dc)
+
     #return
     fireballs = []
     meteors = []
@@ -408,10 +421,24 @@ def RunGame():
     # for i in range(human_number - 1):
     #    ais.append(AI_player(i, ball, walls, bullets, humans, grenades))
 
-    score = [0.0] * human_number
-    start_time = time.time()
-    while time.time() - start_time < time_of_game:
 
+    dc = {}
+    dc["humans"]=str(humans)
+    dc["fireballs"]=str(fireballs)
+    dc["meteors"]=str(meteors)
+    dc["balls"]=str(ball)
+    eventlist = []
+    for human in humans:
+        eventlist.append([8,human.number,human.circle.centre.x,human.circle.centre.y])
+    dc["events"]=str(eventlist)
+    loglist.append(dc)
+
+
+    score = [0.0] * human_number
+    timecnt = 0
+    while timecnt < time_of_game:
+        eventlist = []
+        timecnt+=1
         screen.fill(white)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -419,9 +446,6 @@ def RunGame():
 
         if ball.belong != None:
             score[ball.belong.number] += 1
-
-        def randomfloat(x):
-            return random.randint(0, x - 1) + random.random()
 
         def generate_pos():
             return StartPoints[random.randint(0,len(StartPoints)-1)]
@@ -435,6 +459,7 @@ def RunGame():
                     c = Circle(Point(x, y), human_radius)
                 rot = random.randint(0, 359)
                 humans[i] = Human(Point(x, y), rot, i)
+                eventlist.append([8,i,x,y])
 
         analysis = []
         return_values = []
@@ -459,13 +484,15 @@ def RunGame():
             elif a[0] == 2:
                 rotate(human, a[1])
 
-        UpdateWeaponMap(walls, fireballs, meteors, 1)
+        UpdateWeaponMap(walls, fireballs, meteors, 1,eventlist)
 
         for a, human in zip(analysis, humans):
             if a[0] == 3:
                 shoot(human, fireballs, walls)
+                eventlist.append([1,human.number])
             elif a[0] == 4:
-                throw(human, meteors, Point(a[1], a[2]), walls)
+                if throw(human, meteors, Point(a[1], a[2]), walls):
+                    eventlist.append([4,human.number])
 
         delFireballs = []
         delMeteors = []
@@ -478,9 +505,11 @@ def RunGame():
                     Flag = False
                     break
             if not Flag:
+                eventlist.append([6,fireball.circle.centre.x,fireball.circle.centre.y])
                 for human in humans:
                     if CircleIntersection(human.circle, fireball.attack_range):
                         human.hp -= fireball.hurt
+                        eventlist.append([2,human.number,fireball.hurt])
 
         for fireball in delFireballs:
             fireballs.remove(fireball)
@@ -488,10 +517,12 @@ def RunGame():
         for meteor in meteors:
             if meteor.time == 0:
                 #print('Bomb!')
+                eventlist.append([7,meteor.pos.x,meteor.pos.y])
                 delMeteors.append(meteor)
                 for human in humans:
                     if CircleIntersection(human.circle, meteor.attack_range):
                         human.hp -= meteor.hurt
+                        eventlist.append([2,human.number,meteor.hurt])
 
         for meteor in delMeteors:
             meteors.remove(meteor)
@@ -503,6 +534,7 @@ def RunGame():
                 if ball.belong is human:
                     ball.belong = None
                 delHumanNumbers.append(human.number)
+                eventlist.append([3,human.number])
                 #print(human.number)
             else:
                 if human.attack_time > 0:
@@ -510,7 +542,15 @@ def RunGame():
         for i in delHumanNumbers:
             humans[i]=None
 
-        update_ball(ball, humans)
+        update_ball(ball, humans,eventlist)
+
+        dc = {}
+        dc["humans"]=str(humans)
+        dc["bullets"]=str(fireballs)
+        dc["grenades"]=str(meteors)
+        dc["balls"]=str(ball)
+        dc["events"]=str(eventlist)
+        loglist.append(dc)
 
         for wall in walls:
             draw_rectangle(screen, wall.rectangle, black)
@@ -528,6 +568,8 @@ def RunGame():
         print(i, ":", sc)
 
 
+    with open("log.json","w")as file:
+        json.dump(loglist,file)
 
 if __name__ == "__main__":
     RunGame()

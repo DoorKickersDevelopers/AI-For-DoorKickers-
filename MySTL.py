@@ -397,7 +397,7 @@ def HumanCanGotoPos(human,walls,pos):
     return True
 
 
-def UpdateWeaponMap(walls,fireballs,meteors,future):
+def UpdateWeaponMap(walls,fireballs,meteors,future,eventlist):
     '''
     list of Wall: walls
     list of Fireball : fireballs
@@ -425,6 +425,7 @@ def UpdateWeaponMap(walls,fireballs,meteors,future):
         else:
             delFireballs.append(fireball)
     for fireball in delFireballs:
+        eventlist.append([9,fireball.circle.centre.x,fireball.circle.centre.y])
         fireballs.remove(fireball)
 
     for meteor in meteors:
