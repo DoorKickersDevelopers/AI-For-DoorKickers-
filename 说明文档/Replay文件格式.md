@@ -4,7 +4,7 @@
 
 ```json
 [{
-	"walls":[[left,right,bottom,top], ...]		//墙的左右下上坐标，全部为整数
+	"walls":"[[left,right,bottom,top], ...]"		//墙的左右下上坐标，全部为整数
 }, 
 {
     "humans" : "[[num,[x,y],rotation,hp,grenade_number,fire_time],...]",	
