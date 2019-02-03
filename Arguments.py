@@ -5,7 +5,7 @@ green = (0, 255, 0)
 blue = (0, 0, 255)
 yellow = (255, 255, 0)
 
-density_of_wall = 0.46
+density_of_wall = 0.45
 max_num_of_wall = 15
 room_size = 20
 
@@ -20,7 +20,6 @@ map_uby = height_of_screen
 
 
 frames_per_second = 20
-human_number = 3
 human_hp = 100
 human_meteor_number = 3
 human_fireball_interval = frames_per_second * 1
@@ -42,6 +41,6 @@ explode_hurt = 50
 
 ball_radius = 5
 
-time_of_game = 20 * frames_per_second
+time_of_game = 10 * frames_per_second
 
 time_of_round = 1.0 / frames_per_second
