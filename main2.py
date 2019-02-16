@@ -346,7 +346,9 @@ class Listen(threading.Thread):
             self.ans[i] = (1, 0, 0)
 
     def recvData(self):
-
+        data = sys.stdin.buffer.read()
+        if not data:
+            return
         Len = int.from_bytes(sys.stdin.buffer.read(
             4), byteorder=BYTEORDER, signed=True)
         # print("*******************************************************************\n\n\n\n\n\n")

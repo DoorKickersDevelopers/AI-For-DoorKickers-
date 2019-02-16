@@ -41,6 +41,6 @@ explode_hurt = 50
 
 ball_radius = 5
 
-time_of_game = 10 * frames_per_second
+time_of_game = 3 * frames_per_second
 
 time_of_round = 1.0 / frames_per_second
