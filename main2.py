@@ -1,5 +1,5 @@
-PYGAME = True
-DEBUG = True
+PYGAME = False
+DEBUG = False
 if PYGAME:
     import pygame
     from pygame import Rect
@@ -295,18 +295,6 @@ def throw(human, meteors, pos, walls):
 logs = []
 
 
-def sendTerminateMsg():
-    Body = json.dumps({}).encode()
-    Len = len(Body) + 4
-    Type = 2
-    toSend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
-    toSend += Type.to_bytes(4, byteorder=BYTEORDER, signed=True)
-    toSend += UserCode.to_bytes(4, byteorder=BYTEORDER, signed=True)
-    toSend += Body
-    sys.stdin.buffer.write(toSend)
-    # sys.stdin.flush()
-
-
 def sendLog(log, Type=0, UserCode=-1):
     if DEBUG:
         print("~~~~~~~~~~~~~~~~~~~Send Msg~~~~~~~~~~~~~~~~~~~")
@@ -343,9 +331,6 @@ class Listen(threading.Thread):
             self.ans[i] = (0, 0, 0)
 
     def recvData(self):
-        data = sys.stdin.buffer.read()
-        if not data:
-            return
         Len = int.from_bytes(sys.stdin.buffer.read(
             4), byteorder=BYTEORDER, signed=True)
         # print("*******************************************************************\n\n\n\n\n\n")
@@ -358,17 +343,23 @@ class Listen(threading.Thread):
             # data = json.loads(str(sys.stdin.buffer.read(Len-8), 'utf-8')) # 读取主体部分
             # data = json.loads(str(sys.stdin.buffer.read(Len), 'utf-8')) # 读取主体部分
             data = json.loads(tmp)  # 读取主体部分
+
+            # zaizheli
+            #sendLog(data, 0, -1)
+            #
+
             if UserCode in self.ans.keys():
                 if DEBUG:
                     print("~~~~~~~~~~~~~~~~~~~Recv Msg~~~~~~~~~~~~~~~~~~~")
                     print('AI:', UserCode, data)  # debug
                     print("~~~~~~~~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~")
-                self.ans[UserCode] = data  # 更新对象状态
+                self.ans[UserCode] = (data["flag"],data["args"][0],data["args"][1])  # 更新对象状态
+                if self.ans[UserCode][0]==5:
+                    return False
+                #sendLog(data,0,-1)
                 # self.gameProcess(UserCode)  # 在状态变更后进行游戏逻辑处理
                 # self.sendData({'received':True}, 0, UserCode)
             return True
-        elif Type == 2:
-            return False
 
     def run(self):
         while True:
@@ -427,6 +418,7 @@ def RunGame(human_number):
     log["meteors"] = str(meteors)
     log["balls"] = str(ball)
     eventlist = []
+
     for human in humans:
         eventlist.append(
             [8, human.number, human.circle.centre.x, human.circle.centre.y])
@@ -466,16 +458,18 @@ def RunGame(human_number):
 
         time.sleep(1.0 / frames_per_second)
         for i in range(human_number):
-            analysis.append(listener.ans[i])
+            analysis.append(copy.deepcopy(listener.ans[i]))
             if DEBUG:
                 print("~~~~~~~~~~~~~~~~~~~Exec Msg~~~~~~~~~~~~~~~~~~~")
                 print('AI:', i, listener.ans[i])  # debug
                 print("~~~~~~~~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~")
             listener.ans[i] = (0, 0, 0)
 
+
+
         for a, human in zip(analysis, humans):
             if a[0] == 1:
-                move(human, a[1], walls)
+                move(human, a[1], a[2], walls)
             elif a[0] == 2:
                 rotate(human, a[1])
 
@@ -527,8 +521,8 @@ def RunGame(human_number):
 
         for human in humans:
             if human.hp <= 0:
-                if ball.belong is human:
-                    ball.belong = None
+                if ball.belong ==human.number:
+                    ball.belong = -1
                 delHumanNumbers.append(human.number)
                 eventlist.append([3, human.number])
                 # print(human.number)
@@ -542,8 +536,8 @@ def RunGame(human_number):
 
         log = {}
         log["humans"] = str(humans)
-        log["bullets"] = str(fireballs)
-        log["grenades"] = str(meteors)
+        log["fireballs"] = str(fireballs)
+        log["meteors"] = str(meteors)
         log["balls"] = str(ball)
         log["events"] = str(eventlist)
         sendLog(log)
@@ -562,7 +556,6 @@ def RunGame(human_number):
             draw_circle(screen, ball.circle, blue)
             pygame.display.flip()
 
-    #listener.state = False
     log = {}
     log["scores"] = score
     sendLog(log, 2, -1)
@@ -575,6 +568,7 @@ def RunGame(human_number):
 
     with open("log.json", "w")as file:
         json.dump(logs, file)
+    time.sleep(3)
 
 
 if __name__ == "__main__":

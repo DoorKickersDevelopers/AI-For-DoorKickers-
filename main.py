@@ -463,7 +463,7 @@ def RunGame(human_number):
 
         for human in humans:
             if human.hp <= 0:
-                if ball.belong is human:
+                if ball.belong == human.number:
                     ball.belong = -1
                 delHumanNumbers.append(human.number)
                 eventlist.append([3, human.number])
@@ -478,8 +478,8 @@ def RunGame(human_number):
 
         log = {}
         log["humans"] = str(humans)
-        log["bullets"] = str(fireballs)
-        log["grenades"] = str(meteors)
+        log["fireballs"] = str(fireballs)
+        log["meteors"] = str(meteors)
         log["balls"] = str(ball)
         log["events"] = str(eventlist)
         logs.append(log)

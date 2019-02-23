@@ -1,88 +1,118 @@
-import sys
 import shlex
 import subprocess
 import threading
+import time
 
 BYTEORDER = 'big'
 players = []
-threadLock = threading.Lock()
 gameover = False
+
 
 class judger (threading.Thread):
     def __init__(self, cmd):
         threading.Thread.__init__(self)
         self.subpro = subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE,
-                                    stdin=subprocess.PIPE, stderr=subprocess.STDOUT)
+                                    stdin=subprocess.PIPE, stderr=subprocess.STDOUT
+                                       , universal_newlines=True)
 
     def write(self, msg):
-        threadLock.acquire()
-        self.subpro.stdin.write(msg)
+        print("write to judger")
+        self.subpro.stdin.buffer.write(msg)
         self.subpro.stdin.flush()
-        threadLock.release()
 
     def run(self):
+        error = int('1').to_bytes(4, byteorder=BYTEORDER, signed=True)
+        t = self.subpro.stdout.buffer
         while True:
-            if self.subpro.stdout.readable():
-                Len = int.from_bytes(sys.stdin.buffer.read(
-                    4), byteorder=BYTEORDER, signed=True)
-                # print("*******************************************************************\n\n\n\n\n\n")
-                Type = int.from_bytes(sys.stdin.buffer.read(
-                    4), byteorder=BYTEORDER, signed=True)
-                if Type == 0:  # 用户AI发送的包
-                    UserCode = int.from_bytes(sys.stdin.buffer.read(
-                        4), byteorder=BYTEORDER, signed=True)
-                    Len -= 8
-                    data = sys.stdin.buffer.read(Len)
-                    tosend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
-                    tosend += data
-                    for player in players:
-                        player.write(tosend)
-                elif Type == 2:
-                    Len -= 4
-                    data = sys.stdin.buffer.read(Len)
-                    tosend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
-                    tosend += data
-                    for player in players:
-                        player.write(tosend)
-                    gameover = True
-                    break
+            Len = int.from_bytes(t.read(4), byteorder=BYTEORDER, signed=True)
+            Type = int.from_bytes(t.read(4), byteorder=BYTEORDER, signed=True)
+            if Type == 0:  # 用户AI发送的包
+                print("error: {}".format(str(error)))
+                UserCode = int.from_bytes(t.read(4), byteorder=BYTEORDER, signed=True)
+                print("len : {} type: {} usercode: {}".format(Len, Type, UserCode))
+                Len -= 8
+                data = t.read(Len)
+                tosend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
+                tosend += data
+                print("read from judger:")
+                print(data)
+                if Len != 28:
+                    if UserCode == -1:
+                        for player in players:
+                            player.write(tosend)
+                    else:
+                        players[UserCode].write(tosend)
+                else:
+                    print("don't send")
+            elif Type == 2:
+                global gameover
+                gameover = True
+                Len -= 4
+                data = t.read(Len)
+                print("len : {} type: {}".format(Len, Type))
+                print("data :{}".format(data))
+                tosend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
+                tosend += data
+                for player in players:
+                    player.write(tosend)
+                time.sleep(5)
+                data = t.read(600)
+                print(data)
+                break
+            else:
+                error += Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
+                error += Type.to_bytes(4, byteorder=BYTEORDER, signed=True)
+        print("end judger")
 
 # 在双引号内输入命令
-jud = judger("python judger.py --ai-num 5")
+jud = judger("python main2.py --ai_num 3")
+print("start judger")
 
 
 class player (threading.Thread):
     def __init__(self, cmd, usercode):
         threading.Thread.__init__(self)
         self.subpro = subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE,
-                                    stdin=subprocess.PIPE, stderr=subprocess.STDOUT)
+                                    stdin=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       universal_newlines=True)
         self.usercode = usercode
 
     def write(self, msg):
-        self.subpro.stdin.write(msg)
+        print("write to player{}".format(self.usercode))
+        self.subpro.stdin.buffer.write(msg)
         self.subpro.stdin.flush()
 
     def run(self):
+        t = self.subpro.stdout.buffer
+        global gameover
         while True:
-            if self.subpro.stdout.readable():
-                Len = int.from_bytes(sys.stdin.buffer.read(
-                    4), byteorder=BYTEORDER, signed=True)
-                # print("*******************************************************************\n\n\n\n\n\n")
-                data = sys.stdin.buffer.read(Len)
-                Len += 8
-                type = 0
-                tosend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
-                tosend += type.to_bytes(4, byteorder=BYTEORDER, signed=True)
-                tosend += self.usercode.to_bytes(4, byteorder=BYTEORDER, signed=True)
-                tosend += data
-                jud.write(tosend)
-            if gameover is True:
-                break
+    #        Data = t.read(300)    #正常使用请注调这两行
+    #        print("player data: {}".format(Data))      #如上
+            Len = int.from_bytes(t.read(4), byteorder=BYTEORDER, signed=True)
+            print("player Len: {}".format(Len))
+            data = t.read(Len)
+            Len += 8
+            type = 0
+            tosend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
+            tosend += type.to_bytes(4, byteorder=BYTEORDER, signed=True)
+            tosend += self.usercode.to_bytes(4, byteorder=BYTEORDER, signed=True)
+            tosend += data
+            print("read from player:")
+            print(data)
+            jud.write(tosend)
+        print("end player{}".format(self.usercode))
 
-# 请在双引号内输入命令（ai编号请谨慎设置）
-players.append(player("ai1.exe", 0))
-players.append(player("ai2.exe", 1))
+
+# 请在双引号内输入命令
+#players.append(player("main.exe", 0))
+#players.append(player("main.exe", 1))
+#players.append(player("main.exe", 2))
+players.append(player("python debug_ai.py", 0))
+players.append(player("python debug_ai.py", 1))
+players.append(player("python debug_ai.py", 2))
+print("start player")
 for pla in players:
     pla.start()
 jud.start()
+print("finish start")
 
