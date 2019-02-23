@@ -73,14 +73,10 @@ class Circle(object):
 class Ball:
     def __init__(self, position):
         self.circle = Circle(position, ball_radius)
-        self.belong = None
+        self.belong = -1
 
     def __repr__(self):
-        if self.belong is None:
-            num = -1
-        else:
-            num = self.belong.number
-        return "[[{},{}],{}]".format(self.circle.centre.x, self.circle.centre.y, num)
+        return "[[{},{}],{}]".format(self.circle.centre.x, self.circle.centre.y, self.belong)
 
 
 class Fireball:

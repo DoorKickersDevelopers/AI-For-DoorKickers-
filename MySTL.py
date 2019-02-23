@@ -23,7 +23,7 @@ import math
 from math import sqrt,fabs,atan2
 from Arguments import map_lbx,map_lby,map_ubx,map_uby
 from BaseClass import *
-import pygame
+
 
 
 
@@ -377,6 +377,8 @@ def HumanCanGotoPos(human,walls,pos):
     without collision(with wall)
     '''
     pos1 = human.circle.centre
+    if pos1.x==pos.x and pos1.y==pos.y:
+        return True
     r = human.circle.radius
     if pos.x-r<map_lbx or pos.x+r>map_ubx or pos.y-r<map_lby or pos.y+r>map_uby:
         return False
@@ -445,6 +447,7 @@ import time
 import random
 
 if __name__ == '__main__':
+    import pygame
     pygame.init()
     screen = pygame.display.set_mode((width_of_screen,height_of_screen))
     pygame.display.set_caption('Debug Mode')

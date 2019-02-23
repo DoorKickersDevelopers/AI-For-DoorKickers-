@@ -599,7 +599,6 @@ def RunGame(human_number):
 
 if __name__ == "__main__":
     RunGame(int(sys.argv[2]))
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     # try:
     #    if sys.argv[1] == '--ai-num' and sys.argv[2]:
     #        RunGame(int(sys.argv[2]))

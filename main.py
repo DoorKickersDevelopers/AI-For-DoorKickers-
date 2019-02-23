@@ -1,5 +1,9 @@
-import pygame
-from pygame import Rect
+PYGAME = True
+DEBUG = False
+
+if PYGAME:
+    import pygame
+    from pygame import Rect
 import sys
 import random
 import copy
@@ -11,331 +15,269 @@ from BaseClass import *
 from MySTL import *
 from multiprocessing import Pool
 import json
-
+import logging
+import numpy as np
+import pandas as pd
 
 # Created by frh
 # Modified by xtx
 
 
-def draw_rectangle(screen, rect, color):
-    pygame.draw.rect(screen, color, pygame.Rect(int(rect.left), int(rect.bottom), int(rect.right - rect.left),
-                                                int(rect.top - rect.bottom)))
+if PYGAME:
+    def draw_rectangle(screen, rect, color):
+        pygame.draw.rect(screen, color, pygame.Rect(int(rect.left), int(rect.bottom), int(rect.right - rect.left),
+                                                    int(rect.top - rect.bottom)))
+
+    def draw_circle(screen, circ, color):
+        pygame.draw.circle(screen, color, (int(circ.centre.x),
+                                           int(circ.centre.y)), int(circ.radius))
+
+    def draw_human(screen, human):
+        # print("Shit!")
+        r = human_radius
+        p = human.circle.centre
+        draw_circle(screen, human.circle, red)
+        newp = MoveAlongAngle(p, human.rotation, 2 * human_radius)
+        pygame.draw.line(screen, red, (p.x, p.y), (newp.x, newp.y), 4)
+        myfont = pygame.font.Font(None, 20)
+        textImage = myfont.render(str(human.hp), True, black)
+        screen.blit(textImage, (human.circle.centre.x, human.circle.centre.y))
+
+width = int(width_of_screen / room_size)
+height = int(height_of_screen / room_size)
+width_offset = 1.0 * (width_of_screen - room_size * width) / 2
+height_offset = 1.0 * (height_of_screen - room_size * height) / 2
 
 
-def draw_circle(screen, circ, color):
-    pygame.draw.circle(screen, color, (int(circ.centre.x),
-                                       int(circ.centre.y)), int(circ.radius))
+def GenerateMap():
 
+    Map = np.random.randint(0, 1000, (width, height))
+    Map = Map < 1000 * density_of_wall
 
-def draw_human(screen, human):
-    #print("Shit!")
-    r = human_radius
-    p = human.circle.centre
-    draw_circle(screen, human.circle, red)
-    newp = MoveAlongAngle(p, human.rotation, 2 * human_radius)
-    pygame.draw.line(screen, red, (p.x, p.y), (newp.x, newp.y), 4)
-    myfont = pygame.font.Font(None, 20)
-    textImage = myfont.render(str(human.hp), True, black)
-    screen.blit(textImage, (human.circle.centre.x, human.circle.centre.y))
-
-
-def GenerateMap(Map, width, height):
-    for i in range(width):
-        for j in range(height):
-            if random.random() < density_of_wall:
-                Map[i][j] = True
-            else:
-                Map[i][j] = False
-
-    Cnt2 = [0] * height
-    Cnt = []
-    for i in range(width):
-        Cnt.append(copy.deepcopy(Cnt2))
-    Cnt2 = copy.deepcopy(Cnt)
+    cnt = np.zeros((width, height), dtype=np.int32)
+    cnt2 = cnt.copy()
 
     def count1(i, j):
-        ans = 0
-        for x in range(i - 1, i + 2):
-            for y in range(j - 1, j + 2):
-                if 0 <= x and x <= width - 1 and 0 <= y and y <= height - 1:
-                    ans += int(Map[x][y])
-                else:
-                    ans += 1
+        lx = max(i - 1, 0)
+        rx = min(i + 2, width)
+        ly = max(j - 1, 0)
+        ry = min(j + 2, height)
+        ans = 9 - (~Map[lx:rx, ly:ry]).sum()
         return ans
 
     def count2(i, j):
-        ans = 0
-        for x in range(i - 2, i + 3):
-            for y in range(j - 2, j + 3):
-                if max(abs(x - i), abs(y - j)) >= 2:
-                    if 0 <= x and x <= width - 1 and 0 <= y and y <= height - 1:
-                        ans += int(Map[x][y])
-                    else:
-                        ans += 1
+        lx = max(i - 2, 0)
+        rx = min(i + 3, width)
+        ly = max(j - 2, 0)
+        ry = min(j + 3, height)
+        ans = 25 - (~Map[lx:rx, ly:ry]).sum()
         return ans
 
     for Round in range(4):
         for i in range(width):
             for j in range(height):
-                Cnt[i][j] = count1(i, j)
+                cnt[i, j] = count1(i, j)
         for i in range(width):
             for j in range(height):
-                Cnt2[i][j] = count2(i, j)
-
-        for i in range(width):
-            for j in range(height):
-                if Cnt[i][j] >= 5 or Cnt2[i][j] <= 2:
-                    Map[i][j] = True
-                else:
-                    Map[i][j] = False
+                cnt2[i, j] = count2(i, j)
+        Map = (cnt >= 5) | (cnt2 - cnt <= 2)
 
     for Round in range(3):
         for i in range(width):
             for j in range(height):
-                Cnt[i][j] = count1(i, j)
-        for i in range(width):
-            for j in range(height):
-                if Cnt[i][j] >= 5:
-                    Map[i][j] = True
-                else:
-                    Map[i][j] = False
+                cnt[i, j] = count1(i, j)
+        Map = cnt >= 5
+    return Map
 
 
-StartPoints = []
-
-
-def bfs(stx,sty,Map,color,width,height):
+def bfs(stx, sty, Map):
+    Flag = Map[stx, sty]
+    color = np.zeros((width, height), dtype=np.bool)
     color[stx][sty] = True
-    dxs = [-1,1,0,0]
-    dys = [0,0,-1,1]
+    dxs = [-1, 1, 0, 0]
+    dys = [0, 0, -1, 1]
 
-    queue = [(stx,sty)]
+    queue = [(stx, sty)]
 
-    while queue!=[]:
-        x,y = queue.pop(0)
-        for dx,dy in zip(dxs,dys):
-            if 0<=x+dx and x+dx<width and 0<=y+dy and y+dy<height and (not Map[x+dx][y+dy]) and (not color[x+dx][y+dy]):
-                color[x+dx][y+dy]=True
-                queue.append((x+dx,y+dy))
-
-
-
+    while queue != []:
+        x, y = queue.pop(0)
+        for dx, dy in zip(dxs, dys):
+            if 0 <= x + dx and x + dx < width and 0 <= y + dy and y + dy < height and (Map[x + dx, y + dy] == Flag) and (not color[x + dx][y + dy]):
+                color[x + dx][y + dy] = True
+                queue.append((x + dx, y + dy))
+    return color
 
 
-def check(Map, width, height):
-
-    color = []
-    for i in range(width):
-        color.append([False] * height)
+def check(Map):
 
     for i in range(width):
         for j in range(height):
-            if (not Map[i][j]) and (not color[i][j]):
-                bfs(i, j, Map,color,width,height)
+            if (not Map[i, j]):
+                color = bfs(i, j, Map)
                 break
         else:
             continue
         break
-    ans = 0
-    for i in range(width):
-        for j in range(height):
-            if (not Map[i][j]) and (not color[i][j]):
-                return False
-            else:
-                ans += int(Map[i][j])
 
-    if ans> width*height*(density_of_wall+0.2):
+    if ((~Map) & (~color)).any():
+        return False
+
+    if Map.sum() > width * height * (density_of_wall + 0.2):
         return False
 
     return True
 
 
-def Init():
+StartPoints = []
+
+
+def Init(human_number, log):
+    Map = GenerateMap()
+
+    while not check(Map):
+        if DEBUG:
+            print("Generate Map Failed")
+        Map = GenerateMap()
+
+    if DEBUG:
+        print("-----------------Game Map-----------------")
+        print()
+        for i in range(width):
+            for j in range(height):
+                if(Map[i, j]):
+                    print("O", end='')
+                else:
+                    print("*", end='')
+            print()
+        print("-----------------        -----------------")
+
+    RealMap = np.zeros((width, height), dtype=np.bool)
+
+    def GetReachPoints(x, y):
+        ReachPoints = [(x, y)]
+        queue = [(x, y)]
+        color = np.zeros((width, height), dtype=np.bool)
+        color[x, y] = True
+        dxs = [-1, 1, 0, 0]
+        dys = [0, 0, -1, 1]
+        while queue != []:
+            x, y = queue.pop(0)
+            for dx, dy in zip(dxs, dys):
+                if 0 <= x + dx and x + dx < width and 0 <= y + dy and y + dy < height and (Map[x + dx][y + dy]) and (not color[x + dx][y + dy]):
+                    color[x + dx, y + dy] = True
+                    queue.append((x + dx, y + dy))
+                    ReachPoints.append((x + dx, y + dy))
+        return ReachPoints
+
     walls = []
 
-    global width, height
+    rightest = np.zeros((width, height), dtype=np.int32)
 
-    width = int(width_of_screen / room_size)
-    height = int(height_of_screen / room_size)
-
-    global w_offset, h_offset
-
-    w_offset = 1.0 * (width_of_screen - room_size * width) / 2
-    h_offset = 1.0 * (height_of_screen - room_size * height) / 2
-
-    Map = []
-    for i in range(width):
-        Map.append(copy.deepcopy([False] *height))
-
-    GenerateMap(Map, width, height)
-
-    while not check(Map, width, height):
-        print("Failed")
-        GenerateMap(Map, width, height)
-
-    for i in range(width):
-        for j in range(height):
-            if(Map[i][j]):
-                print("O", end='')
-            else:
-                print("*", end='')
-        print()
-    print()
-
-
-    RealMap = []
-    for i in range(width):
-        RealMap.append([False]*height)
-
-
-    ReachPoints = []
-
-    def bfs(x,y):
-        nonlocal ReachPoints
-        ReachPoints = [(x,y)]
-        queue = [(x,y)]
-        color = []
-        for i in range(width):
-            color.append([False]*height)
-        color[x][y]=True
-        dxs = [-1,1,0,0]
-        dys = [0,0,-1,1]
-        while queue!=[]:
-            x,y = queue.pop(0)
-            for dx,dy in zip(dxs,dys):
-                if 0<=x+dx and x+dx<width and 0<=y+dy and y+dy<height and (Map[x+dx][y+dy]) and (not color[x+dx][y+dy]):
-                    color[x+dx][y+dy]=True
-                    queue.append((x+dx,y+dy))
-                    ReachPoints.append((x+dx,y+dy))
-
-
-    rightest = []
-    for i in range(width):
-        rightest.append([0]*height)
-
-
-
-    ans = 0
-    for i in range(width):
-        for j in range(height):
-                ans += int(Map[i][j])
+    ans = Map.sum()
 
     for Round in range(max_num_of_wall):
-        for j in range(height):
-            for i in range(width-1,-1,-1):
-                if not Map[i][j]:
-                    continue
-                if i==width-1:
-                    rightest[i][j]=i
-                else:
-                    if Map[i+1][j]:
-                        rightest[i][j]=rightest[i+1][j]
-                    else:
-                        rightest[i][j]=i
-        ansx1,ansx2,ansy1,ansy2 = 0,-1,0,-1
         if ans == 0:
             break
-        IsWall = []
+        for j in range(height):
+            for i in range(width - 1, -1, -1):
+                if not Map[i, j]:
+                    continue
+                if i == width - 1:
+                    rightest[i, j] = i
+                else:
+                    if Map[i + 1, j]:
+                        rightest[i, j] = rightest[i + 1, j]
+                    else:
+                        rightest[i, j] = i
+
+        ansx1, ansx2, ansy1, ansy2 = 0, -1, 0, -1
+
+        WallPos = []
         for x in range(width):
             for y in range(height):
-                if Map[x][y]:
-                    IsWall.append((x,y))
-        assert(len(IsWall)==ans)
-        index = random.randint(0,len(IsWall)-1)
-        x,y = IsWall[index]
+                if Map[x, y]:
+                    WallPos.append((x, y))
+        assert(len(WallPos) == ans)
+        x, y = WallPos[random.randint(0, len(WallPos) - 1)]
         # 选取该联通块，使用面积最大的矩形覆盖
-        bfs(x,y)
-        for x,y in ReachPoints:
-            assert(Map[x][y]==True)
+        ReachPoints = GetReachPoints(x, y)
+        for x, y in ReachPoints:
+            assert(Map[x][y] == True)
             # left bottom point
             right = width
-            for yy in range(y,height):
-                if not Map[x][yy]:
+            for yy in range(y, height):
+                if not Map[x, yy]:
                     break
-                right = min(right,rightest[x][yy])
-                x1,x2,y1,y2 = x,right,y,yy
-                if (x2-x1+1)*(y2-y1+1)>(ansx2-ansx1+1)*(ansy2-ansy1+1):
-                    ansx1,ansx2,ansy1,ansy2 = x1,x2,y1,y2
+                right = min(right, rightest[x, yy])
+                x1, x2, y1, y2 = x, right, y, yy
+                if (x2 - x1 + 1) * (y2 - y1 + 1) > (ansx2 - ansx1 + 1) * (ansy2 - ansy1 + 1):
+                    ansx1, ansx2, ansy1, ansy2 = x1, x2, y1, y2
+        RealMap[ansx1:ansx2 + 1, ansy1:ansy2 + 1] = True
+        Map[ansx1:ansx2 + 1, ansy1:ansy2 + 1] = False
 
-        for i in range(ansx1,ansx2+1):
-            for j in range(ansy1,ansy2+1):
-                RealMap[i][j]=True
-                Map[i][j]=False
+        ans -= (ansx2 - ansx1 + 1) * (ansy2 - ansy1 + 1)
+        ansx1 = width_offset + ansx1 * room_size
+        ansx2 = width_offset + (ansx2 + 1) * room_size
+        ansy1 = height_offset + ansy1 * room_size
+        ansy2 = height_offset + (ansy2 + 1) * room_size
 
-        ans -= (ansx2-ansx1+1)*(ansy2-ansy1+1)
-        ansx1 = w_offset + ansx1 * room_size
-        ansx2 = w_offset + (ansx2+1) * room_size
-        ansy1 = h_offset + ansy1 * room_size
-        ansy2 = h_offset + (ansy2+1) * room_size
-
-        walls.append(Wall(ansx1,ansx2,ansy1,ansy2))
-        #print(ansx1,ansx2,ansy1,ansy2)
-    '''
-    for i in range(width):
-        for j in range(height):
-            if(RealMap[i][j]):
-                print("O", end='')
-            else:
-                print("*", end='')
+        walls.append(Wall(ansx1, ansx2, ansy1, ansy2))
+    if DEBUG:
+        print("-----------------Real Map-----------------")
         print()
-    print()
-    '''
+        for i in range(width):
+            for j in range(height):
+                if(RealMap[i, j]):
+                    print("O", end='')
+                else:
+                    print("*", end='')
+            print()
+        print("-----------------        -----------------")
+
+    global StartPoints
+
     for x in range(width):
         for y in range(height):
             if not RealMap[x][y]:
-                StartPoints.append((w_offset + (x + 0.5) * room_size,
-                      h_offset + (y + 0.5) * room_size))
+                StartPoints.append(
+                    (width_offset + (x + 0.5) * room_size, height_offset + (y + 0.5) * room_size))
 
+    StartPoints = pd.Series(StartPoints)
 
-    for i in range(width):
-        for j in range(height):
-            if(RealMap[i][j]):
-                print("O", end='')
-            else:
-                print("*", end='')
-        print()
-    print()
-    def generate_pos():
-        return StartPoints[random.randint(0,len(StartPoints)-1)]
+    poss = StartPoints.sample(n=human_number + 1)
 
-    ball_x, ball_y = generate_pos()
+    ball_x, ball_y = poss.iloc[0]
 
-    ball = Ball(Point(ball_x,ball_y))
+    ball = Ball(Point(ball_x, ball_y))
 
     humans = []
 
     for i in range(human_number):
-        x, y = generate_pos()
-        while (x==ball_x) and (y==ball_y):
-            x,y = generate_pos()
+        x, y = poss.iloc[i + 1]
         rot = random.randint(0, 359)
-
         humans.append(Human(Point(x, y), rot, i))
+
+    log["walls"] = str(walls)
 
     return walls, humans, ball
 
 
-
-def update_ball(ball, humans,eventlist):
-    if ball.belong is not None:
-        ball.circle.centre = ball.belong.circle.centre
+def update_ball(ball, humans, eventlist):
+    if ball.belong != -1:
+        ball.circle.centre = humans[ball.belong].circle.centre
     else:
         for human in humans:
             if (human is not None) and CircleIntersection(ball.circle, human.circle):
-                ball.belong = human
-                eventlist.append([5,human.number])
+                ball.belong = human.number
+                eventlist.append([5, human.number])
                 ball.circle.centre = human.circle.centre
 
 
-def move(human, dis, walls):
-    if dis < 0:
-        dis = 0
-    if dis > human_speed_max:
-        dis = human_speed_max
-    oldcentre = human.circle.centre
-    human.circle.centre = MoveAlongAngle(oldcentre, human.rotation, dis)
-    if not LegalPos(human.circle, walls):
-        human.circle.centre = oldcentre
+def move(human, x,y, walls):
+    if L2Distance(Point(x,y),human.circle.centre)>eps+human_speed_max:
+        x,y = human.circle.centre.x,human.circle.centre.y
+    if HumanCanGotoPos(human,walls,Point(x,y)):
+        human.circle.centre = Point(x,y)
 
 
 def shoot(human, fireballs, walls):
@@ -398,101 +340,90 @@ def func(ai):
         return (0, 0, 0)
 
 
-def RunGame():
-    loglist = []
-    pygame.init()
-    screen = pygame.display.set_mode((width_of_screen, height_of_screen))
-    pygame.display.set_caption("Door Kickers")
-    #Init()
+def RunGame(human_number):
+    if PYGAME:
+        pygame.init()
+        screen = pygame.display.set_mode((width_of_screen, height_of_screen))
+        pygame.display.set_caption("Door Kickers")
 
-    walls, humans, ball = Init()
+    logs = []
+    log = {}
 
-    dc = {}
-    dc["walls"]=str(walls)
-    loglist.append(dc)
+    walls, humans, ball = Init(human_number, log)
+    logs.append(log)
 
-    #return
     fireballs = []
     meteors = []
     ais = []
-    for i in range(human_number):
-        ais.append(AI_player(i, copy.deepcopy(ball), copy.deepcopy(walls), copy.deepcopy(fireballs), copy.deepcopy(humans), copy.deepcopy(meteors)))
     #ais.append(Time_Out_AI_player(0, ball, walls, bullets, humans, grenades))
-    # for i in range(human_number - 1):
-    #    ais.append(AI_player(i, ball, walls, bullets, humans, grenades))
+    for i in range(human_number):
+        ais.append(AI_player(i, copy.deepcopy(ball), copy.deepcopy(walls), copy.deepcopy(
+            fireballs), copy.deepcopy(humans), copy.deepcopy(meteors)))
 
-
-    dc = {}
-    dc["humans"]=str(humans)
-    dc["fireballs"]=str(fireballs)
-    dc["meteors"]=str(meteors)
-    dc["balls"]=str(ball)
+    log = {}
+    log["humans"] = str(humans)
+    log["fireballs"] = str(fireballs)
+    log["meteors"] = str(meteors)
+    log["balls"] = str(ball)
     eventlist = []
     for human in humans:
-        eventlist.append([8,human.number,human.circle.centre.x,human.circle.centre.y])
-    dc["events"]=str(eventlist)
-    loglist.append(dc)
-
+        eventlist.append(
+            [8, human.number, human.circle.centre.x, human.circle.centre.y])
+    log["events"] = str(eventlist)
+    logs.append(log)
 
     score = [0.0] * human_number
     timecnt = 0
     while timecnt < time_of_game:
         eventlist = []
-        timecnt+=1
-        screen.fill(white)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
+        timecnt += 1
+        if PYGAME:
+            screen.fill(white)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
 
-        if ball.belong != None:
+        if ball.belong != -1:
             score[ball.belong.number] += 1
-
-        def generate_pos():
-            return StartPoints[random.randint(0,len(StartPoints)-1)]
 
         for i in range(human_number):
             if humans[i] == None:
-                x,y = generate_pos()
+                x, y = StartPoints.sample(n=1).iloc[0]
                 c = Circle(Point(x, y), human_radius)
                 while CircleIntersection(c, ball.circle):
-                    x, y = generate_pos()
+                    x, y = StartPoints.sample(n=1).iloc[0]
                     c = Circle(Point(x, y), human_radius)
                 rot = random.randint(0, 359)
                 humans[i] = Human(Point(x, y), rot, i)
-                eventlist.append([8,i,x,y])
+                eventlist.append([8, i, x, y])
 
         analysis = []
         return_values = []
-        n = human_number
-        #print(time.time())
-        pool = Pool(processes=n)
+        pool = Pool(processes=human_number)
 
-        for i in range(n):
+        for i in range(human_number):
             ais[i].refresh(ball, walls, fireballs, humans, meteors)
             return_values.append(pool.apply_async(func, args=(ais[i],)))
         pool.close()
-        #print(time.time())
         pool.join()
-        #print(time.time())
-        #print()
         for i in return_values:
             analysis.append(i.get())
 
         for a, human in zip(analysis, humans):
             if a[0] == 1:
-                move(human, a[1], walls)
+                move(human, a[1], a[2], walls)
             elif a[0] == 2:
                 rotate(human, a[1])
 
-        UpdateWeaponMap(walls, fireballs, meteors, 1,eventlist)
+        UpdateWeaponMap(walls, fireballs, meteors, 1, eventlist)
 
         for a, human in zip(analysis, humans):
             if a[0] == 3:
                 shoot(human, fireballs, walls)
-                eventlist.append([1,human.number])
+                eventlist.append([1, human.number])
             elif a[0] == 4:
                 if throw(human, meteors, Point(a[1], a[2]), walls):
-                    eventlist.append([4,human.number])
+                    eventlist.append([4, human.number])
 
         delFireballs = []
         delMeteors = []
@@ -505,24 +436,25 @@ def RunGame():
                     Flag = False
                     break
             if not Flag:
-                eventlist.append([6,fireball.circle.centre.x,fireball.circle.centre.y])
+                eventlist.append(
+                    [6, fireball.circle.centre.x, fireball.circle.centre.y])
                 for human in humans:
                     if CircleIntersection(human.circle, fireball.attack_range):
                         human.hp -= fireball.hurt
-                        eventlist.append([2,human.number,fireball.hurt])
+                        eventlist.append([2, human.number, fireball.hurt])
 
         for fireball in delFireballs:
             fireballs.remove(fireball)
 
         for meteor in meteors:
             if meteor.time == 0:
-                #print('Bomb!')
-                eventlist.append([7,meteor.pos.x,meteor.pos.y])
+                # print('Bomb!')
+                eventlist.append([7, meteor.pos.x, meteor.pos.y])
                 delMeteors.append(meteor)
                 for human in humans:
                     if CircleIntersection(human.circle, meteor.attack_range):
                         human.hp -= meteor.hurt
-                        eventlist.append([2,human.number,meteor.hurt])
+                        eventlist.append([2, human.number, meteor.hurt])
 
         for meteor in delMeteors:
             meteors.remove(meteor)
@@ -532,44 +464,56 @@ def RunGame():
         for human in humans:
             if human.hp <= 0:
                 if ball.belong is human:
-                    ball.belong = None
+                    ball.belong = -1
                 delHumanNumbers.append(human.number)
-                eventlist.append([3,human.number])
-                #print(human.number)
+                eventlist.append([3, human.number])
+                # print(human.number)
             else:
                 if human.attack_time > 0:
                     human.attack_time -= 1
         for i in delHumanNumbers:
-            humans[i]=None
+            humans[i] = None
 
-        update_ball(ball, humans,eventlist)
+        update_ball(ball, humans, eventlist)
 
-        dc = {}
-        dc["humans"]=str(humans)
-        dc["bullets"]=str(fireballs)
-        dc["grenades"]=str(meteors)
-        dc["balls"]=str(ball)
-        dc["events"]=str(eventlist)
-        loglist.append(dc)
+        log = {}
+        log["humans"] = str(humans)
+        log["bullets"] = str(fireballs)
+        log["grenades"] = str(meteors)
+        log["balls"] = str(ball)
+        log["events"] = str(eventlist)
+        logs.append(log)
 
-        for wall in walls:
-            draw_rectangle(screen, wall.rectangle, black)
-        for meteor in meteors:
-            draw_circle(screen, meteor.attack_range, yellow)
-        for human in humans:
-            if human is not None:
-                draw_human(screen, human)
-        for fireball in fireballs:
-            draw_circle(screen, fireball.circle, green)
+        if PYGAME:
+            for wall in walls:
+                draw_rectangle(screen, wall.rectangle, black)
+            for meteor in meteors:
+                draw_circle(screen, meteor.attack_range, yellow)
+            for human in humans:
+                if human is not None:
+                    draw_human(screen, human)
+            for fireball in fireballs:
+                draw_circle(screen, fireball.circle, green)
 
-        draw_circle(screen, ball.circle, blue)
-        pygame.display.flip()
-    for i, sc in enumerate(score):
-        print(i, ":", sc)
+            draw_circle(screen, ball.circle, blue)
+            pygame.display.flip()
 
+    if DEBUG:
+        print("################### Result ###################")
+        for i, sc in enumerate(score):
+            print(i, ":", sc)
+        print("###################        ###################")
 
-    with open("log.json","w")as file:
-        json.dump(loglist,file)
+    with open("log.json", "w")as file:
+        json.dump(logs, file)
+
 
 if __name__ == "__main__":
-    RunGame()
+    RunGame(int(sys.argv[2]))
+    # try:
+    #    if sys.argv[1] == '--ai-num' and sys.argv[2]:
+    #        RunGame(int(sys.argv[2]))
+    #    else:
+    #        print('Invalid format!')
+    # except Exception as e:
+    #    logging.error(e)
