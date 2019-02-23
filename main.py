@@ -384,7 +384,7 @@ def RunGame(human_number):
                     sys.exit()
 
         if ball.belong != -1:
-            score[ball.belong.number] += 1
+            score[ball.belong] += 1
 
         for i in range(human_number):
             if humans[i] == None:

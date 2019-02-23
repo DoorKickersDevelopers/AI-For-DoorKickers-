@@ -1,5 +1,8 @@
-import pygame
-from pygame import Rect
+PYGAME = True
+DEBUG = True
+if PYGAME:
+    import pygame
+    from pygame import Rect
 import sys
 import random
 import copy
@@ -16,7 +19,6 @@ import numpy as np
 import pandas as pd
 
 
-DEBUG = False
 BYTEORDER = 'big'
 
 width = int(width_of_screen / room_size)
@@ -239,25 +241,20 @@ def Init(human_number, log):
 
 
 def update_ball(ball, humans, eventlist):
-    if ball.belong is not None:
-        ball.circle.centre = ball.belong.circle.centre
+    if ball.belong !=-1:
+        ball.circle.centre = humans[ball.belong].circle.centre
     else:
         for human in humans:
             if (human is not None) and CircleIntersection(ball.circle, human.circle):
-                ball.belong = human
+                ball.belong = human.number
                 eventlist.append([5, human.number])
                 ball.circle.centre = human.circle.centre
 
-
-def move(human, dis, walls):
-    if dis < 0:
-        dis = 0
-    if dis > human_speed_max:
-        dis = human_speed_max
-    oldcentre = human.circle.centre
-    human.circle.centre = MoveAlongAngle(oldcentre, human.rotation, dis)
-    if not LegalPos(human.circle, walls):
-        human.circle.centre = oldcentre
+def move(human, x,y, walls):
+    if L2Distance(Point(x,y),human.circle.centre)>eps+human_speed_max:
+        x,y = human.circle.centre.x,human.circle.centre.y
+    if HumanCanGotoPos(human,walls,Point(x,y)):
+        human.circle.centre = Point(x,y)
 
 
 def shoot(human, fireballs, walls):
@@ -343,7 +340,7 @@ class Listen(threading.Thread):
         self.ans = {}
         #self.state = True
         for i in range(human_number):
-            self.ans[i] = (1, 0, 0)
+            self.ans[i] = (0, 0, 0)
 
     def recvData(self):
         data = sys.stdin.buffer.read()
@@ -380,27 +377,25 @@ class Listen(threading.Thread):
             if not self.recvData():
                 break
 
+if PYGAME:
+    def draw_rectangle(screen, rect, color):
+        pygame.draw.rect(screen, color, pygame.Rect(int(rect.left), int(rect.bottom), int(rect.right - rect.left),
+                                                    int(rect.top - rect.bottom)))
 
-def draw_rectangle(screen, rect, color):
-    pygame.draw.rect(screen, color, pygame.Rect(int(rect.left), int(rect.bottom), int(rect.right - rect.left),
-                                                int(rect.top - rect.bottom)))
+    def draw_circle(screen, circ, color):
+        pygame.draw.circle(screen, color, (int(circ.centre.x),
+                                           int(circ.centre.y)), int(circ.radius))
 
-
-def draw_circle(screen, circ, color):
-    pygame.draw.circle(screen, color, (int(circ.centre.x),
-                                       int(circ.centre.y)), int(circ.radius))
-
-
-def draw_human(screen, human):
-    # print("Shit!")
-    r = human_radius
-    p = human.circle.centre
-    draw_circle(screen, human.circle, red)
-    newp = MoveAlongAngle(p, human.rotation, 2 * human_radius)
-    pygame.draw.line(screen, red, (p.x, p.y), (newp.x, newp.y), 4)
-    myfont = pygame.font.Font(None, 20)
-    textImage = myfont.render(str(human.hp), True, black)
-    screen.blit(textImage, (human.circle.centre.x, human.circle.centre.y))
+    def draw_human(screen, human):
+        # print("Shit!")
+        r = human_radius
+        p = human.circle.centre
+        draw_circle(screen, human.circle, red)
+        newp = MoveAlongAngle(p, human.rotation, 2 * human_radius)
+        pygame.draw.line(screen, red, (p.x, p.y), (newp.x, newp.y), 4)
+        myfont = pygame.font.Font(None, 20)
+        textImage = myfont.render(str(human.hp), True, black)
+        screen.blit(textImage, (human.circle.centre.x, human.circle.centre.y))
 
 
 def RunGame(human_number):
@@ -452,8 +447,8 @@ def RunGame(human_number):
                 if event.type == pygame.QUIT:
                     sys.exit()
 
-        if ball.belong != None:
-            score[ball.belong.number] += 1
+        if ball.belong != -1:
+            score[ball.belong] += 1
 
         for i in range(human_number):
             if humans[i] == None:
@@ -476,22 +471,7 @@ def RunGame(human_number):
                 print("~~~~~~~~~~~~~~~~~~~Exec Msg~~~~~~~~~~~~~~~~~~~")
                 print('AI:', i, listener.ans[i])  # debug
                 print("~~~~~~~~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~")
-            listener.ans[i] = (1, 0, 0)
-
-        #n = human_number
-        # print(time.time())
-        #pool = Pool(processes=n)
-
-        # for i in range(n):
-        #    ais[i].refresh(ball, walls, fireballs, humans, meteors)
-        #    return_values.append(pool.apply_async(func, args=(ais[i],)))
-        # pool.close()
-        # print(time.time())
-        # pool.join()
-        # print(time.time())
-        # print()
-        # for i in return_values:
-        #    analysis.append(i.get())
+            listener.ans[i] = (0, 0, 0)
 
         for a, human in zip(analysis, humans):
             if a[0] == 1:
@@ -568,7 +548,7 @@ def RunGame(human_number):
         log["events"] = str(eventlist)
         sendLog(log)
 
-        if DEBUG:
+        if PYGAME:
             for wall in walls:
                 draw_rectangle(screen, wall.rectangle, black)
             for meteor in meteors:
