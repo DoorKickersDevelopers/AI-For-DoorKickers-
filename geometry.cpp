@@ -1,21 +1,6 @@
 #include "geometry.h"
 
 
-/* 需要包含的头文件 */
-#include <cmath> 
-#include <algorithm>
-
-/* 常用的常量定义 */
-const double	INF = 1E200;
-const double	EP = 1E-10;
-const int		MAXV = 300;
-const double	PI = 3.14159265;
-
-using namespace std;
-/* 基本几何结构 */
-
-
-
 /**********************
 *                    *
 *   点的基本运算     *
@@ -320,29 +305,7 @@ bool Point_in_circle(Point o, double r, Point p) {
 	double r2 = r * r;
 	return d2<r2 || abs(d2 - r2)<EP;
 }
-/******************************************************************************
-用 途	：求不共线的三点确定一个圆
-输 入	：三个点p1,p2,p3
-返回值	：如果三点共线，返回false；反之，返回true。圆心由q返回，半径由r返回
-*******************************************************************************/
-bool cocircle(Point p1, Point p2, Point p3, Point &q, double &r) {
-	double x12 = p2.x - p1.x;
-	double y12 = p2.y - p1.y;
-	double x13 = p3.x - p1.x;
-	double y13 = p3.y - p1.y;
-	double z2 = x12 * (p1.x + p2.x) + y12 * (p1.y + p2.y);
-	double z3 = x13 * (p1.x + p3.x) + y13 * (p1.y + p3.y);
-	double d = 2.0*(x12*(p3.y - p2.y) - y12 * (p3.x - p2.x));
-	if (abs(d)<EP) //共线，圆不存在 
-		return false;
-	q.x = (y13*z2 - y12 * z3) / d;
-	q.y = (x12*z3 - x13 * z2) / d;
-	r = dist(p1, q);
-	return true;
-}
-int Line_circle(Line l, Point o, double r, Point &p1, Point &p2) {
-	return true;
-}
+
 
 /**************************\
 *						  *

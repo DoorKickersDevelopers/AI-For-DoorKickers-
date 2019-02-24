@@ -4,34 +4,43 @@
 #include "geometry.h"
 
 
-#include"jsoncpp/json/json.h"
-#include<iostream>
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include "jsoncpp/json/json.h"
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <cstring>
+#include <string>
+#include <regex>
 
 
 using namespace std;
 
 
-char *JsonFile;
+char JsonFile[500];
+bool gameover = false;
 
+void quyinhao() {
+	string s = string(JsonFile);
+	regex rep("(: )\"(.*?)\"");
+	s = regex_replace(s, rep, "$1$2");
+	s = regex_replace(s, regex("None"), "null");
+	strcpy(JsonFile, s.c_str());
+}
 
 void getfile(int len) {
-	JsonFile = new char[len + 10];
-	fgets(JsonFile, len, stdin);
+	fgets(JsonFile, len + 1, stdin);
 }
 
 void readWalls(vector<Wall> &w) {
 
 	Json::Reader reader;
 	Json::Value root;
+	quyinhao();
 	//用reader将文件解析到root，root包含Json中所有子元素
 	if (!reader.parse(JsonFile, JsonFile + strlen(JsonFile), root)) {
-		cerr << "Parse failed." << endl;
+		cerr << "Parse failed0." << endl;
 		return;
 	}
-
 	Json::Value wall = root["walls"];
 	for (int i = 0; i < wall.size(); i++) {
 		Wall tem(wall[i][0].asDouble(), wall[i][1].asDouble(), wall[i][2].asDouble(), wall[i][3].asDouble());
@@ -39,12 +48,19 @@ void readWalls(vector<Wall> &w) {
 	}
 }
 
-void readMess(vector<Human> &h, vector<Bullet> &b, vector<Grenade> &g, Ball &ba, vector<Event> &e) {
+void readMess(vector<Human> &h, vector<Fireball> &b, vector<Meteor> &g, Crystal &ba) {
 	Json::Reader reader;
 	Json::Value root;
 
+	quyinhao();
+
 	if (!reader.parse(JsonFile, JsonFile + strlen(JsonFile), root)) {
-		cerr << "Parse failed." << endl;
+		cerr << "Parse failed1." << endl;
+		return;
+	}
+
+	if (root["scores"]) {
+		gameover = true;
 		return;
 	}
 
@@ -55,94 +71,99 @@ void readMess(vector<Human> &h, vector<Bullet> &b, vector<Grenade> &g, Ball &ba,
 		h.push_back(tem);
 	}
 
-	Json::Value bullets = root["bullets"];
-	for (int i = 0; i < bullets.size(); i++) {
-		Bullet tem(bullets[i][0][0].asDouble(), bullets[i][0][1].asDouble(), bullets[i][1].asDouble());
+	Json::Value fireballs = root["fireballs"];
+	for (int i = 0; i < fireballs.size(); i++) {
+		Fireball tem(fireballs[i][0][0].asDouble(), fireballs[i][0][1].asDouble(), fireballs[i][1].asDouble());
 		b.push_back(tem);
 	}
 
-	Json::Value grenades = root["grenades"];
-	for (int i = 0; i < grenades.size(); i++) {
-		Grenade tem(grenades[i][0][0].asDouble(), grenades[i][0][1].asDouble(), grenades[i][1].asInt());
+	Json::Value meteors = root["meteors"];
+	for (int i = 0; i < meteors.size(); i++) {
+		Meteor tem(meteors[i][0][0].asDouble(), meteors[i][0][1].asDouble(), meteors[i][1].asInt());
 		g.push_back(tem);
 	}
 
-	ba.Pointition.x = root["balls"][0][0].asDouble();
-	ba.Pointition.y = root["balls"][0][1].asDouble();
+	ba.position.x = root["balls"][0][0].asDouble();
+	ba.position.y = root["balls"][0][1].asDouble();
 	ba.belong = root["balls"][1].asInt();
 
-	Json::Value events = root["events"];
-	for (int i = 0; i < events.size(); i++) {
-		int j = events[i][0].asInt();
-		Event tem;
-		tem.opt = j;
-		switch (j) {
-		case 1:
-		case 3:
-		case 4:
-		case 5:
-			tem.arg.number = events[i][1].asInt();
-			break;
-		case 2:
-			tem.arg.onehurt.number = events[i][1].asInt();
-			tem.arg.onehurt.hurt = events[i][2].asInt();
-			break;
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-			tem.arg.pos.x = events[i][1].asDouble();
-			tem.arg.pos.y = events[i][2].asDouble();
-			break;
-		}
-		e.push_back(tem);
-	}
+
+	Logic::Instance()->number = root["number"].asInt();
+
 }
 
 int main() {
 	Logic* logic = Logic::Instance();
 
 	int len = 0;
-
-	scanf("%d", &len);
+	char lenr[4];
+	for (int i = 0; i < 4; i++) {
+		scanf("%c", &lenr[i]);
+	}
+	len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));	
 	getfile(len);
 	vector<Wall> walls;
 	readWalls(walls);
 	logic->init(walls);
-
+	
 	while (true) {
-		scanf("%d", &len);
-
+		for (int i = 0; i < 4; i++) {
+			scanf("%c", &lenr[i]);
+		}
+		len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
+		getfile(len);		
 		vector<Human> humans;
-		vector<Bullet> bullets;
-		vector<Grenade> grenades;
-		Ball ball;
-		vector<Event> events;
-
-		readMess(humans, bullets, grenades, ball, events);
-		logic->getmess(humans, bullets, grenades, ball, events);
+		vector<Fireball> fireballs;
+		vector<Meteor> meteors;
+		Crystal crystal;
+		readMess(humans, fireballs, meteors, crystal);
+		if (gameover) {
+			char finalope[] = "{\"flag\": 5, \"args\": [0,0]}";
+			int len = strlen(finalope);
+			unsigned char lenb[4];
+			lenb[0] = (unsigned char)(len);
+			lenb[1] = (unsigned char)(len >> 8);
+			lenb[2] = (unsigned char)(len >> 16);
+			lenb[3] = (unsigned char)(len >> 24);
+			for (int i = 0; i < 4; i++) {
+				printf("%c", lenb[3 - i]);
+			}
+			printf("%s", finalope);
+			cout.flush();
+			return 0;
+		}
+		logic->getmess(humans, fireballs, meteors, crystal);
 
 		Operation ope;
 		playerAI(ope);
 		char s[20];
 		switch (ope.flag) {
 		case 1:
+			sprintf(s, "[%.2f,%.2f]", ope.arg1, ope.arg2);
+			break;
 		case 2:
-			sprintf(s, "[%.2lf,],", ope.arg1);
+			sprintf(s, "[%.2f,0]", ope.arg1);
 			break;
 		case 3:
-			sprintf(s, "[],");
+			sprintf(s, "[0,0]");
 			break;
 		case 4:
-			sprintf(s, "[%d,%d],", ope.arg1, ope.arg2);
+			sprintf(s, "[%.2f,%.2f]", ope.arg1, ope.arg2);
 			break;
 		}
 		char out[10000];
-		sprintf(out, "\"flag\":%d,\n\"args\":%s", ope.flag, s);
-		printf("%d %s", strlen(out), out);
-
-		if (false)
-			break;
+		sprintf(out, "{\"flag\": %d,\"args\": %s}", ope.flag, s);
+		int len = strlen(out);
+		unsigned char lenb[4];
+		lenb[0] = (unsigned char)(len);
+		lenb[1] = (unsigned char)(len >> 8);
+		lenb[2] = (unsigned char)(len >> 16);
+		lenb[3] = (unsigned char)(len >> 24);
+		for (int i = 0; i < 4; i++) {
+			printf("%c", lenb[3 - i]);
+		}
+		printf("%s", out);
+		cout.flush();
 	}
 
 	return 0;

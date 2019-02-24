@@ -7,100 +7,95 @@
 using namespace std;
 using namespace CONST;
 
+
+//墙类，包含上下左右四个边的位置信息，其中上下边的位置指纵坐标，左右边的位置指横坐标。
 class Wall {
 public:
-	int left, right, bottom, top;
+	double left, right, bottom, top;
 	
 	Wall(){}
-	Wall(int l,int r,int b,int t):
+	Wall(double l, double r, double b, double t):
 		left(l),right(r),bottom(b),top(t){}
 };
 
+//玩家类,死亡时hp为0
 class Human {
 public:
-	int number;
-	Point position;
-	double rotation;
-	int hp;
-	int grenade_number;
-	int fire_time;
+	int number;//编号
+	Point position;//位置
+	double rotation;//朝向
+	int hp;//生命值
+	int meteor_number;//剩下的陨石数量
+	int fire_time;//开火冷却剩余时间
 	
 	Human(int n, double x, double y, double r, int h, int g, int t):
-		number(n), position(Point(x, y)), rotation(r), hp(h), grenade_number(g), fire_time(t){
+		number(n), position(Point(x, y)), rotation(r), hp(h), meteor_number(g), fire_time(t){
 		}
 	Human(){}
 };
 
-class Bullet {
+//火球类
+class Fireball {
 public:
-	Point position;
-	double rotation;
+	Point position;//位置
+	double rotation;//朝向
 	
-	Bullet(){}
-	Bullet(double x, double y, double r):
+	Fireball(){}
+	Fireball(double x, double y, double r):
 		position(Point(x, y)), rotation(r){}
 };
 
-class Grenade {
+//陨石类
+class Meteor {
 public:
-	Point position;
-	double rotation;
-	int lasttime;
+	Point position;//中心位置
+	int lasttime;//剩余存在时间
 	
-	Grenade(){}
-	Grenade(double x, double y, int t):
+	Meteor(){}
+	Meteor(double x, double y, int t):
 		position(Point(x, y)), lasttime(t){}
 };
 
-class Ball {
+//水晶类
+class Crystal {
 public:
-	Point position;
-	int belong;
+	Point position;//位置
+	int belong;//归属
 	
-	Ball(double x, double y, int n):
+	Crystal(double x, double y, int n):
 		position(Point(x, y)), belong(n){
 		}
-	Ball(){
+	Crystal(){
 	}
 	
 };
 
-class Event {
-public:
-	int opt;
-	union {
-		int number;
-		struct {
-			int number;
-			int hurt;
-		}onehurt;
-		struct{
-			double x;
-			double y;
-		}pos;
-	}arg;
-};
-
+//操作类
+/*
+ *"flag": 1/2/3/4,		//分别表示向前移动/旋转/发火球/天降正义
+ *"args": "[dis,]/[rot,]/[]/[x,y]",		  //移动距离/旋转角度/无意义/天降正义	 		
+ */
 class Operation {
 public:
-	int flag;
-	double arg1, arg2; 
+	int flag;//操作类型
+	double arg1, arg2; //操作参数
 };
 
+//总数据类，内含所有需要的数据
 class Logic {
-public:
-	vector<Wall> walls;
-	vector<Human> humans;
-	vector<Bullet> bullets;
-	vector<Grenade> grenades;
-	Ball ball;
-	vector<Event> events;
-	//vector<vector<Event>> replay;
+private:
 	static Logic* instance;
 	Logic() {};
-	Logic(Logic const&){};
-
+	Logic(Logic const&) {};
 public:
+	int number;//自己的编号
+	vector<Wall> walls;
+	vector<Human> humans;
+	vector<Fireball> fireballs;
+	vector<Meteor> meteors;
+	Crystal crystal;
+
+	//Logic为单例类，请使用Logic::Instance()获取指针
 	static Logic* Instance() {
 		if (Logic::instance == 0) {
 			Logic::instance = new Logic();
@@ -108,7 +103,7 @@ public:
 		return Logic::instance;
 	}
 	
+	//请忽略以下函数
 	void init(vector<Wall> w);
-	
-	void getmess(vector<Human> h, vector<Bullet> b, vector<Grenade> g, Ball ba, vector<Event> e);
+	void getmess(vector<Human> h, vector<Fireball> b, vector<Meteor> g, Crystal ba);
 };
