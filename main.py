@@ -1,5 +1,5 @@
 PYGAME = True
-DEBUG = False
+DEBUG = True
 
 if PYGAME:
     import pygame
@@ -324,8 +324,10 @@ class Dispatcher(threading.Thread):
         self.start()
 
     def run(self):
-        self.return_value = self.func()
-
+        try :
+            self.return_value = self.func()
+        except:
+            self.return_value = (-1,0,0)
 
 def func(ai):
     patcher = Dispatcher(ai.analysis)
@@ -373,8 +375,11 @@ def RunGame(human_number):
     logs.append(log)
 
     score = [0.0] * human_number
+    death_time = [0]*human_number
     timecnt = 0
     while timecnt < time_of_game:
+        if DEBUG:
+            print("-----------------Time = {}-----------------".format(timecnt))
         eventlist = []
         timecnt += 1
         if PYGAME:
@@ -388,14 +393,17 @@ def RunGame(human_number):
 
         for i in range(human_number):
             if humans[i] == None:
-                x, y = StartPoints.sample(n=1).iloc[0]
-                c = Circle(Point(x, y), human_radius)
-                while CircleIntersection(c, ball.circle):
+                if death_time[i]==0:
                     x, y = StartPoints.sample(n=1).iloc[0]
                     c = Circle(Point(x, y), human_radius)
-                rot = random.randint(0, 359)
-                humans[i] = Human(Point(x, y), rot, i)
-                eventlist.append([8, i, x, y])
+                    while CircleIntersection(c, ball.circle):
+                        x, y = StartPoints.sample(n=1).iloc[0]
+                        c = Circle(Point(x, y), human_radius)
+                    rot = random.randint(0, 359)
+                    humans[i] = Human(Point(x, y), rot, i)
+                    eventlist.append([8, i, x, y])
+                else:
+                    death_time[i]-=1
 
         analysis = []
         return_values = []
@@ -409,21 +417,27 @@ def RunGame(human_number):
         for i in return_values:
             analysis.append(i.get())
 
+        if DEBUG:
+            for i,a in enumerate(analysis):
+                print("Player{} : ".format(i),a)
+
         for a, human in zip(analysis, humans):
-            if a[0] == 1:
-                move(human, a[1], a[2], walls)
-            elif a[0] == 2:
-                rotate(human, a[1])
+            if human != None:
+                if a[0] == 1:
+                    move(human, a[1], a[2], walls)
+                elif a[0] == 2:
+                    rotate(human, a[1])
 
         UpdateWeaponMap(walls, fireballs, meteors, 1, eventlist)
 
         for a, human in zip(analysis, humans):
-            if a[0] == 3:
-                shoot(human, fireballs, walls)
-                eventlist.append([1, human.number])
-            elif a[0] == 4:
-                if throw(human, meteors, Point(a[1], a[2]), walls):
-                    eventlist.append([4, human.number])
+            if human!=None:
+                if a[0] == 3:
+                    if shoot(human, fireballs, walls):
+                        eventlist.append([1, human.number])
+                elif a[0] == 4:
+                    if throw(human, meteors, Point(a[1], a[2]), walls):
+                        eventlist.append([4, human.number])
 
         delFireballs = []
         delMeteors = []
@@ -431,17 +445,19 @@ def RunGame(human_number):
         for fireball in fireballs:
             Flag = True
             for human in humans:
-                if CircleIntersection(human.circle, fireball.circle):
-                    delFireballs.append(fireball)
-                    Flag = False
-                    break
+                if human!=None:
+                    if CircleIntersection(human.circle, fireball.circle):
+                        delFireballs.append(fireball)
+                        Flag = False
+                        break
             if not Flag:
                 eventlist.append(
                     [6, fireball.circle.centre.x, fireball.circle.centre.y])
                 for human in humans:
-                    if CircleIntersection(human.circle, fireball.attack_range):
-                        human.hp -= fireball.hurt
-                        eventlist.append([2, human.number, fireball.hurt])
+                    if human!=None:
+                        if CircleIntersection(human.circle, fireball.attack_range):
+                            human.hp -= fireball.hurt
+                            eventlist.append([2, human.number, fireball.hurt])
 
         for fireball in delFireballs:
             fireballs.remove(fireball)
@@ -452,9 +468,10 @@ def RunGame(human_number):
                 eventlist.append([7, meteor.pos.x, meteor.pos.y])
                 delMeteors.append(meteor)
                 for human in humans:
-                    if CircleIntersection(human.circle, meteor.attack_range):
-                        human.hp -= meteor.hurt
-                        eventlist.append([2, human.number, meteor.hurt])
+                    if human!=None:
+                        if CircleIntersection(human.circle, meteor.attack_range):
+                            human.hp -= meteor.hurt
+                            eventlist.append([2, human.number, meteor.hurt])
 
         for meteor in delMeteors:
             meteors.remove(meteor)
@@ -462,17 +479,19 @@ def RunGame(human_number):
         delHumanNumbers = []
 
         for human in humans:
-            if human.hp <= 0:
-                if ball.belong == human.number:
-                    ball.belong = -1
-                delHumanNumbers.append(human.number)
-                eventlist.append([3, human.number])
-                # print(human.number)
-            else:
-                if human.attack_time > 0:
-                    human.attack_time -= 1
+            if human!=None:
+                if human.hp <= 0:
+                    if ball.belong == human.number:
+                        ball.belong = -1
+                    delHumanNumbers.append(human.number)
+                    eventlist.append([3, human.number])
+                    # print(human.number)
+                else:
+                    if human.attack_time > 0:
+                        human.attack_time -= 1
         for i in delHumanNumbers:
             humans[i] = None
+            death_time[i] = time_of_death
 
         update_ball(ball, humans, eventlist)
 
@@ -483,6 +502,28 @@ def RunGame(human_number):
         log["balls"] = str(ball)
         log["events"] = str(eventlist)
         logs.append(log)
+
+        if DEBUG:
+            for event in eventlist:
+                if event[0]==1:
+                    print("Player {} shoots!".format(event[1]))
+                elif event[0]==2:
+                    print("Player {} gets {} hurt!".format(event[1],event[2]))
+                elif event[0]==3:
+                    print("Player {} died!".format(event[1]))
+                elif event[0]==4:
+                    print("Player {} cast Meteor!".format(event[1]))
+                elif event[0]==5:
+                    print("Player {} gets ball!".format(event[1]))
+                elif event[0]==6:
+                    print("A Fireball splashes at ({},{})!".format(event[1],event[2]))
+                elif event[0]==7:
+                    print("A Meteor impacts at ({},{})!".format(event[1],event[2]))
+                elif event[0]==8:
+                    print("Player {} reincarnate at ({},{})!".format(event[1],event[2],event[3]))
+                elif event[0]==9:
+                    print("A Fireball disappears at ({},{})!".format(event[1],event[2]))
+
 
         if PYGAME:
             for wall in walls:
@@ -497,6 +538,9 @@ def RunGame(human_number):
 
             draw_circle(screen, ball.circle, blue)
             pygame.display.flip()
+        if DEBUG:
+            print("-----------------        -----------------")
+
 
     if DEBUG:
         print("################### Result ###################")

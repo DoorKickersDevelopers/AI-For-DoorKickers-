@@ -25,7 +25,7 @@ human_meteor_number = 3
 human_fireball_interval = frames_per_second * 1
 human_meteor_interval = frames_per_second * 3
 human_radius = 10
-human_speed_max = 2000
+human_speed_max = 5
 human_rotate_max = 10
 
 velocity_of_fireball = 4
@@ -33,13 +33,14 @@ fireball_radius = 5
 splash_radius = fireball_radius + 2 * human_speed_max
 fireball_hurt = 10
 
-cast_distance = 2000
-meteor_delay = frames_per_second * 4
+cast_distance = 300
+meteor_delay = frames_per_second * 2
 
 explode_radius = 50
 explode_hurt = 50
 
 ball_radius = 5
 
-time_of_game = 3 * frames_per_second
+time_of_game = 20 * frames_per_second
 time_of_round = 1.0 / frames_per_second
+time_of_death = 5 * frames_per_second

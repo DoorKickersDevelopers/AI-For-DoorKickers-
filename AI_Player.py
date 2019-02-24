@@ -26,10 +26,10 @@ class AI_player:
             ans = (2, -10, 0)
         elif tmp > 8:
             ans = (2, 10, 0)
-        elif tmp > 7:
+        elif tmp > 3:
             ans = (4, self.humans[self.number].circle.centre.x,
                    self.humans[self.number].circle.centre.y)
-        elif tmp > 5:
+        elif tmp > 2:
             ans = (3, 0, 0)
         else:
             dx = human_speed_max * cos(2 * random.random() * pi)
