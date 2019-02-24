@@ -26,4 +26,6 @@ namespace CONST {
 	const int explode_hurt = 50;//陨石爆炸伤害
 	const double crystal_radius = 5;//水晶半径
 	const int time_of_game = 3 * frames_per_second;//游戏总时长
+	const double time_of_round = 1.0 / frames_per_second;//一帧对应的秒数
+	const int time_of_death = 5 * frames_per_second;//复活时间
 }
