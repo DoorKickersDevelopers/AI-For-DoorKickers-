@@ -396,7 +396,6 @@ def RunGame(human_number):
         screen = pygame.display.set_mode((width_of_screen, height_of_screen))
         pygame.display.set_caption("Door Kickers")
 
-    logs = []
     log = {}
 
     walls, humans, ball = Init(human_number, log)
