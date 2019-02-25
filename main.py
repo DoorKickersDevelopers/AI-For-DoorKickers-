@@ -362,6 +362,8 @@ def RunGame(human_number):
         ais.append(AI_player(i, copy.deepcopy(ball), copy.deepcopy(walls), copy.deepcopy(
             fireballs), copy.deepcopy(humans), copy.deepcopy(meteors)))
 
+    score = [0.0] * human_number
+
     log = {}
     log["humans"] = str(humans)
     log["fireballs"] = str(fireballs)
@@ -372,9 +374,10 @@ def RunGame(human_number):
         eventlist.append(
             [8, human.number, human.circle.centre.x, human.circle.centre.y])
     log["events"] = str(eventlist)
+    log["scores"] = score
     logs.append(log)
 
-    score = [0.0] * human_number
+
     death_time = [0]*human_number
     timecnt = 0
     while timecnt < time_of_game:
@@ -501,6 +504,7 @@ def RunGame(human_number):
         log["meteors"] = str(meteors)
         log["balls"] = str(ball)
         log["events"] = str(eventlist)
+        log["scores"] = score
         logs.append(log)
 
         if DEBUG:

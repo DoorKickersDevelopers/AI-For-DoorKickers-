@@ -26,7 +26,7 @@ class AI_player:
             ans = (2, -10, 0)
         elif tmp > 8:
             ans = (2, 10, 0)
-        elif tmp > 5:
+        elif tmp > 3:
             ans = (4, self.humans[self.number].circle.centre.x,
                    self.humans[self.number].circle.centre.y)
         elif tmp > 2:

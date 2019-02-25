@@ -241,7 +241,7 @@ def Init(human_number, log):
 
 
 def update_ball(ball, humans, eventlist):
-    if ball.belong !=-1:
+    if ball.belong != -1:
         ball.circle.centre = humans[ball.belong].circle.centre
     else:
         for human in humans:
@@ -250,11 +250,12 @@ def update_ball(ball, humans, eventlist):
                 eventlist.append([5, human.number])
                 ball.circle.centre = human.circle.centre
 
-def move(human, x,y, walls):
-    if L2Distance(Point(x,y),human.circle.centre)>eps+human_speed_max:
-        x,y = human.circle.centre.x,human.circle.centre.y
-    if HumanCanGotoPos(human,walls,Point(x,y)):
-        human.circle.centre = Point(x,y)
+
+def move(human, x, y, walls):
+    if L2Distance(Point(x, y), human.circle.centre) > eps + human_speed_max:
+        x, y = human.circle.centre.x, human.circle.centre.y
+    if HumanCanGotoPos(human, walls, Point(x, y)):
+        human.circle.centre = Point(x, y)
 
 
 def shoot(human, fireballs, walls):
@@ -350,14 +351,15 @@ class Listen(threading.Thread):
             #
 
             if UserCode in self.ans.keys():
-                #if DEBUG:
+                # if DEBUG:
                 #    print("~~~~~~~~~~~~~~~~~~~Recv Msg~~~~~~~~~~~~~~~~~~~")
                 #    print('AI:', UserCode, data)  # debug
                 #    print("~~~~~~~~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~")
-                self.ans[UserCode] = (data["flag"],data["args"][0],data["args"][1])  # 更新对象状态
-                if self.ans[UserCode][0]==5:
+                self.ans[UserCode] = (
+                    data["flag"], data["args"][0], data["args"][1])  # 更新对象状态
+                if self.ans[UserCode][0] == 5:
                     return False
-                #sendLog(data,0,-1)
+                # sendLog(data,0,-1)
                 # self.gameProcess(UserCode)  # 在状态变更后进行游戏逻辑处理
                 # self.sendData({'received':True}, 0, UserCode)
             return True
@@ -368,6 +370,7 @@ class Listen(threading.Thread):
             #    return
             if not self.recvData():
                 break
+
 
 if PYGAME:
     def draw_rectangle(screen, rect, color):
@@ -407,12 +410,13 @@ def RunGame(human_number):
     # return
     fireballs = []
     meteors = []
-
+    score = [0.0] * human_number
     log = {}
     log["humans"] = str(humans)
     log["fireballs"] = str(fireballs)
     log["meteors"] = str(meteors)
     log["balls"] = str(ball)
+    log["scores"] = score
     eventlist = []
 
     for human in humans:
@@ -424,8 +428,7 @@ def RunGame(human_number):
     listener.start()
     sendLog(log)
 
-    score = [0.0] * human_number
-    death_time = [0]*human_number
+    death_time = [0] * human_number
     timecnt = 0
     while timecnt < time_of_game:
         if DEBUG:
@@ -443,7 +446,7 @@ def RunGame(human_number):
 
         for i in range(human_number):
             if humans[i] == None:
-                if death_time[i]==0:
+                if death_time[i] == 0:
                     x, y = StartPoints.sample(n=1).iloc[0]
                     c = Circle(Point(x, y), human_radius)
                     while CircleIntersection(c, ball.circle):
@@ -453,7 +456,7 @@ def RunGame(human_number):
                     humans[i] = Human(Point(x, y), rot, i)
                     eventlist.append([8, i, x, y])
                 else:
-                    death_time[i]-=1
+                    death_time[i] -= 1
 
         analysis = []
         #return_values = []
@@ -465,8 +468,6 @@ def RunGame(human_number):
                 print('Player {}:'.format(i), listener.ans[i])
             listener.ans[i] = (0, 0, 0)
 
-
-
         for a, human in zip(analysis, humans):
             if human != None:
                 if a[0] == 1:
@@ -477,7 +478,7 @@ def RunGame(human_number):
         UpdateWeaponMap(walls, fireballs, meteors, 1, eventlist)
 
         for a, human in zip(analysis, humans):
-            if human!=None:
+            if human != None:
                 if a[0] == 3:
                     if shoot(human, fireballs, walls):
                         eventlist.append([1, human.number])
@@ -491,7 +492,7 @@ def RunGame(human_number):
         for fireball in fireballs:
             Flag = True
             for human in humans:
-                if human!=None:
+                if human != None:
                     if CircleIntersection(human.circle, fireball.circle):
                         delFireballs.append(fireball)
                         Flag = False
@@ -500,13 +501,10 @@ def RunGame(human_number):
                 eventlist.append(
                     [6, fireball.circle.centre.x, fireball.circle.centre.y])
                 for human in humans:
-                    if human!=None:
+                    if human != None:
                         if CircleIntersection(human.circle, fireball.attack_range):
                             human.hp -= fireball.hurt
                             eventlist.append([2, human.number, fireball.hurt])
-
-
-
 
         for fireball in delFireballs:
             fireballs.remove(fireball)
@@ -517,7 +515,7 @@ def RunGame(human_number):
                 eventlist.append([7, meteor.pos.x, meteor.pos.y])
                 delMeteors.append(meteor)
                 for human in humans:
-                    if human!=None:
+                    if human != None:
                         if CircleIntersection(human.circle, meteor.attack_range):
                             human.hp -= meteor.hurt
                             eventlist.append([2, human.number, meteor.hurt])
@@ -528,7 +526,7 @@ def RunGame(human_number):
         delHumanNumbers = []
 
         for human in humans:
-            if human!=None:
+            if human != None:
                 if human.hp <= 0:
                     if ball.belong == human.number:
                         ball.belong = -1
@@ -542,7 +540,6 @@ def RunGame(human_number):
             humans[i] = None
             death_time[i] = time_of_death
 
-
         update_ball(ball, humans, eventlist)
 
         log = {}
@@ -551,30 +548,33 @@ def RunGame(human_number):
         log["meteors"] = str(meteors)
         log["balls"] = str(ball)
         log["events"] = str(eventlist)
+        log["scores"] = score
         sendLog(log)
 
         if DEBUG:
             for event in eventlist:
-                if event[0]==1:
+                if event[0] == 1:
                     print("Player {} shoots!".format(event[1]))
-                elif event[0]==2:
-                    print("Player {} gets {} hurt!".format(event[1],event[2]))
-                elif event[0]==3:
+                elif event[0] == 2:
+                    print("Player {} gets {} hurt!".format(event[1], event[2]))
+                elif event[0] == 3:
                     print("Player {} died!".format(event[1]))
-                elif event[0]==4:
+                elif event[0] == 4:
                     print("Player {} cast Meteor!".format(event[1]))
-                elif event[0]==5:
+                elif event[0] == 5:
                     print("Player {} gets ball!".format(event[1]))
-                elif event[0]==6:
-                    print("A Fireball splashes at ({},{})!".format(event[1],event[2]))
-                elif event[0]==7:
-                    print("A Meteor impacts at ({},{})!".format(event[1],event[2]))
-                elif event[0]==8:
-                    print("Player {} reincarnate at ({},{})!".format(event[1],event[2],event[3]))
-                elif event[0]==9:
-                    print("A Fireball disappears at ({},{})!".format(event[1],event[2]))
-
-
+                elif event[0] == 6:
+                    print("A Fireball splashes at ({},{})!".format(
+                        event[1], event[2]))
+                elif event[0] == 7:
+                    print("A Meteor impacts at ({},{})!".format(
+                        event[1], event[2]))
+                elif event[0] == 8:
+                    print("Player {} reincarnate at ({},{})!".format(
+                        event[1], event[2], event[3]))
+                elif event[0] == 9:
+                    print("A Fireball disappears at ({},{})!".format(
+                        event[1], event[2]))
 
         if PYGAME:
             for wall in walls:
