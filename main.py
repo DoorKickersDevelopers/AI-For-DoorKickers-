@@ -541,7 +541,7 @@ def RunGame(human_number):
         if DEBUG:
             print("-----------------        -----------------")
 
-
+    logs.append({"scores":score})
     if DEBUG:
         print("################### Result ###################")
         for i, sc in enumerate(score):
