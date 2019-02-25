@@ -1,5 +1,5 @@
 PYGAME = False
-DEBUG = False
+DEBUG = True
 if PYGAME:
     import pygame
     from pygame import Rect
@@ -17,6 +17,7 @@ import json
 import logging
 import numpy as np
 import pandas as pd
+import os
 
 
 BYTEORDER = 'big'
@@ -25,6 +26,11 @@ width = int(width_of_screen / room_size)
 height = int(height_of_screen / room_size)
 width_offset = 1.0 * (width_of_screen - room_size * width) / 2
 height_offset = 1.0 * (height_of_screen - room_size * height) / 2
+
+LogFile = "logfile.txt"
+
+if DEBUG:
+    logFile = open(LogFile, "w")
 
 
 def GenerateMap():
@@ -114,20 +120,20 @@ def Init(human_number, log):
 
     while not check(Map):
         if DEBUG:
-            print("Generate Map Failed")
+            print("Generate Map Failed", file=logFile)
         Map = GenerateMap()
 
     if DEBUG:
-        print("-----------------Game Map-----------------")
-        print()
+        print("-----------------Game Map-----------------", file=logFile)
+        print(file=logFile)
         for i in range(width):
             for j in range(height):
                 if(Map[i, j]):
-                    print("O", end='')
+                    print("O", end='', file=logFile)
                 else:
-                    print("*", end='')
-            print()
-        print("-----------------        -----------------")
+                    print("*", end='', file=logFile)
+            print(file=logFile)
+        print("-----------------        -----------------", file=logFile)
 
     RealMap = np.zeros((width, height), dtype=np.bool)
 
@@ -201,16 +207,16 @@ def Init(human_number, log):
 
         walls.append(Wall(ansx1, ansx2, ansy1, ansy2))
     if DEBUG:
-        print("-----------------Real Map-----------------")
-        print()
+        print("-----------------Real Map-----------------", file=logFile)
+        print(file=logFile)
         for i in range(width):
             for j in range(height):
                 if(RealMap[i, j]):
-                    print("O", end='')
+                    print("O", end='', file=logFile)
                 else:
-                    print("*", end='')
-            print()
-        print("-----------------        -----------------")
+                    print("*", end='', file=logFile)
+            print(file=logFile)
+        print("-----------------        -----------------", file=logFile)
 
     global StartPoints
 
@@ -298,10 +304,10 @@ logs = []
 
 def sendLog(log, Type=0, UserCode=-1):
     if DEBUG:
-        print("~~~~~~~~~~~~~~~~~~~Send Msg~~~~~~~~~~~~~~~~~~~")
-        print("Type=", Type, "UserCode", UserCode)
-        print(log)
-        print("~~~~~~~~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~")
+        print("~~~~~~~~~~~~~~~~~~~Send Msg~~~~~~~~~~~~~~~~~~~", file=logFile)
+        print("Type=", Type, "UserCode", UserCode, file=logFile)
+        print(log, file=logFile)
+        print("~~~~~~~~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~", file=logFile)
         return
     Body = json.dumps(log).encode()
     if UserCode == -1:
@@ -394,7 +400,7 @@ if PYGAME:
 
 
 def RunGame(human_number):
-    if DEBUG:
+    if PYGAME:
         pygame.init()
         screen = pygame.display.set_mode((width_of_screen, height_of_screen))
         pygame.display.set_caption("Door Kickers")
@@ -432,10 +438,11 @@ def RunGame(human_number):
     timecnt = 0
     while timecnt < time_of_game:
         if DEBUG:
-            print("-----------------Time = {}-----------------".format(timecnt))
+            print(
+                "-----------------Time = {}-----------------".format(timecnt), file=logFile)
         eventlist = []
         timecnt += 1
-        if DEBUG:
+        if PYGAME:
             screen.fill(white)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -465,7 +472,7 @@ def RunGame(human_number):
         for i in range(human_number):
             analysis.append(copy.deepcopy(listener.ans[i]))
             if DEBUG:
-                print('Player {}:'.format(i), listener.ans[i])
+                print('Player {}:'.format(i), listener.ans[i], file=logFile)
             listener.ans[i] = (0, 0, 0)
 
         for a, human in zip(analysis, humans):
@@ -554,27 +561,30 @@ def RunGame(human_number):
         if DEBUG:
             for event in eventlist:
                 if event[0] == 1:
-                    print("Player {} shoots!".format(event[1]))
+                    print("Player {} shoots!".format(event[1]), file=logFile)
                 elif event[0] == 2:
-                    print("Player {} gets {} hurt!".format(event[1], event[2]))
+                    print("Player {} gets {} hurt!".format(
+                        event[1], event[2]), file=logFile)
                 elif event[0] == 3:
-                    print("Player {} died!".format(event[1]))
+                    print("Player {} died!".format(event[1]), file=logFile)
                 elif event[0] == 4:
-                    print("Player {} cast Meteor!".format(event[1]))
+                    print("Player {} cast Meteor!".format(
+                        event[1]), file=logFile)
                 elif event[0] == 5:
-                    print("Player {} gets ball!".format(event[1]))
+                    print("Player {} gets ball!".format(
+                        event[1]), file=logFile)
                 elif event[0] == 6:
                     print("A Fireball splashes at ({},{})!".format(
-                        event[1], event[2]))
+                        event[1], event[2]), file=logFile)
                 elif event[0] == 7:
                     print("A Meteor impacts at ({},{})!".format(
-                        event[1], event[2]))
+                        event[1], event[2]), file=logFile)
                 elif event[0] == 8:
                     print("Player {} reincarnate at ({},{})!".format(
-                        event[1], event[2], event[3]))
+                        event[1], event[2], event[3]), file=logFile)
                 elif event[0] == 9:
                     print("A Fireball disappears at ({},{})!".format(
-                        event[1], event[2]))
+                        event[1], event[2]), file=logFile)
 
         if PYGAME:
             for wall in walls:
@@ -595,10 +605,10 @@ def RunGame(human_number):
     sendLog(log, 2, -1)
 
     if DEBUG:
-        print("################### Result ###################")
+        print("################### Result ###################", file=logFile)
         for i, sc in enumerate(score):
-            print(i, ":", sc)
-        print("###################        ###################")
+            print(i, ":", sc, file=logFile)
+        print("###################        ###################", file=logFile)
 
     with open("log.json", "w")as file:
         json.dump(logs, file)
