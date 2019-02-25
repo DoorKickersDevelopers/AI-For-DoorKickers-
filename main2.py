@@ -308,7 +308,7 @@ def sendLog(log, Type=0, UserCode=-1):
         print("Type=", Type, "UserCode", UserCode, file=logFile)
         print(log, file=logFile)
         print("~~~~~~~~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~", file=logFile)
-        return
+
     Body = json.dumps(log).encode()
     if UserCode == -1:
         logs.append(log)
