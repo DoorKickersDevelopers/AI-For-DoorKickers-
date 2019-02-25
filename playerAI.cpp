@@ -6,6 +6,7 @@ int fcount = 0;
 
 //玩家需要完成该函数，通过修改参数ope实现决策
 void playerAI(Operation& ope) {
+
 	if (fcount < 20) {
 		ope.flag = 1;
 		ope.arg1 = Logic::Instance()->humans[Logic::Instance()->number].position.x + 1;

@@ -12,7 +12,6 @@
 #include <string>
 #include <regex>
 
-
 using namespace std;
 
 
@@ -46,6 +45,8 @@ void readWalls(vector<Wall> &w) {
 		Wall tem(wall[i][0].asDouble(), wall[i][1].asDouble(), wall[i][2].asDouble(), wall[i][3].asDouble());
 		w.push_back(tem);
 	}
+
+	Logic::Instance()->number = root["number"].asInt();
 }
 
 void readMess(vector<Human> &h, vector<Fireball> &b, vector<Meteor> &g, Crystal &ba) {
@@ -86,9 +87,6 @@ void readMess(vector<Human> &h, vector<Fireball> &b, vector<Meteor> &g, Crystal 
 	ba.position.x = root["balls"][0][0].asDouble();
 	ba.position.y = root["balls"][0][1].asDouble();
 	ba.belong = root["balls"][1].asInt();
-
-
-	Logic::Instance()->number = root["number"].asInt();
 
 }
 
