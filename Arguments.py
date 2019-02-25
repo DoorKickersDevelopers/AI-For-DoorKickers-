@@ -19,7 +19,7 @@ map_lby = 0
 map_uby = height_of_screen
 
 
-frames_per_second = 20
+frames_per_second = 30
 human_hp = 100
 human_meteor_number = 3
 human_fireball_interval = frames_per_second * 1
