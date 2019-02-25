@@ -77,7 +77,7 @@ def PlayJsonFile(mydir):
         num_of_fireballs = len(fireballs)
         for i in range(num_of_fireballs):
             pos = Point(fireballs[i][0][0], fireballs[i][0][1])
-            rot = Point(fireballs[i][1])
+            rot = fireballs[i][1]
             fireballs[i] = Fireball(pos, rot)
 
         ball = json.loads(frame["balls"])
