@@ -59,7 +59,7 @@ void readMess(vector<Human> &h, vector<Fireball> &b, vector<Meteor> &g, Crystal 
 		return;
 	}
 
-	if (root["scores"]) {
+	if (!root["balls"]) {
 		gameover = true;
 		return;
 	}
