@@ -374,7 +374,7 @@ def RunGame(human_number):
         eventlist.append(
             [8, human.number, human.circle.centre.x, human.circle.centre.y])
     log["events"] = str(eventlist)
-    log["scores"] = score
+    log["scores"] = copy.deepcopy(score)
     logs.append(log)
 
 
@@ -504,7 +504,7 @@ def RunGame(human_number):
         log["meteors"] = str(meteors)
         log["balls"] = str(ball)
         log["events"] = str(eventlist)
-        log["scores"] = score
+        log["scores"] = copy.deepcopy(score)
         logs.append(log)
 
         if DEBUG:
@@ -545,7 +545,7 @@ def RunGame(human_number):
         if DEBUG:
             print("-----------------        -----------------")
 
-    logs.append({"scores":score})
+    logs.append({"scores":copy.deepcopy(score)})
     if DEBUG:
         print("################### Result ###################")
         for i, sc in enumerate(score):

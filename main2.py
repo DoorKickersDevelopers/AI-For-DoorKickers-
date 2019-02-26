@@ -422,7 +422,7 @@ def RunGame(human_number):
     log["fireballs"] = str(fireballs)
     log["meteors"] = str(meteors)
     log["balls"] = str(ball)
-    log["scores"] = score
+    log["scores"] = copy.deepcopy(score)
     eventlist = []
 
     for human in humans:
@@ -555,7 +555,7 @@ def RunGame(human_number):
         log["meteors"] = str(meteors)
         log["balls"] = str(ball)
         log["events"] = str(eventlist)
-        log["scores"] = score
+        log["scores"] = copy.deepcopy(score)
         sendLog(log)
 
         if DEBUG:
@@ -601,7 +601,7 @@ def RunGame(human_number):
             pygame.display.flip()
 
     log = {}
-    log["scores"] = score
+    log["scores"] = copy.deepcopy(score)
     sendLog(log, 2, -1)
 
     if DEBUG:
