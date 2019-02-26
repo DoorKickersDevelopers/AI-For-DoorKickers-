@@ -15,7 +15,7 @@
 using namespace std;
 
 
-char JsonFile[500];
+char JsonFile[2000];
 bool gameover = false;
 
 void quyinhao() {
