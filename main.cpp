@@ -15,8 +15,9 @@
 using namespace std;
 
 
-char JsonFile[2000];
+char *JsonFile;
 bool gameover = false;
+int jsonlen = 2000;
 
 void quyinhao() {
 	string s = string(JsonFile);
@@ -91,6 +92,7 @@ void readMess(vector<Human> &h, vector<Fireball> &b, vector<Meteor> &g, Crystal 
 }
 
 int main() {
+	JsonFile = new char[jsonlen];
 	Logic* logic = Logic::Instance();
 
 	int len = 0;
@@ -109,6 +111,13 @@ int main() {
 			scanf("%c", &lenr[i]);
 		}
 		len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
+		if (len > jsonlen) {
+			while (jsonlen <= len) {
+				jsonlen *= 2;
+			}
+			delete JsonFile;
+			JsonFile = new char[jsonlen];
+		}
 		getfile(len);		
 		vector<Human> humans;
 		vector<Fireball> fireballs;
