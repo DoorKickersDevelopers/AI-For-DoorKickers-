@@ -27,10 +27,20 @@ height = int(height_of_screen / room_size)
 width_offset = 1.0 * (width_of_screen - room_size * width) / 2
 height_offset = 1.0 * (height_of_screen - room_size * height) / 2
 
-LogFile = "logfile.txt"
 
 if DEBUG:
-    logFile = open(LogFile, "w")
+    LogFileDir = "logfile.txt"
+    with open(LogFileDir, "w")as file:
+        file.write("")
+
+    def WriteToLogFile(*ArgTuple, end='\n', sep=' '):
+        with open(LogFileDir, "a") as f:
+            for Arg in ArgTuple[:-1]:
+                f.write(str(Arg))
+                f.write(sep)
+            if len(ArgTuple) > 0:
+                f.write(str(ArgTuple[-1]))
+            f.write(end)
 
 
 def GenerateMap():
@@ -120,20 +130,20 @@ def Init(human_number, log):
 
     while not check(Map):
         if DEBUG:
-            print("Generate Map Failed", file=logFile)
+            WriteToLogFile("Generate Map Failed")
         Map = GenerateMap()
 
     if DEBUG:
-        print("-----------------Game Map-----------------", file=logFile)
-        print(file=logFile)
+        WriteToLogFile("-----------------Game Map-----------------")
+        WriteToLogFile()
         for i in range(width):
             for j in range(height):
                 if(Map[i, j]):
-                    print("O", end='', file=logFile)
+                    WriteToLogFile("O", end='')
                 else:
-                    print("*", end='', file=logFile)
-            print(file=logFile)
-        print("-----------------        -----------------", file=logFile)
+                    WriteToLogFile("*", end='')
+            WriteToLogFile()
+        WriteToLogFile("-----------------        -----------------")
 
     RealMap = np.zeros((width, height), dtype=np.bool)
 
@@ -207,16 +217,17 @@ def Init(human_number, log):
 
         walls.append(Wall(ansx1, ansx2, ansy1, ansy2))
     if DEBUG:
-        print("-----------------Real Map-----------------", file=logFile)
-        print(file=logFile)
+
+        WriteToLogFile("-----------------Real Map-----------------")
+        WriteToLogFile()
         for i in range(width):
             for j in range(height):
                 if(RealMap[i, j]):
-                    print("O", end='', file=logFile)
+                    WriteToLogFile("O", end='')
                 else:
-                    print("*", end='', file=logFile)
-            print(file=logFile)
-        print("-----------------        -----------------", file=logFile)
+                    WriteToLogFile("*", end='')
+            WriteToLogFile()
+        WriteToLogFile("-----------------        -----------------")
 
     global StartPoints
 
@@ -304,15 +315,17 @@ logs = []
 
 def sendLog(log, Type=0, UserCode=-1):
     if DEBUG:
-        print("~~~~~~~~~~~~~~~~~~~Send Msg~~~~~~~~~~~~~~~~~~~", file=logFile)
-        print("Type=", Type, "UserCode", UserCode, file=logFile)
-        print(log, file=logFile)
-        print("~~~~~~~~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~", file=logFile)
-
+        WriteToLogFile("~~~~~~Send Msg(Real time = {})~~~~~~".format(
+            time.strftime("%H:%M:%S", time.localtime(time.time()))))
+        WriteToLogFile("Type=", Type, "UserCode", UserCode)
+        WriteToLogFile(log)
+        WriteToLogFile("~~~~~~                        ~~~~~~")
     Body = json.dumps(log).encode()
     if UserCode == -1:
         logs.append(log)
     if Type == 2:
+        with open("log.json", "w")as file:
+            json.dump(logs, file)
         Len = len(Body) + 4
         toSend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
         toSend += Type.to_bytes(4, byteorder=BYTEORDER, signed=True)
@@ -341,33 +354,24 @@ class Listen(threading.Thread):
     def recvData(self):
         Len = int.from_bytes(sys.stdin.buffer.read(
             4), byteorder=BYTEORDER, signed=True)
-        # print("*******************************************************************\n\n\n\n\n\n")
         Type = int.from_bytes(sys.stdin.buffer.read(
             4), byteorder=BYTEORDER, signed=True)
         UserCode = int.from_bytes(sys.stdin.buffer.read(
             4), byteorder=BYTEORDER, signed=True)
         if Type == 0:  # 用户AI发送的包
             tmp = str(sys.stdin.buffer.read(Len - 8), 'utf-8')
-            # data = json.loads(str(sys.stdin.buffer.read(Len-8), 'utf-8')) # 读取主体部分
-            # data = json.loads(str(sys.stdin.buffer.read(Len), 'utf-8')) # 读取主体部分
             data = json.loads(tmp)  # 读取主体部分
 
-            # zaizheli
-            #sendLog(data, 0, -1)
-            #
-
             if UserCode in self.ans.keys():
-                # if DEBUG:
-                #    print("~~~~~~~~~~~~~~~~~~~Recv Msg~~~~~~~~~~~~~~~~~~~")
-                #    print('AI:', UserCode, data)  # debug
-                #    print("~~~~~~~~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~")
+                if DEBUG:
+                    WriteToLogFile("~~~~~~Recv Msg(Real time = {})~~~~~~".format(
+                        time.strftime("%H:%M:%S", time.localtime(time.time()))))
+                    WriteToLogFile('AI:', UserCode, data)
+                    WriteToLogFile("~~~~~~                        ~~~~~~")
                 self.ans[UserCode] = (
                     data["flag"], data["args"][0], data["args"][1])  # 更新对象状态
                 if self.ans[UserCode][0] == 5:
                     return False
-                # sendLog(data,0,-1)
-                # self.gameProcess(UserCode)  # 在状态变更后进行游戏逻辑处理
-                # self.sendData({'received':True}, 0, UserCode)
             return True
 
     def run(self):
@@ -438,8 +442,8 @@ def RunGame(human_number):
     timecnt = 0
     while timecnt < time_of_game:
         if DEBUG:
-            print(
-                "-----------------Time = {}-----------------".format(timecnt), file=logFile)
+            WriteToLogFile(
+                "-----------------Time = {}-----------------".format(timecnt))
         eventlist = []
         timecnt += 1
         if PYGAME:
@@ -464,7 +468,8 @@ def RunGame(human_number):
                     eventlist.append([8, i, x, y])
                 else:
                     death_time[i] -= 1
-
+        if DEBUG:
+            WriteToLogFile("CheckPoint1")
         analysis = []
         #return_values = []
 
@@ -472,18 +477,21 @@ def RunGame(human_number):
         for i in range(human_number):
             analysis.append(copy.deepcopy(listener.ans[i]))
             if DEBUG:
-                print('Player {}:'.format(i), listener.ans[i], file=logFile)
+                WriteToLogFile('Player {}:'.format(i), listener.ans[i])
             listener.ans[i] = (0, 0, 0)
-
+        if DEBUG:
+            WriteToLogFile("CheckPoint2")
         for a, human in zip(analysis, humans):
             if human != None:
                 if a[0] == 1:
                     move(human, a[1], a[2], walls)
                 elif a[0] == 2:
                     rotate(human, a[1])
-
+        if DEBUG:
+            WriteToLogFile("CheckPoint3")
         UpdateWeaponMap(walls, fireballs, meteors, 1, eventlist)
-
+        if DEBUG:
+            WriteToLogFile("CheckPoint4")
         for a, human in zip(analysis, humans):
             if human != None:
                 if a[0] == 3:
@@ -492,7 +500,8 @@ def RunGame(human_number):
                 elif a[0] == 4:
                     if throw(human, meteors, Point(a[1], a[2]), walls):
                         eventlist.append([4, human.number])
-
+        if DEBUG:
+            WriteToLogFile("CheckPoint5")
         delFireballs = []
         delMeteors = []
 
@@ -512,7 +521,8 @@ def RunGame(human_number):
                         if CircleIntersection(human.circle, fireball.attack_range):
                             human.hp -= fireball.hurt
                             eventlist.append([2, human.number, fireball.hurt])
-
+        if DEBUG:
+            WriteToLogFile("CheckPoint6")
         for fireball in delFireballs:
             fireballs.remove(fireball)
 
@@ -526,7 +536,8 @@ def RunGame(human_number):
                         if CircleIntersection(human.circle, meteor.attack_range):
                             human.hp -= meteor.hurt
                             eventlist.append([2, human.number, meteor.hurt])
-
+        if DEBUG:
+            WriteToLogFile("CheckPoint7")
         for meteor in delMeteors:
             meteors.remove(meteor)
 
@@ -543,11 +554,18 @@ def RunGame(human_number):
                 else:
                     if human.attack_time > 0:
                         human.attack_time -= 1
+
+        if DEBUG:
+            WriteToLogFile("CheckPoint8")
+
         for i in delHumanNumbers:
             humans[i] = None
             death_time[i] = time_of_death
 
         update_ball(ball, humans, eventlist)
+
+        if DEBUG:
+            WriteToLogFile("CheckPoint9")
 
         log = {}
         log["humans"] = str(humans)
@@ -559,32 +577,36 @@ def RunGame(human_number):
         sendLog(log)
 
         if DEBUG:
+            WriteToLogFile("CheckPoint10")
+        if DEBUG:
             for event in eventlist:
                 if event[0] == 1:
-                    print("Player {} shoots!".format(event[1]), file=logFile)
+                    WriteToLogFile("Player {} shoots!".format(event[1]))
                 elif event[0] == 2:
-                    print("Player {} gets {} hurt!".format(
-                        event[1], event[2]), file=logFile)
+                    WriteToLogFile("Player {} gets {} hurt!".format(
+                        event[1], event[2]))
                 elif event[0] == 3:
-                    print("Player {} died!".format(event[1]), file=logFile)
+                    WriteToLogFile("Player {} died!".format(event[1]))
                 elif event[0] == 4:
-                    print("Player {} cast Meteor!".format(
-                        event[1]), file=logFile)
+                    WriteToLogFile("Player {} cast Meteor!".format(
+                        event[1]))
                 elif event[0] == 5:
-                    print("Player {} gets ball!".format(
-                        event[1]), file=logFile)
+                    WriteToLogFile("Player {} gets ball!".format(
+                        event[1]))
                 elif event[0] == 6:
-                    print("A Fireball splashes at ({},{})!".format(
-                        event[1], event[2]), file=logFile)
+                    WriteToLogFile("A Fireball splashes at ({},{})!".format(
+                        event[1], event[2]))
                 elif event[0] == 7:
-                    print("A Meteor impacts at ({},{})!".format(
-                        event[1], event[2]), file=logFile)
+                    WriteToLogFile("A Meteor impacts at ({},{})!".format(
+                        event[1], event[2]))
                 elif event[0] == 8:
-                    print("Player {} reincarnate at ({},{})!".format(
-                        event[1], event[2], event[3]), file=logFile)
+                    WriteToLogFile("Player {} reincarnate at ({},{})!".format(
+                        event[1], event[2], event[3]))
                 elif event[0] == 9:
-                    print("A Fireball disappears at ({},{})!".format(
-                        event[1], event[2]), file=logFile)
+                    WriteToLogFile("A Fireball disappears at ({},{})!".format(
+                        event[1], event[2]))
+        if DEBUG:
+            WriteToLogFile("CheckPoint11")
 
         if PYGAME:
             for wall in walls:
@@ -603,15 +625,12 @@ def RunGame(human_number):
     log = {}
     log["scores"] = copy.deepcopy(score)
     sendLog(log, 2, -1)
-
     if DEBUG:
-        print("################### Result ###################", file=logFile)
+        WriteToLogFile("################### Result ###################")
         for i, sc in enumerate(score):
-            print(i, ":", sc, file=logFile)
-        print("###################        ###################", file=logFile)
+            WriteToLogFile(i, ":", sc)
+        WriteToLogFile("###################        ###################")
 
-    with open("log.json", "w")as file:
-        json.dump(logs, file)
     time.sleep(3)
 
 
