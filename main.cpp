@@ -257,7 +257,8 @@ int main() {
 	logic->init(walls);
 	
 	while (true) {
-		fflush(stdin);
+		rewind(stdin);
+
 		for (int i = 0; i < 4; i++) {
 			scanf("%c", &lenr[i]);
 		}
@@ -269,7 +270,8 @@ int main() {
 			delete JsonFile;
 			JsonFile = new char[jsonlen];
 		}
-		getfile(len);		
+		getfile(len);
+
 		vector<Human> humans;
 		vector<Fireball> fireballs;
 		vector<Meteor> meteors;
