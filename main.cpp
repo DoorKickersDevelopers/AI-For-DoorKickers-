@@ -11,6 +11,10 @@
 #include <cstring>
 #include <string>
 #include <regex>
+#include <thread>
+#include <mutex>
+#include <chrono>
+#include <fstream>
 
 using namespace std;
 
@@ -18,6 +22,8 @@ using namespace std;
 char *JsonFile;
 bool gameover = false;
 int jsonlen = 2000;
+mutex mtx;
+mutex mtxh[2];
 
 void quyinhao() {
 	string s = string(JsonFile);
@@ -91,6 +97,150 @@ void readMess(vector<Human> &h, vector<Fireball> &b, vector<Meteor> &g, Crystal 
 
 }
 
+void readOnce() {
+	char lenr[4];
+	for (int i = 0; i < 4; i++) {
+		scanf("%c", &lenr[i]);
+	}
+	int len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
+	if (len > jsonlen) {
+		while (jsonlen <= len) {
+			jsonlen *= 2;
+		}
+		delete JsonFile;
+		JsonFile = new char[jsonlen];
+	}
+	getfile(len);
+}
+
+/*
+
+ofstream outai("outai.txt");
+ofstream outrw("outrw.txt");
+
+void readFromServer() {
+	int mtxc = 1;
+	while (true) {
+		outrw << "qqqqqqqqqqq" << endl;
+		mtxc = 1 - mtxc;
+		mtxh[mtxc].try_lock();
+		outrw << "wwwwwwwwwww" << endl;
+		readOnce();
+		outrw << "eeeeeeeeeeee" << endl;
+		if (mtx.try_lock()) {
+			outrw << "rrrrrrrrrrr" << endl;
+			vector<Human> humans;
+			vector<Fireball> fireballs;
+			vector<Meteor> meteors;
+			Crystal crystal;
+			readMess(humans, fireballs, meteors, crystal);
+			if (gameover) {
+				char finalope[] = "{\"flag\": 5, \"args\": [0,0]}";
+				int len = strlen(finalope);
+				unsigned char lenb[4];
+				lenb[0] = (unsigned char)(len);
+				lenb[1] = (unsigned char)(len >> 8);
+				lenb[2] = (unsigned char)(len >> 16);
+				lenb[3] = (unsigned char)(len >> 24);
+				for (int i = 0; i < 4; i++) {
+					printf("%c", lenb[3 - i]);
+				}
+				printf("%s", finalope);
+				cout.flush();
+				mtx.unlock();
+				return;
+			}
+			Logic::Instance()->getmess(humans, fireballs, meteors, crystal);
+			outrw << "!!!" << JsonFile << endl;
+			mtx.unlock();
+			mtxh[mtxc].unlock();
+			outrw << "tttttttttttttttt" << endl;
+		}
+	}
+}
+
+void playerDecision() {
+	outai << "11111111111" << endl;
+	int mtxc = 0;
+	while (true) {
+		mtx.lock();
+		if (gameover) {
+			return;
+		}
+		outai << "22222222222" << endl;
+		Operation ope;
+		playerAI(ope);
+		mtx.unlock();
+		outai << "33333333333" << endl;
+		char s[20];
+		switch (ope.flag) {
+		case 1:
+			sprintf(s, "[%.2f,%.2f]", ope.arg1, ope.arg2);
+			break;
+		case 2:
+			sprintf(s, "[%.2f,0]", ope.arg1);
+			break;
+		case 3:
+			sprintf(s, "[0,0]");
+			break;
+		case 4:
+			sprintf(s, "[%.2f,%.2f]", ope.arg1, ope.arg2);
+			break;
+		}
+		char tout[100];
+		sprintf(tout, "{\"flag\": %d,\"args\": %s}", ope.flag, s);
+		int len = strlen(tout);
+		unsigned char lenb[4];
+		lenb[0] = (unsigned char)(len);
+		lenb[1] = (unsigned char)(len >> 8);
+		lenb[2] = (unsigned char)(len >> 16);
+		lenb[3] = (unsigned char)(len >> 24);
+		for (int i = 0; i < 4; i++) {
+			printf("%c", lenb[3 - i]);
+		}
+		printf("%s", tout);
+		outai << "444444444444" << endl;
+		cout.flush();
+		mtxh[mtxc].lock();
+		mtxh[mtxc].unlock();
+		mtxc = 1 - mtxc;
+		outai << "5555555555555" << endl;
+	}
+}
+
+int main() {
+	JsonFile = new char[jsonlen];
+	Logic* logic = Logic::Instance();
+	int len = 0;
+	char lenr[4];
+	for (int i = 0; i < 4; i++) {
+		scanf("%c", &lenr[i]);
+	}
+	len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
+	getfile(len);
+	vector<Wall> walls;
+	readWalls(walls);
+	logic->init(walls);
+	readOnce();
+	vector<Human> humans;
+	vector<Fireball> fireballs;
+	vector<Meteor> meteors;
+	Crystal crystal;
+	readMess(humans, fireballs, meteors, crystal);
+	Logic::Instance()->getmess(humans, fireballs, meteors, crystal);
+	mtxh[0].try_lock();
+	thread aithread(playerDecision);
+	aithread.detach();
+	thread rwthread(readFromServer);
+	rwthread.detach();
+	rwthread.join();
+	aithread.join();
+	delete JsonFile;
+	return 0;
+}
+
+*/
+
 int main() {
 	JsonFile = new char[jsonlen];
 	Logic* logic = Logic::Instance();
@@ -107,6 +257,7 @@ int main() {
 	logic->init(walls);
 	
 	while (true) {
+		fflush(stdin);
 		for (int i = 0; i < 4; i++) {
 			scanf("%c", &lenr[i]);
 		}
@@ -172,6 +323,7 @@ int main() {
 		printf("%s", out);
 		cout.flush();
 	}
+	delete JsonFile;
 
 	return 0;
 }
