@@ -1,5 +1,6 @@
 PYGAME = False
 DEBUG = True
+RANDOMMAP = False
 if PYGAME:
     import pygame
     from pygame import Rect
@@ -42,219 +43,264 @@ if DEBUG:
                 f.write(str(ArgTuple[-1]))
             f.write(end)
 
+if not RANDOMMAP:
+    MapDir = "." +os.path.sep+"Maps" + os.path.sep
 
-def GenerateMap():
-
-    Map = np.random.randint(0, 1000, (width, height))
-    Map = Map < 1000 * density_of_wall
-
-    cnt = np.zeros((width, height), dtype=np.int32)
-    cnt2 = cnt.copy()
-
-    def count1(i, j):
-        lx = max(i - 1, 0)
-        rx = min(i + 2, width)
-        ly = max(j - 1, 0)
-        ry = min(j + 2, height)
-        ans = 9 - (~Map[lx:rx, ly:ry]).sum()
-        return ans
-
-    def count2(i, j):
-        lx = max(i - 2, 0)
-        rx = min(i + 3, width)
-        ly = max(j - 2, 0)
-        ry = min(j + 3, height)
-        ans = 25 - (~Map[lx:rx, ly:ry]).sum()
-        return ans
-
-    for Round in range(4):
-        for i in range(width):
-            for j in range(height):
-                cnt[i, j] = count1(i, j)
-        for i in range(width):
-            for j in range(height):
-                cnt2[i, j] = count2(i, j)
-        Map = (cnt >= 5) | (cnt2 - cnt <= 2)
-
-    for Round in range(3):
-        for i in range(width):
-            for j in range(height):
-                cnt[i, j] = count1(i, j)
-        Map = cnt >= 5
-    return Map
-
-
-def bfs(stx, sty, Map):
-    Flag = Map[stx, sty]
-    color = np.zeros((width, height), dtype=np.bool)
-    color[stx][sty] = True
-    dxs = [-1, 1, 0, 0]
-    dys = [0, 0, -1, 1]
-
-    queue = [(stx, sty)]
-
-    while queue != []:
-        x, y = queue.pop(0)
-        for dx, dy in zip(dxs, dys):
-            if 0 <= x + dx and x + dx < width and 0 <= y + dy and y + dy < height and (Map[x + dx, y + dy] == Flag) and (not color[x + dx][y + dy]):
-                color[x + dx][y + dy] = True
-                queue.append((x + dx, y + dy))
-    return color
-
-
-def check(Map):
-
-    for i in range(width):
-        for j in range(height):
-            if (not Map[i, j]):
-                color = bfs(i, j, Map)
-                break
-        else:
-            continue
-        break
-
-    if ((~Map) & (~color)).any():
-        return False
-
-    if Map.sum() > width * height * (density_of_wall + 0.2):
-        return False
-
-    return True
 
 
 StartPoints = []
 
+if RANDOMMAP:
 
-def Init(human_number, log):
-    Map = GenerateMap()
+    def GenerateMap():
 
-    while not check(Map):
-        if DEBUG:
-            WriteToLogFile("Generate Map Failed")
-        Map = GenerateMap()
+        Map = np.random.randint(0, 1000, (width, height))
+        Map = Map < 1000 * density_of_wall
 
-    if DEBUG:
-        WriteToLogFile("-----------------Game Map-----------------")
-        WriteToLogFile()
-        for i in range(width):
-            for j in range(height):
-                if(Map[i, j]):
-                    WriteToLogFile("O", end='')
-                else:
-                    WriteToLogFile("*", end='')
-            WriteToLogFile()
-        WriteToLogFile("-----------------        -----------------")
+        cnt = np.zeros((width, height), dtype=np.int32)
+        cnt2 = cnt.copy()
 
-    RealMap = np.zeros((width, height), dtype=np.bool)
+        def count1(i, j):
+            lx = max(i - 1, 0)
+            rx = min(i + 2, width)
+            ly = max(j - 1, 0)
+            ry = min(j + 2, height)
+            ans = 9 - (~Map[lx:rx, ly:ry]).sum()
+            return ans
 
-    def GetReachPoints(x, y):
-        ReachPoints = [(x, y)]
-        queue = [(x, y)]
+        def count2(i, j):
+            lx = max(i - 2, 0)
+            rx = min(i + 3, width)
+            ly = max(j - 2, 0)
+            ry = min(j + 3, height)
+            ans = 25 - (~Map[lx:rx, ly:ry]).sum()
+            return ans
+
+        for Round in range(4):
+            for i in range(width):
+                for j in range(height):
+                    cnt[i, j] = count1(i, j)
+            for i in range(width):
+                for j in range(height):
+                    cnt2[i, j] = count2(i, j)
+            Map = (cnt >= 5) | (cnt2 - cnt <= 2)
+
+        for Round in range(3):
+            for i in range(width):
+                for j in range(height):
+                    cnt[i, j] = count1(i, j)
+            Map = cnt >= 5
+        return Map
+
+    def bfs(stx, sty, Map):
+        Flag = Map[stx, sty]
         color = np.zeros((width, height), dtype=np.bool)
-        color[x, y] = True
+        color[stx][sty] = True
         dxs = [-1, 1, 0, 0]
         dys = [0, 0, -1, 1]
+
+        queue = [(stx, sty)]
+
         while queue != []:
             x, y = queue.pop(0)
             for dx, dy in zip(dxs, dys):
-                if 0 <= x + dx and x + dx < width and 0 <= y + dy and y + dy < height and (Map[x + dx][y + dy]) and (not color[x + dx][y + dy]):
-                    color[x + dx, y + dy] = True
+                if 0 <= x + dx and x + dx < width and 0 <= y + dy and y + dy < height and (Map[x + dx, y + dy] == Flag) and (not color[x + dx][y + dy]):
+                    color[x + dx][y + dy] = True
                     queue.append((x + dx, y + dy))
-                    ReachPoints.append((x + dx, y + dy))
-        return ReachPoints
+        return color
 
-    walls = []
+    def check(Map):
 
-    rightest = np.zeros((width, height), dtype=np.int32)
-
-    ans = Map.sum()
-
-    for Round in range(max_num_of_wall):
-        if ans == 0:
-            break
-        for j in range(height):
-            for i in range(width - 1, -1, -1):
-                if not Map[i, j]:
-                    continue
-                if i == width - 1:
-                    rightest[i, j] = i
-                else:
-                    if Map[i + 1, j]:
-                        rightest[i, j] = rightest[i + 1, j]
-                    else:
-                        rightest[i, j] = i
-
-        ansx1, ansx2, ansy1, ansy2 = 0, -1, 0, -1
-
-        WallPos = []
-        for x in range(width):
-            for y in range(height):
-                if Map[x, y]:
-                    WallPos.append((x, y))
-        assert(len(WallPos) == ans)
-        x, y = WallPos[random.randint(0, len(WallPos) - 1)]
-        # 选取该联通块，使用面积最大的矩形覆盖
-        ReachPoints = GetReachPoints(x, y)
-        for x, y in ReachPoints:
-            assert(Map[x][y] == True)
-            # left bottom point
-            right = width
-            for yy in range(y, height):
-                if not Map[x, yy]:
-                    break
-                right = min(right, rightest[x, yy])
-                x1, x2, y1, y2 = x, right, y, yy
-                if (x2 - x1 + 1) * (y2 - y1 + 1) > (ansx2 - ansx1 + 1) * (ansy2 - ansy1 + 1):
-                    ansx1, ansx2, ansy1, ansy2 = x1, x2, y1, y2
-        RealMap[ansx1:ansx2 + 1, ansy1:ansy2 + 1] = True
-        Map[ansx1:ansx2 + 1, ansy1:ansy2 + 1] = False
-
-        ans -= (ansx2 - ansx1 + 1) * (ansy2 - ansy1 + 1)
-        ansx1 = width_offset + ansx1 * room_size
-        ansx2 = width_offset + (ansx2 + 1) * room_size
-        ansy1 = height_offset + ansy1 * room_size
-        ansy2 = height_offset + (ansy2 + 1) * room_size
-
-        walls.append(Wall(ansx1, ansx2, ansy1, ansy2))
-    if DEBUG:
-
-        WriteToLogFile("-----------------Real Map-----------------")
-        WriteToLogFile()
         for i in range(width):
             for j in range(height):
-                if(RealMap[i, j]):
-                    WriteToLogFile("O", end='')
-                else:
-                    WriteToLogFile("*", end='')
+                if (not Map[i, j]):
+                    color = bfs(i, j, Map)
+                    break
+            else:
+                continue
+            break
+
+        if ((~Map) & (~color)).any():
+            return False
+
+        if Map.sum() > width * height * (density_of_wall + 0.2):
+            return False
+
+        return True
+
+
+    def Init(human_number, log):
+        Map = GenerateMap()
+
+        while not check(Map):
+            if DEBUG:
+                WriteToLogFile("Generate Map Failed")
+            Map = GenerateMap()
+
+        if DEBUG:
+            WriteToLogFile("-----------------Game Map-----------------")
             WriteToLogFile()
-        WriteToLogFile("-----------------        -----------------")
+            for i in range(width):
+                for j in range(height):
+                    if(Map[i, j]):
+                        WriteToLogFile("O", end='')
+                    else:
+                        WriteToLogFile("*", end='')
+                WriteToLogFile()
+            WriteToLogFile("-----------------        -----------------")
 
-    global StartPoints
+        RealMap = np.zeros((width, height), dtype=np.bool)
 
-    for x in range(width):
-        for y in range(height):
-            if not RealMap[x][y]:
-                StartPoints.append(
-                    (width_offset + (x + 0.5) * room_size, height_offset + (y + 0.5) * room_size))
+        def GetReachPoints(x, y):
+            ReachPoints = [(x, y)]
+            queue = [(x, y)]
+            color = np.zeros((width, height), dtype=np.bool)
+            color[x, y] = True
+            dxs = [-1, 1, 0, 0]
+            dys = [0, 0, -1, 1]
+            while queue != []:
+                x, y = queue.pop(0)
+                for dx, dy in zip(dxs, dys):
+                    if 0 <= x + dx and x + dx < width and 0 <= y + dy and y + dy < height and (Map[x + dx][y + dy]) and (not color[x + dx][y + dy]):
+                        color[x + dx, y + dy] = True
+                        queue.append((x + dx, y + dy))
+                        ReachPoints.append((x + dx, y + dy))
+            return ReachPoints
 
-    StartPoints = pd.Series(StartPoints)
+        walls = []
 
-    poss = StartPoints.sample(n=human_number + 1)
+        rightest = np.zeros((width, height), dtype=np.int32)
 
-    ball_x, ball_y = poss.iloc[0]
+        ans = Map.sum()
 
-    ball = Ball(Point(ball_x, ball_y))
+        for Round in range(max_num_of_wall):
+            if ans == 0:
+                break
+            for j in range(height):
+                for i in range(width - 1, -1, -1):
+                    if not Map[i, j]:
+                        continue
+                    if i == width - 1:
+                        rightest[i, j] = i
+                    else:
+                        if Map[i + 1, j]:
+                            rightest[i, j] = rightest[i + 1, j]
+                        else:
+                            rightest[i, j] = i
 
-    humans = []
+            ansx1, ansx2, ansy1, ansy2 = 0, -1, 0, -1
 
-    for i in range(human_number):
-        x, y = poss.iloc[i + 1]
-        rot = random.randint(0, 359)
-        humans.append(Human(Point(x, y), rot, i))
+            WallPos = []
+            for x in range(width):
+                for y in range(height):
+                    if Map[x, y]:
+                        WallPos.append((x, y))
+            assert(len(WallPos) == ans)
+            x, y = WallPos[random.randint(0, len(WallPos) - 1)]
+            # 选取该联通块，使用面积最大的矩形覆盖
+            ReachPoints = GetReachPoints(x, y)
+            for x, y in ReachPoints:
+                assert(Map[x][y] == True)
+                # left bottom point
+                right = width
+                for yy in range(y, height):
+                    if not Map[x, yy]:
+                        break
+                    right = min(right, rightest[x, yy])
+                    x1, x2, y1, y2 = x, right, y, yy
+                    if (x2 - x1 + 1) * (y2 - y1 + 1) > (ansx2 - ansx1 + 1) * (ansy2 - ansy1 + 1):
+                        ansx1, ansx2, ansy1, ansy2 = x1, x2, y1, y2
+            RealMap[ansx1:ansx2 + 1, ansy1:ansy2 + 1] = True
+            Map[ansx1:ansx2 + 1, ansy1:ansy2 + 1] = False
 
-    log["walls"] = str(walls)
+            ans -= (ansx2 - ansx1 + 1) * (ansy2 - ansy1 + 1)
+            ansx1 = width_offset + ansx1 * room_size
+            ansx2 = width_offset + (ansx2 + 1) * room_size
+            ansy1 = height_offset + ansy1 * room_size
+            ansy2 = height_offset + (ansy2 + 1) * room_size
 
-    return walls, humans, ball
+            walls.append(Wall(ansx1, ansx2, ansy1, ansy2))
+        if DEBUG:
+
+            WriteToLogFile("-----------------Real Map-----------------")
+            WriteToLogFile()
+            for i in range(width):
+                for j in range(height):
+                    if(RealMap[i, j]):
+                        WriteToLogFile("O", end='')
+                    else:
+                        WriteToLogFile("*", end='')
+                WriteToLogFile()
+            WriteToLogFile("-----------------        -----------------")
+
+        global StartPoints
+
+        for x in range(width):
+            for y in range(height):
+                if not RealMap[x][y]:
+                    StartPoints.append(
+                        (width_offset + (x + 0.5) * room_size, height_offset + (y + 0.5) * room_size))
+
+        StartPoints = pd.Series(StartPoints)
+
+        poss = StartPoints.sample(n=human_number + 1)
+
+        ball_x, ball_y = poss.iloc[0]
+
+        ball = Ball(Point(ball_x, ball_y))
+
+        humans = []
+
+        for i in range(human_number):
+            x, y = poss.iloc[i + 1]
+            rot = random.randint(0, 359)
+            humans.append(Human(Point(x, y), rot, i))
+
+        log["walls"] = str(walls)
+
+        return walls, humans, ball,0
+else:
+    def Init(human_number, log):
+
+        MapNames = os.listdir(MapDir)
+        MapNames.sort()
+        Num = len(MapNames)
+        K = random.randint(0,Num-1)
+        MapName = MapNames[K]
+        with open(MapDir+MapName,"r")as file:
+            JSON = json.loads(file.read())
+        JSON = json.loads(JSON[0]["walls"])
+        walls = []
+        for wall in JSON:
+            walls.append(Wall(wall[0],wall[1],wall[2],wall[3]))
+
+        global StartPoints
+
+        radius = max(human_radius,ball_radius,fireball_radius)
+
+        for x in range(int(width_of_screen/radius)):
+            for y in range(int(height_of_screen/radius)):
+                if LegalPos(Circle(Point(1.0*x*radius,1.0*y*radius),1.0*radius),walls):
+                    StartPoints.append((1.0*x*radius, 1.0*y*radius))
+
+        StartPoints = pd.Series(StartPoints)
+
+        poss = StartPoints.sample(n=human_number + 1)
+
+        ball_x, ball_y = poss.iloc[0]
+
+        ball = Ball(Point(ball_x, ball_y))
+
+        humans = []
+
+        for i in range(human_number):
+            x, y = poss.iloc[i + 1]
+            rot = random.randint(0, 359)
+            humans.append(Human(Point(x, y), rot, i))
+
+        log["walls"] = str(walls)
+        return walls,humans,ball,K
+
 
 
 def update_ball(ball, humans, eventlist):
@@ -411,11 +457,16 @@ def RunGame(human_number):
 
     log = {}
 
-    walls, humans, ball = Init(human_number, log)
-    logs.append(log)
+    walls, humans, ball , kk = Init(human_number, log)
+
     for i in range(human_number):
         log["number"] = i
         sendLog(log, 0, i)
+
+    if not RANDOMMAP:
+        log["walls"] = kk
+
+    logs.append(log)
 
     # return
     fireballs = []
