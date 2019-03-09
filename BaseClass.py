@@ -1,24 +1,13 @@
 import math
 from math import sqrt, fabs, atan2
 from Arguments import *
+import copy
 
 
 class Point(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-
-    def __repr__(self):
-        return "Point({},{})".format(self.x, self.y)
-
-    def __add__(self, other):
-        return Point(self.x + other.x, self.y + other.y)
-
-    def __sub__(self, other):
-        return Point(self.x - other.x, self.y - other.y)
-
-    def __mul__(self, other):
-        return self.x * other.y - self.y * other.x
 
 
 class Line(object):
@@ -31,9 +20,6 @@ class Line(object):
     def Points(self):
         return self.p1, self.p2
 
-    def __repr__(self):
-        return "Line( {} , {} )".format(self.p1.__repr__(), self.p2.__repr__())
-
 
 class Rectangle(object):
     def __init__(self, left, right, bottom, top):
@@ -45,18 +31,12 @@ class Rectangle(object):
             raise Exception(
                 "create an instance of Rectangle with illegal argument")
 
-    def __repr__(self):
-        return "Rect(x:[{},{}],y:[{},{}])".format(self.left, self.right, self.bottom, self.top)
-
     def Points(self):
         return Point(self.left, self.bottom), Point(self.left, self.top), Point(self.right, self.bottom), Point(self.right, self.top)
 
     def Lines(self):
         p1, p2, p3, p4 = self.Points()
         return Line(p1, p2), Line(p1, p3), Line(p2, p4), Line(p3, p4)
-
-    def expand(self, d):
-        return Rectangle(self.left - d, self.right + d, self.bottom - d, self.top + d)
 
 
 class Circle(object):
@@ -66,14 +46,15 @@ class Circle(object):
         if self.radius <= 0:
             raise Exception("create an instance of Circle with illegal radius")
 
-    def __repr__(self):
-        return "Circle(o:{},r:{})".format(self.centre, self.radius)
-
 
 class Ball:
-    def __init__(self, position):
-        self.circle = Circle(position, ball_radius)
+    radius = ball_radius
+
+    def __init__(self, birth_pos):
+        self.pos = copy.deepcopy(birth_pos)
+        self.birth_pos = copy.deepcopy(birth_pos)
         self.belong = -1
+        self.-
 
     def __repr__(self):
         return "[[{},{}],{}]".format(self.circle.centre.x, self.circle.centre.y, self.belong)
