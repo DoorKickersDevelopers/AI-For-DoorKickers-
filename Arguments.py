@@ -56,4 +56,14 @@ explode_hurt = 50
 
 flash_distance = 200
 
+# some constants about balls
 ball_radius = 5
+
+# some constants about target district
+target_radius = 50
+
+# some constants about score
+kill_score = 5
+killed_score = 0
+goal_score = 20
+goaled_score = 0
