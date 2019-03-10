@@ -358,7 +358,7 @@ def RunGame():
             "fireballs":str(fireballs),
             "meteors":str(meteors),
             "balls":str(balls),
-            "scores":copy.deepcopy(score)
+            "scores":str(score)
         }
         sendLog(log)
 
@@ -505,7 +505,7 @@ def RunGame():
             "fireballs":str(fireballs),
             "meteors":str(meteors),
             "balls":str(balls),
-            "scores":copy.deepcopy(score),
+            "scores":str(score),
             "events":str(events)
         }
 
@@ -543,7 +543,7 @@ def RunGame():
         """
     log = {
         "frame":-1,
-        "scores": copy.deepcopy(score)
+        "scores": str(score)
     }
     sendLog(log, 2, -1)
     logs.append(log)
