@@ -18,12 +18,14 @@ import logging
 
 BYTEORDER = 'big'
 
+test_num = random.randint(0,9999)
+
 if DEBUG:
     logfile_dir = "."+os.sep+"DEBUG"+os.sep
     if not os.path.exists(logfile_dir):
         os.makedirs(logfile_dir)
 
-    logfile_name = logfile_dir + "logfile{}.txt".format(random.randint(0,9999))
+    logfile_name = logfile_dir + "logfile{}.txt".format(test_num)
 
     def WriteToLogFile(*ArgTuple, end='\n', sep=' '):
         with open(logfile_name, "a") as f:
@@ -94,7 +96,6 @@ targets = [TargetArea(Point(t[0],t[1])) for t in target_places]
 score = [0.0]*faction_number
 
 def sendLog(log, Type=0, UserCode=-1):
-    return
     if DEBUG:
         WriteToLogFile("~~~~~~Send Msg(Real time = {})~~~~~~".format(datetime.datetime.now().strftime('%H:%M:%S.%f')))
         WriteToLogFile("Type=", Type, "UserCode", UserCode)
@@ -545,6 +546,11 @@ def RunGame():
         "scores": copy.deepcopy(score)
     }
     sendLog(log, 2, -1)
+    logs.append(log)
+    replay_dir = "." + os.sep + "Replay" + os.sep
+    replay_name = "replay{}.json".format(test_num)
+    with open(replay_dir + replay_name,"w")as file:
+        file.write(str(logs))
     if DEBUG:
         WriteToLogFile("################### Result ###################")
         for i, sc in enumerate(score):

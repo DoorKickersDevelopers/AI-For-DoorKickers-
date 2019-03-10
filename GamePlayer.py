@@ -1,5 +1,4 @@
 import pygame
-from pygame import Rect
 import sys
 import random
 import copy
@@ -7,8 +6,6 @@ import time
 import json
 from BaseClass import *
 from MySTL import *
-
-filedir = "log.json"
 
 
 def draw_rectangle(screen, rect, color):
@@ -35,10 +32,61 @@ def draw_human(screen, human):
 
 def PlayJsonFile(mydir):
     pygame.init()
-    screen = pygame.display.set_mode((width_of_screen, height_of_screen))
-    pygame.display.set_caption("Door Kickers Player")
+    screen = pygame.display.set_mode((width, height))
+    pygame.display.set_caption("Defense Of The sOgou")
+
+    def draw_wall(wall):
+        pygame.draw.rect(screen, black, pygame.Rect(int(wall.left), int(wall.bottom),
+                                                    int(wall.right - wall.left), int(wall.top - wall.bottom)))
+
+    def draw_ball(ball):
+        pygame.draw.circle(screen, green, (int(ball.pos.x),
+                                           int(ball.pos.y)), int(ball.radius))
+
+    def draw_fireball(fireball):
+        pygame.draw.circle(screen, red, (int(fireball.pos.x),
+                                         int(fireball.pos.y)), int(fireball.radius))
+
+    def draw_target(target):
+        pygame.draw.circle(screen, gray, (int(target.pos.x),
+                                          int(target.pos.y)), int(target.radius))
+
+    def draw_meteor(meteor):
+        pygame.draw.circle(screen, pink, (int(meteor.pos.x), int(
+            meteor.pos.y)), int(meteor.attack_radius))
+
+    def draw_human(human):
+        if human.inv_time > 0:
+            pygame.draw.circle(screen, golden, (int(human.pos.x), int(
+                human.pos.y)), int(fireball_radius + 3))
+        pygame.draw.circle(screen, blue, (int(human.pos.x),
+                                          int(human.pos.y)), int(fireball_radius))
+        myfont = pygame.font.Font(None, 20)
+        textImage = myfont.render(str(human.hp), True, blue)
+        screen.blit(textImage, (human.pos.x, human.pos.y))
+
+    def draw_all(humans, walls, balls, fireballs, meteors, targets):
+        screen.fill(white)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+        for target in targets:
+            draw_target(target)
+        for meteor in meteors:
+            draw_meteor(meteor)
+        for wall in walls:
+            draw_wall(wall)
+        for human in humans:
+            if human.death_time == -1:
+                draw_human(human)
+        for fireball in fireballs:
+            draw_fireball(fireball)
+        for ball in balls:
+            draw_ball(ball)
+        pygame.display.flip()
+
     with open(mydir, "r")as file:
-        Json = file.read().replace("None", "null")
+        Json = file.read()
         Json = json.loads(Json)
 
     walls = json.loads(Json[0]["walls"])
@@ -100,29 +148,6 @@ def PlayJsonFile(mydir):
             print(
                 "=====================time = {} frames=====================".format(timecnt))
         timecnt += 1
-        for event in events:
-            if event[0] == 1:
-                print("Player {} shoots!".format(event[1]))
-            elif event[0] == 2:
-                print("Player {} gets {} hurt!".format(event[1], event[2]))
-            elif event[0] == 3:
-                print("Player {} died!".format(event[1]))
-            elif event[0] == 4:
-                print("Player {} cast Meteor!".format(event[1]))
-            elif event[0] == 5:
-                print("Player {} gets ball!".format(event[1]))
-            elif event[0] == 6:
-                print("A Fireball splashes at ({},{})!".format(
-                    event[1], event[2]))
-            elif event[0] == 7:
-                print("A Meteor impacts at ({},{})!".format(
-                    event[1], event[2]))
-            elif event[0] == 8:
-                print("Player {} reincarnate at ({},{})!".format(
-                    event[1], event[2], event[3]))
-            elif event[0] == 9:
-                print("A Fireball disappears at ({},{})!".format(
-                    event[1], event[2]))
 
         time.sleep(1.0 / 25)
 
@@ -134,4 +159,29 @@ def PlayJsonFile(mydir):
 
 
 if __name__ == "__main__":
-    PlayJsonFile(filedir)
+    if len(sys.argv) == 2:
+        PlayJsonFile(sys.argv[1])
+    else:
+        replay_dir = "." + os.sep + "Replay" + os.sep
+        replay_names = os.listdir(replay_dir)
+        if len(replay_names) == 0:
+            raise Exception("No Replay File in default dir")
+
+        def TimeStampToTime(timestamp):
+            timeStruct = time.localtime(timestamp)
+            return timeStruct
+
+        def get_FileModifyTime(filePath):
+            filePath = unicode(filePath, 'utf8')
+            t = os.path.getmtime(filePath)
+            return TimeStampToTime(t)
+
+        newest_t = get_FileModifyTime(replay_dir + replay_names[0])
+        name = replay_names[0]
+
+        for replay_name in replay_names[1:]:
+            T = get_FileModifyTime(replay_dir + replay_name)
+            if newest_t < T:
+                newest_t = T
+                name = replay_name
+        PlayJsonFile(replay_dir + name)
