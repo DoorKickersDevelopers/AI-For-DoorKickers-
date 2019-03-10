@@ -36,7 +36,7 @@ if DEBUG:
 
 if PYGAME:
     pygame.init()
-    screen = pygame.display.set_mode((width_of_screen, height_of_screen))
+    screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Defense Of The sOgou")
 
     def draw_wall(wall):
@@ -44,7 +44,7 @@ if PYGAME:
             int(wall.right - wall.left), int(wall.top - wall.bottom)))
 
     def draw_ball(ball):
-        pygame.draw.circle(screen, blue, (int(ball.pos.x),int(ball.pos.y)), int(ball.radius))
+        pygame.draw.circle(screen, green, (int(ball.pos.x),int(ball.pos.y)), int(ball.radius))
 
     def draw_fireball(fireball):
         pygame.draw.circle(screen, red, (int(fireball.pos.x),int(fireball.pos.y)), int(fireball.radius))
@@ -57,8 +57,8 @@ if PYGAME:
 
     def draw_human(human):
         if human.inv_time>0:
-            pygame.draw.circle(screen, golden, (int(human.pos.x),int(human.pos.y)), int(fireball_radius))
-        pygame.draw.circle(screen, blue, (int(human.pos.x),int(human.pos.y)), int(fireball_radius-1))
+            pygame.draw.circle(screen, golden, (int(human.pos.x),int(human.pos.y)), int(fireball_radius+3))
+        pygame.draw.circle(screen, blue, (int(human.pos.x),int(human.pos.y)), int(fireball_radius))
         myfont = pygame.font.Font(None, 20)
         textImage = myfont.render(str(human.hp), True, blue)
         screen.blit(textImage, (human.pos.x, human.pos.y))
@@ -94,6 +94,7 @@ targets = [TargetArea(Point(t[0],t[1])) for t in target_places]
 score = [0.0]*faction_number
 
 def sendLog(log, Type=0, UserCode=-1):
+    return
     if DEBUG:
         WriteToLogFile("~~~~~~Send Msg(Real time = {})~~~~~~".format(datetime.datetime.now().strftime('%H:%M:%S.%f')))
         WriteToLogFile("Type=", Type, "UserCode", UserCode)
@@ -133,7 +134,7 @@ class Listen(threading.Thread):
         super(Listen, self).__init__()
         self.ans = []
         for i in range(faction_number):
-            self.ans.append(null)
+            self.ans.append(self.null)
 
     def recvData(self):
         Len = int.from_bytes(sys.stdin.buffer.read(
@@ -277,6 +278,8 @@ def shoot(human,pos):
     pos = Point(pos[0],pos[1])
     if human.pos.x==pos.x and human.pos.y==pos.y:
         return
+    if not LegalPos(pos,walls):
+        return
     ang = Angle(human.pos,pos)
     pos = MoveAlongAngle(human.pos,ang,fireball_radius)
     if LegalPos(pos,walls):
@@ -288,7 +291,7 @@ def cast(human, pos):
     if human.death_time!=-1 or human.meteor_time>0 or human.meteor_number==0:
         return
     pos = Point(pos[0],pos[1])
-    if not PointInRectangle(pos,Rectangle(0,width,0,height))
+    if not PointInRectangle(pos,Rectangle(0,width,0,height)):
         return
     if L2Distance(human.pos,pos)<=eps+meteor_distance:
         Ev(4,human.number)
@@ -330,11 +333,11 @@ def RunGame():
     listener.start()
 
     timecnt = 0
-    while timecnt < time_of_game:
+    while timecnt < frames_of_game:
         timecnt += 1
         EvClear()
         if DEBUG:
-            WriteToLogFile("-----------------Time = {}-----------------".format(timecnt))
+            WriteToLogFile("-----------------Time = {}(Real time = {})-----------------".format(timecnt,datetime.datetime.now().strftime('%H:%M:%S.%f')))
 
         # Rebirth
         for human in humans:
@@ -390,7 +393,7 @@ def RunGame():
         delFireballs = []
         for fireball in fireballs:
             newpos = MoveAlongAngle(fireball.pos,fireball.rot,fireball.velocity)
-            if not LegalPos(newpos):
+            if not LegalPos(newpos,walls):
                 delFireballs.append(fireball)
             else:
                 for fac,a in enumerate(analysis):
@@ -421,13 +424,13 @@ def RunGame():
                 delMeteors.append(meteor)
 
         hurt_record = [{}]*len(humans)
-        for fireball in delfireballs:
+        for fireball in delFireballs:
             Ev(6,fireball.pos.x,fireball.pos.y,fireball.from_number)
             for human in humans:
                 fireball_hurt(fireball,human,hurt_record)
             fireballs.remove(fireball)
 
-        for meteor in delmeteors:
+        for meteor in delMeteors:
             Ev(7,meteor.pos.x,meteor.pos.y,meteor.from_number)
             for human in humans:
                 meteor_hurt(meteor,human,hurt_record)

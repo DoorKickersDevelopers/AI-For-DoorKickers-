@@ -123,7 +123,7 @@ class Human:
 
     def __repr__(self):
         return "[{},{},{},{},{},{},{},{},{},{},{}]".format(
-            self.number, self.pos.x, self.pos.y, self.hp, self.meteor_number, self.meteor_time, self.flash_number, self.flash_time, self.fireball_time, self.death_time, self.self.inv_time)
+            self.number, self.pos.x, self.pos.y, self.hp, self.meteor_number, self.meteor_time, self.flash_number, self.flash_time, self.fireball_time, self.death_time, self.inv_time)
 
 
 class Wall(Rectangle):
