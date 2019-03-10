@@ -194,7 +194,7 @@ def init():
         "frame":0,
         "map":map_id,
     }
-    logs.append(log)
+    logs.append(copy.deepcopy(log))
     for i in range(faction_number):
         log["faction"] = i
         sendLog(log,0,i)
@@ -548,6 +548,8 @@ def RunGame():
     sendLog(log, 2, -1)
     logs.append(log)
     replay_dir = "." + os.sep + "Replay" + os.sep
+    if not os.path.exists(replay_dir):
+        os.mkdir(replay_dir)
     replay_name = "replay{}.json".format(test_num)
     with open(replay_dir + replay_name,"w")as file:
         file.write(str(logs))

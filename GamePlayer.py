@@ -5,29 +5,6 @@ import copy
 import time
 import json
 from BaseClass import *
-from MySTL import *
-
-
-def draw_rectangle(screen, rect, color):
-    pygame.draw.rect(screen, color, pygame.Rect(int(rect.left), int(rect.bottom), int(rect.right - rect.left),
-                                                int(rect.top - rect.bottom)))
-
-
-def draw_circle(screen, circ, color):
-    pygame.draw.circle(screen, color, (int(circ.centre.x),
-                                       int(circ.centre.y)), int(circ.radius))
-
-
-def draw_human(screen, human):
-    # print("Shit!")
-    r = human_radius
-    p = human.circle.centre
-    draw_circle(screen, human.circle, red)
-    newp = MoveAlongAngle(p, human.rotation, 2 * human_radius)
-    pygame.draw.line(screen, red, (p.x, p.y), (newp.x, newp.y), 4)
-    myfont = pygame.font.Font(None, 20)
-    textImage = myfont.render(str(human.hp), True, black)
-    screen.blit(textImage, (human.circle.centre.x, human.circle.centre.y))
 
 
 def PlayJsonFile(mydir):
@@ -88,7 +65,10 @@ def PlayJsonFile(mydir):
     with open(mydir, "r")as file:
         Json = file.read()
         Json = json.loads(Json)
-
+    init_info = Json[0]
+    final_info = Json[-1]
+    Json = Json[1:-1]
+    MapID = init_info
     walls = json.loads(Json[0]["walls"])
     num_of_walls = len(walls)
     for i in range(num_of_walls):
