@@ -17,7 +17,7 @@ pink = (242, 156, 177)
 # game setting
 friendly_fire = True
 
-# load the map
+# load the map,assert the map's legality
 map_dir = "." + os.sep + "Maps" + os.sep
 map_names = os.listdir(map_dir)
 map_names.sort()
@@ -56,12 +56,12 @@ human_velocity = 5
 # some constants about skills
 fireball_velocity = 4
 fireball_radius = 5
-splash_radius = fireball_radius + 2 * human_velocity
+splash_radius = 8
 splash_hurt = 10
 
 meteor_distance = 300
 meteor_delay = frames_per_second * 2
-explode_radius = 50
+explode_radius = 100
 explode_hurt = 50
 
 flash_distance = 200

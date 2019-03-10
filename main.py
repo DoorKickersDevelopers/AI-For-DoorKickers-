@@ -1,7 +1,5 @@
 PYGAME = True
-# 运行时开启pygame显示在线渲染结果
 DEBUG = True
-# 打印调试信息到了文件中
 
 if PYGAME:
     import pygame
@@ -17,8 +15,6 @@ from MySTL import *
 from multiprocessing import Pool
 import json
 import logging
-import numpy as np
-import pandas as pd
 
 BYTEORDER = 'big'
 
@@ -54,8 +50,7 @@ if PYGAME:
         pygame.draw.circle(screen, red, (int(fireball.pos.x),int(fireball.pos.y)), int(fireball.radius))
 
     def draw_target(target):
-        for pos in target_places:
-            pygame.draw.circle(screen, gray, (int(target.centre.x),int(target.centre.y)), int(target.radius))
+        pygame.draw.circle(screen, gray, (int(target.pos.x),int(target.pos.y)), int(target.radius))
 
     def draw_meteor(meteor):
         pygame.draw.circle(screen, pink, (int(meteor.pos.x),int(meteor.pos.y)), int(meteor.attack_radius))
@@ -88,6 +83,16 @@ if PYGAME:
             draw_ball(ball)
         pygame.display.flip()
 
+events = []
+logs = []
+humans = [None]*faction_number*human_number
+balls = [None]*faction_number
+fireballs = []
+meteors = []
+walls = [Wall(w[0],w[1],w[2],w[3]) for w in wallrects]
+targets = [TargetArea(Point(t[0],t[1])) for t in target_places]
+score = [0.0]*faction_number
+
 def sendLog(log, Type=0, UserCode=-1):
     if DEBUG:
         WriteToLogFile("~~~~~~Send Msg(Real time = {})~~~~~~".format(datetime.datetime.now().strftime('%H:%M:%S.%f')))
@@ -95,8 +100,6 @@ def sendLog(log, Type=0, UserCode=-1):
         WriteToLogFile(log)
         WriteToLogFile("~~~~~~                        ~~~~~~")
     Body = json.dumps(log).encode()
-    if UserCode == -1:
-        logs.append(log)
     if Type == 2:
         Len = len(Body) + 4
         toSend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
@@ -172,16 +175,7 @@ class Listen(threading.Thread):
             if not self.recvData():
                 break
 
-log = {}
-events = []
-logs = []
-humans = [None]*faction_number*human_number
-balls = [None]*faction_number
-fireballs = []
-meteors = []
-walls = [Wall(w[0],w[1],w[2],w[3]) for w in wallrects]
-targets = [Circle(Point(t[0],t[1]),target_radius) for t in target_places]
-score = [0.0]*faction_number
+
 
 def Ev(*Args):
     lt = []
@@ -216,7 +210,7 @@ def flash(human,pos):
         return
     pos = Point(pos[0],pos[1])
     if L2Distance(human.pos,pos)<=eps+flash_distance and LegalPos(pos,walls):
-        Ev(10,human.number,human.pos.x,human.pos.y,pos.x,pos.y)
+        Ev(9,human.number,human.pos.x,human.pos.y,pos.x,pos.y)
         human.pos = pos
         human.flash_time = human.flash_interval
         human.flash_number -= 1
@@ -227,16 +221,16 @@ def LegalMove(pos1,pos2):
     for wall in walls:
         if LineIntersectRect(Line(pos1,pos2),wall):
             return False
-    return True
+    if L2Distance(pos1,pos2)<=human_velocity+eps:
+        return True
+    else:
+        return False
 
 def move(human, pos):
     pos = Point(pos[0],pos[1])
     if LegalMove(human.pos,pos):
         human.pos = pos
-    if L2Distance(Point(x,y),human.circle.centre)>eps+human_speed_max:
-        x,y = human.circle.centre.x,human.circle.centre.y
-    if HumanCanGotoPos(human,walls,Point(x,y)):
-        human.circle.centre = Point(x,y)
+
 
 def fireball_hurt(fireball,human,hurt_record):
     if human.death_time!=-1 or human.inv_time>0:
@@ -269,7 +263,7 @@ def meteor_hurt(meteor,human,hurt_record):
 def death(human,hurt_dict):
     human.death_time = frames_of_death
     Ev(3,human.number,human.pos.x,human.pos.y)
-    score[human.faction_number] += killed_score
+    score[human.faction] += killed_score
     sum_hurt = 0
     for h_id,hurt in hurt_dict.items():
         sum_hurt += hurt
@@ -294,7 +288,7 @@ def cast(human, pos):
     if human.death_time!=-1 or human.meteor_time>0 or human.meteor_number==0:
         return
     pos = Point(pos[0],pos[1])
-    if pos.x<0 or pos.x>width or pos.y<0 or pos.y>height:
+    if not PointInRectangle(pos,Rectangle(0,width,0,height))
         return
     if L2Distance(human.pos,pos)<=eps+meteor_distance:
         Ev(4,human.number)
@@ -307,9 +301,13 @@ def pickupball(ball):
     num = -1
     for human in humans:
         if human.death_time==-1 and human.faction!=ball.faction:
-            if L2Distance(human.pos,ball.pos)<mindis:
-                mindis = L2Distance(human.pos,ball.pos)
+            Dis = L2Distance(human.pos,ball.pos)
+            if Dis<mindis:
+                mindis = Dis
                 num = human.number
+            elif Dis==mindis:
+                if score[num%faction_number]<score[human.faction]:
+                    num = human.number
     if mindis<ball.radius+eps:
         ball.belong = num
         ball.pos.x,ball.pos.y = humans[num].pos.x,humans[num].pos.y
@@ -317,8 +315,8 @@ def pickupball(ball):
 
 def goal(ball):
     target = targets[ball.belong%faction_number]
-    if L2Distance(ball.pos,target)<=target_radius+eps:
-        Ev(11,ball.belong,ball.faction)
+    if L2Distance(ball.pos,target.pos)<=target.radius+eps:
+        Ev(10,ball.belong,ball.faction)
         score[ball.belong%faction_number]+=goal_score
         score[ball.faction]+=goaled_score
         ball.reset()
@@ -350,13 +348,14 @@ def RunGame():
             WriteToLogFile("Rebirth Succeed")
 
         # Send State
-        log["frame"] = timecnt
-        log["humans"] = str(humans)
-        log["fireballs"] = str(fireballs)
-        log["meteors"] = str(meteors)
-        log["balls"] = str(balls)
-        log["events"] = str(events)
-        log["scores"] = copy.deepcopy(score)
+        log = {
+            "frame":timecnt,
+            "humans":str(humans),
+            "fireballs":str(fireballs),
+            "meteors":str(meteors),
+            "balls":str(balls),
+            "scores":copy.deepcopy(score)
+        }
         sendLog(log)
 
         if PYGAME:
@@ -398,7 +397,7 @@ def RunGame():
                     for i,pos in enumerate(a["move"]):
                         h_id = i*faction_number+fac
                         if LegalMove(humans[h_id].pos,Point(pos[0],pos[1])):
-                            if DisLine(Line(fireball.pos,newpos),Line(humans[h_id].pos,Point(pos[0],pos[1])))<=fireball_radius+eps:
+                            if DisFireballHuman(fireball.pos,newpos,humans[h_id].pos,Point(pos[0],pos[1]))<=fireball_radius+eps:
                                 delFireballs.append(fireball)
                         else:
                             if DisLinePoint(Line(fireball.pos,newpos),humans[h_id].pos)<=fireball_radius+eps:
@@ -492,6 +491,22 @@ def RunGame():
 
         for meteor in meteors:
             meteor.time-=1
+
+        if DEBUG:
+            WriteToLogFile("Update Time Succeed")
+
+        log = {
+            "frame":timecnt,
+            "humans":str(humans),
+            "fireballs":str(fireballs),
+            "meteors":str(meteors),
+            "balls":str(balls),
+            "scores":copy.deepcopy(score),
+            "events":copy.deepcopy(events)
+        }
+
+
+        logs.append(log)
 
         """
         if DEBUG:

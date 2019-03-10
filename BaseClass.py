@@ -9,13 +9,22 @@ class Point(object):
         self.x = x
         self.y = y
 
+    def __add__(self, p):
+        return Point(self.x + p.x, self.y + p.y)
+
+    def __sub__(self, p):
+        return Point(self.x - p.x, self.y - p.y)
+
+    def __mul__(self, p):
+        return self.x * p.y - self.y * p.x
+
 
 class Line(object):
     def __init__(self, p1, p2):
-        self.p1 = p1
-        self.p2 = p2
         if p1.x == p2.x and p1.y == p2.y:
             raise Exception("create an instance of line with illegal argument")
+        self.p1 = copy.deepcopy(p1)
+        self.p2 = copy.deepcopy(p2)
 
     def Points(self):
         return self.p1, self.p2
@@ -23,28 +32,26 @@ class Line(object):
 
 class Rectangle(object):
     def __init__(self, left, right, bottom, top):
+        if right <= left or top <= bottom:
+            raise Exception(
+                "create an instance of Rectangle with illegal argument")
         self.left = left
         self.right = right
         self.bottom = bottom
         self.top = top
-        if self.right <= self.left or self.top <= self.bottom:
-            raise Exception(
-                "create an instance of Rectangle with illegal argument")
 
     def Points(self):
         return Point(self.left, self.bottom), Point(self.left, self.top), Point(self.right, self.bottom), Point(self.right, self.top)
 
-    def Lines(self):
-        p1, p2, p3, p4 = self.Points()
-        return Line(p1, p2), Line(p1, p3), Line(p2, p4), Line(p3, p4)
+    def expand(e):
+        return Rectangle(self.left + e, self.right - e, self.bottom + e, self.top - e)
 
 
-class Circle(object):
-    def __init__(self, centre, radius):
-        self.centre = centre
-        self.radius = radius
-        if self.radius <= 0:
-            raise Exception("create an instance of Circle with illegal radius")
+class TargetArea:
+    radius = target_radius
+
+    def __init__(self, pos):
+        self.pos = copy.deepcopy(pos)
 
 
 class Ball:
@@ -68,9 +75,9 @@ class Fireball:
     hurt = splash_hurt
     attack_radius = splash_radius
 
-    def __init__(self, position, rotation, from_number):
-        self.pos = position
-        self.rot = rotation
+    def __init__(self, pos, rot, from_number):
+        self.pos = copy.deepcopy(pos)
+        self.rot = rot
         self.from_number = from_number
 
     def __repr__(self):
@@ -81,9 +88,9 @@ class Meteor:
     hurt = explode_hurt
     attack_radius = explode_radius
 
-    def __init__(self, position, from_number):
+    def __init__(self, pos, from_number):
         self.time = meteor_delay
-        self.pos = position
+        self.pos = pos
         self.from_number = from_number
 
     def __repr__(self):
@@ -91,7 +98,7 @@ class Meteor:
 
 
 class Human:
-    velocity_max = human_velocity
+    velocity = human_velocity
     fireball_interval = human_fireball_interval
     meteor_interval = human_meteor_interval
     flash_interval = human_flash_interval
