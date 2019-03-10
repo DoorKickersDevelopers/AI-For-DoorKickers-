@@ -183,7 +183,7 @@ def Ev(*Args):
     lt = []
     for Arg in Args:
         lt.append(Arg)
-    events.append(Ev)
+    events.append(lt)
 
 def EvClear():
     global events
