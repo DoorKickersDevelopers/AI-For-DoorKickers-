@@ -1,0 +1,1716 @@
+~~~~~~Send Msg(Real time = 23:20:38.169042)~~~~~~
+Type= 0 UserCode 0
+{'frame': 0, 'map': 0, 'faction': 0}
+~~~~~~                        ~~~~~~
+~~~~~~Send Msg(Real time = 23:20:38.169478)~~~~~~
+Type= 0 UserCode 1
+{'frame': 0, 'map': 0, 'faction': 1}
+~~~~~~                        ~~~~~~
+-----------------Time = 1(Real time = 23:20:38.170306)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.170720)~~~~~~
+Type= 0 UserCode -1
+{'frame': 1, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,40], [1,700,300,100,3,0,3,0,0,-1,40], [2,50,350,100,3,0,3,0,0,-1,40], [3,750,250,100,3,0,3,0,0,-1,40], [4,50,250,100,3,0,3,0,0,-1,40], [5,750,350,100,3,0,3,0,0,-1,40]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 2(Real time = 23:20:38.228304)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.228507)~~~~~~
+Type= 0 UserCode -1
+{'frame': 2, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,39], [1,700,300,100,3,0,3,0,0,-1,39], [2,50,350,100,3,0,3,0,0,-1,39], [3,750,250,100,3,0,3,0,0,-1,39], [4,50,250,100,3,0,3,0,0,-1,39], [5,750,350,100,3,0,3,0,0,-1,39]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 3(Real time = 23:20:38.287643)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.287800)~~~~~~
+Type= 0 UserCode -1
+{'frame': 3, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,38], [1,700,300,100,3,0,3,0,0,-1,38], [2,50,350,100,3,0,3,0,0,-1,38], [3,750,250,100,3,0,3,0,0,-1,38], [4,50,250,100,3,0,3,0,0,-1,38], [5,750,350,100,3,0,3,0,0,-1,38]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 4(Real time = 23:20:38.342712)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.342844)~~~~~~
+Type= 0 UserCode -1
+{'frame': 4, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,37], [1,700,300,100,3,0,3,0,0,-1,37], [2,50,350,100,3,0,3,0,0,-1,37], [3,750,250,100,3,0,3,0,0,-1,37], [4,50,250,100,3,0,3,0,0,-1,37], [5,750,350,100,3,0,3,0,0,-1,37]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 5(Real time = 23:20:38.401108)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.401263)~~~~~~
+Type= 0 UserCode -1
+{'frame': 5, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,36], [1,700,300,100,3,0,3,0,0,-1,36], [2,50,350,100,3,0,3,0,0,-1,36], [3,750,250,100,3,0,3,0,0,-1,36], [4,50,250,100,3,0,3,0,0,-1,36], [5,750,350,100,3,0,3,0,0,-1,36]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 6(Real time = 23:20:38.455366)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.455505)~~~~~~
+Type= 0 UserCode -1
+{'frame': 6, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,35], [1,700,300,100,3,0,3,0,0,-1,35], [2,50,350,100,3,0,3,0,0,-1,35], [3,750,250,100,3,0,3,0,0,-1,35], [4,50,250,100,3,0,3,0,0,-1,35], [5,750,350,100,3,0,3,0,0,-1,35]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 7(Real time = 23:20:38.510625)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.510783)~~~~~~
+Type= 0 UserCode -1
+{'frame': 7, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,34], [1,700,300,100,3,0,3,0,0,-1,34], [2,50,350,100,3,0,3,0,0,-1,34], [3,750,250,100,3,0,3,0,0,-1,34], [4,50,250,100,3,0,3,0,0,-1,34], [5,750,350,100,3,0,3,0,0,-1,34]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 8(Real time = 23:20:38.568687)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.568845)~~~~~~
+Type= 0 UserCode -1
+{'frame': 8, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,33], [1,700,300,100,3,0,3,0,0,-1,33], [2,50,350,100,3,0,3,0,0,-1,33], [3,750,250,100,3,0,3,0,0,-1,33], [4,50,250,100,3,0,3,0,0,-1,33], [5,750,350,100,3,0,3,0,0,-1,33]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 9(Real time = 23:20:38.623170)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.623328)~~~~~~
+Type= 0 UserCode -1
+{'frame': 9, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,32], [1,700,300,100,3,0,3,0,0,-1,32], [2,50,350,100,3,0,3,0,0,-1,32], [3,750,250,100,3,0,3,0,0,-1,32], [4,50,250,100,3,0,3,0,0,-1,32], [5,750,350,100,3,0,3,0,0,-1,32]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 10(Real time = 23:20:38.677582)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.677732)~~~~~~
+Type= 0 UserCode -1
+{'frame': 10, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,31], [1,700,300,100,3,0,3,0,0,-1,31], [2,50,350,100,3,0,3,0,0,-1,31], [3,750,250,100,3,0,3,0,0,-1,31], [4,50,250,100,3,0,3,0,0,-1,31], [5,750,350,100,3,0,3,0,0,-1,31]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 11(Real time = 23:20:38.732847)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.733041)~~~~~~
+Type= 0 UserCode -1
+{'frame': 11, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,30], [1,700,300,100,3,0,3,0,0,-1,30], [2,50,350,100,3,0,3,0,0,-1,30], [3,750,250,100,3,0,3,0,0,-1,30], [4,50,250,100,3,0,3,0,0,-1,30], [5,750,350,100,3,0,3,0,0,-1,30]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 12(Real time = 23:20:38.788648)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.788783)~~~~~~
+Type= 0 UserCode -1
+{'frame': 12, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,29], [1,700,300,100,3,0,3,0,0,-1,29], [2,50,350,100,3,0,3,0,0,-1,29], [3,750,250,100,3,0,3,0,0,-1,29], [4,50,250,100,3,0,3,0,0,-1,29], [5,750,350,100,3,0,3,0,0,-1,29]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 13(Real time = 23:20:38.843046)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.843202)~~~~~~
+Type= 0 UserCode -1
+{'frame': 13, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,28], [1,700,300,100,3,0,3,0,0,-1,28], [2,50,350,100,3,0,3,0,0,-1,28], [3,750,250,100,3,0,3,0,0,-1,28], [4,50,250,100,3,0,3,0,0,-1,28], [5,750,350,100,3,0,3,0,0,-1,28]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 14(Real time = 23:20:38.901263)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.901394)~~~~~~
+Type= 0 UserCode -1
+{'frame': 14, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,27], [1,700,300,100,3,0,3,0,0,-1,27], [2,50,350,100,3,0,3,0,0,-1,27], [3,750,250,100,3,0,3,0,0,-1,27], [4,50,250,100,3,0,3,0,0,-1,27], [5,750,350,100,3,0,3,0,0,-1,27]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 15(Real time = 23:20:38.955826)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:38.956001)~~~~~~
+Type= 0 UserCode -1
+{'frame': 15, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,26], [1,700,300,100,3,0,3,0,0,-1,26], [2,50,350,100,3,0,3,0,0,-1,26], [3,750,250,100,3,0,3,0,0,-1,26], [4,50,250,100,3,0,3,0,0,-1,26], [5,750,350,100,3,0,3,0,0,-1,26]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 16(Real time = 23:20:39.011331)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.011508)~~~~~~
+Type= 0 UserCode -1
+{'frame': 16, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,25], [1,700,300,100,3,0,3,0,0,-1,25], [2,50,350,100,3,0,3,0,0,-1,25], [3,750,250,100,3,0,3,0,0,-1,25], [4,50,250,100,3,0,3,0,0,-1,25], [5,750,350,100,3,0,3,0,0,-1,25]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 17(Real time = 23:20:39.066578)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.066756)~~~~~~
+Type= 0 UserCode -1
+{'frame': 17, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,24], [1,700,300,100,3,0,3,0,0,-1,24], [2,50,350,100,3,0,3,0,0,-1,24], [3,750,250,100,3,0,3,0,0,-1,24], [4,50,250,100,3,0,3,0,0,-1,24], [5,750,350,100,3,0,3,0,0,-1,24]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 18(Real time = 23:20:39.121880)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.122052)~~~~~~
+Type= 0 UserCode -1
+{'frame': 18, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,23], [1,700,300,100,3,0,3,0,0,-1,23], [2,50,350,100,3,0,3,0,0,-1,23], [3,750,250,100,3,0,3,0,0,-1,23], [4,50,250,100,3,0,3,0,0,-1,23], [5,750,350,100,3,0,3,0,0,-1,23]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 19(Real time = 23:20:39.177073)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.177251)~~~~~~
+Type= 0 UserCode -1
+{'frame': 19, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,22], [1,700,300,100,3,0,3,0,0,-1,22], [2,50,350,100,3,0,3,0,0,-1,22], [3,750,250,100,3,0,3,0,0,-1,22], [4,50,250,100,3,0,3,0,0,-1,22], [5,750,350,100,3,0,3,0,0,-1,22]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 20(Real time = 23:20:39.238480)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.238655)~~~~~~
+Type= 0 UserCode -1
+{'frame': 20, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,21], [1,700,300,100,3,0,3,0,0,-1,21], [2,50,350,100,3,0,3,0,0,-1,21], [3,750,250,100,3,0,3,0,0,-1,21], [4,50,250,100,3,0,3,0,0,-1,21], [5,750,350,100,3,0,3,0,0,-1,21]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 21(Real time = 23:20:39.293682)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.293857)~~~~~~
+Type= 0 UserCode -1
+{'frame': 21, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,20], [1,700,300,100,3,0,3,0,0,-1,20], [2,50,350,100,3,0,3,0,0,-1,20], [3,750,250,100,3,0,3,0,0,-1,20], [4,50,250,100,3,0,3,0,0,-1,20], [5,750,350,100,3,0,3,0,0,-1,20]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 22(Real time = 23:20:39.354721)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.354873)~~~~~~
+Type= 0 UserCode -1
+{'frame': 22, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,19], [1,700,300,100,3,0,3,0,0,-1,19], [2,50,350,100,3,0,3,0,0,-1,19], [3,750,250,100,3,0,3,0,0,-1,19], [4,50,250,100,3,0,3,0,0,-1,19], [5,750,350,100,3,0,3,0,0,-1,19]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 23(Real time = 23:20:39.409173)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.409329)~~~~~~
+Type= 0 UserCode -1
+{'frame': 23, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,18], [1,700,300,100,3,0,3,0,0,-1,18], [2,50,350,100,3,0,3,0,0,-1,18], [3,750,250,100,3,0,3,0,0,-1,18], [4,50,250,100,3,0,3,0,0,-1,18], [5,750,350,100,3,0,3,0,0,-1,18]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 24(Real time = 23:20:39.463587)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.463720)~~~~~~
+Type= 0 UserCode -1
+{'frame': 24, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,17], [1,700,300,100,3,0,3,0,0,-1,17], [2,50,350,100,3,0,3,0,0,-1,17], [3,750,250,100,3,0,3,0,0,-1,17], [4,50,250,100,3,0,3,0,0,-1,17], [5,750,350,100,3,0,3,0,0,-1,17]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 25(Real time = 23:20:39.518090)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.518221)~~~~~~
+Type= 0 UserCode -1
+{'frame': 25, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,16], [1,700,300,100,3,0,3,0,0,-1,16], [2,50,350,100,3,0,3,0,0,-1,16], [3,750,250,100,3,0,3,0,0,-1,16], [4,50,250,100,3,0,3,0,0,-1,16], [5,750,350,100,3,0,3,0,0,-1,16]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 26(Real time = 23:20:39.572480)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.572611)~~~~~~
+Type= 0 UserCode -1
+{'frame': 26, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,15], [1,700,300,100,3,0,3,0,0,-1,15], [2,50,350,100,3,0,3,0,0,-1,15], [3,750,250,100,3,0,3,0,0,-1,15], [4,50,250,100,3,0,3,0,0,-1,15], [5,750,350,100,3,0,3,0,0,-1,15]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 27(Real time = 23:20:39.626728)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.626884)~~~~~~
+Type= 0 UserCode -1
+{'frame': 27, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,14], [1,700,300,100,3,0,3,0,0,-1,14], [2,50,350,100,3,0,3,0,0,-1,14], [3,750,250,100,3,0,3,0,0,-1,14], [4,50,250,100,3,0,3,0,0,-1,14], [5,750,350,100,3,0,3,0,0,-1,14]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 28(Real time = 23:20:39.684879)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.685065)~~~~~~
+Type= 0 UserCode -1
+{'frame': 28, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,13], [1,700,300,100,3,0,3,0,0,-1,13], [2,50,350,100,3,0,3,0,0,-1,13], [3,750,250,100,3,0,3,0,0,-1,13], [4,50,250,100,3,0,3,0,0,-1,13], [5,750,350,100,3,0,3,0,0,-1,13]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 29(Real time = 23:20:39.739360)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.739500)~~~~~~
+Type= 0 UserCode -1
+{'frame': 29, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,12], [1,700,300,100,3,0,3,0,0,-1,12], [2,50,350,100,3,0,3,0,0,-1,12], [3,750,250,100,3,0,3,0,0,-1,12], [4,50,250,100,3,0,3,0,0,-1,12], [5,750,350,100,3,0,3,0,0,-1,12]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 30(Real time = 23:20:39.793961)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.794124)~~~~~~
+Type= 0 UserCode -1
+{'frame': 30, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,11], [1,700,300,100,3,0,3,0,0,-1,11], [2,50,350,100,3,0,3,0,0,-1,11], [3,750,250,100,3,0,3,0,0,-1,11], [4,50,250,100,3,0,3,0,0,-1,11], [5,750,350,100,3,0,3,0,0,-1,11]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 31(Real time = 23:20:39.849610)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.849774)~~~~~~
+Type= 0 UserCode -1
+{'frame': 31, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,10], [1,700,300,100,3,0,3,0,0,-1,10], [2,50,350,100,3,0,3,0,0,-1,10], [3,750,250,100,3,0,3,0,0,-1,10], [4,50,250,100,3,0,3,0,0,-1,10], [5,750,350,100,3,0,3,0,0,-1,10]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 32(Real time = 23:20:39.907171)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.907352)~~~~~~
+Type= 0 UserCode -1
+{'frame': 32, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,9], [1,700,300,100,3,0,3,0,0,-1,9], [2,50,350,100,3,0,3,0,0,-1,9], [3,750,250,100,3,0,3,0,0,-1,9], [4,50,250,100,3,0,3,0,0,-1,9], [5,750,350,100,3,0,3,0,0,-1,9]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 33(Real time = 23:20:39.964265)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:39.964705)~~~~~~
+Type= 0 UserCode -1
+{'frame': 33, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,8], [1,700,300,100,3,0,3,0,0,-1,8], [2,50,350,100,3,0,3,0,0,-1,8], [3,750,250,100,3,0,3,0,0,-1,8], [4,50,250,100,3,0,3,0,0,-1,8], [5,750,350,100,3,0,3,0,0,-1,8]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 34(Real time = 23:20:40.019650)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.019808)~~~~~~
+Type= 0 UserCode -1
+{'frame': 34, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,7], [1,700,300,100,3,0,3,0,0,-1,7], [2,50,350,100,3,0,3,0,0,-1,7], [3,750,250,100,3,0,3,0,0,-1,7], [4,50,250,100,3,0,3,0,0,-1,7], [5,750,350,100,3,0,3,0,0,-1,7]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 35(Real time = 23:20:40.074215)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.074351)~~~~~~
+Type= 0 UserCode -1
+{'frame': 35, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,6], [1,700,300,100,3,0,3,0,0,-1,6], [2,50,350,100,3,0,3,0,0,-1,6], [3,750,250,100,3,0,3,0,0,-1,6], [4,50,250,100,3,0,3,0,0,-1,6], [5,750,350,100,3,0,3,0,0,-1,6]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 36(Real time = 23:20:40.128747)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.128958)~~~~~~
+Type= 0 UserCode -1
+{'frame': 36, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,5], [1,700,300,100,3,0,3,0,0,-1,5], [2,50,350,100,3,0,3,0,0,-1,5], [3,750,250,100,3,0,3,0,0,-1,5], [4,50,250,100,3,0,3,0,0,-1,5], [5,750,350,100,3,0,3,0,0,-1,5]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 37(Real time = 23:20:40.183642)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.183817)~~~~~~
+Type= 0 UserCode -1
+{'frame': 37, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,4], [1,700,300,100,3,0,3,0,0,-1,4], [2,50,350,100,3,0,3,0,0,-1,4], [3,750,250,100,3,0,3,0,0,-1,4], [4,50,250,100,3,0,3,0,0,-1,4], [5,750,350,100,3,0,3,0,0,-1,4]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 38(Real time = 23:20:40.238751)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.238926)~~~~~~
+Type= 0 UserCode -1
+{'frame': 38, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,3], [1,700,300,100,3,0,3,0,0,-1,3], [2,50,350,100,3,0,3,0,0,-1,3], [3,750,250,100,3,0,3,0,0,-1,3], [4,50,250,100,3,0,3,0,0,-1,3], [5,750,350,100,3,0,3,0,0,-1,3]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 39(Real time = 23:20:40.294145)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.294378)~~~~~~
+Type= 0 UserCode -1
+{'frame': 39, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,2], [1,700,300,100,3,0,3,0,0,-1,2], [2,50,350,100,3,0,3,0,0,-1,2], [3,750,250,100,3,0,3,0,0,-1,2], [4,50,250,100,3,0,3,0,0,-1,2], [5,750,350,100,3,0,3,0,0,-1,2]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 40(Real time = 23:20:40.352707)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.352865)~~~~~~
+Type= 0 UserCode -1
+{'frame': 40, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,1], [1,700,300,100,3,0,3,0,0,-1,1], [2,50,350,100,3,0,3,0,0,-1,1], [3,750,250,100,3,0,3,0,0,-1,1], [4,50,250,100,3,0,3,0,0,-1,1], [5,750,350,100,3,0,3,0,0,-1,1]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 41(Real time = 23:20:40.407696)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.407859)~~~~~~
+Type= 0 UserCode -1
+{'frame': 41, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 42(Real time = 23:20:40.462381)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.462538)~~~~~~
+Type= 0 UserCode -1
+{'frame': 42, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 43(Real time = 23:20:40.516765)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.516921)~~~~~~
+Type= 0 UserCode -1
+{'frame': 43, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 44(Real time = 23:20:40.572153)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.572330)~~~~~~
+Type= 0 UserCode -1
+{'frame': 44, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 45(Real time = 23:20:40.627301)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.627519)~~~~~~
+Type= 0 UserCode -1
+{'frame': 45, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 46(Real time = 23:20:40.688539)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.688714)~~~~~~
+Type= 0 UserCode -1
+{'frame': 46, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 47(Real time = 23:20:40.743615)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.743846)~~~~~~
+Type= 0 UserCode -1
+{'frame': 47, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 48(Real time = 23:20:40.802338)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.802519)~~~~~~
+Type= 0 UserCode -1
+{'frame': 48, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 49(Real time = 23:20:40.856762)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.856938)~~~~~~
+Type= 0 UserCode -1
+{'frame': 49, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 50(Real time = 23:20:40.912665)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.912839)~~~~~~
+Type= 0 UserCode -1
+{'frame': 50, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 51(Real time = 23:20:40.967844)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:40.968018)~~~~~~
+Type= 0 UserCode -1
+{'frame': 51, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 52(Real time = 23:20:41.023135)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.023294)~~~~~~
+Type= 0 UserCode -1
+{'frame': 52, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 53(Real time = 23:20:41.077533)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.077733)~~~~~~
+Type= 0 UserCode -1
+{'frame': 53, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 54(Real time = 23:20:41.139830)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.140002)~~~~~~
+Type= 0 UserCode -1
+{'frame': 54, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 55(Real time = 23:20:41.195543)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.196111)~~~~~~
+Type= 0 UserCode -1
+{'frame': 55, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 56(Real time = 23:20:41.254025)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.254200)~~~~~~
+Type= 0 UserCode -1
+{'frame': 56, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 57(Real time = 23:20:41.309306)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.309481)~~~~~~
+Type= 0 UserCode -1
+{'frame': 57, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 58(Real time = 23:20:41.369662)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.369793)~~~~~~
+Type= 0 UserCode -1
+{'frame': 58, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 59(Real time = 23:20:41.424203)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.424367)~~~~~~
+Type= 0 UserCode -1
+{'frame': 59, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 60(Real time = 23:20:41.478651)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.478809)~~~~~~
+Type= 0 UserCode -1
+{'frame': 60, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 61(Real time = 23:20:41.532883)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.533014)~~~~~~
+Type= 0 UserCode -1
+{'frame': 61, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 62(Real time = 23:20:41.587696)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.587827)~~~~~~
+Type= 0 UserCode -1
+{'frame': 62, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 63(Real time = 23:20:41.642465)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.642638)~~~~~~
+Type= 0 UserCode -1
+{'frame': 63, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 64(Real time = 23:20:41.701450)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.701606)~~~~~~
+Type= 0 UserCode -1
+{'frame': 64, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 65(Real time = 23:20:41.755759)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.755890)~~~~~~
+Type= 0 UserCode -1
+{'frame': 65, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 66(Real time = 23:20:41.810959)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.811124)~~~~~~
+Type= 0 UserCode -1
+{'frame': 66, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 67(Real time = 23:20:41.865907)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.866038)~~~~~~
+Type= 0 UserCode -1
+{'frame': 67, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 68(Real time = 23:20:41.921200)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.921382)~~~~~~
+Type= 0 UserCode -1
+{'frame': 68, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 69(Real time = 23:20:41.975728)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:41.975859)~~~~~~
+Type= 0 UserCode -1
+{'frame': 69, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 70(Real time = 23:20:42.034748)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.034909)~~~~~~
+Type= 0 UserCode -1
+{'frame': 70, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 71(Real time = 23:20:42.089243)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.089397)~~~~~~
+Type= 0 UserCode -1
+{'frame': 71, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 72(Real time = 23:20:42.143643)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.143775)~~~~~~
+Type= 0 UserCode -1
+{'frame': 72, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 73(Real time = 23:20:42.199535)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.199697)~~~~~~
+Type= 0 UserCode -1
+{'frame': 73, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 74(Real time = 23:20:42.253934)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.254091)~~~~~~
+Type= 0 UserCode -1
+{'frame': 74, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 75(Real time = 23:20:42.310446)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.310646)~~~~~~
+Type= 0 UserCode -1
+{'frame': 75, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 76(Real time = 23:20:42.368460)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.368622)~~~~~~
+Type= 0 UserCode -1
+{'frame': 76, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 77(Real time = 23:20:42.422755)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.422901)~~~~~~
+Type= 0 UserCode -1
+{'frame': 77, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 78(Real time = 23:20:42.477283)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.477445)~~~~~~
+Type= 0 UserCode -1
+{'frame': 78, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 79(Real time = 23:20:42.532457)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.532614)~~~~~~
+Type= 0 UserCode -1
+{'frame': 79, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 80(Real time = 23:20:42.587343)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.587474)~~~~~~
+Type= 0 UserCode -1
+{'frame': 80, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 81(Real time = 23:20:42.643383)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.643559)~~~~~~
+Type= 0 UserCode -1
+{'frame': 81, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 82(Real time = 23:20:42.702137)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.702276)~~~~~~
+Type= 0 UserCode -1
+{'frame': 82, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 83(Real time = 23:20:42.756359)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.756514)~~~~~~
+Type= 0 UserCode -1
+{'frame': 83, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 84(Real time = 23:20:42.810796)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.810927)~~~~~~
+Type= 0 UserCode -1
+{'frame': 84, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 85(Real time = 23:20:42.865531)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.865701)~~~~~~
+Type= 0 UserCode -1
+{'frame': 85, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 86(Real time = 23:20:42.920163)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.920320)~~~~~~
+Type= 0 UserCode -1
+{'frame': 86, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 87(Real time = 23:20:42.974632)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:42.974764)~~~~~~
+Type= 0 UserCode -1
+{'frame': 87, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 88(Real time = 23:20:43.029002)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.029181)~~~~~~
+Type= 0 UserCode -1
+{'frame': 88, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 89(Real time = 23:20:43.083509)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.083699)~~~~~~
+Type= 0 UserCode -1
+{'frame': 89, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 90(Real time = 23:20:43.139916)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.140109)~~~~~~
+Type= 0 UserCode -1
+{'frame': 90, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 91(Real time = 23:20:43.195567)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.196162)~~~~~~
+Type= 0 UserCode -1
+{'frame': 91, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 92(Real time = 23:20:43.254101)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.254277)~~~~~~
+Type= 0 UserCode -1
+{'frame': 92, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 93(Real time = 23:20:43.314775)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.315257)~~~~~~
+Type= 0 UserCode -1
+{'frame': 93, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 94(Real time = 23:20:43.370556)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.370737)~~~~~~
+Type= 0 UserCode -1
+{'frame': 94, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 95(Real time = 23:20:43.429354)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.429778)~~~~~~
+Type= 0 UserCode -1
+{'frame': 95, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 96(Real time = 23:20:43.486200)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.486374)~~~~~~
+Type= 0 UserCode -1
+{'frame': 96, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 97(Real time = 23:20:43.544250)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.544427)~~~~~~
+Type= 0 UserCode -1
+{'frame': 97, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 98(Real time = 23:20:43.602828)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.602999)~~~~~~
+Type= 0 UserCode -1
+{'frame': 98, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 99(Real time = 23:20:43.658100)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.658275)~~~~~~
+Type= 0 UserCode -1
+{'frame': 99, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 100(Real time = 23:20:43.717489)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 23:20:43.717676)~~~~~~
+Type= 0 UserCode -1
+{'frame': 100, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,0], [1,700,300,100,3,0,3,0,0,-1,0], [2,50,350,100,3,0,3,0,0,-1,0], [3,750,250,100,3,0,3,0,0,-1,0], [4,50,250,100,3,0,3,0,0,-1,0], [5,750,350,100,3,0,3,0,0,-1,0]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+~~~~~~Send Msg(Real time = 23:20:43.772849)~~~~~~
+Type= 2 UserCode -1
+{'frame': -1, 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+################### Result ###################
+0 : 0.0
+1 : 0.0
+###################        ###################

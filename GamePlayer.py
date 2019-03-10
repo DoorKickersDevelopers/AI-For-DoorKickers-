@@ -32,7 +32,7 @@ def PlayJsonFile(mydir):
     ball_places = JSON["ball_places"]
     target_places = JSON["target_places"]
     wallrects = JSON["walls"]
-    human_number = len(birth_places[0])
+    human_number = JSON["human_number"]
 
     pygame.init()
     screen = pygame.display.set_mode((width, height))
