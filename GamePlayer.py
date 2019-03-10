@@ -144,15 +144,15 @@ def PlayJsonFile(mydir):
             print(
                 "=====================time = {} frames=====================".format(timecnt))
 
-
         for event in events:
             if event[0] == 1:
                 print("Player {} shoots!".format(event[1]))
             elif event[0] == 2:
                 print("Player {} gets {} hurt from {}!".format(
-                    event[1], event[2],event[3]))
+                    event[1], event[2], event[3]))
             elif event[0] == 3:
-                print("Player {} died at ({},{})!".format(event[1],event[2],event[3]))
+                print("Player {} died at ({},{})!".format(
+                    event[1], event[2], event[3]))
             elif event[0] == 4:
                 print("Player {} cast Meteor!".format(
                     event[1]))
@@ -160,22 +160,26 @@ def PlayJsonFile(mydir):
                 print("Player {} gets ball!".format(
                     event[1]))
             elif event[0] == 6:
-                WriteToLogFile("A Fireball splashes at ({},{})!".format(
-                    event[1], event[2]))
+                print("A Fireball from {} splashes at ({},{})!".format(
+                    event[3], event[1], event[2]))
             elif event[0] == 7:
-                WriteToLogFile("A Meteor impacts at ({},{})!".format(
-                    event[1], event[2]))
+                print("A Meteor from {} impacts at ({},{})!".format(
+                    event[3], event[1], event[2]))
             elif event[0] == 8:
-                WriteToLogFile("Player {} reincarnate at ({},{})!".format(
-                    event[1], event[2], event[3]))
+                print("Player {} reincarnate!".format(
+                    event[1]))
             elif event[0] == 9:
-                WriteToLogFile("A Fireball disappears at ({},{})!".format(
+                print("Player {} flashes from ({},{}) to ({},{})!".format(
+                    event[1], event[2], event[3], event[4], event[5]))
+            elif event[0] == 10:
+                print("Player {} goals with faction{}'s ball!".format(
                     event[1], event[2]))
+
         time.sleep(1.0 / 25)
 
     print("=====================score board=====================")
 
-    for i, s in enumerate(final_info["scores"]):
+    for i, s in enumerate(json.loads(final_info["scores"])):
         print("Player{} :".format(i), s)
     print("=====================================================")
 
