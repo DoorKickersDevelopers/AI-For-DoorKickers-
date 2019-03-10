@@ -21,65 +21,15 @@
 
 import math
 from math import sqrt,fabs,atan2
-from Arguments import map_lbx,map_lby,map_ubx,map_uby
 from BaseClass import *
-
-
-
 
 eps = 1e-7
 
-# When I wrote this,only God and I understood what I was doing
-
-
-
 
 def L2Distance(p1,p2):
-    """
-    Point p1
-    Point p2
-    return Euclidean Distance
-    """
     return sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y))
 
-
-
-def PointInRectangle(p,rect):
-    """
-    Point p
-    Rectangle rect
-    return True if p in rect(containing no edges)
-    """
-    return (rect.left<p.x and p.x<rect.right) and (rect.bottom<p.y and p.y<rect.top)
-
-def RectangleIntersection(rect1,rect2):
-    """
-    Rectangle rect1
-    Rectangle rect2
-    return True if rect1 intersect with rect2(containing no edges)
-    """
-    if rect1.left<rect2.left:
-        b,c = rect1.right,rect2.left
-    else:
-        b,c = rect2.right,rect1.left
-    if b<=c:
-        return False
-
-    if rect1.bottom<rect2.bottom:
-        b,c = rect1.top,rect2.bottom
-    else:
-        b,c = rect2.top,rect1.bottom
-    if b<=c:
-        return False
-
-    return True
-
 def PointOnLine(p,l):
-    """
-    Point p
-    Line l
-    return True if p on l
-    """
     if l.p1.x==l.p2.x:
         if p.x!=l.p1.x:
             return False
@@ -100,11 +50,6 @@ def PointOnLine(p,l):
 
 
 def LineIntersection(l1,l2):
-    '''
-    Line l1
-    Line l2
-    return True if l1 intersect with l2 (have at least one intersection)
-    '''
     if PointOnLine(l1.p1, l2) or PointOnLine(l1.p2, l2) or PointOnLine(l2.p1, l1) or PointOnLine(l2.p2, l1):
         return True
 
@@ -131,38 +76,11 @@ def LineIntersection(l1,l2):
 
     #This Implementation is slow, maybe bugs exist
 
-
-def RotateTo(angle1, angle2):
-    '''
-    float angle1
-    float angle2
-    return rot degree if you want to rotate from rot1 to rot2
-    Warning: No cliping with Human_Rot_Max
-    '''
-    if 0<=angle1 and angle1 <= 180:
-        if angle2>angle1+180:
-            return -(angle1+360-angle2)
-        return angle2-angle1
-    if angle1 >= 180:
-        if angle2<angle1-180:
-            return 360-angle1+angle2
-        return angle2-angle1
-
 def Angle(p1,p2):
-    '''
-    Point p1
-    Point p2
-    return Angle(p2-p1)
-    '''
     if p1==p2:
         raise Exception("Try to get Angle with illegal Argument")
     p = p2-p1
     angle = atan2(p.y, p.x)
-    angle = angle/math.pi*180
-    if angle<0 :
-        return angle+360
-    else:
-        return angle
 
 def LineIntersectRect(l,rect):
     '''
@@ -309,25 +227,11 @@ def LineIntersectCirclePoints(l,c):
     return ans
 
 
-def LegalPos(c,walls):
-    """
-    Circle c
-    list of wall walls
-    return True if set a circle with r = radius at pos without any collision
-    """
-    pos = c.centre
-    radius = c.radius
-    if pos.x-radius<map_lbx or pos.x+radius>map_ubx or pos.y-radius<map_lby or pos.y+radius>map_uby:
+def LegalPos(pos,walls):
+    if pos.x<0 or pos.x>width or pos.y<0 or pos.y>height:
         return False
     for wall in walls:
-        rect = wall.rectangle
-        ps = rect.Points()
-        for p in ps:
-            if L2Distance(p, pos) < radius-eps:
-                return False
-        rect1 = Rectangle(rect.left-radius, rect.right+radius, rect.bottom, rect.top)
-        rect2 = Rectangle(rect.left, rect.right, rect.bottom-radius, rect.top+radius)
-        if PointInRectangle(pos, rect1) or PointInRectangle(pos, rect2):
+        if wall.left<=pos.x and pos.x<=wall.right and wall.bottom<=pos.y and pos.y<=wall.top:
             return False
     return True
 

@@ -1,7 +1,6 @@
 import os
 import random
 import json
-
 # some constants about pygame
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -9,6 +8,14 @@ red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
 yellow = (255, 255, 0)
+golden = (217, 217, 25)
+gray = (127, 127, 127)
+purple = (255, 0, 255)
+pink = (242, 156, 177)
+
+
+# game setting
+friendly_fire = True
 
 # load the map
 map_dir = "." + os.sep + "Maps" + os.sep
@@ -25,13 +32,16 @@ faction_number = JSON["faction_number"]
 birth_places = JSON["birth_places"]
 ball_places = JSON["ball_places"]
 target_places = JSON["target_places"]
-walls = JSON["walls"]
+wallrects = JSON["walls"]
+human_number = len(birth_places[0])
+
 
 # some constants about time
 frames_per_second = 20
 frames_of_game = JSON["time_of_game"] * frames_per_second
 time_of_round = 1.0 / frames_per_second
 frames_of_death = 5 * frames_per_second
+frames_of_invincible = 2 * frames_per_second
 
 
 # some constants about human

@@ -50,63 +50,78 @@ class Circle(object):
 class Ball:
     radius = ball_radius
 
-    def __init__(self, birth_pos):
-        self.pos = copy.deepcopy(birth_pos)
+    def __init__(self, birth_pos, faction):
         self.birth_pos = copy.deepcopy(birth_pos)
+        self.faction = faction
+
+    def reset(self):
+        self.pos = copy.deepcopy(self.birth_pos)
         self.belong = -1
-        self.-
 
     def __repr__(self):
-        return "[[{},{}],{}]".format(self.circle.centre.x, self.circle.centre.y, self.belong)
+        return "[{},{},{},{}]".format(self.pos.x, self.pos.y, self.belong, self.faction)
 
 
 class Fireball:
-    velocity = velocity_of_fireball
-    hurt = fireball_hurt
+    radius = fireball_radius
+    velocity = fireball_velocity
+    hurt = splash_hurt
+    attack_radius = splash_radius
 
-    def __init__(self, position, rotation):
-        self.circle = Circle(position, fireball_radius)
-        self.rotation = rotation
-        self.attack_range = Circle(position, splash_radius)
+    def __init__(self, position, rotation, from_number):
+        self.pos = position
+        self.rot = rotation
+        self.from_number = from_number
 
     def __repr__(self):
-        return "[[{},{}],{}]".format(self.circle.centre.x, self.circle.centre.y, self.rotation)
+        return "[{},{},{},{}]".format(self.pos.x, self.pos.y, self.rot, self.from_number)
 
 
 class Meteor:
     hurt = explode_hurt
+    attack_radius = explode_radius
 
-    def __init__(self, position, last_time=meteor_delay):
+    def __init__(self, position, from_number):
         self.time = meteor_delay
         self.pos = position
-        self.attack_range = Circle(position, explode_radius)
+        self.from_number = from_number
 
     def __repr__(self):
-        return "[[{},{}],{}]".format(self.pos.x, self.pos.y, self.time)
+        return "[{},{},{},{}]".format(self.pos.x, self.pos.y, self.time, self.from_number)
 
 
 class Human:
-    velocity_max = human_speed_max
-    rotation_max = human_rotate_max
+    velocity_max = human_velocity
     fireball_interval = human_fireball_interval
     meteor_interval = human_meteor_interval
-    meteor_cast_distance = cast_distance
+    flash_interval = human_flash_interval
+    meteor_cast_distance = meteor_distance
+    flash_cast_distance = flash_distance
 
-    def __init__(self, position, rotation, number):
-        self.circle = Circle(position, human_radius)
-        self.rotation = rotation
+    def __init__(self, number, pos):
+        self.birth_pos = copy.deepcopy(pos)
+        self.number = number
+        self.death_time = 0
+        self.faction = number % faction_number
+
+    def reset(self):
         self.hp = human_hp
         self.meteor_number = human_meteor_number
-        self.attack_time = 0
-        self.number = number
+        self.flash_number = human_flash_number
+        self.meteor_time = 0
+        self.flash_time = 0
+        self.inv_time = frames_of_invincible
+        self.pos = copy.deepcopy(self.birth_pos)
+        self.fireball_time = 0
 
     def __repr__(self):
-        return "[{},[{},{}],{},{},{},{}]".format(self.number, self.circle.centre.x, self.circle.centre.y, self.rotation, self.hp, self.meteor_number, self.attack_time)
+        return "[{},{},{},{},{},{},{},{},{},{},{}]".format(
+            self.number, self.pos.x, self.pos.y, self.hp, self.meteor_number, self.meteor_time, self.flash_number, self.flash_time, self.fireball_time, self.death_time, self.self.inv_time)
 
 
-class Wall:
+class Wall(Rectangle):
     def __init__(self, left, right, bottom, top):
-        self.rectangle = Rectangle(left, right, bottom, top)
+        super(Wall, self).__init__(left, right, bottom, top)
 
     def __repr__(self):
-        return "[{},{},{},{}]".format(self.rectangle.left, self.rectangle.right, self.rectangle.bottom, self.rectangle.top)
+        return "[{},{},{},{}]".format(self.left, self.right, self.bottom, self.top)
