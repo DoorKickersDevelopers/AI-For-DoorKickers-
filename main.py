@@ -506,7 +506,7 @@ def RunGame():
             "meteors":str(meteors),
             "balls":str(balls),
             "scores":copy.deepcopy(score),
-            "events":copy.deepcopy(events)
+            "events":str(events)
         }
 
 
@@ -552,7 +552,7 @@ def RunGame():
         os.mkdir(replay_dir)
     replay_name = "replay{}.json".format(test_num)
     with open(replay_dir + replay_name,"w")as file:
-        file.write(str(logs))
+        file.write(json.dumps(logs))
     if DEBUG:
         WriteToLogFile("################### Result ###################")
         for i, sc in enumerate(score):

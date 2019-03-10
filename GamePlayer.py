@@ -8,6 +8,32 @@ from BaseClass import *
 
 
 def PlayJsonFile(mydir):
+    print()
+    print("Load Replay File={}".format(mydir))
+
+    with open(mydir, "r")as file:
+        Json = file.read()
+        Json = json.loads(Json)
+    init_info = Json[0]
+    final_info = Json[-1]
+    Json = Json[1:-1]
+    MapID = init_info["map"]
+    map_dir = "." + os.sep + "Maps" + os.sep
+    map_names = os.listdir(map_dir)
+    map_names.sort()
+    map_name = map_names[MapID]
+    with open(map_dir + map_name, "r")as file:
+        JSON = file.read()
+        JSON = json.loads(JSON)
+    width = JSON["width"]
+    height = JSON["height"]
+    faction_number = JSON["faction_number"]
+    birth_places = JSON["birth_places"]
+    ball_places = JSON["ball_places"]
+    target_places = JSON["target_places"]
+    wallrects = JSON["walls"]
+    human_number = len(birth_places[0])
+
     pygame.init()
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Defense Of The sOgou")
@@ -62,78 +88,67 @@ def PlayJsonFile(mydir):
             draw_ball(ball)
         pygame.display.flip()
 
-    with open(mydir, "r")as file:
-        Json = file.read()
-        Json = json.loads(Json)
-    init_info = Json[0]
-    final_info = Json[-1]
-    Json = Json[1:-1]
-    MapID = init_info
-    walls = json.loads(Json[0]["walls"])
-    num_of_walls = len(walls)
-    for i in range(num_of_walls):
-        walls[i] = Wall(walls[i][0], walls[i][1],
-                        walls[i][2], walls[i][3])
+    walls = [Wall(w[0], w[1], w[2], w[3]) for w in wallrects]
+    targets = [TargetArea(Point(t[0], t[1])) for t in target_places]
 
-    Score = Json[-1]["scores"]
-    Json = Json[1:-1]
-    timecnt = 0
-    for frame in Json:
-        screen.fill(white)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-        humans = json.loads(frame["humans"])
-        num_of_humans = len(humans)
-        for i in range(num_of_humans):
-            if humans[i] == None:
-                continue
-            num = humans[i][0]
-            pos = Point(humans[i][1][0], humans[i][1][1])
-            rot = humans[i][2]
-            hp = humans[i][3]
-            humans[i] = Human(pos, rot, num)
-            humans[i].hp = hp
+    humans = [None] * faction_number * human_number
+    balls = [None] * faction_number
 
-        meteors = json.loads(frame["meteors"])
+    for fac, birth_place in enumerate(birth_places):
+        for i, pos in enumerate(birth_place):
+            humans[i * faction_number +
+                   fac] = Human(i * faction_number + fac, Point(pos[0], pos[1]))
+            humans[i * faction_number + fac].reset()
+    for fac, ball_place in enumerate(ball_places):
+        balls[fac] = Ball(Point(ball_place[0], ball_place[1]), fac)
+        balls[fac].reset()
+
+    for Data in Json:
+        timecnt = Data['frame']
+        hs = json.loads(Data["humans"])
+        for i in range(faction_number * human_number):
+            num = hs[i][0]
+            h = humans[i]
+            h.pos = Point(hs[i][1], hs[i][2])
+            h.hp, h.meteor_num, h.meteor_time, h.flash_num, h.flash_time, h.fireball_time, h.death_time, h.inv_time = tuple(
+                hs[i][3:])
+
+        meteors = json.loads(Data["meteors"])
         num_of_meteors = len(meteors)
         for i in range(num_of_meteors):
-            pos = Point(meteors[i][0][0], meteors[i][0][1])
-            meteors[i] = Meteor(pos)
+            pos = Point(meteors[i][0], meteors[i][1])
+            lasttime = meteors[i][2]
+            from_number = meteors[i][3]
+            meteors[i] = Meteor(pos, from_number)
+            meteors[i].time = lasttime
 
-        fireballs = json.loads(frame["fireballs"])
+        fireballs = json.loads(Data["fireballs"])
         num_of_fireballs = len(fireballs)
         for i in range(num_of_fireballs):
-            pos = Point(fireballs[i][0][0], fireballs[i][0][1])
-            rot = fireballs[i][1]
-            fireballs[i] = Fireball(pos, rot)
+            pos = Point(fireballs[i][0], fireballs[i][1])
+            rot = fireballs[i][2]
+            from_number = meteors[i][3]
+            fireballs[i] = Fireball(pos, rot, from_number)
 
-        ball = json.loads(frame["balls"])
-        ball = Point(ball[0][0], ball[0][1])
-        ball = Ball(ball)
-        for wall in walls:
-            draw_rectangle(screen, wall.rectangle, black)
-        for meteor in meteors:
-            draw_circle(screen, meteor.attack_range, yellow)
-        for human in humans:
-            if human is not None:
-                draw_human(screen, human)
-        for fireball in fireballs:
-            draw_circle(screen, fireball.circle, green)
-        draw_circle(screen, ball.circle, blue)
-        pygame.display.flip()
+        bs = json.loads(Data["balls"])
+        for i in range(faction_number):
+            pos = Point(bs[i][0], bs[i][1])
+            balls[i].pos = pos
+            balls[i].belong = bs[i][2]
+            balls[i].faction = bs[i][3]
 
-        events = json.loads(frame["events"])
+        draw_all(humans, walls, balls, fireballs, meteors, targets)
+
+        events = json.loads(Data["events"])
         if len(events) > 0:
             print(
                 "=====================time = {} frames=====================".format(timecnt))
-        timecnt += 1
 
         time.sleep(1.0 / 25)
 
     print("=====================score board=====================")
 
-    for i, s in enumerate(Score):
+    for i, s in enumerate(final_info["scores"]):
         print("Player{} :".format(i), s)
     print("=====================================================")
 
@@ -152,7 +167,6 @@ if __name__ == "__main__":
             return timeStruct
 
         def get_FileModifyTime(filePath):
-            filePath = unicode(filePath, 'utf8')
             t = os.path.getmtime(filePath)
             return TimeStampToTime(t)
 

@@ -23,7 +23,7 @@ map_names = os.listdir(map_dir)
 map_names.sort()
 map_id = random.randint(0, len(map_names) - 1)
 map_name = map_names[map_id]
-with open(map_dir + map_name)as file:
+with open(map_dir + map_name, "r")as file:
     JSON = file.read()
     JSON = json.loads(JSON)
 width = JSON["width"]
