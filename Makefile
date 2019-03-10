@@ -18,5 +18,5 @@ main.o: makefile Const.h PlayerAI.h geometry.h logic.h jsoncpp/json/json-forward
 
 .PHONY: clean
 clean:
-	-rm -r *.exe
-	-del -r *.exe
+	-rm -r *.exe *.o
+	-del -r *.exe *.o
