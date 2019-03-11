@@ -1,0 +1,11 @@
+
+*.o
+*.exe
+*.py
+__pychache__
+DEBUG
+jsoncpp
+Maps
+Replay
+说明文档
+*.swp
