@@ -11,9 +11,6 @@
 #include <cstring>
 #include <string>
 #include <regex>
-#include <thread>
-#include <mutex>
-#include <chrono>
 #include <fstream>
 
 using namespace std;
@@ -22,8 +19,6 @@ using namespace std;
 char *JsonFile;
 bool gameover = false;
 int jsonlen = 2000;
-mutex mtx;
-mutex mtxh[2];
 
 void quyinhao(string s) {
 	//string s = string(JsonFile);
@@ -79,6 +74,7 @@ void readMap() {
 	int width = root["width"].asInt();
 	int height = root["height"].asInt();
 	int faction_number = root["faction_number"].asInt();
+	int human_number = root["human_number"].asInt();
 	int time_of_game = root["time_of_game"].asInt();
 
 	Json::Value birth_places_raw = root["birth_places"];
@@ -113,7 +109,7 @@ void readMap() {
 		walls.push_back(w);
 	}
 
-	logic->initMap(width, height, faction_number, time_of_game, birth_places, ball_places, target_places, walls, time_of_game);
+	logic->initMap(width, height, faction_number, human_number, birth_places, ball_places, target_places, walls, time_of_game);
 }
 
 void readFrame() {
@@ -183,7 +179,7 @@ void readOnce() {
 	getfile(len);
 }
 
-void sendMessage(bool gameover = true) {
+void sendMessage(bool gameover = false) {
 	Operation ope = Logic::Instance()->ope;
 	Json::Value message;
 	if (!gameover) {
@@ -221,8 +217,11 @@ void sendMessage(bool gameover = true) {
 	else {
 		message["flag"] = 2;
 	}
-	string out = message.toStyledString();
-	int len = strlen(out.c_str());
+
+	Json::FastWriter writer;
+	writer.omitEndingLineFeed();
+	//string out = message.toStyledString();
+	int len = strlen(writer.write(message).c_str());
 	unsigned char lenb[4];
 	lenb[0] = (unsigned char)(len);
 	lenb[1] = (unsigned char)(len >> 8);
@@ -231,7 +230,8 @@ void sendMessage(bool gameover = true) {
 	for (int i = 0; i < 4; i++) {
 		printf("%c", lenb[3 - i]);
 	}
-	printf("%s", out);
+	printf("%s", writer.write(message).c_str());
+	//printf("%s", out);
 	cout.flush();
 }
 
@@ -265,7 +265,7 @@ int main() {
 		getfile(len);
 		readFrame();
 		if (gameover) {
-			sendMessage(false);
+			sendMessage(true);
 			return 0;
 		}
 		logic->resetOpe();
