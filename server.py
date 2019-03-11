@@ -2,6 +2,8 @@ import shlex
 import subprocess
 import threading
 import time
+import platform
+
 
 BYTEORDER = 'big'
 players = []
@@ -66,7 +68,10 @@ class judger (threading.Thread):
 
 
 # 在双引号内输入命令
-jud = judger("python3 main.py")
+if platform.system()=="Windows":
+    jud = judger("python main.py")
+else:
+    jud = judger("python3 main.py")
 print("start judger")
 
 
@@ -106,8 +111,12 @@ class player (threading.Thread):
 
 
 # 请在双引号内输入命令
-players.append(player("./main", 0))
-players.append(player("./main", 1))
+if platform.system()=="Windows":
+    players.append(player("main.exe", 0))
+    players.append(player("main.exe", 1))
+else:
+    players.append(player("./main", 0))
+    players.append(player("./main", 1))
 print("start player")
 for pla in players:
     pla.start()
