@@ -25,12 +25,12 @@ public:
 	Point position;//位置
 	int hp;//生命值
 	int meteor_number;//剩下的陨石数量
-	int meteor_time;
-	int flash_num;
-	int flash_time;
+	int meteor_time;//陨石术剩余冷却时间
+	int flash_num;//剩余闪现数量
+	int flash_time;//闪现剩余冷却时间
 	int fire_time;//开火冷却剩余时间
-	int death_time;
-	int inv_time;
+	int death_time;//死亡剩余时间
+	int inv_time;//无敌时间
 
 	Human(int n, double x, double y, int h, int mn, int mt, int fn, int ft, int fit, int dt, int it):
 		number(n), position(Point(x, y)), hp(h), meteor_number(mn), meteor_time(mt), 
@@ -44,7 +44,7 @@ class Fireball {
 public:
 	Point position;//位置
 	double rotation;//朝向
-	int from_number;
+	int from_number;//来自哪个人
 	
 	Fireball(){}
 	Fireball(double x, double y, double r, int f):
@@ -56,7 +56,7 @@ class Meteor {
 public:
 	Point position;//中心位置
 	int last_time;//剩余存在时间
-	int from_number;
+	int from_number;//来自哪个人
 	
 	Meteor(){}
 	Meteor(double x, double y, int t, int f):
@@ -67,8 +67,8 @@ public:
 class Crystal {
 public:
 	Point position;//位置
-	int belong;//归属
-	int faction;
+	int belong;//归属(指被扛起)
+	int faction;//所属势力
 	
 	Crystal(double x, double y, int n, int f):
 		position(Point(x, y)), belong(n), faction(f){}
@@ -76,11 +76,6 @@ public:
 	
 };
 
-//操作类
-/*
- *"flag": 1/2/3/4,		//分别表示向前移动/旋转/发火球/天降正义
- *"args": "[x,y]/[rot,]/[]/[x,y]",		  //希望移动到的地点，不能超过最大移动距离/旋转角度/无意义/天降正义	 		
- */
 class Operation {
 public:
 	int flag;
@@ -92,15 +87,15 @@ public:
 
 class Map {
 public:
-	int width;
-	int height;
-	int faction_number;
-	int human_number;
-	vector<vector<Point>> birth_places;
-	vector<Point> crystal_places;
-	vector<Point> target_places;
-	vector<Wall> walls;
-	int time_of_game;
+	int width;//宽
+	int height;//高
+	int faction_number;//势力个数
+	int human_number;//每个势力控制人的个数
+	vector<vector<Point>> birth_places;//每个人的出生地
+	vector<Point> crystal_places;//每个势力的水晶初始位置
+	vector<Point> target_places;//每个势力的水晶搬运目标位置
+	vector<Wall> walls;//墙
+	int time_of_game;//游戏总时间
 
 	Map() {};
 	void set(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Wall> wa, int ti) {
@@ -123,16 +118,16 @@ private:
 	Logic() {};
 	Logic(Logic const&) {};
 public:
-	int frame;
-	Map map;
+	int frame;//现在的帧数
+	Map map;//地图
 	int faction;//自己的编号
 	//vector<Wall> walls;
-	vector<Human> humans;
-	vector<Fireball> fireballs;
-	vector<Meteor> meteors;
-	vector<Crystal> crystal;
+	vector<Human> humans;//所有人
+	vector<Fireball> fireballs;//所有火球
+	vector<Meteor> meteors;//所有陨石
+	vector<Crystal> crystal;//所有水晶
 
-	Operation ope;
+	Operation ope;//本次决策操作的集合，选手可以忽略
 
 	//Logic为单例类，请使用Logic::Instance()获取指针
 	static Logic* Instance() {
@@ -142,14 +137,17 @@ public:
 		return Logic::instance;
 	}
 
-	void move(int num, Point p);
-	void shoot(int num, Point p);
-	void meteor(int num, Point p);
-	void flash(int num);
-	void unmove(int num);
-	void unshoot(int num);
-	void unmeteor(int num);
-	void unflash(int num);
+	void move(int num, Point p);//指定你控制的第num个人移动到p位置
+	void shoot(int num, Point p);//指定你控制的第num个人向p位置发射火球
+	void meteor(int num, Point p);//指定你控制的第num个人向p位置释放陨石术
+	void flash(int num);//指定你控制的第num个人本次移动改为闪现
+	void unmove(int num);//取消你控制的第num个人的移动指令
+	void unshoot(int num);//取消你控制的第num个人的射击指令
+	void unmeteor(int num);//取消你控制的第num个人的发射陨石指令
+	void unflash(int num);//取消你控制的第num个人的闪现指令
+
+	bool canMove(int num, Point p);//判断能否移动到p位置，不能移动到地图外、墙内、最大移动距离外
+	bool canArrive(Point from, Point to, double r);//from和to之间能否通过半径为r的圆，而不被墙阻碍，可以用于子弹和人物。
 	
 	//请忽略以下函数
 	void initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Wall> wa, int ti);

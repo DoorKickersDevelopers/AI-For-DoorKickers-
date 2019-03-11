@@ -36,6 +36,14 @@ void Logic::unflash(int num){
 	ope.flash[num] = false;
 }
 
+bool Logic::canMove(int num, Point p){
+	return false;
+}
+
+bool Logic::canArrive(Point from, Point to, double r){
+	return false;
+}
+
 void Logic::initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Wall> wa, int ti) {
 	return map.set(w, h, f, hn, b, c, t, wa, ti);
 }
