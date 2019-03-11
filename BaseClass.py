@@ -43,7 +43,7 @@ class Rectangle(object):
     def Points(self):
         return Point(self.left, self.bottom), Point(self.left, self.top), Point(self.right, self.bottom), Point(self.right, self.top)
 
-    def expand(e):
+    def expand(self, e):
         return Rectangle(self.left + e, self.right - e, self.bottom + e, self.top - e)
 
 
