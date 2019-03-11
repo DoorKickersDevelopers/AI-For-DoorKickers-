@@ -2,7 +2,7 @@ import math
 from math import sqrt, fabs, atan2
 from BaseClass import *
 
-eps = 1e-7
+eps = 1e-5
 
 
 def L2Distance(p1, p2):

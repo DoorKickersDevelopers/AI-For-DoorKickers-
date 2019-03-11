@@ -1,5 +1,5 @@
 PYGAME = False
-DEBUG = True
+DEBUG = False
 
 if PYGAME:
     import pygame
@@ -289,7 +289,7 @@ def fireball_hurt(fireball,human,hurt_record):
     if not friendly_fire:
         if fireball.from_number%faction_number == human.faction:
             return
-    if L2Distance(fireball.pos,human.pos)<=fireball.attack_radius-eps:
+    if L2Distance(fireball.pos,human.pos)<=fireball.attack_radius+eps:
         human.hp-=fireball.hurt
         if fireball.from_number in hurt_record[human.number]:
             hurt_record[human.number][fireball.from_number]+=fireball.hurt
@@ -331,7 +331,7 @@ def shoot(human,pos):
     if not LegalPos(pos,walls):
         return
     ang = Angle(human.pos,pos)
-    pos = MoveAlongAngle(human.pos,ang,fireball_radius)
+    pos = MoveAlongAngle(human.pos,ang,splash_radius)
     if LegalPos(pos,walls):
         fireballs.append(Fireball(pos,ang,human.number))
         human.fireball_time = human.fireball_interval

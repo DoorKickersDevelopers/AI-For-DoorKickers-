@@ -66,7 +66,7 @@ class judger (threading.Thread):
 
 
 # 在双引号内输入命令
-jud = judger("python main.py")
+jud = judger("python3 main.py")
 print("start judger")
 
 
@@ -106,12 +106,8 @@ class player (threading.Thread):
 
 
 # 请在双引号内输入命令
-#players.append(player("main.exe", 0))
-#players.append(player("main.exe", 1))
-#players.append(player("main.exe", 2))
-players.append(player("python debug_ai.py", 0))
-players.append(player("python debug_ai.py", 1))
-#players.append(player("python debug_ai.py", 2))
+players.append(player("./main", 0))
+players.append(player("./main", 1))
 print("start player")
 for pla in players:
     pla.start()

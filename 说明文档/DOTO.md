@@ -43,7 +43,7 @@
 
 普通攻击方式有一种，法术有两种
 
-普通攻击（火球术）：在角色指定方向离角色`fireball_radius`远生成一个火球（如果该位置在地图内，且不在墙的范围内），火球可以看成一个点，向前以每帧`fireball_velocity`的移动速度飞去，在碰到墙/地图边界/角色（碰到角色的判定方式不同于墙和边界，为火球与角色的距离小于`fireball_radius`，注意此处判定使用计算几何中两条线段最近距离的方式，爆炸位置为移动后的位置）的时候才会消失，**只要火球消失**，就会造成半径为`splash_radius`(略大于`fireball_radius`)范围内的伤害`splash_hurt`。火球不可以连发，有`human_fireball_interval`的冷却帧数限制。
+普通攻击（火球术）：在角色指定方向离角色`splash_radius`远生成一个火球（如果该位置在地图内，且不在墙的范围内），火球可以看成一个点，向前以每帧`fireball_velocity`的移动速度飞去，在碰到墙/地图边界/角色（碰到角色的判定方式不同于墙和边界，为火球与角色的距离小于`fireball_radius`，注意此处判定使用计算几何中两条线段最近距离的方式，爆炸位置为移动后的位置）的时候才会消失，**只要火球消失**，就会造成半径为`splash_radius`(略大于`fireball_radius`)范围内的伤害`splash_hurt`。火球不可以连发，有`human_fireball_interval`的冷却帧数限制。
 
 陨石术：指定角色的半径`meteor_distance`内一点（可以为障碍物上，不可以在边界外），放置一个陨石轰击指示物，经过`meteor_delay`的帧数之后，天降一颗陨石，对半径为`explode_radius`内所有角色造成`explode_hurt`的伤害。陨石术不可以连发，有`human_meteor_interval`的冷却帧数限制，陨石术不能无限次发射，每个角色出生/复活后可以使用`human_meteor_number`次陨石术，使用一次少一次。
 
