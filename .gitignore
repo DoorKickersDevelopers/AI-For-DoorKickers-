@@ -2,7 +2,7 @@
 *.o
 *.exe
 *.py
-__pychache__
+__pycache__
 DEBUG
 jsoncpp
 Maps
