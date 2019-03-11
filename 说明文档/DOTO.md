@@ -47,7 +47,7 @@
 
 陨石术：指定角色的半径`meteor_distance`内一点（可以为障碍物上，不可以在边界外），放置一个陨石轰击指示物，经过`meteor_delay`的帧数之后，天降一颗陨石，对半径为`explode_radius`内所有角色造成`explode_hurt`的伤害。陨石术不可以连发，有`human_meteor_interval`的冷却帧数限制，陨石术不能无限次发射，每个角色出生/复活后可以使用`human_meteor_number`次陨石术，使用一次少一次。
 
-闪现：指定角色的半径`flash_distance`内一点（地图内，非墙区域），瞬间移动到该位置。闪现不可以连发，有`human_flash_interval`的冷却帧数限制，闪现不能无限次发射，每个角色出生/复活后可以使用`human_flash_number`次闪现，使用一次少一次。
+闪现：指定角色的半径`flash_distance`内一点（地图内，非墙区域），瞬间移动到该位置。闪现不可以连发，有`human_flash_interval`的冷却帧数限制，闪现不能无限次发射，每个角色出生/复活后可以使用`human_flash_number`次闪现，使用一次少一次。**注意：拿到球的角色不能使用闪现！**
 
 ### 分数机制
 

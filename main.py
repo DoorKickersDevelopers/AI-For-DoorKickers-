@@ -1,4 +1,4 @@
-PYGAME = True
+PYGAME = False
 DEBUG = True
 
 if PYGAME:
@@ -120,7 +120,32 @@ def sendLog(log, Type=0, UserCode=-1):
 
 
 def LegalInfo(data):
-    return True
+    try:
+        assert isinstance(data,dict)
+        assert "flag" in data
+        if data["flag"]==1 or data["flag"]==2:
+            return True
+        assert data["flag"]==0
+        assert "move" in data and "shoot" in data and "meteor" in data and "flash" in data
+        assert isinstance(data["flash"],list)
+        assert len(data["flash"])==human_number
+        for b in data["flash"]:
+            assert b==True or b==False
+        def check(l):
+            assert isinstance(l,list)
+            assert len(l)==human_number
+            for item in l:
+                assert isinstance(item,list)
+                assert len(item)==2
+                for i in item:
+                    assert isinstance(i,float)or isinstance(i,int)
+        check(data["move"])
+        check(data["shoot"])
+        check(data["meteor"])
+    except:
+        return False
+    else:
+        return True
 
 
 class Listen(threading.Thread):
@@ -155,10 +180,30 @@ class Listen(threading.Thread):
                     WriteToLogFile(data)
                     WriteToLogFile("~~~~~~                        ~~~~~~")
                 return True
-            if DEBUG:
-                WriteToLogFile("~~~~~~Recv Msg(Real time = {})~~~~~~".format(datetime.datetime.now().strftime('%H:%M:%S.%f')))
-                WriteToLogFile('AI:', UserCode, data)
-                WriteToLogFile("~~~~~~                        ~~~~~~")
+
+            if LegalInfo(JSON):
+                if DEBUG:
+                    WriteToLogFile("~~~~~~Recv Msg(Real time = {})~~~~~~".format(datetime.datetime.now().strftime('%H:%M:%S.%f')))
+                    WriteToLogFile('AI:', UserCode)
+                    WriteToLogFile(data)
+                    WriteToLogFile("~~~~~~                        ~~~~~~")
+                if JSON["flag"]==0:
+                    self.ans[UserCode]=JSON
+                    return True
+                elif JSON["flag"]==1:
+                    self.ans[UserCode]=null
+                    return True
+                elif JSON["flag"]==2:
+                    return False
+            else:
+                if DEBUG:
+                    WriteToLogFile("~~~~~~Recv BAD MSG(Real time = {})~~~~~~".format(datetime.datetime.now().strftime('%H:%M:%S.%f')))
+                    WriteToLogFile('AI:', UserCode)
+                    WriteToLogFile(data)
+                    WriteToLogFile("~~~~~~                        ~~~~~~")
+                return True
+
+
 
             if JSON["flag"]==0:
                 if LegalInfo(JSON):
@@ -210,6 +255,10 @@ def init():
 def flash(human,pos):
     if human.death_time!=-1 or human.flash_time>0 or human.flash_number==0:
         return
+    for ball in balls:
+        if ball.belong == human.number:
+            return
+
     pos = Point(pos[0],pos[1])
     if L2Distance(human.pos,pos)<=eps+flash_distance and LegalPos(pos,walls):
         Ev(9,human.number,human.pos.x,human.pos.y,pos.x,pos.y)

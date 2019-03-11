@@ -12,8 +12,7 @@ class judger (threading.Thread):
     def __init__(self, cmd):
         threading.Thread.__init__(self)
         self.subpro = subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE,
-                                    stdin=subprocess.PIPE, stderr=subprocess.STDOUT
-                                       , universal_newlines=True)
+                                       stdin=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
 
     def write(self, msg):
         print("write to judger")
@@ -28,7 +27,8 @@ class judger (threading.Thread):
             Type = int.from_bytes(t.read(4), byteorder=BYTEORDER, signed=True)
             if Type == 0:  # 用户AI发送的包
                 print("error: {}".format(str(error)))
-                UserCode = int.from_bytes(t.read(4), byteorder=BYTEORDER, signed=True)
+                UserCode = int.from_bytes(
+                    t.read(4), byteorder=BYTEORDER, signed=True)
                 print("len : {} type: {} usercode: {}".format(Len, Type, UserCode))
                 Len -= 8
                 data = t.read(Len)
@@ -64,8 +64,9 @@ class judger (threading.Thread):
                 error += Type.to_bytes(4, byteorder=BYTEORDER, signed=True)
         print("end judger")
 
+
 # 在双引号内输入命令
-jud = judger("python main2.py --ai_num 3")
+jud = judger("python main.py")
 print("start judger")
 
 
@@ -73,7 +74,7 @@ class player (threading.Thread):
     def __init__(self, cmd, usercode):
         threading.Thread.__init__(self)
         self.subpro = subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE,
-                                    stdin=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       stdin=subprocess.PIPE, stderr=subprocess.STDOUT,
                                        universal_newlines=True)
         self.usercode = usercode
 
@@ -86,8 +87,8 @@ class player (threading.Thread):
         t = self.subpro.stdout.buffer
         global gameover
         while True:
-    #        Data = t.read(300)    #正常使用请注调这两行
-    #        print("player data: {}".format(Data))      #如上
+            #        Data = t.read(300)    #正常使用请注调这两行
+            #        print("player data: {}".format(Data))      #如上
             Len = int.from_bytes(t.read(4), byteorder=BYTEORDER, signed=True)
             print("player Len: {}".format(Len))
             data = t.read(Len)
@@ -95,7 +96,8 @@ class player (threading.Thread):
             type = 0
             tosend = Len.to_bytes(4, byteorder=BYTEORDER, signed=True)
             tosend += type.to_bytes(4, byteorder=BYTEORDER, signed=True)
-            tosend += self.usercode.to_bytes(4, byteorder=BYTEORDER, signed=True)
+            tosend += self.usercode.to_bytes(4,
+                                             byteorder=BYTEORDER, signed=True)
             tosend += data
             print("read from player:")
             print(data)
@@ -109,10 +111,9 @@ class player (threading.Thread):
 #players.append(player("main.exe", 2))
 players.append(player("python debug_ai.py", 0))
 players.append(player("python debug_ai.py", 1))
-players.append(player("python debug_ai.py", 2))
+#players.append(player("python debug_ai.py", 2))
 print("start player")
 for pla in players:
     pla.start()
 jud.start()
 print("finish start")
-
