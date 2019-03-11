@@ -488,7 +488,7 @@ def RunGame():
 
         # death and kill score
         for human in humans:
-            if human.hp<=0:
+            if human.hp<=0 and human.death_time==-1:
                 death(human,hurt_record[human.number])
 
         if DEBUG:
