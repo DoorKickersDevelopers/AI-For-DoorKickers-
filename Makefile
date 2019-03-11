@@ -1,6 +1,6 @@
 all: main.exe
 
-main.exe: makefile main.o logic.h logic.o const.h playerAI.h playerAI.cpp  jsoncpp/json/json-forwards.h jsoncpp/json/json.h jsoncpp/jsoncpp.cpp geometry.o geometry.h
+main.exe: Makefile main.o logic.h logic.o const.h playerAI.h playerAI.cpp  jsoncpp/json/json-forwards.h jsoncpp/json/json.h jsoncpp/jsoncpp.cpp geometry.o geometry.h
 ifeq ($(OS),Windows_NT)
 	g++ main.o logic.o playerAI.cpp jsoncpp/jsoncpp.cpp geometry.o -o main.exe -D_GLIBCXX_USE_CXX11_ABI=0 -static-libstdc++ -lwsock32 -std=c++11
 else
