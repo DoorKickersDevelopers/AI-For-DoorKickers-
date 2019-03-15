@@ -334,6 +334,8 @@ def shoot(human, pos):
     pos = Point(pos[0], pos[1])
     if human.pos.x == pos.x and human.pos.y == pos.y:
         return
+    if not(0<=pos.x and pos.x<width and 0<=pos.y and pos.y<height):
+        return
     ang = Angle(human.pos, pos)
     pos = MoveAlongAngle(human.pos, ang, splash_radius)
     if LegalPos(pos, walls):

@@ -62,7 +62,7 @@ fireball_radius = 5
 splash_radius = 8
 splash_hurt = 10
 
-meteor_distance = 300
+meteor_distance = 3000
 meteor_delay = frames_per_second * 2
 explode_radius = 100
 explode_hurt = 50
