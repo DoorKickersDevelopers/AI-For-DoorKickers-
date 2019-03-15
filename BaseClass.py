@@ -66,7 +66,12 @@ class Ball:
         self.belong = -1
 
     def __repr__(self):
-        return "[{},{},{},{}]".format(self.pos.x, self.pos.y, self.belong, self.faction)
+        return "[{},{},{},{}]".format(
+            round(self.pos.x, precision),
+            round(self.pos.y, precision),
+            self.belong,
+            self.faction
+        )
 
 
 class Fireball:
@@ -81,7 +86,12 @@ class Fireball:
         self.from_number = from_number
 
     def __repr__(self):
-        return "[{},{},{},{}]".format(self.pos.x, self.pos.y, self.rot, self.from_number)
+        return "[{},{},{},{}]".format(
+            round(self.pos.x, precision),
+            round(self.pos.y, precision),
+            round(self.rot, precision),
+            self.from_number
+        )
 
 
 class Meteor:
@@ -94,7 +104,12 @@ class Meteor:
         self.from_number = from_number
 
     def __repr__(self):
-        return "[{},{},{},{}]".format(self.pos.x, self.pos.y, self.time, self.from_number)
+        return "[{},{},{},{}]".format(
+            round(self.pos.x, precision),
+            round(self.pos.y, precision),
+            self.time,
+            self.from_number
+        )
 
 
 class Human:
@@ -123,4 +138,15 @@ class Human:
 
     def __repr__(self):
         return "[{},{},{},{},{},{},{},{},{},{},{}]".format(
-            self.number, self.pos.x, self.pos.y, self.hp, self.meteor_number, self.meteor_time, self.flash_number, self.flash_time, self.fireball_time, self.death_time, self.inv_time)
+            self.number,
+            round(self.pos.x, precision),
+            round(self.pos.y, precision),
+            self.hp,
+            self.meteor_number,
+            self.meteor_time,
+            self.flash_number,
+            self.flash_time,
+            self.fireball_time,
+            self.death_time,
+            self.inv_time
+        )

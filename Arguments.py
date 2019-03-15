@@ -18,6 +18,9 @@ pink = (242, 156, 177)
 # game setting
 friendly_fire = False
 
+# precision
+precision = 3
+
 # load the map,assert the map's legality
 map_dir = "." + os.sep + "Maps" + os.sep
 map_names = os.listdir(map_dir)
