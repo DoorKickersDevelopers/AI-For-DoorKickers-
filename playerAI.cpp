@@ -4,7 +4,7 @@
 
 using namespace CONST;
 
-int fcount = 61;
+int fcount = 0;
 
 //玩家需要完成该函数，通过调用八个指令完成决策，最后return发送决策
 void playerAI() {
@@ -41,7 +41,7 @@ void playerAI() {
 	}
 	else if (fcount < 80) {
 		for (int i = 0; i < logic->map.human_number; i++) {
-			logic->flash(i);
+			//logic->flash(i);
 			Point now = logic->humans[i * logic->map.faction_number + logic->faction].position;
 			logic->move(i, Point(now.x + 10, now.y + 10));
 		}

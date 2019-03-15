@@ -36,16 +36,12 @@ void Logic::unflash(int num){
 	ope.flash[num] = false;
 }
 
-bool Logic::canMove(int num, Point p){
-	return false;
+bool Logic::isWall(int x, int y){
+	return map.pixels[x][y];
 }
 
-bool Logic::canArrive(Point from, Point to, double r){
-	return false;
-}
-
-void Logic::initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Wall> wa, int ti) {
-	return map.set(w, h, f, hn, b, c, t, wa, ti);
+void Logic::initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<vector<bool>> p, int ti) {
+	return map.set(w, h, f, hn, b, c, t, p, ti);
 }
 
 void Logic::getFrame(int f, vector<Human> h, vector<Fireball> b, vector<Meteor> g, vector<Crystal> ba) {

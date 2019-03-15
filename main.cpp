@@ -102,14 +102,27 @@ void readMap() {
 		target_places.push_back(p);
 	}
 
-	Json::Value walls_raw = root["walls"];
+	Json::Value pixels_raw = root["walls"];
+	/*
 	vector<Wall> walls;
 	for (int i = 0; i < walls_raw.size(); i++) {
 		Wall w(walls_raw[i][0].asDouble(), walls_raw[i][1].asDouble(), walls_raw[i][2].asDouble(), walls_raw[i][3].asDouble());
 		walls.push_back(w);
 	}
+	*/
+	vector<vector<bool>> pixels;
+	for (int i = 0; i < pixels_raw.size(); i++) {
+		vector<bool> line;
+		for (int j = 0; j < pixels_raw[i].size(); j++) {
+			if (pixels[i][j] == 0)
+				line.push_back(true);
+			else
+				line.push_back(false);
+		}
+		pixels.push_back(line);
+	}
 
-	logic->initMap(width, height, faction_number, human_number, birth_places, ball_places, target_places, walls, time_of_game);
+	logic->initMap(width, height, faction_number, human_number, birth_places, ball_places, target_places, pixels, time_of_game);
 }
 
 void readFrame() {

@@ -7,16 +7,17 @@
 using namespace std;
 using namespace CONST;
 
-
+/*
 //墙类，包含上下左右四个边的位置信息，其中上下边的位置指纵坐标，左右边的位置指横坐标。
 class Wall {
 public:
-	double left, right, bottom, top;
+	vector<vector<bool>> pixels;
 	
 	Wall(){}
 	Wall(double l, double r, double b, double t):
 		left(l),right(r),bottom(b),top(t){}
 };
+*/
 
 //玩家类,死亡时hp为0
 class Human {
@@ -94,11 +95,12 @@ public:
 	vector<vector<Point>> birth_places;//每个人的出生地
 	vector<Point> crystal_places;//每个势力的水晶初始位置
 	vector<Point> target_places;//每个势力的水晶搬运目标位置
-	vector<Wall> walls;//墙
+	//vector<Wall> walls;//墙
+	vector<vector<bool>> pixels;//游戏地图的像素信息，(x, y)处为true表示[x,x+1]×[y,y+1]处不是墙
 	int time_of_game;//游戏总时间
 
 	Map() {};
-	void set(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Wall> wa, int ti) {
+	void set(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<vector<bool>> p, int ti) {
 		width = w;
 		height = h;
 		faction_number = f;
@@ -106,7 +108,8 @@ public:
 		birth_places = b;
 		crystal_places = c;
 		target_places = t;
-		walls = wa;
+		//walls = wa;
+		pixels = p;
 		time_of_game = ti;
 	}
 };
@@ -146,11 +149,10 @@ public:
 	void unmeteor(int num);//取消你控制的第num个人的发射陨石指令
 	void unflash(int num);//取消你控制的第num个人的闪现指令
 
-	bool canMove(int num, Point p);//判断能否移动到p位置，不能移动到地图外、墙内、最大移动距离外
-	bool canArrive(Point from, Point to, double r);//from和to之间能否通过半径为r的圆，而不被墙阻碍，可以用于子弹和人物。
+	bool isWall(int x, int y);
 	
 	//请忽略以下函数
-	void initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Wall> wa, int ti);
+	void initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<vector<bool>> p, int ti);
 	void getFrame(int frame, vector<Human> h, vector<Fireball> b, vector<Meteor> g, vector<Crystal> ba);
 	void resetOpe();
 };
