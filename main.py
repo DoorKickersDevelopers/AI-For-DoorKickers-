@@ -282,6 +282,8 @@ def flash(human, pos):
 
 
 def move(human, pos):
+    if human.death_time !=-1:
+        return
     pos = Point(pos[0], pos[1])
     if L2Distance(human.pos, pos) <= eps + human_velocity and LegalPos(pos, walls):
         human.pos = pos
