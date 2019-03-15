@@ -334,8 +334,6 @@ def shoot(human, pos):
     pos = Point(pos[0], pos[1])
     if human.pos.x == pos.x and human.pos.y == pos.y:
         return
-    if not LegalPos(pos, walls):
-        return
     ang = Angle(human.pos, pos)
     pos = MoveAlongAngle(human.pos, ang, splash_radius)
     if LegalPos(pos, walls):
@@ -454,10 +452,9 @@ def RunGame():
         for fireball in fireballs:
             newpos = MoveAlongAngle(
                 fireball.pos, fireball.rot, fireball.velocity)
+            fireball.pos = newpos
             if not LegalPos(newpos, walls):
                 delFireballs.append(fireball)
-            else:
-                fireball.pos = newpos
 
         for fac, a in enumerate(analysis):
             for i, pos in enumerate(a["move"]):

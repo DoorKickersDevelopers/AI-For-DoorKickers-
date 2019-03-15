@@ -16,7 +16,7 @@ pink = (242, 156, 177)
 
 
 # game setting
-friendly_fire = True
+friendly_fire = False
 
 # load the map,assert the map's legality
 map_dir = "." + os.sep + "Maps" + os.sep
