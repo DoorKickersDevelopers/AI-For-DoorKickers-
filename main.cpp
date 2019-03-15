@@ -114,7 +114,7 @@ void readMap() {
 	for (int i = 0; i < pixels_raw.size(); i++) {
 		vector<bool> line;
 		for (int j = 0; j < pixels_raw[i].size(); j++) {
-			if (pixels[i][j] == 0)
+			if (pixels_raw[i][j].asInt() == 0)
 				line.push_back(true);
 			else
 				line.push_back(false);
