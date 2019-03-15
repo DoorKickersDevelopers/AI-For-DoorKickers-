@@ -38,4 +38,6 @@ namespace CONST {
 	const int goaled_score = 0;
 
 
+	const double room_size = 200;
+
 }

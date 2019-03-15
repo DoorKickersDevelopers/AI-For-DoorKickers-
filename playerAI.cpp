@@ -9,6 +9,7 @@ int fcount = 0;
 //玩家需要完成该函数，通过调用八个指令完成决策，最后return发送决策
 void playerAI() {
 	Logic * logic = Logic::Instance();
+	/*
 	if (fcount < 20) {
 		for (int i = 0; i < logic->map.human_number; i++) {
 			Point now = logic->humans[i * logic->map.faction_number + logic->faction].position;
@@ -30,7 +31,7 @@ void playerAI() {
 	else if (fcount < 40) {
 		for (int i = 0; i < logic->map.human_number; i++) {
 			Point now = logic->humans[i * logic->map.faction_number + logic->faction].position;
-			logic->shoot(i, Point(now.x + 100, now.y + 100));
+			logic->shoot(i, Point(now.x - 100, now.y - 100));
 		}
 	}
 	else if (fcount < 60) {
@@ -47,4 +48,31 @@ void playerAI() {
 		}
 	}
 	fcount++;
+	*/
+	/*
+	for (int i = 0; i < logic->map.human_number; i++) {
+		Point now = logic->humans[i * logic->map.faction_number + (1 - logic->faction)].position;
+		logic->shoot(i, Point(now.x + 1, now.y + 1));
+	}
+	*/
+	if (logic->crystal[1 - logic->faction].belong < 0) {
+		for (int i = 0; i < logic->map.human_number; i++) {
+			Point now = logic->humans[i * logic->map.faction_number + logic->faction].position;
+			logic->move(i, Point(now.x + 5, now.y));
+		}
+	}
+	else if(fcount++ < 10) {
+		
+		for (int i = 0; i < logic->map.human_number; i++) {
+			Point now = logic->humans[i * logic->map.faction_number + logic->faction].position;
+			logic->move(i, Point(now.x - 5, now.y));
+		}
+	}
+	if (logic->crystal[logic->faction].belong > -1) {
+		for (int i = 0; i < logic->map.human_number; i++) {
+			Point now = logic->humans[i * logic->map.faction_number + logic->faction].position;
+			logic->shoot(i, Point(now.x - 5, now.y));
+		}
+	}
+
 }

@@ -167,7 +167,7 @@ void readFrame() {
 
 
 	vector<Crystal> crystal;
-	Json::Value crystal_raw = root["crystal"];
+	Json::Value crystal_raw = root["balls"];
 	for (int i = 0; i < crystal_raw.size(); i++) {
 		Crystal tem(crystal_raw[i][0].asDouble(), crystal_raw[i][1].asDouble(), crystal_raw[i][2].asInt(), crystal_raw[i][3].asInt());
 		crystal.push_back(tem);
