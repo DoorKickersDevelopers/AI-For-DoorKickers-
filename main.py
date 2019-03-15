@@ -456,6 +456,8 @@ def RunGame():
                 fireball.pos, fireball.rot, fireball.velocity)
             if not LegalPos(newpos, walls):
                 delFireballs.append(fireball)
+            else:
+                fireball.pos = newpos
 
         for fac, a in enumerate(analysis):
             for i, pos in enumerate(a["move"]):
