@@ -5,6 +5,7 @@ import copy
 import time
 import json
 from BaseClass import *
+import numpy as np
 
 
 def PlayJsonFile(mydir):
@@ -31,16 +32,17 @@ def PlayJsonFile(mydir):
     birth_places = JSON["birth_places"]
     ball_places = JSON["ball_places"]
     target_places = JSON["target_places"]
-    wallrects = JSON["walls"]
+    walls = JSON["walls"]
+    walls = np.asarray(walls).astype(np.bool)
     human_number = JSON["human_number"]
 
     pygame.init()
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Defense Of The sOgou")
 
-    def draw_wall(wall):
-        pygame.draw.rect(screen, black, pygame.Rect(int(wall.left), int(wall.bottom),
-                                                    int(wall.right - wall.left), int(wall.top - wall.bottom)))
+    def draw_wall(x, y):
+        pygame.draw.rect(screen, black, pygame.Rect(x * room_size, y * room_size,
+                                                    room_size, room_size))
 
     def draw_ball(ball):
         pygame.draw.circle(screen, green, (int(ball.pos.x),
@@ -77,8 +79,10 @@ def PlayJsonFile(mydir):
             draw_target(target)
         for meteor in meteors:
             draw_meteor(meteor)
-        for wall in walls:
-            draw_wall(wall)
+        for x in range(width):
+            for y in range(height):
+                if walls[x][y]:
+                    draw_wall(x, y)
         for human in humans:
             if human.death_time == -1:
                 draw_human(human)
@@ -88,7 +92,6 @@ def PlayJsonFile(mydir):
             draw_ball(ball)
         pygame.display.flip()
 
-    walls = [Wall(w[0], w[1], w[2], w[3]) for w in wallrects]
     targets = [TargetArea(Point(t[0], t[1])) for t in target_places]
 
     humans = [None] * faction_number * human_number

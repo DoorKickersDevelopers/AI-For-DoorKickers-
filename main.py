@@ -41,9 +41,9 @@ if PYGAME:
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Defense Of The sOgou")
 
-    def draw_wall(wall):
-        pygame.draw.rect(screen, black, pygame.Rect(int(wall.left), int(wall.bottom),
-                                                    int(wall.right - wall.left), int(wall.top - wall.bottom)))
+    def draw_wall(x, y):
+        pygame.draw.rect(screen, black, pygame.Rect(x * room_size, y * room_size,
+                                                    room_size, room_size))
 
     def draw_ball(ball):
         pygame.draw.circle(screen, green, (int(ball.pos.x),
@@ -80,8 +80,10 @@ if PYGAME:
             draw_target(target)
         for meteor in meteors:
             draw_meteor(meteor)
-        for wall in walls:
-            draw_wall(wall)
+        for x in range(width):
+            for y in range(height):
+                if walls[x][y]:
+                    draw_wall(x, y)
         for human in humans:
             if human.death_time == -1:
                 draw_human(human)
@@ -97,7 +99,6 @@ humans = [None] * faction_number * human_number
 balls = [None] * faction_number
 fireballs = []
 meteors = []
-walls = [Wall(w[0], w[1], w[2], w[3]) for w in wallrects]
 targets = [TargetArea(Point(t[0], t[1])) for t in target_places]
 score = [0.0] * faction_number
 
@@ -280,23 +281,9 @@ def flash(human, pos):
         human.flash_number -= 1
 
 
-def LegalMove(pos1, pos2):
-    if not LegalPos(pos2, walls):
-        return False
-    if pos1.x == pos2.x and pos1.y == pos2.y:
-        return True
-    for wall in walls:
-        if LineIntersectRect(Line(pos1, pos2), wall):
-            return False
-    if L2Distance(pos1, pos2) <= human_velocity + eps:
-        return True
-    else:
-        return False
-
-
 def move(human, pos):
     pos = Point(pos[0], pos[1])
-    if LegalMove(human.pos, pos):
+    if L2Distance(human.pos, pos) <= eps + human_velocity and LegalPos(pos, walls):
         human.pos = pos
 
 
@@ -469,28 +456,29 @@ def RunGame():
                 fireball.pos, fireball.rot, fireball.velocity)
             if not LegalPos(newpos, walls):
                 delFireballs.append(fireball)
-            else:
-                for fac, a in enumerate(analysis):
-                    for i, pos in enumerate(a["move"]):
-                        h_id = i * faction_number + fac
-                        if LegalMove(humans[h_id].pos, Point(pos[0], pos[1])):
-                            if DisFireballHuman(fireball.pos, newpos, humans[h_id].pos, Point(pos[0], pos[1])) <= fireball_radius + eps:
-                                delFireballs.append(fireball)
-                        else:
-                            if DisLinePoint(Line(fireball.pos, newpos), humans[h_id].pos) <= fireball_radius + eps:
-                                delFireballs.append(fireball)
-            fireball.pos = newpos
+
         for fac, a in enumerate(analysis):
             for i, pos in enumerate(a["move"]):
                 h_id = i * faction_number + fac
                 move(humans[h_id], pos)
+
         for ball in balls:
             if ball.belong != -1:
                 ball.pos.x, ball.pos.y = humans[ball.belong].pos.x, humans[ball.belong].pos.y
+
         if DEBUG:
             WriteToLogFile("Move Succeed")
 
         # hurt
+
+        for fireball in fireballs:
+            if not(fireball in delFireballs):
+                for human in huamns:
+                    if not friendly_fire:
+                        if human.faction == fireball.from_number % faction_number:
+                            continue
+                    if L2Distance(fireball.pos, human.pos) <= eps + fireball_radius:
+                        delFireballs.append(fireball)
 
         delMeteors = []
         for meteor in meteors:
@@ -582,36 +570,6 @@ def RunGame():
         }
 
         logs.append(log)
-
-        """
-        if DEBUG:
-            for event in eventlist:
-                if event[0] == 1:
-                    WriteToLogFile("Player {} shoots!".format(event[1]))
-                elif event[0] == 2:
-                    WriteToLogFile("Player {} gets {} hurt!".format(
-                        event[1], event[2]))
-                elif event[0] == 3:
-                    WriteToLogFile("Player {} died!".format(event[1]))
-                elif event[0] == 4:
-                    WriteToLogFile("Player {} cast Meteor!".format(
-                        event[1]))
-                elif event[0] == 5:
-                    WriteToLogFile("Player {} gets ball!".format(
-                        event[1]))
-                elif event[0] == 6:
-                    WriteToLogFile("A Fireball splashes at ({},{})!".format(
-                        event[1], event[2]))
-                elif event[0] == 7:
-                    WriteToLogFile("A Meteor impacts at ({},{})!".format(
-                        event[1], event[2]))
-                elif event[0] == 8:
-                    WriteToLogFile("Player {} reincarnate at ({},{})!".format(
-                        event[1], event[2], event[3]))
-                elif event[0] == 9:
-                    WriteToLogFile("A Fireball disappears at ({},{})!".format(
-                        event[1], event[2]))
-        """
     log = {
         "frame": -1,
         "scores": str(score)

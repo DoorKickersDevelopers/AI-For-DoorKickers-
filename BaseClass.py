@@ -124,11 +124,3 @@ class Human:
     def __repr__(self):
         return "[{},{},{},{},{},{},{},{},{},{},{}]".format(
             self.number, self.pos.x, self.pos.y, self.hp, self.meteor_number, self.meteor_time, self.flash_number, self.flash_time, self.fireball_time, self.death_time, self.inv_time)
-
-
-class Wall(Rectangle):
-    def __init__(self, left, right, bottom, top):
-        super(Wall, self).__init__(left, right, bottom, top)
-
-    def __repr__(self):
-        return "[{},{},{},{}]".format(self.left, self.right, self.bottom, self.top)

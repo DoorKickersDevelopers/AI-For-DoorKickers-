@@ -1,6 +1,7 @@
 import os
 import random
 import json
+import numpy as np
 # some constants about pygame
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -32,8 +33,10 @@ faction_number = JSON["faction_number"]
 birth_places = JSON["birth_places"]
 ball_places = JSON["ball_places"]
 target_places = JSON["target_places"]
-wallrects = JSON["walls"]
+walls = JSON["walls"]
+walls = np.asarray(walls).astype(np.bool)
 human_number = JSON["human_number"]
+room_size = 200
 
 
 # some constants about time
