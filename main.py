@@ -1,5 +1,5 @@
 PYGAME = False
-DEBUG = False
+DEBUG = True
 
 if PYGAME:
     import pygame
@@ -80,8 +80,8 @@ if PYGAME:
             draw_target(target)
         for meteor in meteors:
             draw_meteor(meteor)
-        for x in range(width):
-            for y in range(height):
+        for x in range(int(width / room_size)):
+            for y in range(int(height / room_size)):
                 if walls[x][y]:
                     draw_wall(x, y)
         for human in humans:
