@@ -475,11 +475,12 @@ def RunGame():
         for fireball in fireballs:
             if not(fireball in delFireballs):
                 for human in humans:
-                    if not friendly_fire:
-                        if human.faction == fireball.from_number % faction_number:
-                            continue
-                    if L2Distance(fireball.pos, human.pos) <= eps + fireball_radius:
-                        delFireballs.append(fireball)
+                    if human.death_time==-1:
+                        if not friendly_fire:
+                            if human.faction == fireball.from_number % faction_number:
+                                continue
+                        if L2Distance(fireball.pos, human.pos) <= eps + fireball_radius:
+                            delFireballs.append(fireball)
 
         delMeteors = []
         for meteor in meteors:
