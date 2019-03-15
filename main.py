@@ -473,7 +473,7 @@ def RunGame():
 
         for fireball in fireballs:
             if not(fireball in delFireballs):
-                for human in huamns:
+                for human in humans:
                     if not friendly_fire:
                         if human.faction == fireball.from_number % faction_number:
                             continue
