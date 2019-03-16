@@ -7,6 +7,8 @@ import json
 from BaseClass import *
 import numpy as np
 
+scale = 1.0
+
 
 def PlayJsonFile(mydir):
     print()
@@ -37,36 +39,36 @@ def PlayJsonFile(mydir):
     human_number = JSON["human_number"]
 
     pygame.init()
-    screen = pygame.display.set_mode((width, height))
+    screen = pygame.display.set_mode((int(width * scale), int(height * scale)))
     pygame.display.set_caption("Defense Of The sOgou")
 
     def draw_wall(x, y):
-        pygame.draw.rect(screen, black, pygame.Rect(x * room_size, y * room_size,
-                                                    room_size, room_size))
+        pygame.draw.rect(screen, black, pygame.Rect(x * room_size * scale, y * room_size * scale,
+                                                    room_size * scale, room_size * scale))
 
     def draw_ball(ball):
-        pygame.draw.circle(screen, green, (int(ball.pos.x),
-                                           int(ball.pos.y)), int(ball.radius))
+        pygame.draw.circle(screen, green, (int(ball.pos.x * scale),
+                                           int(ball.pos.y * scale)), int(ball.radius * scale))
 
     def draw_fireball(fireball):
-        pygame.draw.circle(screen, red, (int(fireball.pos.x),
-                                         int(fireball.pos.y)), int(fireball.radius))
+        pygame.draw.circle(screen, red, (int(fireball.pos.x * scale),
+                                         int(fireball.pos.y * scale)), int(fireball.radius * scale))
 
     def draw_target(target):
-        pygame.draw.circle(screen, gray, (int(target.pos.x),
-                                          int(target.pos.y)), int(target.radius))
+        pygame.draw.circle(screen, gray, (int(target.pos.x * scale),
+                                          int(target.pos.y * scale)), int(target.radius * scale))
 
     def draw_meteor(meteor):
-        pygame.draw.circle(screen, pink, (int(meteor.pos.x), int(
-            meteor.pos.y)), int(meteor.attack_radius))
+        pygame.draw.circle(screen, pink, (int(meteor.pos.x * scale), int(
+            meteor.pos.y * scale)), int(meteor.attack_radius * scale))
 
     def draw_human(human):
         if human.inv_time > 0:
-            pygame.draw.circle(screen, golden, (int(human.pos.x), int(
-                human.pos.y)), int(fireball_radius + 3))
-        pygame.draw.circle(screen, blue, (int(human.pos.x),
-                                          int(human.pos.y)), int(fireball_radius))
-        myfont = pygame.font.Font(None, 20)
+            pygame.draw.circle(screen, golden, (int(human.pos.x * scale), int(
+                human.pos.y * scale)), int((fireball_radius * scale) + 3))
+        pygame.draw.circle(screen, blue, (int(human.pos.x * scale),
+                                          int(human.pos.y * scale)), int(fireball_radius * scale))
+        myfont = pygame.font.Font(None, 30)
         textImage = myfont.render(str(human.hp), True, blue)
         screen.blit(textImage, (human.pos.x, human.pos.y))
 
