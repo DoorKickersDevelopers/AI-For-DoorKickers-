@@ -39,7 +39,7 @@ target_places = JSON["target_places"]
 walls = JSON["walls"]
 walls = np.asarray(walls).astype(np.bool)
 human_number = JSON["human_number"]
-room_size = 200
+room_size = 1
 
 
 # some constants about time

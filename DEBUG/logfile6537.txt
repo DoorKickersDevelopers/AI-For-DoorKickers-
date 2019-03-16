@@ -1,0 +1,815 @@
+~~~~~~Send Msg(Real time = 11:50:44.020438)~~~~~~
+Type= 0 UserCode 0
+{'frame': 0, 'map': 0, 'faction': 0}
+~~~~~~                        ~~~~~~
+~~~~~~Send Msg(Real time = 11:50:44.035401)~~~~~~
+Type= 0 UserCode 1
+{'frame': 0, 'map': 0, 'faction': 1}
+~~~~~~                        ~~~~~~
+-----------------Time = 1(Real time = 11:50:44.051357)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:44.060331)~~~~~~
+Type= 0 UserCode -1
+{'frame': 1, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,40], [1,700,300,100,3,0,3,0,0,-1,40], [2,50,350,100,3,0,3,0,0,-1,40], [3,750,250,100,3,0,3,0,0,-1,40], [4,50,250,100,3,0,3,0,0,-1,40], [5,750,350,100,3,0,3,0,0,-1,40]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 2(Real time = 11:50:44.176127)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:44.187098)~~~~~~
+Type= 0 UserCode -1
+{'frame': 2, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,39], [1,700,300,100,3,0,3,0,0,-1,39], [2,50,350,100,3,0,3,0,0,-1,39], [3,750,250,100,3,0,3,0,0,-1,39], [4,50,250,100,3,0,3,0,0,-1,39], [5,750,350,100,3,0,3,0,0,-1,39]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 3(Real time = 11:50:44.382574)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:44.417481)~~~~~~
+Type= 0 UserCode -1
+{'frame': 3, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,38], [1,700,300,100,3,0,3,0,0,-1,38], [2,50,350,100,3,0,3,0,0,-1,38], [3,750,250,100,3,0,3,0,0,-1,38], [4,50,250,100,3,0,3,0,0,-1,38], [5,750,350,100,3,0,3,0,0,-1,38]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 4(Real time = 11:50:44.569076)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:44.580047)~~~~~~
+Type= 0 UserCode -1
+{'frame': 4, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,37], [1,700,300,100,3,0,3,0,0,-1,37], [2,50,350,100,3,0,3,0,0,-1,37], [3,750,250,100,3,0,3,0,0,-1,37], [4,50,250,100,3,0,3,0,0,-1,37], [5,750,350,100,3,0,3,0,0,-1,37]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 5(Real time = 11:50:44.694739)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:44.702718)~~~~~~
+Type= 0 UserCode -1
+{'frame': 5, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,36], [1,700,300,100,3,0,3,0,0,-1,36], [2,50,350,100,3,0,3,0,0,-1,36], [3,750,250,100,3,0,3,0,0,-1,36], [4,50,250,100,3,0,3,0,0,-1,36], [5,750,350,100,3,0,3,0,0,-1,36]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 6(Real time = 11:50:44.817440)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:44.825419)~~~~~~
+Type= 0 UserCode -1
+{'frame': 6, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,35], [1,700,300,100,3,0,3,0,0,-1,35], [2,50,350,100,3,0,3,0,0,-1,35], [3,750,250,100,3,0,3,0,0,-1,35], [4,50,250,100,3,0,3,0,0,-1,35], [5,750,350,100,3,0,3,0,0,-1,35]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 7(Real time = 11:50:44.945099)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:44.954047)~~~~~~
+Type= 0 UserCode -1
+{'frame': 7, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,34], [1,700,300,100,3,0,3,0,0,-1,34], [2,50,350,100,3,0,3,0,0,-1,34], [3,750,250,100,3,0,3,0,0,-1,34], [4,50,250,100,3,0,3,0,0,-1,34], [5,750,350,100,3,0,3,0,0,-1,34]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 8(Real time = 11:50:45.067743)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:45.074757)~~~~~~
+Type= 0 UserCode -1
+{'frame': 8, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,33], [1,700,300,100,3,0,3,0,0,-1,33], [2,50,350,100,3,0,3,0,0,-1,33], [3,750,250,100,3,0,3,0,0,-1,33], [4,50,250,100,3,0,3,0,0,-1,33], [5,750,350,100,3,0,3,0,0,-1,33]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 9(Real time = 11:50:45.189271)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:45.197221)~~~~~~
+Type= 0 UserCode -1
+{'frame': 9, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,32], [1,700,300,100,3,0,3,0,0,-1,32], [2,50,350,100,3,0,3,0,0,-1,32], [3,750,250,100,3,0,3,0,0,-1,32], [4,50,250,100,3,0,3,0,0,-1,32], [5,750,350,100,3,0,3,0,0,-1,32]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 10(Real time = 11:50:45.315554)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:45.324530)~~~~~~
+Type= 0 UserCode -1
+{'frame': 10, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,31], [1,700,300,100,3,0,3,0,0,-1,31], [2,50,350,100,3,0,3,0,0,-1,31], [3,750,250,100,3,0,3,0,0,-1,31], [4,50,250,100,3,0,3,0,0,-1,31], [5,750,350,100,3,0,3,0,0,-1,31]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 11(Real time = 11:50:45.444211)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:45.452503)~~~~~~
+Type= 0 UserCode -1
+{'frame': 11, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,30], [1,700,300,100,3,0,3,0,0,-1,30], [2,50,350,100,3,0,3,0,0,-1,30], [3,750,250,100,3,0,3,0,0,-1,30], [4,50,250,100,3,0,3,0,0,-1,30], [5,750,350,100,3,0,3,0,0,-1,30]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 12(Real time = 11:50:45.590248)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:45.608132)~~~~~~
+Type= 0 UserCode -1
+{'frame': 12, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,29], [1,700,300,100,3,0,3,0,0,-1,29], [2,50,350,100,3,0,3,0,0,-1,29], [3,750,250,100,3,0,3,0,0,-1,29], [4,50,250,100,3,0,3,0,0,-1,29], [5,750,350,100,3,0,3,0,0,-1,29]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 13(Real time = 11:50:45.733335)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:45.742312)~~~~~~
+Type= 0 UserCode -1
+{'frame': 13, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,28], [1,700,300,100,3,0,3,0,0,-1,28], [2,50,350,100,3,0,3,0,0,-1,28], [3,750,250,100,3,0,3,0,0,-1,28], [4,50,250,100,3,0,3,0,0,-1,28], [5,750,350,100,3,0,3,0,0,-1,28]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 14(Real time = 11:50:45.865640)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:45.875614)~~~~~~
+Type= 0 UserCode -1
+{'frame': 14, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,27], [1,700,300,100,3,0,3,0,0,-1,27], [2,50,350,100,3,0,3,0,0,-1,27], [3,750,250,100,3,0,3,0,0,-1,27], [4,50,250,100,3,0,3,0,0,-1,27], [5,750,350,100,3,0,3,0,0,-1,27]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 15(Real time = 11:50:45.998354)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:46.008326)~~~~~~
+Type= 0 UserCode -1
+{'frame': 15, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,26], [1,700,300,100,3,0,3,0,0,-1,26], [2,50,350,100,3,0,3,0,0,-1,26], [3,750,250,100,3,0,3,0,0,-1,26], [4,50,250,100,3,0,3,0,0,-1,26], [5,750,350,100,3,0,3,0,0,-1,26]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 16(Real time = 11:50:46.130396)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:46.139371)~~~~~~
+Type= 0 UserCode -1
+{'frame': 16, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,25], [1,700,300,100,3,0,3,0,0,-1,25], [2,50,350,100,3,0,3,0,0,-1,25], [3,750,250,100,3,0,3,0,0,-1,25], [4,50,250,100,3,0,3,0,0,-1,25], [5,750,350,100,3,0,3,0,0,-1,25]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 17(Real time = 11:50:46.257406)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:46.266382)~~~~~~
+Type= 0 UserCode -1
+{'frame': 17, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,24], [1,700,300,100,3,0,3,0,0,-1,24], [2,50,350,100,3,0,3,0,0,-1,24], [3,750,250,100,3,0,3,0,0,-1,24], [4,50,250,100,3,0,3,0,0,-1,24], [5,750,350,100,3,0,3,0,0,-1,24]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 18(Real time = 11:50:46.392388)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:46.401364)~~~~~~
+Type= 0 UserCode -1
+{'frame': 18, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,23], [1,700,300,100,3,0,3,0,0,-1,23], [2,50,350,100,3,0,3,0,0,-1,23], [3,750,250,100,3,0,3,0,0,-1,23], [4,50,250,100,3,0,3,0,0,-1,23], [5,750,350,100,3,0,3,0,0,-1,23]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+Flash Succeed
+Move Succeed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+Update balls Succeed
+Update Time Succeed
+-----------------Time = 19(Real time = 11:50:46.535378)-----------------
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:46.544353)~~~~~~
+Type= 0 UserCode -1
+{'frame': 19, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,22], [1,700,300,100,3,0,3,0,0,-1,22], [2,50,350,100,3,0,3,0,0,-1,22], [3,750,250,100,3,0,3,0,0,-1,22], [4,50,250,100,3,0,3,0,0,-1,22], [5,750,350,100,3,0,3,0,0,-1,22]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+Send Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:46.617160)~~~~~~
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+AI: 2
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+
+Listen Succeed
+~~~~~~                        ~~~~~~
+Flash Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:46.644128)~~~~~~
+AI: 1
+Hurt and Death Succeed
+
+Cast Succeed
+~~~~~~                        ~~~~~~
+Shoot Succeed
+Update balls Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:46.675012)~~~~~~
+AI: 0
+Update Time Succeed
+
+-----------------Time = 20(Real time = 11:50:46.689964)-----------------
+Rebirth Succeed
+             ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:46.703927)~~~~~~
+~~~~~~Send Msg(Real time = 11:50:46.704924)~~~~~~
+AI: 1
+Type= 0 UserCode -1
+
+frame': 20, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,21], [1,700,300,100,3,0,3,0,0,-1,21], [2,50,350,100,3,0,3,0,0,-1,21], [3,750,250,100,3,0,3,0,0,-1,21], [4,50,250,100,3,0,3,0,0,-1,21], [5,750,350,100,3,0,3,0,0,-1,21]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+~~~~~~                        ~~~~~~
+Send Succeed
+ Msg(Real time = 11:50:46.731860)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:46.761772)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:46.789698)~~~~~~
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+AI: 2
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+
+sten Succeed
+~~~~~~                        ~~~~~~
+Flash Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:46.820620)~~~~~~
+Move Succeed
+AI: 0
+Hurt and Death Succeed
+
+Cast Succeed
+Shoot Succeed
+~~~~~~                        ~~~~~~
+Update balls Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:46.855533)~~~~~~
+AI: 2
+Update Time Succeed
+
+-----------------Time = 21(Real time = 11:50:46.869484)-----------------
+~~~~~~                        ~~~~~~
+Rebirth Succeed
+~~~~~~Send Msg(Real time = 11:50:46.885442)~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:46.885442)~~~~~~
+Type= 0 UserCode -1
+AI: 1
+
+{'frame': 21, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,20], [1,700,300,100,3,0,3,0,0,-1,20], [2,50,350,100,3,0,3,0,0,-1,20], [3,750,250,100,3,0,3,0,0,-1,20], [4,50,250,100,3,0,3,0,0,-1,20], [5,750,350,100,3,0,3,0,0,-1,20]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:46.914364)~~~~~~
+Send Succeed
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:46.945282)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+~~~~~~Recv Bad Msg(Real time = 11:50:46.978193)~~~~~~
+AI: 1
+Listen Succeed
+
+Flash Succeed
+~~~~~~                        ~~~~~~
+Move Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.009112)~~~~~~
+Hurt and Death Succeed
+AI: 0
+Cast Succeed
+Shoot Succeed
+
+Update balls Succeed
+        ~~~~~~
+Update Time Succeed
+al time = 11:50:47.041026)~~~~~~
+AI: 2
+-----------------Time = 22(Real time = 11:50:47.048006)-----------------
+
+Rebirth Succeed
+~~~~~~                        ~~~~~~
+~~~~~~Send Msg(Real time = 11:50:47.058449)~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.062462)~~~~~~
+Type= 0 UserCode -1
+{'frame': 22, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,19], [1,700,300,100,3,0,3,0,0,-1,19], [2,50,350,100,3,0,3,0,0,-1,19], [3,750,250,100,3,0,3,0,0,-1,19], [4,50,250,100,3,0,3,0,0,-1,19], [5,750,350,100,3,0,3,0,0,-1,19]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+AI: 1
+~~~~~~                        ~~~~~~
+
+Send Succeed
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.080427)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.098345)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.116341)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+~~~~~~Recv Bad Msg(Real time = 11:50:47.132283)~~~~~~
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+AI: 2
+Listen Succeed
+
+Flash Succeed
+Move Succeed
+~~~~~~                        ~~~~~~
+Hurt and Death Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.149209)~~~~~~
+Cast Succeed
+AI: 0
+Shoot Succeed
+
+Update balls Succeed
+~~~~~~                        ~~~~~~
+Update Time Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.165200)~~~~~~
+-----------------Time = 23(Real time = 11:50:47.170153)-----------------
+AI: 1
+Rebirth Succeed
+
+~~~~~~Send Msg(Real time = 11:50:47.177163)~~~~~~
+~~~~~~                        ~~~~~~
+Type= 0 UserCode -1
+~~~~~~Recv Bad Msg(Real time = 11:50:47.181157)~~~~~~
+{'frame': 23, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,18], [1,700,300,100,3,0,3,0,0,-1,18], [2,50,350,100,3,0,3,0,0,-1,18], [3,750,250,100,3,0,3,0,0,-1,18], [4,50,250,100,3,0,3,0,0,-1,18], [5,750,350,100,3,0,3,0,0,-1,18]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+AI: 2
+~~~~~~                        ~~~~~~
+
+~~~~~~                        ~~~~~~
+Send Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.199075)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.215061)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.231018)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.246947)~~~~~~
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+AI: 2
+Listen Succeed
+
+~~~~~~                        ~~~~~~
+Flash Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.262934)~~~~~~
+Move Succeed
+Hurt and Death Succeed
+AI: 1
+
+Cast Succeed
+Shoot Succeed
+~~~~~~                        ~~~~~~
+Update balls Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.279887)~~~~~~
+Update Time Succeed
+AI: 0
+-----------------Time = 24(Real time = 11:50:47.288863)-----------------
+
+~~~~~~                        ~~~~~~
+Rebirth Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.296843)~~~~~~
+~~~~~~Send Msg(Real time = 11:50:47.297812)~~~~~~
+Type= 0 UserCode -1
+AI: 2
+{'frame': 24, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,17], [1,700,300,100,3,0,3,0,0,-1,17], [2,50,350,100,3,0,3,0,0,-1,17], [3,750,250,100,3,0,3,0,0,-1,17], [4,50,250,100,3,0,3,0,0,-1,17], [5,750,350,100,3,0,3,0,0,-1,17]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+
+~~~~~~                        ~~~~~~
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.313768)~~~~~~
+Send Succeed
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.329727)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.345712)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.362639)~~~~~~
+AI: 2
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+~~~~~~                        ~~~~~~
+Flash Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.378595)~~~~~~
+AI: 1
+cceed
+Hurt and Death Succeed
+Cast Succeed
+Shoot Succeed
+
+~~~~~~                        ~~~~~~
+Update balls Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.407523)~~~~~~
+Update Time Succeed
+AI: 0
+-----------------Time = 25(Real time = 11:50:47.412541)-----------------
+Rebirth Succeed
+
+~~~~~~Send Msg(Real time = 11:50:47.425500)~~~~~~
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.430458)~~~~~~
+Type= 0 UserCode -1
+AI: 2
+{'frame': 25, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,16], [1,700,300,100,3,0,3,0,0,-1,16], [2,50,350,100,3,0,3,0,0,-1,16], [3,750,250,100,3,0,3,0,0,-1,16], [4,50,250,100,3,0,3,0,0,-1,16], [5,750,350,100,3,0,3,0,0,-1,16]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+
+~~~~~~                        ~~~~~~
+~~~~~~                        ~~~~~~
+Send Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.453910)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.476877)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.502808)~~~~~~
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+AI: 0
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+
+Listen Succeed
+~~~~~~                        ~~~~~~
+Flash Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.527725)~~~~~~
+Move Succeed
+AI: 1
+Hurt and Death Succeed
+Cast Succeed
+~~~~~~                        ~~~~~~
+Shoot Succeed
+Update balls Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.552647)~~~~~~
+Update Time Succeed
+AI: 2
+
+-----------------Time = 26(Real time = 11:50:47.562621)-----------------
+~~~~~~                        ~~~~~~
+Rebirth Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.576613)~~~~~~
+~~~~~~Send Msg(Real time = 11:50:47.576613)~~~~~~
+AI: 1
+Type= 0 UserCode -1
+
+{'frame': 26, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,15], [1,700,300,100,3,0,3,0,0,-1,15], [2,50,350,100,3,0,3,0,0,-1,15], [3,750,250,100,3,0,3,0,0,-1,15], [4,50,250,100,3,0,3,0,0,-1,15], [5,750,350,100,3,0,3,0,0,-1,15]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~                        ~~~~~~
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.602513)~~~~~~
+Send Succeed
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.622460)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.650415)~~~~~~
+AI: 1
+Player 0: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+~~~~~~                        ~~~~~~
+Player 1: {'flag': 1, 'move': [[-1, -1], [-1, -1], [-1, -1]], 'shoot': [[-1, -1], [-1, -1], [-1, -1]], 'meteor': [[-1, -1], [-1, -1], [-1, -1]], 'flash': [False, False, False]}
+Listen Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.666343)~~~~~~
+Flash Succeed
+AI: 0
+
+ve Succeed
+~~~~~~                        ~~~~~~
+Cast Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.682299)~~~~~~
+Shoot Succeed
+AI: 2
+
+Update balls Succeed
+~~~~~~                        ~~~~~~
+Update Time Succeed
+~~~~~~Recv Bad Msg(Real time = 11:50:47.698256)~~~~~~
+-----------------Time = 27(Real time = 11:50:47.698256)-----------------
+Rebirth Succeed
+AI: 2
+
+~~~~~~Send Msg(Real time = 11:50:47.707232)~~~~~~
+Type= 0 UserCode -1
+~~~~~~                        ~~~~~~
+{'frame': 27, 'humans': '[[0,100,300,100,3,0,3,0,0,-1,14], [1,700,300,100,3,0,3,0,0,-1,14], [2,50,350,100,3,0,3,0,0,-1,14], [3,750,250,100,3,0,3,0,0,-1,14], [4,50,250,100,3,0,3,0,0,-1,14], [5,750,350,100,3,0,3,0,0,-1,14]]', 'fireballs': '[]', 'meteors': '[]', 'balls': '[[50,300,-1,0], [750,300,-1,1]]', 'scores': '[0.0, 0.0]'}
+~~~~~~Recv Bad Msg(Real time = 11:50:47.715211)~~~~~~
+~~~~~~                        ~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.732166)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.749984)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.767220)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.784639)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.801553)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.819475)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.836459)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.862363)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.887296)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.910233)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.938188)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.963095)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:47.987058)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.010994)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.031908)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.050888)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.068838)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.086761)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.104714)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.121697)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.138624)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.155605)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.173366)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.190352)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.207306)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.223265)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.240218)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.258142)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.275099)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.299063)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.322975)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.345937)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.373867)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.407742)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.433673)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.455615)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.474592)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.491550)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.509498)~~~~~~
+AI: 1
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.526458)~~~~~~
+AI: 2
+
+~~~~~~                        ~~~~~~
+~~~~~~Recv Bad Msg(Real time = 11:50:48.549392)~~~~~~
+AI: 0
+
+~~~~~~                        ~~~~~~
