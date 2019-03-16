@@ -54,7 +54,7 @@ void playerAI() {
 		Point now = logic->humans[i * logic->map.faction_number + (1 - logic->faction)].position;
 		logic->shoot(i, Point(now.x + 1, now.y + 1));
 	}
-	*/
+	*//*
 	if (logic->crystal[1 - logic->faction].belong < 0) {
 		for (int i = 0; i < logic->map.human_number; i++) {
 			Point now = logic->humans[i * logic->map.faction_number + logic->faction].position;
@@ -74,5 +74,6 @@ void playerAI() {
 			logic->shoot(i, Point(now.x - 5, now.y));
 		}
 	}
-
+	*/
+	return;
 }

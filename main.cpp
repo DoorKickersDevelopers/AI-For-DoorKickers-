@@ -20,8 +20,16 @@ char *JsonFile;
 bool gameover = false;
 int jsonlen = 2000;
 
-void quyinhao(string s) {
+void quyinhao(string& s) {
 	//string s = string(JsonFile);
+	regex rep("(: )\"(.*?)\"");
+	s = regex_replace(s, rep, "$1$2");
+	//s = regex_replace(s, regex("None"), "null");
+	//strcpy(JsonFile, s.c_str());
+}
+
+void quyinhao() {
+	string s = string(JsonFile);
 	regex rep("(: )\"(.*?)\"");
 	s = regex_replace(s, rep, "$1$2");
 	//s = regex_replace(s, regex("None"), "null");
@@ -114,10 +122,11 @@ void readMap() {
 	for (int i = 0; i < pixels_raw.size(); i++) {
 		vector<bool> line;
 		for (int j = 0; j < pixels_raw[i].size(); j++) {
-			if (pixels_raw[i][j].asInt() == 0)
+			/*if (pixels_raw[i][j].asInt() == 0)
 				line.push_back(true);
 			else
-				line.push_back(false);
+				line.push_back(false);*/
+			line.push_back(pixels_raw[i][j].asBool());
 		}
 		pixels.push_back(line);
 	}
@@ -129,7 +138,7 @@ void readFrame() {
 	Json::Reader reader;
 	Json::Value root;
 
-	quyinhao(string(JsonFile));
+	quyinhao();
 
 	if (!reader.parse(JsonFile, JsonFile + strlen(JsonFile), root)) {
 		cerr << "Parse failed1." << endl;
