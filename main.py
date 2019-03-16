@@ -1,5 +1,5 @@
 PYGAME = False
-DEBUG = True
+DEBUG = False
 
 if PYGAME:
     import pygame
