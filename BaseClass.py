@@ -139,8 +139,8 @@ class Human:
     def __repr__(self):
         return "[{},{},{},{},{},{},{},{},{},{},{}]".format(
             self.number,
-            round(self.pos.x, precision),
-            round(self.pos.y, precision),
+            self.pos.x,
+            self.pos.y,
             self.hp,
             self.meteor_number,
             self.meteor_time,
