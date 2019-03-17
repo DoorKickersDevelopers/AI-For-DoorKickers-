@@ -89,7 +89,7 @@ void readMap() {
 	vector<vector<Point>> birth_places;
 	for (int i = 0; i < birth_places_raw.size(); i++) {
 		vector<Point> one;
-		for (int j = 0; j < birth_places_raw[i].size(); i++) {
+		for (int j = 0; j < birth_places_raw[i].size(); j++) {
 			Point p(birth_places_raw[i][j][0].asDouble(), birth_places_raw[i][j][1].asDouble());
 			one.push_back(p);
 		}
@@ -257,7 +257,9 @@ void sendMessage(bool gameover = false) {
 	cout.flush();
 }
 
+//char mybuffer[32768];
 int main() {
+	//setvbuf(stdin, mybuffer, _IOFBF, sizeof(mybuffer));
 	JsonFile = new char[jsonlen];
 	Logic* logic = Logic::Instance();
 
