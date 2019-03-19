@@ -22,7 +22,7 @@ friendly_fire = False
 precision = 3
 
 # load the map,assert the map's legality
-map_dir = "." + os.sep + "Maps" + os.sep
+map_dir = os.getcwd() + os.sep + "Maps" + os.sep
 map_names = os.listdir(map_dir)
 map_names.sort()
 map_id = random.randint(0, len(map_names) - 1)
