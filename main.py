@@ -20,6 +20,8 @@ BYTEORDER = 'big'
 
 test_num = random.randint(0, 9999)
 
+fireball_no = 0
+
 if DEBUG:
     logfile_dir = "." + os.sep + "DEBUG" + os.sep
     if not os.path.exists(logfile_dir):
@@ -239,6 +241,37 @@ def Ev(*Args):
     lt = []
     for Arg in Args:
         lt.append(Arg)
+
+    if DEBUG:
+        if lt[0] == 1:
+            WriteToLogFile("Player {} shoots!".format(lt[1]))
+        elif lt[0] == 2:
+            WriteToLogFile("Player {} gets {} hurt from {}!".format(
+                lt[1], lt[2], lt[3]))
+        elif lt[0] == 3:
+            WriteToLogFile("Player {} died at ({},{})!".format(
+                lt[1], lt[2], lt[3]))
+        elif lt[0] == 4:
+            WriteToLogFile("Player {} cast Meteor!".format(
+                lt[1]))
+        elif lt[0] == 5:
+            WriteToLogFile("Player {} gets ball!".format(
+                lt[1]))
+        elif lt[0] == 6:
+            WriteToLogFile("A Fireball from {} splashes at ({},{})!".format(
+                lt[3], lt[1], lt[2]))
+        elif lt[0] == 7:
+            WriteToLogFile("A Meteor from {} impacts at ({},{})!".format(
+                lt[3], lt[1], lt[2]))
+        elif lt[0] == 8:
+            WriteToLogFile("Player {} reincarnate!".format(
+                lt[1]))
+        elif lt[0] == 9:
+            WriteToLogFile("Player {} flashes from ({},{}) to ({},{})!".format(
+                lt[1], lt[2], lt[3], lt[4], lt[5]))
+        elif lt[0] == 10:
+            WriteToLogFile("Player {} goals with faction{}'s ball!".format(
+                lt[1], lt[2]))
     events.append(lt)
 
 
@@ -285,8 +318,11 @@ def move(human, pos):
     if human.death_time !=-1:
         return
     pos = Point(pos[0], pos[1])
+    x, y = PointToCoordinate(pos)
     if L2Distance(human.pos, pos) <= eps + human_velocity and LegalPos(pos, walls):
         human.pos = pos
+        if DEBUG:
+            WriteToLogFile("human {} moves to {}".format(human.number,pos))
 
 
 def fireball_hurt(fireball, human, hurt_record):
@@ -340,8 +376,10 @@ def shoot(human, pos):
         return
     ang = Angle(human.pos, pos)
     pos = MoveAlongAngle(human.pos, ang, splash_radius)
+    global fireball_no
     if LegalPos(pos, walls):
-        fireballs.append(Fireball(pos, ang, human.number))
+        fireball_no+=1
+        fireballs.append(Fireball(pos, ang, human.number,fireball_no))
         human.fireball_time = human.fireball_interval
         Ev(1, human.number)
 
@@ -399,7 +437,7 @@ def RunGame():
         timecnt += 1
         EvClear()
         if DEBUG:
-            WriteToLogFile("-----------------Time = {}(Real time = {})-----------------".format(
+            WriteToLogFile("--------------------------Time = {}(Real time = {})--------------------------".format(
                 timecnt, datetime.datetime.now().strftime('%H:%M:%S.%f')))
 
         # Rebirth
@@ -463,6 +501,7 @@ def RunGame():
         for fac, a in enumerate(analysis):
             for i, pos in enumerate(a["move"]):
                 h_id = i * faction_number + fac
+                #WriteToLogFile("*** human[{}] goto"+str(pos))
                 move(humans[h_id], pos)
 
         for ball in balls:

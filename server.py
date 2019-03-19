@@ -27,7 +27,7 @@ class judger (threading.Thread):
         while True:
             Len = int.from_bytes(t.read(4), byteorder=BYTEORDER, signed=True)
             Type = int.from_bytes(t.read(4), byteorder=BYTEORDER, signed=True)
-            if Type == 0:  # 用户AI发送的包
+            if Type == 0:
                 print("error: {}".format(str(error)))
                 UserCode = int.from_bytes(
                     t.read(4), byteorder=BYTEORDER, signed=True)
@@ -67,7 +67,6 @@ class judger (threading.Thread):
         print("end judger")
 
 
-# 在双引号内输入命令
 if platform.system() == "Windows":
     jud = judger("python main.py")
 else:

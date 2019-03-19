@@ -133,7 +133,7 @@ def PlayJsonFile(mydir):
             pos = Point(fireballs[i][0], fireballs[i][1])
             rot = fireballs[i][2]
             from_number = fireballs[i][3]
-            fireballs[i] = Fireball(pos, rot, from_number)
+            fireballs[i] = Fireball(pos, rot, from_number, fireballs[i][4])
 
         bs = json.loads(Data["balls"])
         for i in range(faction_number):

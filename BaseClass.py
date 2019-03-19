@@ -18,6 +18,9 @@ class Point(object):
     def __mul__(self, p):
         return self.x * p.y - self.y * p.x
 
+    def __repr__(self):
+        return "[{},{}]".format(self.x, self.y)
+
 
 class Line(object):
     def __init__(self, p1, p2):
@@ -80,17 +83,19 @@ class Fireball:
     hurt = splash_hurt
     attack_radius = splash_radius
 
-    def __init__(self, pos, rot, from_number):
+    def __init__(self, pos, rot, from_number, no):
         self.pos = copy.deepcopy(pos)
         self.rot = rot
         self.from_number = from_number
+        self.no = no
 
     def __repr__(self):
-        return "[{},{},{},{}]".format(
+        return "[{},{},{},{},{}]".format(
             round(self.pos.x, precision),
             round(self.pos.y, precision),
             round(self.rot, precision),
-            self.from_number
+            self.from_number,
+            self.no
         )
 
 
