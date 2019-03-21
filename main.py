@@ -1,4 +1,4 @@
-PYGAME = False
+PYGAME = True
 DEBUG = False
 
 if PYGAME:
@@ -496,7 +496,7 @@ def RunGame():
             "fireballs": str(fireballs),
             "meteors": str(meteors),
             "balls": str(balls),
-            "scores": str(score)
+            "scores": str(score),
             "bonus":str(bonuses)
         }
         sendLog(log)
