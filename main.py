@@ -406,6 +406,7 @@ def cast(human, pos):
     pos = Point(pos[0], pos[1])
     if not PointInRectangle(pos, Rectangle(0, width, 0, height)):
         return
+    global meteor_no
     if L2Distance(human.pos, pos) <= eps + meteor_distance:
         meteor_no += 1
         Ev(4, human.number)
