@@ -50,7 +50,7 @@ void playerAI() {
 		}
 	}
 	fcount++;
-	*/
+	*//*
 	if(logic->map.bonus_places.size() > 0 && logic->map.bonus_places[0].x > 0 && logic->bonus.size() > 0)
 		if (logic->bonus[0])
 			for (int i = 0; i < logic->map.human_number; i++) {
@@ -61,7 +61,7 @@ void playerAI() {
 			for (int i = 0; i < logic->map.human_number; i++) {
 				Point now = logic->humans[i * logic->map.faction_number + (logic->faction)].position;
 				logic->move(i, Point(now.x + 1, now.y + 1));
-			}
+			}*/
 	/*
 	if (logic->crystal[1 - logic->faction].belong < 0) {
 		for (int i = 0; i < logic->map.human_number; i++) {
