@@ -95,12 +95,13 @@ public:
 	vector<vector<Point>> birth_places;//每个人的出生地
 	vector<Point> crystal_places;//每个势力的水晶初始位置
 	vector<Point> target_places;//每个势力的水晶搬运目标位置
+	vector<Point> bonus_places;//每个加分道具的位置
 	//vector<Wall> walls;//墙
 	vector<vector<bool>> pixels;//游戏地图的像素信息，(x, y)处为true表示[x,x+1]×[y,y+1]处不是墙
 	int time_of_game;//游戏总时间
 
 	Map() {};
-	void set(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<vector<bool>> p, int ti) {
+	void set(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Point> bo, vector<vector<bool>> p, int ti) {
 		width = w;
 		height = h;
 		faction_number = f;
@@ -108,6 +109,7 @@ public:
 		birth_places = b;
 		crystal_places = c;
 		target_places = t;
+		bonus_places = bo;
 		//walls = wa;
 		pixels = p;
 		time_of_game = ti;
@@ -129,6 +131,7 @@ public:
 	vector<Fireball> fireballs;//所有火球
 	vector<Meteor> meteors;//所有陨石
 	vector<Crystal> crystal;//所有水晶
+	vector<bool> bonus;//加分道具是否存在(可以被吃掉)
 
 	Operation ope;//本次决策操作的集合，选手可以忽略
 
@@ -152,7 +155,7 @@ public:
 	bool isWall(int x, int y);
 	
 	//请忽略以下函数
-	void initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<vector<bool>> p, int ti);
-	void getFrame(int frame, vector<Human> h, vector<Fireball> b, vector<Meteor> g, vector<Crystal> ba);
+	void initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Point> bo, vector<vector<bool>> p, int ti);
+	void getFrame(int frame, vector<Human> h, vector<Fireball> b, vector<Meteor> g, vector<Crystal> ba, vector<bool> bo);
 	void resetOpe();
 };

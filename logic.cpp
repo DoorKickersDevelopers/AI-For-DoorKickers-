@@ -40,16 +40,17 @@ bool Logic::isWall(int x, int y){
 	return map.pixels[x][y];
 }
 
-void Logic::initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<vector<bool>> p, int ti) {
-	return map.set(w, h, f, hn, b, c, t, p, ti);
+void Logic::initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Point> bo, vector<vector<bool>> p, int ti) {
+	return map.set(w, h, f, hn, b, c, t, bo, p, ti);
 }
 
-void Logic::getFrame(int f, vector<Human> h, vector<Fireball> b, vector<Meteor> g, vector<Crystal> ba) {
+void Logic::getFrame(int f, vector<Human> h, vector<Fireball> b, vector<Meteor> g, vector<Crystal> ba, vector<bool> bo) {
 	frame = f;
 	humans = h;
 	fireballs = b;
 	meteors = g;
 	crystal = ba;
+	bonus = bo;
 
 
 	/*

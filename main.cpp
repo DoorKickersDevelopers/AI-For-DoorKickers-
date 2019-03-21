@@ -110,6 +110,13 @@ void readMap() {
 		target_places.push_back(p);
 	}
 
+	Json::Value bonus_places_raw = root["bonus_places"];
+	vector<Point> bonus_places;
+	for (int i = 0; i < bonus_places_raw.size(); i++) {
+		Point p(bonus_places_raw[i][0].asDouble(), bonus_places_raw[i][1].asDouble());
+		bonus_places.push_back(p);
+	}
+
 	Json::Value pixels_raw = root["walls"];
 	/*
 	vector<Wall> walls;
@@ -131,7 +138,7 @@ void readMap() {
 		pixels.push_back(line);
 	}
 
-	logic->initMap(width, height, faction_number, human_number, birth_places, ball_places, target_places, pixels, time_of_game);
+	logic->initMap(width, height, faction_number, human_number, birth_places, ball_places, target_places, bonus_places, pixels, time_of_game);
 }
 
 void readFrame() {
@@ -182,7 +189,13 @@ void readFrame() {
 		crystal.push_back(tem);
 	}
 
-	Logic::Instance()->getFrame(frame, humans, fireballs, meteors, crystal);
+	vector<bool> bonus;
+	Json::Value bonus_raw = root["bonus"];
+	for (int i = 0; i < bonus_raw.size(); i++) {
+		bonus.push_back(bonus_raw[i].asBool());
+	}
+
+	Logic::Instance()->getFrame(frame, humans, fireballs, meteors, crystal, bonus);
 }
 
 void readOnce() {
@@ -257,7 +270,7 @@ void sendMessage(bool gameover = false) {
 	cout.flush();
 }
 
-//char mybuffer[32768];
+//char mybuffer[4096];
 int main() {
 	//setvbuf(stdin, mybuffer, _IOFBF, sizeof(mybuffer));
 	JsonFile = new char[jsonlen];
@@ -274,6 +287,8 @@ int main() {
 	
 	while (true) {
 		rewind(stdin);
+		//setbuf(stdin, NULL);
+		//memset(mybuffer, 0, sizeof(mybuffer));
 
 		for (int i = 0; i < 4; i++) {
 			scanf("%c", &lenr[i]);
