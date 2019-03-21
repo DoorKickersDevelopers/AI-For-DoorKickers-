@@ -98,7 +98,8 @@ if PYGAME:
         for ball in balls:
             draw_ball(ball)
         for bonus in bonuses:
-            draw_bonus(bonus)
+            if bonus.time==-1:
+                draw_bonus(bonus)
         pygame.display.flip()
 
 events = []
@@ -279,6 +280,10 @@ def Ev(*Args):
         elif lt[0] == 10:
             WriteToLogFile("Player {} goals with faction{}'s ball!".format(
                 lt[1], lt[2]))
+        elif lt[0] == 11:
+            WriteToLogFile("Bonus_place {} generate a bonus!".format(lt[1]))
+        elif lt[0] == 12:
+            WriteToLogFile("Player {} get a bonus at bonus_place {}".format(lt[1],lt[2]))
     events.append(lt)
 
 
@@ -644,7 +649,8 @@ def RunGame():
             meteor.time -= 1
 
         for bonus in bonuses:
-            bonus.time-=1
+            if bonus.time > 0:
+                bonus.time-=1
 
         if DEBUG:
             WriteToLogFile("Update Time Succeed")

@@ -34,6 +34,7 @@ def PlayJsonFile(mydir):
     birth_places = JSON["birth_places"]
     ball_places = JSON["ball_places"]
     target_places = JSON["target_places"]
+    bonus_places = JSON["bonus_places"]
     walls = JSON["walls"]
     walls = np.asarray(walls).astype(np.bool)
     human_number = JSON["human_number"]
@@ -72,7 +73,11 @@ def PlayJsonFile(mydir):
         textImage = myfont.render(str(human.hp), True, blue)
         screen.blit(textImage, (human.pos.x, human.pos.y))
 
-    def draw_all(humans, walls, balls, fireballs, meteors, targets):
+    def draw_bonus(bonus):
+        pygame.draw.circle(screen, yellow, (int(bonus.pos.x),
+                                            int(bonus.pos.y)), int(bonus.radius))
+
+    def draw_all(humans, walls, balls, fireballs, meteors, targets, bonuses):
         screen.fill(white)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -92,10 +97,14 @@ def PlayJsonFile(mydir):
             draw_fireball(fireball)
         for ball in balls:
             draw_ball(ball)
+        for bonus in bonuses:
+            if bonus.time == -1:
+                draw_bonus(bonus)
         pygame.display.flip()
 
     targets = [TargetArea(Point(t[0], t[1])) for t in target_places]
-
+    bonuses = [Bonus(num, Point(t[0], t[1]))
+               for num, t in enumerate(bonus_places)]
     humans = [None] * faction_number * human_number
     balls = [None] * faction_number
 
@@ -124,8 +133,15 @@ def PlayJsonFile(mydir):
             pos = Point(meteors[i][0], meteors[i][1])
             lasttime = meteors[i][2]
             from_number = meteors[i][3]
-            meteors[i] = Meteor(pos, from_number)
+            meteors[i] = Meteor(pos, from_number, meteors[i][4])
             meteors[i].time = lasttime
+
+        b = json.loads(Data["bonus"])
+        for i, bb in enumerate(b):
+            if bb == 1:
+                bonuses[i].time = -1
+            else:
+                bonuses[i].time = 0
 
         fireballs = json.loads(Data["fireballs"])
         num_of_fireballs = len(fireballs)
@@ -142,7 +158,7 @@ def PlayJsonFile(mydir):
             balls[i].belong = bs[i][2]
             balls[i].faction = bs[i][3]
 
-        draw_all(humans, walls, balls, fireballs, meteors, targets)
+        draw_all(humans, walls, balls, fireballs, meteors, targets, bonuses)
 
         events = json.loads(Data["events"])
         if len(events) > 0:
@@ -178,6 +194,11 @@ def PlayJsonFile(mydir):
                     event[1], event[2], event[3], event[4], event[5]))
             elif event[0] == 10:
                 print("Player {} goals with faction{}'s ball!".format(
+                    event[1], event[2]))
+            elif event[0] == 11:
+                print("Bonus_place {} generate a bonus!".format(event[1]))
+            elif event[0] == 12:
+                print("Player {} get a bonus at bonus_place {}".format(
                     event[1], event[2]))
 
         time.sleep(1.0 / 25)
