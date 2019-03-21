@@ -35,6 +35,7 @@ height = JSON["height"]
 faction_number = JSON["faction_number"]
 birth_places = JSON["birth_places"]
 ball_places = JSON["ball_places"]
+bonus_places = JSON["bonus_places"]
 target_places = JSON["target_places"]
 walls = JSON["walls"]
 walls = np.asarray(walls).astype(np.bool)
@@ -48,7 +49,6 @@ frames_of_game = JSON["time_of_game"] * frames_per_second
 time_of_round = 1.0 / frames_per_second
 frames_of_death = 5 * frames_per_second
 frames_of_invincible = 2 * frames_per_second
-
 
 # some constants about human
 human_hp = 100
@@ -78,8 +78,14 @@ ball_radius = 5
 # some constants about target district
 target_radius = 50
 
+# some constants about bonus district
+bonus_radius = 2
+bonus_time_low = 3 * frames_per_second
+bonus_time_high = 5 * frames_per_second
+
 # some constants about score
 kill_score = 5
 killed_score = 0
 goal_score = 20
 goaled_score = 0
+bonus_score = 10

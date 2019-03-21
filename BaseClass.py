@@ -2,6 +2,7 @@ import math
 from math import sqrt, fabs, atan2
 from Arguments import *
 import copy
+import random
 
 
 class Point(object):
@@ -103,18 +104,39 @@ class Meteor:
     hurt = explode_hurt
     attack_radius = explode_radius
 
-    def __init__(self, pos, from_number):
+    def __init__(self, pos, from_number, no):
         self.time = meteor_delay
         self.pos = pos
         self.from_number = from_number
+        self.no = no
 
     def __repr__(self):
-        return "[{},{},{},{}]".format(
+        return "[{},{},{},{},{}]".format(
             round(self.pos.x, precision),
             round(self.pos.y, precision),
             self.time,
-            self.from_number
+            self.from_number,
+            self.no
         )
+
+
+class Bonus:
+    low_time = bonus_time_low
+    high_time = bonus_time_high
+    radius = bonus_radius
+
+    def __init__(self, number, pos):
+        self.number = number
+        self.pos = pos
+
+    def reset(self):
+        self.time = random.randint(self.low_time, self.high_time)
+
+    def __repr__(self):
+        if self.time == -1:
+            return "1"
+        else:
+            return "0"
 
 
 class Human:

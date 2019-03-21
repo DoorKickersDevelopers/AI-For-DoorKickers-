@@ -21,6 +21,7 @@ BYTEORDER = 'big'
 test_num = random.randint(0, 9999)
 
 fireball_no = 0
+meteor_no = 0
 
 if DEBUG:
     logfile_dir = "." + os.sep + "DEBUG" + os.sep
@@ -58,6 +59,9 @@ if PYGAME:
     def draw_target(target):
         pygame.draw.circle(screen, gray, (int(target.pos.x),
                                           int(target.pos.y)), int(target.radius))
+    def draw_bonus(bonus):
+        pygame.draw.circle(screen, yellow, (int(bonus.pos.x), int(bonus.pos.y)), int(bonus.radius))
+
 
     def draw_meteor(meteor):
         pygame.draw.circle(screen, pink, (int(meteor.pos.x), int(
@@ -73,7 +77,7 @@ if PYGAME:
         textImage = myfont.render(str(human.hp), True, blue)
         screen.blit(textImage, (human.pos.x, human.pos.y))
 
-    def draw_all(humans, walls, balls, fireballs, meteors, targets):
+    def draw_all(humans, walls, balls, fireballs, meteors, targets , bonuses):
         screen.fill(white)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -93,6 +97,8 @@ if PYGAME:
             draw_fireball(fireball)
         for ball in balls:
             draw_ball(ball)
+        for bonus in bonuses:
+            draw_bonus(bonus)
         pygame.display.flip()
 
 events = []
@@ -102,6 +108,7 @@ balls = [None] * faction_number
 fireballs = []
 meteors = []
 targets = [TargetArea(Point(t[0], t[1])) for t in target_places]
+bonuses = [Bonus(num,Point(t[0],t[1])) for num,t in enumerate(bonus_places)]
 score = [0.0] * faction_number
 
 
@@ -294,9 +301,13 @@ def init():
         for i, pos in enumerate(birth_place):
             humans[i * faction_number +
                    fac] = Human(i * faction_number + fac, Point(pos[0], pos[1]))
+
     for fac, ball_place in enumerate(ball_places):
         balls[fac] = Ball(Point(ball_place[0], ball_place[1]), fac)
         balls[fac].reset()
+
+    for bonus in bonuses:
+        bonus.reset()
 
 
 def flash(human, pos):
@@ -391,10 +402,11 @@ def cast(human, pos):
     if not PointInRectangle(pos, Rectangle(0, width, 0, height)):
         return
     if L2Distance(human.pos, pos) <= eps + meteor_distance:
+        meteor_no += 1
         Ev(4, human.number)
         human.meteor_time = human.meteor_interval
         human.meteor_number -= 1
-        meteors.append(Meteor(pos, human.number))
+        meteors.append(Meteor(pos, human.number,meteor_no))
 
 
 def pickupball(ball):
@@ -422,6 +434,23 @@ def goal(ball):
         score[ball.belong % faction_number] += goal_score
         score[ball.faction] += goaled_score
         ball.reset()
+
+def getbonus(bonus):
+    mindis = 1e9
+    num = -1
+    for human in humans:
+        if human.death_time==-1:
+            Dis = L2Distance(human.pos,bonus.pos)
+            if Dis < mindis:
+                mindis = Dis
+                num = human.number
+            elif Dis == mindis:
+                if score[num % faction_number] < score[human.faction]:
+                    num = human.number
+    if mindis < bonus.radius + eps:
+        score[num%faction_number]+=bonus_score
+        bonus.reset()
+        Ev(12, num,bonus.number)
 
 
 def RunGame():
@@ -451,6 +480,15 @@ def RunGame():
         if DEBUG:
             WriteToLogFile("Rebirth Succeed")
 
+        # Reset Bonus
+        for bonus in bonuses:
+            if bonus.time == 0:
+                bonus.time=-1
+                Ev(11,bonus.number)
+        if DEBUG:
+            WriteToLogFile("Reset Bonus Succeed")
+
+
         # Send State
         log = {
             "frame": timecnt,
@@ -459,11 +497,12 @@ def RunGame():
             "meteors": str(meteors),
             "balls": str(balls),
             "scores": str(score)
+            "bonus":str(bonuses)
         }
         sendLog(log)
 
         if PYGAME:
-            draw_all(humans, walls, balls, fireballs, meteors, targets)
+            draw_all(humans, walls, balls, fireballs, meteors, targets,bonuses)
 
         if DEBUG:
             WriteToLogFile("Send Succeed")
@@ -549,6 +588,11 @@ def RunGame():
         if DEBUG:
             WriteToLogFile("Hurt and Death Succeed")
 
+
+        for bonus in bonuses:
+            if bonus.time==-1:
+                getbonus(bonus)
+
         # Cast
         for fac, a in enumerate(analysis):
             for i, pos in enumerate(a["meteor"]):
@@ -599,6 +643,9 @@ def RunGame():
         for meteor in meteors:
             meteor.time -= 1
 
+        for bonus in bonuses:
+            bonus.time-=1
+
         if DEBUG:
             WriteToLogFile("Update Time Succeed")
 
@@ -609,6 +656,7 @@ def RunGame():
             "meteors": str(meteors),
             "balls": str(balls),
             "scores": str(score),
+            "bonus":str(bonuses),
             "events": str(events)
         }
 
