@@ -466,7 +466,7 @@ def RunGame():
     listener.setDaemon(True)
     listener.start()
 
-    time.sleep(0.1)
+    time.sleep(1)
 
     timecnt = 0
     while timecnt < frames_of_game:
