@@ -1,4 +1,4 @@
-PYGAME = True
+PYGAME = False
 DEBUG = False
 
 if PYGAME:
@@ -22,6 +22,8 @@ test_num = random.randint(0, 9999)
 
 fireball_no = 0
 meteor_no = 0
+
+save_dir = None
 
 if DEBUG:
     logfile_dir = "." + os.sep + "DEBUG" + os.sep
@@ -676,9 +678,12 @@ def RunGame():
     }
     sendLog(log, 2, -1)
     logs.append(log)
-    replay_dir = "." + os.sep + "Replay" + os.sep
-    if not os.path.exists(replay_dir):
-        os.mkdir(replay_dir)
+    if save_dir == None:
+        replay_dir = "." + os.sep + "Replay" + os.sep
+        if not os.path.exists(replay_dir):
+            os.mkdir(replay_dir)
+    else:
+        replay_dir = save_dir
     replay_name = "replay{}.json".format(test_num)
     with open(replay_dir + replay_name, "w")as file:
         file.write(json.dumps(logs))
@@ -692,4 +697,11 @@ def RunGame():
 
 
 if __name__ == "__main__":
-    RunGame()
+    if len(sys.argv)==1:
+        RunGame()
+    else:
+        if PYGAME or DEBUG:
+            print("Please close PYGAME and DEBUG first!")
+        else:
+            save_dir = sys.argv[1]
+            RunGame()
