@@ -9,7 +9,7 @@ int fcount = 0;
 //玩家需要完成该函数，通过调用八个指令完成决策，最后return发送决策
 void playerAI() {
 
-	//std::this_thread::sleep_for(std::chrono::milliseconds(200));
+	std::this_thread::sleep_for(std::chrono::milliseconds(200));
 	Logic * logic = Logic::Instance();
 	/*
 	if (fcount < 20) {
@@ -82,11 +82,11 @@ void playerAI() {
 			logic->shoot(i, Point(now.x - 5, now.y));
 		}
 	}
-	*//*
+	*/
 	for (int i = 0; i < logic->map.human_number; i++) {
 		Point now = logic->humans[i * logic->map.faction_number + logic->faction].position;
 		logic->move(i, Point(now.x + 3.5, now.y + 3.5));
 		logic->meteor(i, Point(logic->frame, -1));
-	}*/
+	}
 	return;
 }

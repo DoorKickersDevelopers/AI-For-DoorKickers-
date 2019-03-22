@@ -12,6 +12,10 @@
 #include <string>
 #include <regex>
 #include <fstream>
+#include <thread>
+#include <mutex>
+#include <chrono>
+
 
 using namespace std;
 
@@ -270,8 +274,144 @@ void sendMessage(bool gameover = false) {
 	cout.flush();
 }
 
-//char mybuffer[4096];
+mutex mut;
+
+int frame;
+vector<Human> humans;
+vector<Fireball> fireballs;
+vector<Meteor> meteors;
+vector<Crystal> crystal;
+vector<bool> bonus;
+
+bool hasNew = false;
+
+void read() {
+	Json::Reader reader;
+	Json::Value root;
+	int len = 0;
+	char lenr[4];
+
+	while (true) {
+
+		for (int i = 0; i < 4; i++) {
+			scanf("%c", &lenr[i]);
+		}
+		len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
+		if (len > jsonlen) {
+			while (jsonlen <= len) {
+				jsonlen *= 2;
+			}
+			delete JsonFile;
+			JsonFile = new char[jsonlen];
+		}
+		getfile(len);
+
+		quyinhao();
+
+
+		if (!reader.parse(JsonFile, JsonFile + strlen(JsonFile), root)) {
+			cerr << "Parse failed1." << endl;
+			return;
+		}
+
+
+		mut.lock();
+		hasNew = true;
+
+		frame = root["frame"].asInt();
+		if (frame == -1) {
+			gameover = true;
+			return;
+		}
+
+		Json::Value humans_raw = root["humans"];
+		for (int i = 0; i < humans_raw.size(); i++) {
+			Human tem(humans_raw[i][0].asInt(), humans_raw[i][1].asDouble(), humans_raw[i][2].asDouble(),
+				humans_raw[i][3].asInt(), humans_raw[i][4].asInt(), humans_raw[i][5].asInt(), humans_raw[i][6].asInt(),
+				humans_raw[i][7].asInt(), humans_raw[i][8].asInt(), humans_raw[i][9].asInt(), humans_raw[i][10].asInt());
+			humans.push_back(tem);
+		}
+
+		Json::Value fireballs_raw = root["fireballs"];
+		for (int i = 0; i < fireballs_raw.size(); i++) {
+			Fireball tem(fireballs_raw[i][0].asDouble(), fireballs_raw[i][1].asDouble(), fireballs_raw[i][2].asDouble(), fireballs_raw[i][3].asInt());
+			fireballs.push_back(tem);
+		}
+
+		Json::Value meteors_raw = root["meteors"];
+		for (int i = 0; i < meteors_raw.size(); i++) {
+			Meteor tem(meteors_raw[i][0].asDouble(), meteors_raw[i][1].asDouble(), meteors_raw[i][2].asInt(), meteors_raw[i][3].asInt());
+			meteors.push_back(tem);
+		}
+
+
+		Json::Value crystal_raw = root["balls"];
+		for (int i = 0; i < crystal_raw.size(); i++) {
+			Crystal tem(crystal_raw[i][0].asDouble(), crystal_raw[i][1].asDouble(), crystal_raw[i][2].asInt(), crystal_raw[i][3].asInt());
+			crystal.push_back(tem);
+		}
+
+		Json::Value bonus_raw = root["bonus"];
+		for (int i = 0; i < bonus_raw.size(); i++) {
+			bonus.push_back(bonus_raw[i].asBool());
+		}
+
+		mut.unlock();
+	}
+}
+
+void apply() {
+	while (!hasNew) {
+		if (gameover)
+			return;
+		this_thread::sleep_for(chrono::milliseconds(5));
+	}
+	mut.lock();
+	hasNew = false;
+	Logic::Instance()->getFrame(frame, humans, fireballs, meteors, crystal, bonus);
+	mut.unlock();
+}
+
 int main() {
+	JsonFile = new char[jsonlen];
+	Logic* logic = Logic::Instance();
+
+	int len = 0;
+	char lenr[4];
+	for (int i = 0; i < 4; i++) {
+		scanf("%c", &lenr[i]);
+	}
+	len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
+	getfile(len);
+	readMap();
+
+	readOnce();
+	readFrame();
+	logic->resetOpe();
+	playerAI();
+	sendMessage();
+
+	thread listen(read);
+	listen.detach();
+
+	while (true) {
+		apply();
+
+		if (gameover) {
+			sendMessage(true);
+			return 0;
+		}
+		logic->resetOpe();
+		playerAI();
+		sendMessage();
+	}
+	delete JsonFile;
+
+	return 0;
+}
+
+//char mybuffer[4096];
+int main0() {
 	//setvbuf(stdin, mybuffer, _IOFBF, sizeof(mybuffer));
 	JsonFile = new char[jsonlen];
 	Logic* logic = Logic::Instance();
@@ -286,7 +426,7 @@ int main() {
 	readMap();
 	
 	while (true) {
-		rewind(stdin);
+		//rewind(stdin);
 		//setbuf(stdin, NULL);
 		//memset(mybuffer, 0, sizeof(mybuffer));
 
