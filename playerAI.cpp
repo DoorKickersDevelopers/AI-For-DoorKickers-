@@ -8,8 +8,8 @@ int fcount = 0;
 
 //玩家需要完成该函数，通过调用八个指令完成决策，最后return发送决策
 void playerAI() {
-
-	std::this_thread::sleep_for(std::chrono::milliseconds(200));
+	if(fcount++ % 2 == 0)
+		std::this_thread::sleep_for(std::chrono::milliseconds(205));
 	Logic * logic = Logic::Instance();
 	/*
 	if (fcount < 20) {

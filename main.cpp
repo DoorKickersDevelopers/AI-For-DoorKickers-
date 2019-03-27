@@ -284,6 +284,7 @@ vector<Crystal> crystal;
 vector<bool> bonus;
 
 bool hasNew = false;
+bool ready = false;
 
 void read() {
 	Json::Reader reader;
@@ -306,67 +307,78 @@ void read() {
 		}
 		getfile(len);
 
-		quyinhao();
+		if (ready) {
+
+			quyinhao();
+
+			humans.clear();
+			fireballs.clear();
+			meteors.clear();
+			crystal.clear();
+			bonus.clear();
+
+			if (!reader.parse(JsonFile, JsonFile + strlen(JsonFile), root)) {
+				cerr << "Parse failed1." << endl;
+				return;
+			}
 
 
-		if (!reader.parse(JsonFile, JsonFile + strlen(JsonFile), root)) {
-			cerr << "Parse failed1." << endl;
-			return;
+			mut.lock();
+			hasNew = true;
+
+			frame = root["frame"].asInt();
+			if (frame == -1) {
+				gameover = true;
+				return;
+			}
+
+			Json::Value humans_raw = root["humans"];
+			for (int i = 0; i < humans_raw.size(); i++) {
+				Human tem(humans_raw[i][0].asInt(), humans_raw[i][1].asDouble(), humans_raw[i][2].asDouble(),
+					humans_raw[i][3].asInt(), humans_raw[i][4].asInt(), humans_raw[i][5].asInt(), humans_raw[i][6].asInt(),
+					humans_raw[i][7].asInt(), humans_raw[i][8].asInt(), humans_raw[i][9].asInt(), humans_raw[i][10].asInt());
+				humans.push_back(tem);
+			}
+
+			Json::Value fireballs_raw = root["fireballs"];
+			for (int i = 0; i < fireballs_raw.size(); i++) {
+				Fireball tem(fireballs_raw[i][0].asDouble(), fireballs_raw[i][1].asDouble(), fireballs_raw[i][2].asDouble(), fireballs_raw[i][3].asInt());
+				fireballs.push_back(tem);
+			}
+
+			Json::Value meteors_raw = root["meteors"];
+			for (int i = 0; i < meteors_raw.size(); i++) {
+				Meteor tem(meteors_raw[i][0].asDouble(), meteors_raw[i][1].asDouble(), meteors_raw[i][2].asInt(), meteors_raw[i][3].asInt());
+				meteors.push_back(tem);
+			}
+
+
+			Json::Value crystal_raw = root["balls"];
+			for (int i = 0; i < crystal_raw.size(); i++) {
+				Crystal tem(crystal_raw[i][0].asDouble(), crystal_raw[i][1].asDouble(), crystal_raw[i][2].asInt(), crystal_raw[i][3].asInt());
+				crystal.push_back(tem);
+			}
+
+			Json::Value bonus_raw = root["bonus"];
+			for (int i = 0; i < bonus_raw.size(); i++) {
+				bonus.push_back(bonus_raw[i].asBool());
+			}
+
+
+			mut.unlock();
 		}
-
-
-		mut.lock();
-		hasNew = true;
-
-		frame = root["frame"].asInt();
-		if (frame == -1) {
-			gameover = true;
-			return;
-		}
-
-		Json::Value humans_raw = root["humans"];
-		for (int i = 0; i < humans_raw.size(); i++) {
-			Human tem(humans_raw[i][0].asInt(), humans_raw[i][1].asDouble(), humans_raw[i][2].asDouble(),
-				humans_raw[i][3].asInt(), humans_raw[i][4].asInt(), humans_raw[i][5].asInt(), humans_raw[i][6].asInt(),
-				humans_raw[i][7].asInt(), humans_raw[i][8].asInt(), humans_raw[i][9].asInt(), humans_raw[i][10].asInt());
-			humans.push_back(tem);
-		}
-
-		Json::Value fireballs_raw = root["fireballs"];
-		for (int i = 0; i < fireballs_raw.size(); i++) {
-			Fireball tem(fireballs_raw[i][0].asDouble(), fireballs_raw[i][1].asDouble(), fireballs_raw[i][2].asDouble(), fireballs_raw[i][3].asInt());
-			fireballs.push_back(tem);
-		}
-
-		Json::Value meteors_raw = root["meteors"];
-		for (int i = 0; i < meteors_raw.size(); i++) {
-			Meteor tem(meteors_raw[i][0].asDouble(), meteors_raw[i][1].asDouble(), meteors_raw[i][2].asInt(), meteors_raw[i][3].asInt());
-			meteors.push_back(tem);
-		}
-
-
-		Json::Value crystal_raw = root["balls"];
-		for (int i = 0; i < crystal_raw.size(); i++) {
-			Crystal tem(crystal_raw[i][0].asDouble(), crystal_raw[i][1].asDouble(), crystal_raw[i][2].asInt(), crystal_raw[i][3].asInt());
-			crystal.push_back(tem);
-		}
-
-		Json::Value bonus_raw = root["bonus"];
-		for (int i = 0; i < bonus_raw.size(); i++) {
-			bonus.push_back(bonus_raw[i].asBool());
-		}
-
-		mut.unlock();
 	}
 }
 
 void apply() {
+	ready = true;
 	while (!hasNew) {
 		if (gameover)
 			return;
 		this_thread::sleep_for(chrono::milliseconds(5));
 	}
 	mut.lock();
+	ready = false;
 	hasNew = false;
 	Logic::Instance()->getFrame(frame, humans, fireballs, meteors, crystal, bonus);
 	mut.unlock();
@@ -387,12 +399,13 @@ int main() {
 
 	readOnce();
 	readFrame();
-	logic->resetOpe();
-	playerAI();
-	sendMessage();
 
 	thread listen(read);
 	listen.detach();
+
+	logic->resetOpe();
+	playerAI();
+	sendMessage();
 
 	while (true) {
 		apply();
