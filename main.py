@@ -399,7 +399,7 @@ def shoot(human, pos):
         fireball_no+=1
         fireballs.append(Fireball(pos, ang, human.number,fireball_no))
         human.fireball_time = human.fireball_interval
-        Ev(1, human.number)
+        Ev(1, human.number, fireball_no)
 
 
 def cast(human, pos):
@@ -411,7 +411,7 @@ def cast(human, pos):
     global meteor_no
     if L2Distance(human.pos, pos) <= eps + meteor_distance:
         meteor_no += 1
-        Ev(4, human.number)
+        Ev(4, human.number,meteor_no)
         human.meteor_time = human.meteor_interval
         human.meteor_number -= 1
         meteors.append(Meteor(pos, human.number,meteor_no))
