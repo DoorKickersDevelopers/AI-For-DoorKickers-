@@ -16,8 +16,13 @@
 #include <mutex>
 #include <chrono>
 
+#ifdef _WIN32
+
 #include <io.h>
 #include <fcntl.h>
+
+#endif // _WIN32
+
 
 using namespace std;
 
@@ -407,7 +412,12 @@ int main() {
 	JsonFile = new char[jsonlen];
 	Logic* logic = Logic::Instance();
 
+
+	#ifdef _WIN32
+
 	_setmode(_fileno(stdin), _O_BINARY);
+
+	#endif
 
 	int len = 0;
 	char lenr[4];
