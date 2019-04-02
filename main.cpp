@@ -16,6 +16,8 @@
 #include <mutex>
 #include <chrono>
 
+#include <io.h>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -286,18 +288,23 @@ vector<bool> bonus;
 bool hasNew = false;
 bool ready = false;
 
-void read() {
+void keepread() {
 	Json::Reader reader;
 	Json::Value root;
 	int len = 0;
-	char lenr[4];
+	unsigned char lenr[4];
 
+	//ofstream out("o.txt");
 	while (true) {
-
-		for (int i = 0; i < 4; i++) {
-			scanf("%c", &lenr[i]);
-		}
+		scanf("%4c", lenr);
+		/*for (int i = 0; i < 4; i++) {
+			if (scanf("%c", &lenr[i]) != 1) {
+				out << i << ' ' << Logic::Instance()->frame << ' ' << len << endl;
+				cout << "qweqweqwe" << endl;
+			}
+		}*/
 		len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
+		
 		if (len > jsonlen) {
 			while (jsonlen <= len) {
 				jsonlen *= 2;
@@ -306,6 +313,17 @@ void read() {
 			JsonFile = new char[jsonlen];
 		}
 		getfile(len);
+
+		//bool flag = true;
+		//for (int i = 0; i < strlen(JsonFile); i++) {
+		//	if (oldjsonfile[i] != JsonFile[i]) {
+		//		flag = false;
+		//	}
+		//}
+		//if (flag)
+			//cout << "qweqweqwe" << endl;
+		//memcpy(oldjsonfile, JsonFile, strlen(JsonFile));
+		//this_thread::sleep_for(chrono::milliseconds(5));
 
 		if (ready) {
 
@@ -370,6 +388,7 @@ void read() {
 	}
 }
 
+
 void apply() {
 	ready = true;
 	while (!hasNew) {
@@ -388,19 +407,32 @@ int main() {
 	JsonFile = new char[jsonlen];
 	Logic* logic = Logic::Instance();
 
+	_setmode(_fileno(stdin), _O_BINARY);
+
 	int len = 0;
 	char lenr[4];
-	for (int i = 0; i < 4; i++) {
-		scanf("%c", &lenr[i]);
-	}
+
+	scanf("%4c", lenr);
+
+	//for (int i = 0; i < 4; i++) {
+		//lenr[i] = getchar();
+		/*if (scanf("%c", &lenr[i]) != 1) {
+		//if (lenr[i] < 0){
+			out << i << ' ' << Logic::Instance()->frame << ' ' << len << endl;
+			out << "qweqweqwe" << endl;
+			cout << "qweqweqwe" << endl;
+		}*/
+	//}
+
 	len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
+	
 	getfile(len);
 	readMap();
 
 	readOnce();
 	readFrame();
 
-	thread listen(read);
+	thread listen(keepread);
 	listen.detach();
 
 	logic->resetOpe();
@@ -439,7 +471,7 @@ int main0() {
 	readMap();
 	
 	while (true) {
-		//rewind(stdin);
+		rewind(stdin);
 		//setbuf(stdin, NULL);
 		//memset(mybuffer, 0, sizeof(mybuffer));
 
