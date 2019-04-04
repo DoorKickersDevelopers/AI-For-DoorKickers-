@@ -2,8 +2,6 @@
 #include "playerAI.h"
 #include "logic.h"
 #include "geometry.h"
-#include "map.h"
-
 
 #include "jsoncpp/json/json.h"
 #include <iostream>
@@ -33,18 +31,14 @@ bool gameover = false;
 int jsonlen = 2000;
 
 void quyinhao(string& s) {
-	//string s = string(JsonFile);
 	regex rep("(: )\"(.*?)\"");
 	s = regex_replace(s, rep, "$1$2");
-	//s = regex_replace(s, regex("None"), "null");
-	//strcpy(JsonFile, s.c_str());
 }
 
 void quyinhao() {
 	string s = string(JsonFile);
 	regex rep("(: )\"(.*?)\"");
 	s = regex_replace(s, rep, "$1$2");
-	//s = regex_replace(s, regex("None"), "null");
 	strcpy(JsonFile, s.c_str());
 }
 
@@ -65,31 +59,20 @@ void readMap() {
 	logic->faction = root0["faction"].asInt();
 	int map_number = root0["map"].asInt();
 
-
-	/*string str;
+	string map_raw;
 	ifstream fin;
-	fin.open("Maps/" + to_string(map_number) + ".json", ios::in);
+	fin.open("./Maps/" + to_string(map_number) + ".json", ios::in);
 	stringstream buf;
 	buf << fin.rdbuf();
-	str = buf.str();
-	//cout << str << endl;
-	fin.close();*/
+	map_raw = buf.str();
 
 	Json::Reader reader;
 	Json::Value root;
-	//quyinhao(str);
-	//用reader将文件解析到root，root包含Json中所有子元素
 
 	if (!reader.parse(map_raw, root)) {
 		cerr << "Parse failed." << endl;
 		return;
 	}
-	/*
-	if (!reader.parse(JsonFile, JsonFile + strlen(JsonFile), root)) {
-		cerr << "Parse failed0." << endl;
-		return;
-	}
-	*/
 
 	int width = root["width"].asInt();
 	int height = root["height"].asInt();
@@ -130,21 +113,11 @@ void readMap() {
 	}
 
 	Json::Value pixels_raw = root["walls"];
-	/*
-	vector<Wall> walls;
-	for (int i = 0; i < walls_raw.size(); i++) {
-		Wall w(walls_raw[i][0].asDouble(), walls_raw[i][1].asDouble(), walls_raw[i][2].asDouble(), walls_raw[i][3].asDouble());
-		walls.push_back(w);
-	}
-	*/
+
 	vector<vector<bool>> pixels;
 	for (int i = 0; i < pixels_raw.size(); i++) {
 		vector<bool> line;
 		for (int j = 0; j < pixels_raw[i].size(); j++) {
-			/*if (pixels_raw[i][j].asInt() == 0)
-				line.push_back(true);
-			else
-				line.push_back(false);*/
 			line.push_back(pixels_raw[i][j].asBool());
 		}
 		pixels.push_back(line);
@@ -267,7 +240,6 @@ void sendMessage(bool gameover = false) {
 
 	Json::FastWriter writer;
 	writer.omitEndingLineFeed();
-	//string out = message.toStyledString();
 	int len = strlen(writer.write(message).c_str());
 	unsigned char lenb[4];
 	lenb[0] = (unsigned char)(len);
@@ -278,7 +250,6 @@ void sendMessage(bool gameover = false) {
 		printf("%c", lenb[3 - i]);
 	}
 	printf("%s", writer.write(message).c_str());
-	//printf("%s", out);
 	cout.flush();
 }
 
@@ -300,15 +271,8 @@ void keepread() {
 	int len = 0;
 	unsigned char lenr[4];
 
-	//ofstream out("o.txt");
 	while (true) {
 		scanf("%4c", lenr);
-		/*for (int i = 0; i < 4; i++) {
-			if (scanf("%c", &lenr[i]) != 1) {
-				out << i << ' ' << Logic::Instance()->frame << ' ' << len << endl;
-				cout << "qweqweqwe" << endl;
-			}
-		}*/
 		len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
 		
 		if (len > jsonlen) {
@@ -319,17 +283,6 @@ void keepread() {
 			JsonFile = new char[jsonlen];
 		}
 		getfile(len);
-
-		//bool flag = true;
-		//for (int i = 0; i < strlen(JsonFile); i++) {
-		//	if (oldjsonfile[i] != JsonFile[i]) {
-		//		flag = false;
-		//	}
-		//}
-		//if (flag)
-			//cout << "qweqweqwe" << endl;
-		//memcpy(oldjsonfile, JsonFile, strlen(JsonFile));
-		//this_thread::sleep_for(chrono::milliseconds(5));
 
 		if (ready) {
 
@@ -345,7 +298,6 @@ void keepread() {
 				cerr << "Parse failed1." << endl;
 				return;
 			}
-
 
 			mut.lock();
 			hasNew = true;
@@ -388,7 +340,6 @@ void keepread() {
 				bonus.push_back(bonus_raw[i].asBool());
 			}
 
-
 			mut.unlock();
 		}
 	}
@@ -425,16 +376,6 @@ int main() {
 
 	scanf("%4c", lenr);
 
-	//for (int i = 0; i < 4; i++) {
-		//lenr[i] = getchar();
-		/*if (scanf("%c", &lenr[i]) != 1) {
-		//if (lenr[i] < 0){
-			out << i << ' ' << Logic::Instance()->frame << ' ' << len << endl;
-			out << "qweqweqwe" << endl;
-			cout << "qweqweqwe" << endl;
-		}*/
-	//}
-
 	len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
 	
 	getfile(len);
@@ -453,52 +394,6 @@ int main() {
 	while (true) {
 		apply();
 
-		if (gameover) {
-			sendMessage(true);
-			return 0;
-		}
-		logic->resetOpe();
-		playerAI();
-		sendMessage();
-	}
-	delete JsonFile;
-
-	return 0;
-}
-
-//char mybuffer[4096];
-int main0() {
-	//setvbuf(stdin, mybuffer, _IOFBF, sizeof(mybuffer));
-	JsonFile = new char[jsonlen];
-	Logic* logic = Logic::Instance();
-
-	int len = 0;
-	char lenr[4];
-	for (int i = 0; i < 4; i++) {
-		scanf("%c", &lenr[i]);
-	}
-	len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));	
-	getfile(len);
-	readMap();
-	
-	while (true) {
-		rewind(stdin);
-		//setbuf(stdin, NULL);
-		//memset(mybuffer, 0, sizeof(mybuffer));
-
-		for (int i = 0; i < 4; i++) {
-			scanf("%c", &lenr[i]);
-		}
-		len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
-		if (len > jsonlen) {
-			while (jsonlen <= len) {
-				jsonlen *= 2;
-			}
-			delete JsonFile;
-			JsonFile = new char[jsonlen];
-		}
-		getfile(len);
-		readFrame();
 		if (gameover) {
 			sendMessage(true);
 			return 0;

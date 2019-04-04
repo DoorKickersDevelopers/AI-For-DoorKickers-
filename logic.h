@@ -7,18 +7,6 @@
 using namespace std;
 using namespace CONST;
 
-/*
-//墙类，包含上下左右四个边的位置信息，其中上下边的位置指纵坐标，左右边的位置指横坐标。
-class Wall {
-public:
-	vector<vector<bool>> pixels;
-	
-	Wall(){}
-	Wall(double l, double r, double b, double t):
-		left(l),right(r),bottom(b),top(t){}
-};
-*/
-
 //人物类
 class Human {
 public:
@@ -98,7 +86,7 @@ public:
 	vector<Point> target_places;//每个势力的水晶搬运目标位置，同上
 	vector<Point> bonus_places;//每个加分道具的位置
 	//vector<Wall> walls;//墙
-	vector<vector<bool>> pixels;//游戏地图的像素信息，(x, y)处为true表示[x,x+1]×[y,y+1]处不是墙
+	vector<vector<bool>> pixels;//游戏地图的像素信息，(x, y)处为true表示[x,x+1]×[y,y+1]处是墙
 	int time_of_game;//游戏总时间
 
 	Map() {};
