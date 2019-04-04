@@ -2,6 +2,7 @@
 #include "playerAI.h"
 #include "logic.h"
 #include "geometry.h"
+#include "map.h"
 
 
 #include "jsoncpp/json/json.h"
@@ -65,21 +66,21 @@ void readMap() {
 	int map_number = root0["map"].asInt();
 
 
-	string str;
+	/*string str;
 	ifstream fin;
 	fin.open("Maps/" + to_string(map_number) + ".json", ios::in);
 	stringstream buf;
 	buf << fin.rdbuf();
 	str = buf.str();
 	//cout << str << endl;
-	fin.close();
+	fin.close();*/
 
 	Json::Reader reader;
 	Json::Value root;
-	quyinhao(str);
+	//quyinhao(str);
 	//用reader将文件解析到root，root包含Json中所有子元素
 
-	if (!reader.parse(str, root)) {
+	if (!reader.parse(map_raw, root)) {
 		cerr << "Parse failed." << endl;
 		return;
 	}

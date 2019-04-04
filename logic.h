@@ -19,12 +19,12 @@ public:
 };
 */
 
-//玩家类,死亡时hp为0
+//人物类
 class Human {
 public:
 	int number;//编号
 	Point position;//位置
-	int hp;//生命值
+	int hp;//生命值,死亡时hp为0
 	int meteor_number;//剩下的陨石数量
 	int meteor_time;//陨石术剩余冷却时间
 	int flash_num;//剩余闪现数量
@@ -44,7 +44,7 @@ public:
 class Fireball {
 public:
 	Point position;//位置
-	double rotation;//朝向
+	double rotation;//朝向[0,2\pi]
 	int from_number;//来自哪个人
 	
 	Fireball(){}
@@ -68,7 +68,7 @@ public:
 class Crystal {
 public:
 	Point position;//位置
-	int belong;//归属(指被扛起)
+	int belong;//归属(指被扛起)，未被扛起时为-1
 	int faction;//所属势力
 	
 	Crystal(double x, double y, int n, int f):
@@ -86,15 +86,16 @@ public:
 	vector<bool> flash;
 };
 
+//地图类
 class Map {
 public:
 	int width;//宽
 	int height;//高
 	int faction_number;//势力个数
 	int human_number;//每个势力控制人的个数
-	vector<vector<Point>> birth_places;//每个人的出生地
-	vector<Point> crystal_places;//每个势力的水晶初始位置
-	vector<Point> target_places;//每个势力的水晶搬运目标位置
+	vector<vector<Point>> birth_places;//每个人的出生地，birth_places[i][j]指第i个势力的第j个人的出生地
+	vector<Point> crystal_places;//每个势力的水晶初始位置，crystal_places[i]指第i个势力的水晶初始位置
+	vector<Point> target_places;//每个势力的水晶搬运目标位置，同上
 	vector<Point> bonus_places;//每个加分道具的位置
 	//vector<Wall> walls;//墙
 	vector<vector<bool>> pixels;//游戏地图的像素信息，(x, y)处为true表示[x,x+1]×[y,y+1]处不是墙
@@ -127,10 +128,10 @@ public:
 	Map map;//地图
 	int faction;//自己的编号
 	//vector<Wall> walls;
-	vector<Human> humans;//所有人
+	vector<Human> humans;//所有人，humans[j*n+i]指第i个势力控制的第j个人物，其中n指势力个数，例如0号势力可以控制0,n,2n,...
 	vector<Fireball> fireballs;//所有火球
 	vector<Meteor> meteors;//所有陨石
-	vector<Crystal> crystal;//所有水晶
+	vector<Crystal> crystal;//所有水晶，crystal[i]表示第i个势力所有的水晶
 	vector<bool> bonus;//加分道具是否存在(可以被吃掉)
 
 	Operation ope;//本次决策操作的集合，选手可以忽略
@@ -151,6 +152,8 @@ public:
 	void unshoot(int num);//取消你控制的第num个人的射击指令
 	void unmeteor(int num);//取消你控制的第num个人的发射陨石指令
 	void unflash(int num);//取消你控制的第num个人的闪现指令
+
+	//注意，这里你控制的第num个人实际上是humans中的humans[j*n+num]，j指你的势力标号，n指总势力个数
 
 	bool isWall(int x, int y);
 	
