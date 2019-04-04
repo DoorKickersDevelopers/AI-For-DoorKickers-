@@ -99,7 +99,6 @@ public:
 		crystal_places = c;
 		target_places = t;
 		bonus_places = bo;
-		//walls = wa;
 		pixels = p;
 		time_of_game = ti;
 	}
