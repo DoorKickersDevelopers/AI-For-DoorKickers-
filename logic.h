@@ -7,19 +7,19 @@
 using namespace std;
 using namespace CONST;
 
-//ÈËÎïÀà
+//äººç‰©ç±»
 class Human {
 public:
-	int number;//±àºÅ
-	Point position;//Î»ÖÃ
-	int hp;//ÉúÃüÖµ,ËÀÍöÊ±hpÎª0
-	int meteor_number;//Ê£ÏÂµÄÔÉÊ¯ÊıÁ¿
-	int meteor_time;//ÔÉÊ¯ÊõÊ£ÓàÀäÈ´Ê±¼ä
-	int flash_num;//Ê£ÓàÉÁÏÖÊıÁ¿
-	int flash_time;//ÉÁÏÖÊ£ÓàÀäÈ´Ê±¼ä
-	int fire_time;//¿ª»ğÀäÈ´Ê£ÓàÊ±¼ä
-	int death_time;//ËÀÍöÊ£ÓàÊ±¼ä
-	int inv_time;//ÎŞµĞÊ±¼ä
+	int number;//ç¼–å·
+	Point position;//ä½ç½®
+	int hp;//ç”Ÿå‘½å€¼,æ­»äº¡æ—¶hpä¸º0
+	int meteor_number;//å‰©ä¸‹çš„é™¨çŸ³æ•°é‡
+	int meteor_time;//é™¨çŸ³æœ¯å‰©ä½™å†·å´æ—¶é—´
+	int flash_num;//å‰©ä½™é—ªç°æ•°é‡
+	int flash_time;//é—ªç°å‰©ä½™å†·å´æ—¶é—´
+	int fire_time;//å¼€ç«å†·å´å‰©ä½™æ—¶é—´
+	int death_time;//æ­»äº¡å‰©ä½™æ—¶é—´
+	int inv_time;//æ— æ•Œæ—¶é—´
 
 	Human(int n, double x, double y, int h, int mn, int mt, int fn, int ft, int fit, int dt, int it):
 		number(n), position(Point(x, y)), hp(h), meteor_number(mn), meteor_time(mt), 
@@ -28,36 +28,36 @@ public:
 	Human(){}
 };
 
-//»ğÇòÀà
+//ç«çƒç±»
 class Fireball {
 public:
-	Point position;//Î»ÖÃ
-	double rotation;//³¯Ïò[0,2\pi]
-	int from_number;//À´×ÔÄÄ¸öÈË
+	Point position;//ä½ç½®
+	double rotation;//æœå‘[0,2\pi]
+	int from_number;//æ¥è‡ªå“ªä¸ªäºº
 	
 	Fireball(){}
 	Fireball(double x, double y, double r, int f):
 		position(Point(x, y)), rotation(r), from_number(f){}
 };
 
-//ÔÉÊ¯Àà
+//é™¨çŸ³ç±»
 class Meteor {
 public:
-	Point position;//ÖĞĞÄÎ»ÖÃ
-	int last_time;//Ê£Óà´æÔÚÊ±¼ä
-	int from_number;//À´×ÔÄÄ¸öÈË
+	Point position;//ä¸­å¿ƒä½ç½®
+	int last_time;//å‰©ä½™å­˜åœ¨æ—¶é—´
+	int from_number;//æ¥è‡ªå“ªä¸ªäºº
 	
 	Meteor(){}
 	Meteor(double x, double y, int t, int f):
 		position(Point(x, y)), last_time(t), from_number(f){}
 };
 
-//Ë®¾§Àà
+//æ°´æ™¶ç±»
 class Crystal {
 public:
-	Point position;//Î»ÖÃ
-	int belong;//¹éÊô(Ö¸±»¿¸Æğ)£¬Î´±»¿¸ÆğÊ±Îª-1
-	int faction;//ËùÊôÊÆÁ¦
+	Point position;//ä½ç½®
+	int belong;//å½’å±(æŒ‡è¢«æ‰›èµ·)ï¼Œæœªè¢«æ‰›èµ·æ—¶ä¸º-1
+	int faction;//æ‰€å±åŠ¿åŠ›
 	
 	Crystal(double x, double y, int n, int f):
 		position(Point(x, y)), belong(n), faction(f){}
@@ -74,20 +74,20 @@ public:
 	vector<bool> flash;
 };
 
-//µØÍ¼Àà
+//åœ°å›¾ç±»
 class Map {
 public:
-	int width;//¿í
-	int height;//¸ß
-	int faction_number;//ÊÆÁ¦¸öÊı
-	int human_number;//Ã¿¸öÊÆÁ¦¿ØÖÆÈËµÄ¸öÊı
-	vector<vector<Point>> birth_places;//Ã¿¸öÈËµÄ³öÉúµØ£¬birth_places[i][j]Ö¸µÚi¸öÊÆÁ¦µÄµÚj¸öÈËµÄ³öÉúµØ
-	vector<Point> crystal_places;//Ã¿¸öÊÆÁ¦µÄË®¾§³õÊ¼Î»ÖÃ£¬crystal_places[i]Ö¸µÚi¸öÊÆÁ¦µÄË®¾§³õÊ¼Î»ÖÃ
-	vector<Point> target_places;//Ã¿¸öÊÆÁ¦µÄË®¾§°áÔËÄ¿±êÎ»ÖÃ£¬Í¬ÉÏ
-	vector<Point> bonus_places;//Ã¿¸ö¼Ó·ÖµÀ¾ßµÄÎ»ÖÃ
-	//vector<Wall> walls;//Ç½
-	vector<vector<bool>> pixels;//ÓÎÏ·µØÍ¼µÄÏñËØĞÅÏ¢£¬(x, y)´¦Îªtrue±íÊ¾[x,x+1]¡Á[y,y+1]´¦ÊÇÇ½
-	int time_of_game;//ÓÎÏ·×ÜÊ±¼ä
+	int width;//å®½
+	int height;//é«˜
+	int faction_number;//åŠ¿åŠ›ä¸ªæ•°
+	int human_number;//æ¯ä¸ªåŠ¿åŠ›æ§åˆ¶äººçš„ä¸ªæ•°
+	vector<vector<Point>> birth_places;//æ¯ä¸ªäººçš„å‡ºç”Ÿåœ°ï¼Œbirth_places[i][j]æŒ‡ç¬¬iä¸ªåŠ¿åŠ›çš„ç¬¬jä¸ªäººçš„å‡ºç”Ÿåœ°
+	vector<Point> crystal_places;//æ¯ä¸ªåŠ¿åŠ›çš„æ°´æ™¶åˆå§‹ä½ç½®ï¼Œcrystal_places[i]æŒ‡ç¬¬iä¸ªåŠ¿åŠ›çš„æ°´æ™¶åˆå§‹ä½ç½®
+	vector<Point> target_places;//æ¯ä¸ªåŠ¿åŠ›çš„æ°´æ™¶æ¬è¿ç›®æ ‡ä½ç½®ï¼ŒåŒä¸Š
+	vector<Point> bonus_places;//æ¯ä¸ªåŠ åˆ†é“å…·çš„ä½ç½®
+	//vector<Wall> walls;//å¢™
+	vector<vector<bool>> pixels;//æ¸¸æˆåœ°å›¾çš„åƒç´ ä¿¡æ¯ï¼Œ(x, y)å¤„ä¸ºtrueè¡¨ç¤º[x,x+1]Ã—[y,y+1]å¤„æ˜¯å¢™
+	int time_of_game;//æ¸¸æˆæ€»æ—¶é—´
 
 	Map() {};
 	void set(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Point> bo, vector<vector<bool>> p, int ti) {
@@ -104,26 +104,26 @@ public:
 	}
 };
 
-//×ÜÊı¾İÀà£¬ÄÚº¬ËùÓĞĞèÒªµÄÊı¾İ
+//æ€»æ•°æ®ç±»ï¼Œå†…å«æ‰€æœ‰éœ€è¦çš„æ•°æ®
 class Logic {
 private:
 	static Logic* instance;
 	Logic() {};
 	Logic(Logic const&) {};
 public:
-	int frame;//ÏÖÔÚµÄÖ¡Êı
-	Map map;//µØÍ¼
-	int faction;//×Ô¼ºµÄ±àºÅ
+	int frame;//ç°åœ¨çš„å¸§æ•°
+	Map map;//åœ°å›¾
+	int faction;//è‡ªå·±çš„ç¼–å·
 	//vector<Wall> walls;
-	vector<Human> humans;//ËùÓĞÈË£¬humans[j*n+i]Ö¸µÚi¸öÊÆÁ¦¿ØÖÆµÄµÚj¸öÈËÎï£¬ÆäÖĞnÖ¸ÊÆÁ¦¸öÊı£¬ÀıÈç0ºÅÊÆÁ¦¿ÉÒÔ¿ØÖÆ0,n,2n,...
-	vector<Fireball> fireballs;//ËùÓĞ»ğÇò
-	vector<Meteor> meteors;//ËùÓĞÔÉÊ¯
-	vector<Crystal> crystal;//ËùÓĞË®¾§£¬crystal[i]±íÊ¾µÚi¸öÊÆÁ¦ËùÓĞµÄË®¾§
-	vector<bool> bonus;//¼Ó·ÖµÀ¾ßÊÇ·ñ´æÔÚ(¿ÉÒÔ±»³Ôµô)
+	vector<Human> humans;//æ‰€æœ‰äººï¼Œhumans[j*n+i]æŒ‡ç¬¬iä¸ªåŠ¿åŠ›æ§åˆ¶çš„ç¬¬jä¸ªäººç‰©ï¼Œå…¶ä¸­næŒ‡åŠ¿åŠ›ä¸ªæ•°ï¼Œä¾‹å¦‚0å·åŠ¿åŠ›å¯ä»¥æ§åˆ¶0,n,2n,...
+	vector<Fireball> fireballs;//æ‰€æœ‰ç«çƒ
+	vector<Meteor> meteors;//æ‰€æœ‰é™¨çŸ³
+	vector<Crystal> crystal;//æ‰€æœ‰æ°´æ™¶ï¼Œcrystal[i]è¡¨ç¤ºç¬¬iä¸ªåŠ¿åŠ›æ‰€æœ‰çš„æ°´æ™¶
+	vector<bool> bonus;//åŠ åˆ†é“å…·æ˜¯å¦å­˜åœ¨(å¯ä»¥è¢«åƒæ‰)
 
-	Operation ope;//±¾´Î¾ö²ß²Ù×÷µÄ¼¯ºÏ£¬Ñ¡ÊÖ¿ÉÒÔºöÂÔ
+	Operation ope;//æœ¬æ¬¡å†³ç­–æ“ä½œçš„é›†åˆï¼Œé€‰æ‰‹å¯ä»¥å¿½ç•¥
 
-	//LogicÎªµ¥ÀıÀà£¬ÇëÊ¹ÓÃLogic::Instance()»ñÈ¡Ö¸Õë
+	//Logicä¸ºå•ä¾‹ç±»ï¼Œè¯·ä½¿ç”¨Logic::Instance()è·å–æŒ‡é’ˆ
 	static Logic* Instance() {
 		if (Logic::instance == 0) {
 			Logic::instance = new Logic();
@@ -131,20 +131,20 @@ public:
 		return Logic::instance;
 	}
 
-	void move(int num, Point p);//Ö¸¶¨Äã¿ØÖÆµÄµÚnum¸öÈËÒÆ¶¯µ½pÎ»ÖÃ
-	void shoot(int num, Point p);//Ö¸¶¨Äã¿ØÖÆµÄµÚnum¸öÈËÏòpÎ»ÖÃ·¢Éä»ğÇò
-	void meteor(int num, Point p);//Ö¸¶¨Äã¿ØÖÆµÄµÚnum¸öÈËÏòpÎ»ÖÃÊÍ·ÅÔÉÊ¯Êõ
-	void flash(int num);//Ö¸¶¨Äã¿ØÖÆµÄµÚnum¸öÈË±¾´ÎÒÆ¶¯¸ÄÎªÉÁÏÖ
-	void unmove(int num);//È¡ÏûÄã¿ØÖÆµÄµÚnum¸öÈËµÄÒÆ¶¯Ö¸Áî
-	void unshoot(int num);//È¡ÏûÄã¿ØÖÆµÄµÚnum¸öÈËµÄÉä»÷Ö¸Áî
-	void unmeteor(int num);//È¡ÏûÄã¿ØÖÆµÄµÚnum¸öÈËµÄ·¢ÉäÔÉÊ¯Ö¸Áî
-	void unflash(int num);//È¡ÏûÄã¿ØÖÆµÄµÚnum¸öÈËµÄÉÁÏÖÖ¸Áî
+	void move(int num, Point p);//æŒ‡å®šä½ æ§åˆ¶çš„ç¬¬numä¸ªäººç§»åŠ¨åˆ°pä½ç½®
+	void shoot(int num, Point p);//æŒ‡å®šä½ æ§åˆ¶çš„ç¬¬numä¸ªäººå‘pä½ç½®å‘å°„ç«çƒ
+	void meteor(int num, Point p);//æŒ‡å®šä½ æ§åˆ¶çš„ç¬¬numä¸ªäººå‘pä½ç½®é‡Šæ”¾é™¨çŸ³æœ¯
+	void flash(int num);//æŒ‡å®šä½ æ§åˆ¶çš„ç¬¬numä¸ªäººæœ¬æ¬¡ç§»åŠ¨æ”¹ä¸ºé—ªç°
+	void unmove(int num);//å–æ¶ˆä½ æ§åˆ¶çš„ç¬¬numä¸ªäººçš„ç§»åŠ¨æŒ‡ä»¤
+	void unshoot(int num);//å–æ¶ˆä½ æ§åˆ¶çš„ç¬¬numä¸ªäººçš„å°„å‡»æŒ‡ä»¤
+	void unmeteor(int num);//å–æ¶ˆä½ æ§åˆ¶çš„ç¬¬numä¸ªäººçš„å‘å°„é™¨çŸ³æŒ‡ä»¤
+	void unflash(int num);//å–æ¶ˆä½ æ§åˆ¶çš„ç¬¬numä¸ªäººçš„é—ªç°æŒ‡ä»¤
 
-	//×¢Òâ£¬ÕâÀïÄã¿ØÖÆµÄµÚnum¸öÈËÊµ¼ÊÉÏÊÇhumansÖĞµÄhumans[j*n+num]£¬jÖ¸ÄãµÄÊÆÁ¦±êºÅ£¬nÖ¸×ÜÊÆÁ¦¸öÊı
+	//æ³¨æ„ï¼Œè¿™é‡Œä½ æ§åˆ¶çš„ç¬¬numä¸ªäººå®é™…ä¸Šæ˜¯humansä¸­çš„humans[j*n+num]ï¼ŒjæŒ‡ä½ çš„åŠ¿åŠ›æ ‡å·ï¼ŒnæŒ‡æ€»åŠ¿åŠ›ä¸ªæ•°
 
 	bool isWall(int x, int y);
 	
-	//ÇëºöÂÔÒÔÏÂº¯Êı
+	//è¯·å¿½ç•¥ä»¥ä¸‹å‡½æ•°
 	void initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Point> bo, vector<vector<bool>> p, int ti);
 	void getFrame(int frame, vector<Human> h, vector<Fireball> b, vector<Meteor> g, vector<Crystal> ba, vector<bool> bo);
 	void resetOpe();
