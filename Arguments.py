@@ -47,45 +47,45 @@ room_size = 1
 frames_per_second = 20
 frames_of_game = JSON["time_of_game"] * frames_per_second
 time_of_round = 1.0 / frames_per_second
-frames_of_death = 5 * frames_per_second
+frames_of_death = 8 * frames_per_second
 frames_of_invincible = 2 * frames_per_second
 
 # some constants about human
 human_hp = 100
-human_meteor_number = 3
-human_flash_number = 3
-human_fireball_interval = frames_per_second * 1
-human_meteor_interval = frames_per_second * 3
+human_meteor_number = 1000
+human_flash_number = 1000
+human_fireball_interval = frames_per_second * 0.5
+human_meteor_interval = frames_per_second * 8
 human_flash_interval = frames_per_second * 3
-human_velocity = 5
+human_velocity = 0.6
 
 # some constants about skills
-fireball_velocity = 4
-fireball_radius = 5
-splash_radius = 8
-splash_hurt = 10
+fireball_velocity = 3
+fireball_radius = 3
+splash_radius = 3
+splash_hurt = 5
 
-meteor_distance = 3000
+meteor_distance = 30
 meteor_delay = frames_per_second * 2
-explode_radius = 100
-explode_hurt = 50
+explode_radius = 3
+explode_hurt = 100
 
-flash_distance = 200
+flash_distance = 20
 
 # some constants about balls
-ball_radius = 5
+ball_radius = 3
 
 # some constants about target district
-target_radius = 50
+target_radius = 5
 
 # some constants about bonus district
-bonus_radius = 2
-bonus_time_low = 3 * frames_per_second
-bonus_time_high = 5 * frames_per_second
+bonus_radius = 6
+bonus_time_low = 8 * frames_per_second
+bonus_time_high = 12 * frames_per_second
 
 # some constants about score
-kill_score = 5
+kill_score = 1
 killed_score = 0
-goal_score = 20
+goal_score = 80
 goaled_score = 0
 bonus_score = 10

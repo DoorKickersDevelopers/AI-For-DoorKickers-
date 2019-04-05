@@ -1,10 +1,10 @@
-# Defense of the sOgou
+# Defense of the Origin
 
 [TOC]
 
 ## 前言
 
-本游戏的灵感来自于DOTA，因此我将它命名为DOTO（搜狗卫士），表示还有代码中会有很多TODO
+本游戏的灵感来自于DOTA，因此我将它命名为DOTO，表示还有代码中会有很多TODO
 
 ## 游戏介绍 简略版
 
