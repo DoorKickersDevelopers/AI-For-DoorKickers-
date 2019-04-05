@@ -2,7 +2,9 @@ PYGAME = False
 DEBUG = False
 
 if PYGAME:
-    import pygame
+    import contextlib
+    with contextlib.redirect_stdout(None):
+        import pygame
 import sys
 import random
 import copy
