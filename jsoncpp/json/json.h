@@ -1032,7 +1032,6 @@ Json::Value obj_value(Json::objectValue); // {}
   //# endif
 
   /// \deprecated Always pass len.
-  JSONCPP_DEPRECATED("Use setComment(JSONCPP_STRING const&) instead.")
   void setComment(const char* comment, CommentPlacement placement);
   /// Comments must be //... or /* ... */
   void setComment(const char* comment, size_t len, CommentPlacement placement);
@@ -1199,7 +1198,6 @@ public:
   /// Return the member name of the referenced Value. "" if it is not an
   /// objectValue.
   /// \deprecated This cannot be used for UTF-8 strings, since there can be embedded nulls.
-  JSONCPP_DEPRECATED("Use `key = name();` instead.")
   char const* memberName() const;
   /// Return the member name of the referenced Value, or NULL if it is not an
   /// objectValue.
@@ -1417,13 +1415,11 @@ public:
   /** \brief Constructs a Reader allowing all features
    * for parsing.
    */
-  JSONCPP_DEPRECATED("Use CharReader and CharReaderBuilder instead") 
   Reader();
 
   /** \brief Constructs a Reader allowing the specified feature set
    * for parsing.
    */
-  JSONCPP_DEPRECATED("Use CharReader and CharReaderBuilder instead") 
   Reader(const Features& features);
 
   /** \brief Read a Value from a <a HREF="http://www.json.org">JSON</a>
@@ -1479,7 +1475,6 @@ public:
    *         during parsing.
    * \deprecated Use getFormattedErrorMessages() instead (typo fix).
    */
-  JSONCPP_DEPRECATED("Use getFormattedErrorMessages() instead.")
   JSONCPP_STRING getFormatedErrorMessages() const;
 
   /** \brief Returns a user friendly string that list errors in the parsed
@@ -1932,7 +1927,7 @@ public:
 /** \brief Abstract class for writers.
  * \deprecated Use StreamWriter. (And really, this is an implementation detail.)
  */
-class JSONCPP_DEPRECATED("Use StreamWriter instead") JSON_API Writer {
+class JSON_API Writer {
 public:
   virtual ~Writer();
 
@@ -1952,7 +1947,7 @@ public:
 #pragma warning(push)
 #pragma warning(disable:4996) // Deriving from deprecated class
 #endif
-class JSONCPP_DEPRECATED("Use StreamWriterBuilder instead") JSON_API FastWriter : public Writer {
+class JSON_API FastWriter : public Writer {
 public:
   FastWriter();
   ~FastWriter() JSONCPP_OVERRIDE {}
@@ -2011,7 +2006,7 @@ private:
 #pragma warning(push)
 #pragma warning(disable:4996) // Deriving from deprecated class
 #endif
-class JSONCPP_DEPRECATED("Use StreamWriterBuilder instead") JSON_API StyledWriter : public Writer {
+class JSON_API StyledWriter : public Writer {
 public:
   StyledWriter();
   ~StyledWriter() JSONCPP_OVERRIDE {}
@@ -2079,7 +2074,7 @@ private:
 #pragma warning(push)
 #pragma warning(disable:4996) // Deriving from deprecated class
 #endif
-class JSONCPP_DEPRECATED("Use StreamWriterBuilder instead") JSON_API StyledStreamWriter {
+class JSON_API StyledStreamWriter {
 public:
 /**
  * \param indentation Each level will be indented by this amount extra.
