@@ -249,6 +249,7 @@ void sendMessage(bool gameover = false) {
 	for (int i = 0; i < 4; i++) {
 		printf("%c", lenb[3 - i]);
 	}
+	
 	printf("%s", writer.write(message).c_str());
 	cout.flush();
 }
@@ -368,6 +369,7 @@ int main() {
 	#ifdef _WIN32
 
 	_setmode(_fileno(stdin), _O_BINARY);
+	_setmode(_fileno(stdout), _O_BINARY);
 
 	#endif
 

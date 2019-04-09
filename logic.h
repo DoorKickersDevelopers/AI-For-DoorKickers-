@@ -85,7 +85,6 @@ public:
 	vector<Point> crystal_places;//每个势力的水晶初始位置，crystal_places[i]指第i个势力的水晶初始位置
 	vector<Point> target_places;//每个势力的水晶搬运目标位置，同上
 	vector<Point> bonus_places;//每个加分道具的位置
-	//vector<Wall> walls;//墙
 	vector<vector<bool>> pixels;//游戏地图的像素信息，(x, y)处为true表示[x,x+1]×[y,y+1]处是墙
 	int time_of_game;//游戏总时间
 
