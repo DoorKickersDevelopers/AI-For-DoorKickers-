@@ -216,6 +216,9 @@ if __name__ == "__main__":
     else:
         replay_dir = "." + os.sep + "Replay" + os.sep
         replay_names = os.listdir(replay_dir)
+        for replay_name in replay_names:
+            if not replay_name.endswith(".json"):
+                replay_names.remove(replay_name)
         if len(replay_names) == 0:
             raise Exception("No Replay File in default dir")
 

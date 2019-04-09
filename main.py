@@ -17,6 +17,7 @@ from MySTL import *
 from multiprocessing import Pool
 import json
 import logging
+import os
 
 BYTEORDER = 'big'
 
@@ -684,11 +685,14 @@ def RunGame():
         replay_dir = "." + os.sep + "Replay" + os.sep
         if not os.path.exists(replay_dir):
             os.mkdir(replay_dir)
+        replay_dir += "replay{}.zip".format(test_num)
     else:
         replay_dir = save_dir
-    replay_name = "replay{}.json".format(test_num)
-    with open(replay_dir + replay_name, "w")as file:
+    name = replay_dir[replay_dir.rfind('/')+1:]
+    Dir = replay_dir[:replay_dir.rfind('/')+1]
+    with open(Dir+name.replace(".zip",".json"), "w")as file:
         file.write(json.dumps(logs))
+    os.system("cd {0} && zip -r {1} {2} && rm {2}".format(Dir,name,name.replace(".zip",".json")))
     if DEBUG:
         WriteToLogFile("################### Result ###################")
         for i, sc in enumerate(score):
