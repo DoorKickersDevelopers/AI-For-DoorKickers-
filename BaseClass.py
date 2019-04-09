@@ -166,8 +166,8 @@ class Human:
     def __repr__(self):
         return "[{},{},{},{},{},{},{},{},{},{},{}]".format(
             self.number,
-            self.pos.x,
-            self.pos.y,
+            round(self.pos.x, precision),
+            round(self.pos.y, precision),
             self.hp,
             self.meteor_number,
             self.meteor_time,
