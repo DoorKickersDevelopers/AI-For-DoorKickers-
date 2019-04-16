@@ -141,6 +141,10 @@ public:
 
 	//注意，这里你控制的第num个人实际上是humans中的humans[j*n+num]，j指你的势力标号，n指总势力个数
 
+	string debugMsg;
+	void debug(string msg);
+	void debugAppend(string amsg);
+
 	bool isWall(int x, int y);
 	
 	//请忽略以下函数
