@@ -4,6 +4,7 @@
 #include "geometry.h"
 
 #include <vector>
+#include <string>
 using namespace std;
 using namespace CONST;
 
@@ -22,7 +23,7 @@ public:
 	int inv_time;//无敌时间
 
 	Human(int n, double x, double y, int h, int mn, int mt, int fn, int ft, int fit, int dt, int it):
-		number(n), position(Point(x, y)), hp(h), meteor_number(mn), meteor_time(mt), 
+		number(n), position(Point(x, y)), hp(h), meteor_number(mn), meteor_time(mt),
 		flash_num(fn), flash_time(ft), fire_time(fit), death_time(dt), inv_time(it){
 		}
 	Human(){}
@@ -34,7 +35,7 @@ public:
 	Point position;//位置
 	double rotation;//朝向[0,2\pi]
 	int from_number;//来自哪个人
-	
+
 	Fireball(){}
 	Fireball(double x, double y, double r, int f):
 		position(Point(x, y)), rotation(r), from_number(f){}
@@ -46,7 +47,7 @@ public:
 	Point position;//中心位置
 	int last_time;//剩余存在时间
 	int from_number;//来自哪个人
-	
+
 	Meteor(){}
 	Meteor(double x, double y, int t, int f):
 		position(Point(x, y)), last_time(t), from_number(f){}
@@ -58,11 +59,11 @@ public:
 	Point position;//位置
 	int belong;//归属(指被扛起)，未被扛起时为-1
 	int faction;//所属势力
-	
+
 	Crystal(double x, double y, int n, int f):
 		position(Point(x, y)), belong(n), faction(f){}
 	Crystal(){}
-	
+
 };
 
 class Operation {
@@ -141,8 +142,13 @@ public:
 
 	//注意，这里你控制的第num个人实际上是humans中的humans[j*n+num]，j指你的势力标号，n指总势力个数
 
+	string debugMsg;
+	void debug(string msg);//设置debug信息，会覆盖本帧之前设置的信息
+	void debugAppend(string amsg);//追加debug信息，不会覆盖之前的信息
+	//每帧将重置debug信息，每帧的debug信息不能超过1024字节，如果需要加长信息，请修改main.cpp(但不建议过长，否则可能导致通信中断)。
+
 	bool isWall(int x, int y);
-	
+
 	//请忽略以下函数
 	void initMap(int w, int h, int f, int hn, vector<vector<Point>> b, vector<Point> c, vector<Point> t, vector<Point> bo, vector<vector<bool>> p, int ti);
 	void getFrame(int frame, vector<Human> h, vector<Fireball> b, vector<Meteor> g, vector<Crystal> ba, vector<bool> bo);

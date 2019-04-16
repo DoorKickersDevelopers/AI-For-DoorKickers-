@@ -14,20 +14,20 @@
 
 ## playerAI.h & playerAI.cpp
 仅包含函数
-```cpp
+​```cpp
 void playerAI();
-```
+​```
 选手需要完成在player.cpp中完成该函数，之后说明如何完成。
 
 ## const.h
 储存所有可能会用到的常数。可以使用
-```cpp
+​```cpp
 using namespace CONST;
-```
+​```
 或者
-```cpp
+​```cpp
 CONST::变量名
-```
+​```
 进行调用。
 
 ## geometry.h & geometry.cpp
@@ -35,9 +35,9 @@ CONST::变量名
 
 ## logic.h & logic.cpp
 重要的数据类。选手需要关注Human类、Fireball类、Meteor类、Crystal类、Map类以及Logic类。前五类都是基本数据类型，之后会具体说明，同时可参见logic.h的注释。Logic类包含了当前地图全部的信息并提供操作接口。在每帧开始时(即playerAI函数被调用)，Logic会将所有数据更新至最新。决策结束后(即playerAI函数结束返回)，Logic会将选手在playerAI中进行的操作记录并发送。Logic使用单例模式，确保整个程序只有一个Logic类并可以通过静态函数获取单例指针。使用时请使用
-```cpp
+​```cpp
 Logic::Instance()
-```
+​```
 获取Logic单例指针，以获取本帧所有数据并调用操作接口进行决策。
 
 注意，所有数据均为public数据，请谨慎修改。如有修改，下一次决策时将会被最新的数据覆盖。
@@ -71,7 +71,7 @@ Logic::Instance()
 数据包括，本帧的帧数、自己势力的编号、地图、所有人物、所有火球、所有陨石、所有水晶、加分道具是否存在。
 
 接口包括
-```cpp
+​```cpp
 void move(int num, Point p);//指定你控制的第num个人移动到p位置
 void shoot(int num, Point p);//指定你控制的第num个人向p位置发射火球
 void meteor(int num, Point p);//指定你控制的第num个人向p位置释放陨石术
@@ -80,8 +80,17 @@ void unmove(int num);//取消你控制的第num个人的移动指令
 void unshoot(int num);//取消你控制的第num个人的射击指令
 void unmeteor(int num);//取消你控制的第num个人的发射陨石指令
 void unflash(int num);//取消你控制的第num个人的闪现指令
-```
+​```
 注意，这里你控制的第num个人实际上是humans中的humans[j*n+num]，其中j指你的势力标号，n指总势力个数。
+
+新增debug接口如下
+​```cpp
+void debug(string msg);//设置debug信息，会覆盖本帧之前设置的信息
+void debugAppend(string amsg);//追加debug信息，不会覆盖之前的信息
+​```
+每帧将重置debug信息，每帧的debug信息不能超过1024字节，如果需要加长信息，请修改main.cpp(但不建议过长，否则可能导致通信中断)。
+
+**注意:请不要在程序中进行任何的stdio，否则将导致通信中断。**
 
 # SDK运行逻辑
 本节介绍与选手有关的SDK运行逻辑，详见源代码。

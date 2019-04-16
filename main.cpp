@@ -228,11 +228,14 @@ void sendMessage(bool gameover = false) {
 		for (int i = 0; i < ope.flash.size(); i++) {
 			flash.append(Json::Value(ope.flash[i]));
 		}
+		Json::Value debug = Json::Value(Logic::Instance()->debugMsg.substr(0, 1024));
+
 		message["flag"] = 0;
 		message["move"] = move;
 		message["shoot"] = shoot;
 		message["meteor"] = meteor;
 		message["flash"] = flash;
+		message["debug"] = debug;
 	}
 	else {
 		message["flag"] = 2;
@@ -249,7 +252,7 @@ void sendMessage(bool gameover = false) {
 	for (int i = 0; i < 4; i++) {
 		printf("%c", lenb[3 - i]);
 	}
-	
+
 	printf("%s", writer.write(message).c_str());
 	cout.flush();
 }

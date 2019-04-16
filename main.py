@@ -703,10 +703,10 @@ def RunGame():
             file.write(debugMsgs[i])
     with open(Dir+name.replace(".zip",".json"), "w")as file:
         file.write(json.dumps(logs))
-    command = "cd {0} && zip -r {1} {2} ".format(Dir,name,name.replace(".zip",".json"))
+    command = "cd {0} && zip -rq {1} {2} ".format(Dir,name,name.replace(".zip",".json"))
     for i in range(faction_number):
         command += name.replace(".zip","_player{}_debug.txt".format(i))+" "
-    command += "&& rm *.json *.txt"
+    command += "&& rm -f *.json *.txt"
     os.system(command)
     if DEBUG:
         WriteToLogFile("################### Result ###################")
