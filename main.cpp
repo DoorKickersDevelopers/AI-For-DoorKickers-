@@ -97,7 +97,7 @@ void readMap() {
 		Point p(ball_places_raw[i][0].asDouble(), ball_places_raw[i][1].asDouble());
 		ball_places.push_back(p);
 	}
-	
+
 	Json::Value target_places_raw = root["target_places"];
 	vector<Point> target_places;
 	for (int i = 0; i < target_places_raw.size(); i++) {
@@ -216,7 +216,7 @@ void sendMessage(bool gameover = false) {
 			p.append(ope.shoot[i].x);
 			p.append(ope.shoot[i].y);
 			shoot.append(p);
-		}		
+		}
 		Json::Value meteor;
 		for (int i = 0; i < ope.meteor.size(); i++) {
 			Json::Value p;
@@ -278,7 +278,7 @@ void keepread() {
 	while (true) {
 		scanf("%4c", lenr);
 		len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
-		
+
 		if (len > jsonlen) {
 			while (jsonlen <= len) {
 				jsonlen *= 2;
@@ -382,7 +382,7 @@ int main() {
 	scanf("%4c", lenr);
 
 	len = (unsigned int)((((unsigned int)lenr[3]) & 255) | ((((unsigned int)lenr[2]) & 255) << 8) | ((((unsigned int)lenr[1]) & 255) << 16) | ((((unsigned int)lenr[0]) & 255) << 24));
-	
+
 	getfile(len);
 	readMap();
 

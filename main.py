@@ -535,10 +535,11 @@ def RunGame():
             WriteToLogFile("Listen Succeed")
 
         for fac,a in enumerate(analysis):
-            if a['debug']!='':
-                debugMsgs[fac]+='Frames = {}\n'.format(timecnt)
-                debugMsgs[fac]+=a['debug']
-                debugMsgs[fac]+='\n\n'
+            if 'debug' in a:
+                if a['debug']!='':
+                    debugMsgs[fac]+='Frames = {}\n'.format(timecnt)
+                    debugMsgs[fac]+=a['debug']
+                    debugMsgs[fac]+='\n\n'
 
         # flash
         for fac, a in enumerate(analysis):
