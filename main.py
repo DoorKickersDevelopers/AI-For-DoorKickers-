@@ -181,6 +181,7 @@ class Listen(threading.Thread):
         "shoot": [[-1, -1]] * human_number,
         "meteor": [[-1, -1]] * human_number,
         "flash": [False] * human_number,
+        "debug":"",
     }
 
     def __init__(self):
