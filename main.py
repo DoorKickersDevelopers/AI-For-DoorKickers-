@@ -486,9 +486,7 @@ def RunGame():
 
         # Rebirth
         for human in humans:
-            if human.death_time > 0:
-                human.death_time -= 1
-            elif human.death_time == 0:
+            if human.death_time == 0:
                 human.reset()
                 human.death_time = -1
                 Ev(8, human.number)
