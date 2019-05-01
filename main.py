@@ -1,5 +1,5 @@
-PYGAME = False
-DEBUG = False
+PYGAME = True
+DEBUG = True
 
 if PYGAME:
     import contextlib
@@ -587,7 +587,11 @@ def RunGame():
             if meteor.time == 0:
                 delMeteors.append(meteor)
 
-        hurt_record = [{}] * len(humans)
+        hurt_record = []
+        for i in range(len(humans)):
+            hurt_record.append({})
+
+        #hurt_record = [{}] * len(humans)
         for fireball in delFireballs:
             Ev(6, round(fireball.pos.x,precision), round(fireball.pos.y,precision), fireball.from_number)
             for human in humans:
