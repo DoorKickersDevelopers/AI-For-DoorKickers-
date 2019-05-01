@@ -193,7 +193,7 @@ void readOnce() {
 		while (jsonlen <= len) {
 			jsonlen *= 2;
 		}
-		delete JsonFile;
+		delete[] JsonFile;
 		JsonFile = new char[jsonlen];
 	}
 	getfile(len);
@@ -283,7 +283,7 @@ void keepread() {
 			while (jsonlen <= len) {
 				jsonlen *= 2;
 			}
-			delete JsonFile;
+			delete[] JsonFile;
 			JsonFile = new char[jsonlen];
 		}
 		getfile(len);
@@ -407,7 +407,7 @@ int main() {
 		playerAI();
 		sendMessage();
 	}
-	delete JsonFile;
+	delete[] JsonFile;
 
 	return 0;
 }
