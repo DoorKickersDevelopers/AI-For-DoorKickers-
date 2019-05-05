@@ -1,5 +1,5 @@
-PYGAME = True
-DEBUG = True
+PYGAME = False
+DEBUG = False
 
 if PYGAME:
     import contextlib
@@ -460,6 +460,9 @@ def getbonus(bonus):
             elif Dis == mindis:
                 if score[num % faction_number] < score[human.faction]:
                     num = human.number
+                elif score[num % faction_number] == score[human.faction]:
+                    if random.randint(0,1)==0:
+                        num = human.number
     if mindis < bonus.radius + eps:
         score[num%faction_number]+=bonus_score
         bonus.reset()
