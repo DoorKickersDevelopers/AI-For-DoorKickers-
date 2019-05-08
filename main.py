@@ -1,4 +1,4 @@
-PYGAME = False
+PYGAME = True
 DEBUG = False
 
 if PYGAME:
@@ -450,23 +450,30 @@ def goal(ball):
 
 def getbonus(bonus):
     mindis = 1e9
-    num = -1
+    maxscore = -1
+    people = []
     for human in humans:
         if human.death_time==-1:
             Dis = L2Distance(human.pos,bonus.pos)
             if Dis < mindis:
                 mindis = Dis
-                num = human.number
+                maxscore = score[human.faction]
+                people = [human.number]
             elif Dis == mindis:
-                if score[num % faction_number] < score[human.faction]:
-                    num = human.number
-                elif score[num % faction_number] == score[human.faction]:
-                    if random.randint(0,1)==0:
-                        num = human.number
+                if maxscore < score[human.faction]:
+                    maxscore = score[human.faction]
+                    people = [human.number]
+                elif maxscore == score[human.faction]:
+                    people.append(human.number)
     if mindis < bonus.radius + eps:
-        score[num%faction_number]+=bonus_score
+        facs = []
+        for p in people:
+            if (p%faction_number) not in facs:
+                facs.append(p%faction_number)
+                Ev(12,p,bonus.number)
+        for fac in facs:
+            score[fac]+=int(bonus_score/len(facs))
         bonus.reset()
-        Ev(12, num,bonus.number)
 
 
 def RunGame():

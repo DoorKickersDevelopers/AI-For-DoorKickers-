@@ -164,6 +164,7 @@ def PlayJsonFile(mydir):
         if len(events) > 0:
             print(
                 "=====================time = {} frames=====================".format(timecnt))
+            print(json.loads(Data["scores"]))
 
         for event in events:
             if event[0] == 1:
